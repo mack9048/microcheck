@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="favicon.svg">
+<title>MicroCheck</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="MicroCheck: on-demand clinical home care and diagnostics delivered to your doorstep.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: centered sky-gradient hero + drifting photo strip, then calm white sections in a 1180px column; navy + brand blue pills as the only loud elements. */
+:root {
+  --bg: #f5f9fc;
+  --surface: #ffffff;
+  --surface-2: #eef5fb;
+  --ink: #0b1f3a;
+  --ink-2: #4c5f79;
+  --line: #d9e6f1;
+  --blue: #0b9dd9;
+  --blue-deep: #1569b0;
+  --green: #4cb84f;
+  --green-soft: #e6f6e6;
+  --sky-1: #cfe8f8;
+  --sky-2: #eaf5fc;
+  --btn-bg: #0b1f3a;
+  --btn-fg: #ffffff;
+  --on-blue: #ffffff;
+  --shadow: 0 1px 2px rgba(11,31,58,.05), 0 8px 24px rgba(11,31,58,.07);
+  --font-display: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --r-lg: 22px;
+  --r-md: 14px;
+  --max: 1180px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #071628; --surface: #0d2240; --surface-2: #0f2948; --ink: #e9f2fb; --ink-2: #9fb3cb;
+    --line: #1c3a5e; --blue: #3bb7ee; --blue-deep: #6cc6f2; --green: #67d06a; --green-soft: #12351f;
+    --sky-1: #0e3358; --sky-2: #0a1f3a; --btn-bg: #e9f2fb; --btn-fg: #0b1f3a; --on-blue: #04121f;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #071628; --surface: #0d2240; --surface-2: #0f2948; --ink: #e9f2fb; --ink-2: #9fb3cb;
+  --line: #1c3a5e; --blue: #3bb7ee; --blue-deep: #6cc6f2; --green: #67d06a; --green-soft: #12351f;
+  --sky-1: #0e3358; --sky-2: #0a1f3a; --btn-bg: #e9f2fb; --btn-fg: #0b1f3a; --on-blue: #04121f;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.35);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4 { font-family: var(--font-display); margin: 0; letter-spacing: -0.02em; text-wrap: balance; line-height: 1.12; }
+p { margin: 0; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 8px; }
+
+.wrap { max-width: var(--max); margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.eyebrow { font-family: var(--font-display); font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--blue-deep); }
+.section { padding-block: clamp(64px, 9vw, 112px); }
+.section-head { display: grid; gap: 14px; max-width: 640px; margin-bottom: 44px; }
+.section-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.75rem); font-weight: 700; }
+.section-head p { color: var(--ink-2); font-size: 1.06rem; }
+.center { text-align: center; margin-inline: auto; justify-items: center; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 12px 24px; border-radius: 999px; font: 600 .98rem/1 var(--font-display); text-decoration: none; border: 0; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn-navy { background: var(--btn-bg); color: var(--btn-fg); box-shadow: var(--shadow); }
+.btn-blue { background: var(--blue); color: var(--on-blue); box-shadow: var(--shadow); }
+.btn-ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+.btn-pill { padding: 6px 6px 6px 20px; min-height: 46px; background: var(--blue); color: var(--on-blue); }
+.btn-pill .arrow { width: 34px; height: 34px; border-radius: 50%; background: var(--surface); color: var(--ink); display: grid; place-items: center; transition: transform .25s ease; }
+.btn-pill:hover .arrow { transform: rotate(45deg); }
+
+/* Header */
+.hero { position: relative; margin-top: calc(-1 * env(safe-area-inset-top, 0px)); padding-top: env(safe-area-inset-top, 0px); overflow: hidden;
+  background:
+    radial-gradient(60% 55% at 50% 0%, var(--sky-1), transparent 70%),
+    radial-gradient(40% 40% at 8% 30%, var(--sky-1), transparent 70%),
+    radial-gradient(40% 40% at 92% 35%, var(--green-soft), transparent 70%),
+    linear-gradient(180deg, var(--sky-2), var(--bg)); }
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 20px; position: relative; z-index: 5; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-word { font-family: var(--font-display); font-weight: 800; font-size: 1.45rem; letter-spacing: -0.03em; line-height: .9; }
+.logo-word .m { color: var(--blue); }
+.logo-word .c { color: var(--green); }
+.logo-tag { display: block; font: 500 .62rem/1 var(--font-body); color: var(--ink-2); letter-spacing: .02em; margin-top: 4px; }
+.nav-links { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; }
+.nav-links a { text-decoration: none; font-size: .93rem; font-weight: 500; color: var(--ink); opacity: .82; }
+.nav-links a:hover { opacity: 1; color: var(--blue-deep); }
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+.menu-btn { display: none; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; place-items: center; }
+.mobile-menu { display: grid; gap: 4px; padding: 10px; margin-bottom: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); box-shadow: var(--shadow); position: relative; z-index: 5; }
+.mobile-menu a { padding: 12px 14px; border-radius: 10px; text-decoration: none; font-weight: 500; }
+.mobile-menu a:hover { background: var(--surface-2); }
+
+.hero-copy { text-align: center; display: grid; justify-items: center; gap: 22px; padding-top: clamp(28px, 6vw, 64px); position: relative; }
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: .86rem; font-weight: 500; box-shadow: 0 2px 10px rgba(11,31,58,.05); }
+.badge svg { color: var(--blue); }
+.hero h1 { font-size: clamp(2.3rem, 6.2vw, 4.4rem); font-weight: 700; max-width: 19ch; line-height: 1.06; letter-spacing: -0.035em; }
+.hero h1 .hl { color: var(--blue); }
+.hero-sub { color: var(--ink-2); font-size: clamp(1rem, 1.6vw, 1.12rem); max-width: 56ch; }
+.hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.squiggle { position: absolute; left: max(2%, calc(50% - 520px)); top: 58%; width: 72px; color: var(--ink); opacity: .75; }
+.hero-note { font-size: .84rem; color: var(--ink-2); display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; }
+.hero-note span { display: inline-flex; align-items: center; gap: 6px; }
+.hero-note svg { color: var(--green); }
+
+/* Photo strip */
+.strip { margin-top: clamp(40px, 6vw, 64px); overflow: hidden; padding-bottom: 8px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.strip-track { display: flex; gap: 16px; width: max-content; animation: drift 55s linear infinite; }
+.strip:hover .strip-track { animation-play-state: paused; }
+@keyframes drift { to { transform: translateX(calc(-50% - 8px)); } }
+.tile { width: clamp(200px, 22vw, 260px); aspect-ratio: 13 / 16; border-radius: var(--r-lg) var(--r-lg) 0 0; overflow: hidden; position: relative; flex: none; background: var(--surface); }
+.tile img { width: 100%; height: 100%; object-fit: cover; }
+.tile-doc { background: linear-gradient(170deg, #bfe2f6, #e9f6fd); }
+.tile-doc img { object-fit: cover; object-position: top; }
+.tile-organ { background: var(--surface); display: grid; align-content: space-between; padding: 18px; border: 1px solid var(--line); border-bottom: 0; }
+.tile-organ img { width: 76%; height: auto; margin: 6px auto 0; }
+.tile-label { font: 700 1.02rem/1.25 var(--font-display); }
+.tile-label small { display: block; font: 500 .8rem/1.4 var(--font-body); color: var(--ink-2); margin-top: 4px; }
+.tile-stat { padding: 22px; display: grid; align-content: space-between; color: #fff; }
+.tile-stat.navy { background: #0b1f3a; }
+.tile-stat.blue { background: linear-gradient(160deg, #0b9dd9, #1569b0); }
+.tile-stat.green { background: linear-gradient(160deg, #4cb84f, #2e8f3a); }
+.tile-stat .big { font: 800 clamp(2.6rem, 4vw, 3.4rem)/1 var(--font-display); letter-spacing: -0.04em; }
+.tile-stat p { font-size: .95rem; opacity: .9; }
+.tile-chip { position: absolute; left: 14px; bottom: 14px; right: 14px; background: rgba(255,255,255,.92); color: #0b1f3a; border-radius: 12px; padding: 10px 12px; font: 600 .84rem/1.3 var(--font-display); display: flex; gap: 8px; align-items: center; }
+.tile-chip i { width: 8px; height: 8px; border-radius: 50%; background: #4cb84f; flex: none; box-shadow: 0 0 0 4px rgba(76,184,79,.2); }
+
+/* Trust bar */
+.trust { background: var(--surface); border-block: 1px solid var(--line); }
+.trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.trust-item { padding: 26px 22px; display: grid; gap: 4px; border-left: 1px solid var(--line); }
+.trust-item:first-child { border-left: 0; padding-left: 0; }
+.trust-item b { font: 800 1.75rem/1.1 var(--font-display); letter-spacing: -0.03em; color: var(--blue-deep); font-variant-numeric: tabular-nums; }
+.trust-item span { font-size: .9rem; color: var(--ink-2); }
+
+/* Services */
+.services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.svc { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 26px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 14px; transition: transform .25s ease, box-shadow .25s ease; }
+.svc:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.svc-img { background: var(--surface-2); border-radius: var(--r-md); aspect-ratio: 16 / 11; display: grid; place-items: center; overflow: hidden; }
+.svc-img img { width: 62%; mix-blend-mode: multiply; }
+:root[data-theme="dark"] .svc-img img { mix-blend-mode: normal; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .svc-img img { mix-blend-mode: normal; } }
+.svc h3 { font-size: 1.3rem; font-weight: 700; }
+.svc p { color: var(--ink-2); font-size: .97rem; }
+.svc ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.svc li { font-size: .78rem; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: var(--surface-2); color: var(--blue-deep); }
+
+/* How it works */
+.how { background: var(--surface); }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; counter-reset: step; position: relative; }
+.step { padding: 28px; border-radius: var(--r-lg); background: var(--surface-2); display: grid; gap: 10px; align-content: start; }
+.step-n { width: 44px; height: 44px; border-radius: 50%; background: var(--btn-bg); color: var(--btn-fg); display: grid; place-items: center; font: 700 1rem/1 var(--font-display); }
+.step h3 { font-size: 1.2rem; font-weight: 700; margin-top: 8px; }
+.step p { color: var(--ink-2); font-size: .96rem; }
+.how-extras { margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.extra { display: flex; gap: 14px; align-items: flex-start; padding: 6px 4px; }
+.extra-ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--green-soft); color: var(--green); flex: none; }
+.extra b { font-family: var(--font-display); display: block; margin-bottom: 2px; }
+.extra span { color: var(--ink-2); font-size: .92rem; }
+
+/* Diabetic club */
+.club { background:
+  radial-gradient(50% 60% at 0% 0%, var(--green-soft), transparent 70%),
+  radial-gradient(50% 60% at 100% 100%, var(--sky-1), transparent 70%), var(--bg); }
+.club-top { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: end; margin-bottom: 44px; }
+.club-top h2 { font-size: clamp(1.9rem, 3.6vw, 2.75rem); font-weight: 700; margin-top: 12px; }
+.club-top p { color: var(--ink-2); font-size: 1.04rem; }
+.launch { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: .85rem; font-weight: 500; }
+.launch b { background: var(--green); color: #fff; border-radius: 999px; padding: 3px 10px; font: 700 .72rem/1.4 var(--font-display); letter-spacing: .06em; }
+.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+.tier { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 28px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 18px; position: relative; }
+.tier.featured { background: #0b1f3a; color: #e9f2fb; border-color: #0b1f3a; box-shadow: 0 20px 50px rgba(11,31,58,.25); }
+:root[data-theme="dark"] .tier.featured { background: #12345c; border-color: var(--blue); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tier.featured { background: #12345c; border-color: var(--blue); } }
+.tier-tag { font: 700 .74rem/1 var(--font-display); letter-spacing: .12em; text-transform: uppercase; color: var(--blue-deep); }
+.tier.featured .tier-tag { color: #7fd0f5; }
+.tier h3 { font-size: 1.45rem; font-weight: 700; margin-top: 8px; }
+.tier-profile { font-size: .92rem; color: var(--ink-2); margin-top: 6px; }
+.tier.featured .tier-profile, .tier.featured dd { color: #b9c9dc; }
+.tier dl { margin: 0; display: grid; gap: 14px; padding-top: 18px; border-top: 1px solid var(--line); }
+.tier.featured dl { border-color: rgba(255,255,255,.14); }
+.tier dt { font: 700 .74rem/1 var(--font-display); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 5px; }
+.tier dd { margin: 0; font-size: .94rem; color: var(--ink-2); }
+.popular { position: absolute; top: 22px; right: 22px; background: var(--green); color: #fff; border-radius: 999px; padding: 5px 11px; font: 700 .72rem/1.2 var(--font-display); }
+.tier .btn { width: 100%; }
+.tier.featured .btn-ghost { background: #ffffff; color: #0b1f3a; border-color: #ffffff; }
+.upcoming { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.upcoming > span { font-size: .9rem; color: var(--ink-2); margin-right: 4px; }
+.chip { padding: 8px 14px; border-radius: 999px; border: 1px dashed var(--line); background: var(--surface); font-size: .86rem; font-weight: 500; }
+
+/* About */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+.about-media { position: relative; }
+.about-media img { border-radius: var(--r-lg); aspect-ratio: 4 / 3.4; object-fit: cover; width: 100%; }
+.since { position: absolute; left: -14px; bottom: 24px; background: var(--surface); border-radius: var(--r-md); padding: 16px 18px; box-shadow: var(--shadow); display: grid; gap: 2px; }
+.since small { font-size: .74rem; color: var(--ink-2); letter-spacing: .08em; text-transform: uppercase; font-weight: 600; }
+.since b { font: 800 1.35rem/1.2 var(--font-display); }
+.about-copy { display: grid; gap: 18px; min-width: 0; }
+.about-copy h2 { font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 700; }
+.about-copy p { color: var(--ink-2); }
+.about-copy .lead { color: var(--ink); font-size: 1.08rem; }
+.quote { border-left: 3px solid var(--green); padding: 4px 0 4px 18px; font: 600 1.08rem/1.5 var(--font-display); }
+.phone-row { display: flex; align-items: center; gap: 14px; padding: 14px 18px 14px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); width: fit-content; max-width: 100%; }
+.phone-ic { width: 44px; height: 44px; border-radius: 50%; background: var(--blue); color: var(--on-blue); display: grid; place-items: center; flex: none; }
+.phone-row small { display: block; font-size: .78rem; color: var(--ink-2); }
+.phone-row b { font: 700 1.1rem/1.2 var(--font-display); user-select: all; }
+
+/* Booking */
+.book { background: var(--surface); }
+.book-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
+.book-aside { display: grid; gap: 22px; min-width: 0; }
+.book-aside h2 { font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 700; }
+.book-aside > p { color: var(--ink-2); }
+.hl-list { display: grid; gap: 14px; list-style: none; padding: 0; margin: 0; }
+.hl-list li { display: flex; gap: 12px; }
+.hl-list .extra-ic { width: 34px; height: 34px; border-radius: 10px; }
+.hl-list b { display: block; font-family: var(--font-display); }
+.hl-list span { color: var(--ink-2); font-size: .92rem; }
+.form-card { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(20px, 3vw, 32px); display: grid; gap: 18px; min-width: 0; }
+.field { display: grid; gap: 7px; min-width: 0; }
+.field > label, .field > .lbl { font: 600 .86rem/1.2 var(--font-display); }
+.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+input, textarea, select { width: 100%; font: inherit; font-size: .97rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+input:focus, textarea:focus { outline: 2px solid var(--blue); outline-offset: 0; border-color: transparent; }
+textarea { resize: vertical; min-height: 84px; }
+.opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.opt { position: relative; }
+.opt input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.opt span { display: grid; gap: 2px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); height: 100%; transition: border-color .2s, background .2s; }
+.opt span b { font: 700 .92rem/1.2 var(--font-display); }
+.opt span small { font-size: .78rem; color: var(--ink-2); }
+.opt input:checked + span { border-color: var(--blue); background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--blue); }
+.opt input:focus-visible + span { outline: 3px solid var(--blue); outline-offset: 2px; }
+.slots { grid-template-columns: repeat(3, 1fr); }
+.slots .opt span { text-align: center; font-weight: 600; font-size: .9rem; }
+.err { color: #d33a3a; font-size: .8rem; }
+.form-foot { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+.form-foot small { color: var(--ink-2); font-size: .82rem; max-width: 34ch; }
+.done { display: grid; gap: 14px; padding: 22px; border-radius: var(--r-md); background: var(--green-soft); }
+.done h3 { font-size: 1.2rem; }
+.done pre { margin: 0; white-space: pre-wrap; font: .88rem/1.55 var(--font-body); color: var(--ink); background: var(--surface); padding: 14px; border-radius: 10px; border: 1px solid var(--line); }
+.done .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* Insights */
+.posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.post { display: grid; gap: 10px; align-content: start; padding: 24px; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--surface); }
+.post-meta { display: flex; gap: 10px; align-items: center; font-size: .8rem; color: var(--ink-2); }
+.post-meta b { color: var(--blue-deep); font-weight: 600; }
+.post h3 { font-size: 1.15rem; font-weight: 700; }
+.post p { color: var(--ink-2); font-size: .94rem; }
+
+/* Notice + footer */
+.notice { display: flex; gap: 14px; align-items: flex-start; padding: 18px 20px; border-radius: var(--r-md); border: 1px solid var(--line); background: var(--surface); font-size: .92rem; color: var(--ink-2); }
+.notice svg { color: #e0803a; flex: none; margin-top: 2px; }
+.notice b { color: var(--ink); }
+footer { background: #071628; color: #c7d5e6; margin-top: clamp(64px, 9vw, 112px); }
+.f-cta { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; padding-block: 48px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.f-cta h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700; }
+.f-cta p { margin-top: 8px; }
+.f-cta .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.f-cta .btn-navy { background: #fff; color: #0b1f3a; }
+.f-cta .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.25); }
+.f-cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; padding-block: 48px; }
+.f-cols h4 { color: #fff; font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
+.f-cols ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; font-size: .92rem; }
+.f-cols a { text-decoration: none; }
+.f-cols a:hover { color: #fff; }
+.f-brand { display: grid; gap: 14px; align-content: start; font-size: .92rem; max-width: 36ch; }
+.f-brand .logo-word .m { color: #3bb7ee; }
+.f-brand .logo-tag { color: #9fb3cb; }
+.f-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding-block: 22px 28px; border-top: 1px solid rgba(255,255,255,.1); font-size: .82rem; color: #8ea3bd; }
+
+@media (max-width: 980px) {
+  .nav-links, .nav-actions .btn-pill { display: none; }
+  .menu-btn { display: grid; }
+  .services, .tiers, .posts { grid-template-columns: 1fr; max-width: 560px; }
+  .steps, .how-extras { grid-template-columns: 1fr; }
+  .club-top, .about-grid, .book-grid { grid-template-columns: 1fr; }
+  .trust-grid { grid-template-columns: 1fr 1fr; }
+  .trust-item:nth-child(3) { border-left: 0; padding-left: 0; }
+  .trust-item:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .f-cols { grid-template-columns: 1fr 1fr; }
+  .squiggle { display: none; }
+  .since { left: 12px; }
+}
+@media (max-width: 560px) {
+  .row-2, .opts { grid-template-columns: 1fr; }
+  .slots { grid-template-columns: repeat(3, 1fr); }
+  .trust-item { padding: 20px 12px; }
+  .trust-item:nth-child(2n) { padding-right: 0; }
+  .f-cols { grid-template-columns: 1fr; }
+  .hero-ctas .btn { width: 100%; }
+  .nav-actions .btn-call-txt { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .strip-track { animation: none; }
+  .strip { overflow-x: auto; }
+  .btn, .svc, .btn-pill .arrow { transition: none; }
+}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M13.8 16.6a1 1 0 0 0 1.2-.3l.4-.5A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.5.4a1 1 0 0 0-.3 1.2 14 14 0 0 0 6.4 6.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z M3 13l9 5 9-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z M12 9v4 M12 17h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 48 52"><defs><linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2fb3ea"/><stop offset="1" stop-color="#1569b0"/></linearGradient></defs><path d="M24 4H46V26A22 22 0 1 1 24 4Z" fill="url(#dg)"/><path d="M12 28c3.6 6 9 9.5 13 9.5s9.6-3.5 12.5-9.5" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="hero" id="home">
+  <div class="wrap">
+    <nav class="nav" aria-label="Main">
+      <a class="logo" href="#home" aria-label="MicroCheck home">
+        <svg width="40" height="44" aria-hidden="true"><use href="#i-drop"/></svg>
+        <span class="logo-word"><span class="m">micro</span><span class="c">check</span><span class="logo-tag">Healthcare, Home Delivered.</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how">How it Works</a></li>
+        <li><a href="#diabetic-club">Diabetes Club</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn btn-pill" href="#contact">Book a Home Service <span class="arrow"><svg width="16" height="16"><use href="#i-arrow"/></svg></span></a>
+        <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <a href="#services">Services</a>
+      <a href="#how">How it Works</a>
+      <a href="#diabetic-club">Diabetes Club</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact Us</a>
+      <a class="btn btn-navy" href="#contact">Book a Home Service</a>
+    </div>
+
+    <div class="hero-copy">
+      <span class="badge"><svg width="16" height="16"><use href="#i-shield"/></svg>Verified clinicians · Certified partner labs</span>
+      <h1>Clinical Care &amp; Diagnostics, <span class="hl">Delivered</span> to Your Doorstep.</h1>
+      <p class="hero-sub">On-demand home care, lab sample collection and home-based clinical support, scheduled as easily as your favourite delivery app.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-navy" href="#contact">Book Home Collection</a>
+        <a class="btn btn-blue" href="tel:+919020004000"><svg width="18" height="18"><use href="#i-phone"/></svg>Call +91 90200 04000</a>
+      </div>
+      <div class="hero-note">
+        <span><svg width="14" height="14"><use href="#i-check"/></svg>No payment until your slot is locked</span>
+        <span><svg width="14" height="14"><use href="#i-check"/></svg>24/7 home triage</span>
+      </div>
+      <svg class="squiggle" viewBox="0 0 80 50" aria-hidden="true"><path d="M4 6c6 22 22 30 30 22s-4-16-9-6 8 24 44 18m0 0-8-6m8 6-7 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+
+  <div class="strip" aria-label="MicroCheck services at a glance">
+    <div class="strip-track" id="stripTrack">
+      <div class="tile tile-doc"><img src="images/doctor-hero.webp" alt="MicroCheck clinician in a white coat"><div class="tile-chip"><i></i>Licensed clinician dispatched</div></div>
+      <div class="tile tile-stat navy"><div class="big">24/7</div><p>Home triage support, day or night</p></div>
+      <div class="tile"><img src="images/hospital.webp" alt="MicroCheck clinical partner facility"><div class="tile-chip"><i></i>Accredited partner lab network</div></div>
+      <div class="tile tile-organ"><div class="tile-label">Home Sample Collection<small>Blood panels, biochemistry, microbiology</small></div><img src="images/brain.webp" alt=""></div>
+      <div class="tile tile-stat green"><div class="big">NABL+</div><p>Certified partner laboratories</p></div>
+      <div class="tile tile-organ"><div class="tile-label">Home Nursing<small>Wound care, IV therapy, post-op</small></div><img src="images/liver.webp" alt=""></div>
+      <div class="tile tile-stat blue"><div class="big">100%</div><p>Verified clinical professionals</p></div>
+      <div class="tile tile-organ"><div class="tile-label">Dialysis Support<small>Technician dispatch &amp; case management</small></div><img src="images/kidney.webp" alt=""></div>
+    </div>
+  </div>
+</header>
+
+<section class="trust" aria-label="Key facts">
+  <div class="wrap trust-grid">
+    <div class="trust-item"><b>100%</b><span>Verified clinical professionals</span></div>
+    <div class="trust-item"><b>NABL+</b><span>Certified partner labs</span></div>
+    <div class="trust-item"><b>Instant</b><span>Home booking &amp; dispatch</span></div>
+    <div class="trust-item"><b>24/7</b><span>Home triage support</span></div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Our Services</span>
+      <h2>Hospital-grade care, without the hospital trip.</h2>
+      <p>Book a lab collection, a nursing visit or ongoing dialysis support. Every visit is handled by licensed professionals and accredited partner labs.</p>
+    </div>
+    <div class="services">
+      <article class="svc">
+        <div class="svc-img"><img src="images/brain.webp" alt="" loading="lazy"></div>
+        <h3>Home Sample Collection</h3>
+        <p>Phlebotomy, biochemical diagnostics, specialised blood panels and microbiology. Certified phlebotomists carry samples to partner labs on a cold chain.</p>
+        <ul><li>Blood panels</li><li>Microbiology</li><li>Cold-chain logistics</li></ul>
+      </article>
+      <article class="svc">
+        <div class="svc-img"><img src="images/liver.webp" alt="" loading="lazy"></div>
+        <h3>Clinical Home Care &amp; Nursing</h3>
+        <p>Wound care, post-op nursing, IV therapy, injections and vitals charting by licensed clinical nurses with certified procedural kits.</p>
+        <ul><li>Wound care</li><li>IV therapy</li><li>Vitals charting</li></ul>
+      </article>
+      <article class="svc">
+        <div class="svc-img"><img src="images/kidney.webp" alt="" loading="lazy"></div>
+        <h3>Dialysis Support &amp; Coordination</h3>
+        <p>Home maintenance coordination, verified technician dispatch and setup hygiene audits, with a dedicated case manager.</p>
+        <ul><li>Technician dispatch</li><li>Hygiene audits</li><li>Case management</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section how" id="how">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">How it Works</span>
+      <h2>From booking to doorstep in three steps.</h2>
+      <p>Share a few details and our dispatch desk confirms your slot, usually within minutes.</p>
+    </div>
+    <ol class="steps" style="list-style:none;padding:0;margin:0">
+      <li class="step"><span class="step-n">1</span><h3>Tell us the need</h3><p>Choose the service, a preferred schedule and your address with a landmark.</p></li>
+      <li class="step"><span class="step-n">2</span><h3>Dispatch confirms</h3><p>Our desk locks your slot and assigns a verified clinician near you.</p></li>
+      <li class="step"><span class="step-n">3</span><h3>Care arrives</h3><p>A licensed clinician reaches your door, confirmed with an OTP handoff.</p></li>
+    </ol>
+    <div class="how-extras">
+      <div class="extra"><span class="extra-ic"><svg width="20" height="20"><use href="#i-layers"/></svg></span><div><b>One booking for every service</b><span>Home collection, nursing visits and Diabetic Club in a single request.</span></div></div>
+      <div class="extra"><span class="extra-ic"><svg width="20" height="20"><use href="#i-shield"/></svg></span><div><b>Verified dispatch</b><span>OTP-secured handoff, so the right clinician reaches the right address.</span></div></div>
+      <div class="extra"><span class="extra-ic"><svg width="20" height="20"><use href="#i-clock"/></svg></span><div><b>24/7 clinical triage</b><span>Urgent coordination with licensed home-care professionals, day or night.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section club" id="diabetic-club">
+  <div class="wrap">
+    <div class="club-top">
+      <div>
+        <span class="launch"><b>WORLD DIABETES DAY</b>Launching 14 November</span>
+        <h2>Take control of your sugar levels with the MicroCheck Diabetic Care Club.</h2>
+      </div>
+      <p>Three care plans for Type 1 and Type 2 diabetes. Each combines regular home lab tests, nursing oversight and progress tracking to help prevent long-term complications.</p>
+    </div>
+    <div class="tiers">
+      <article class="tier">
+        <div><span class="tier-tag">Tier 1</span><h3>Essential Care</h3><p class="tier-profile">Stable Type 2 · routine tracking</p></div>
+        <dl>
+          <div><dt>Diagnostics</dt><dd>HbA1c testing, FBS / PPBS monitoring</dd></div>
+          <div><dt>Support</dt><dd>Quarterly vitals check and digital report summary</dd></div>
+          <div><dt>Oversight</dt><dd>Standard digital tracking</dd></div>
+        </dl>
+        <span></span>
+        <a class="btn btn-ghost" href="#contact" data-plan="Essential Care">Join Essential Care</a>
+      </article>
+      <article class="tier featured">
+        <span class="popular">Most chosen</span>
+        <div><span class="tier-tag">Tier 2</span><h3>Advanced Control</h3><p class="tier-profile">Active management · escalation risk</p></div>
+        <dl>
+          <div><dt>Diagnostics</dt><dd>Bi-monthly HbA1c and full lipid profile; home urine microalbumin</dd></div>
+          <div><dt>Support</dt><dd>Monthly nurse visit; foot and wound inspection; emergency kit setup</dd></div>
+          <div><dt>Oversight</dt><dd>Routine doctor-facing digital trend summary</dd></div>
+        </dl>
+        <span></span>
+        <a class="btn btn-ghost" href="#contact" data-plan="Advanced Control">Join Advanced Control</a>
+      </article>
+      <article class="tier">
+        <div><span class="tier-tag">Tier 3</span><h3>360° Shield</h3><p class="tier-profile">Complex management · co-morbidities</p></div>
+        <dl>
+          <div><dt>Diagnostics</dt><dd>Monthly suite: HbA1c, renal profile, lipid panel</dd></div>
+          <div><dt>Support</dt><dd>Dedicated primary home nurse; full home care coordination</dd></div>
+          <div><dt>Oversight</dt><dd>Continuous progress tracking with early warning flags</dd></div>
+        </dl>
+        <span></span>
+        <a class="btn btn-ghost" href="#contact" data-plan="360° Shield">Join 360° Shield</a>
+      </article>
+    </div>
+    <div class="upcoming"><span>Coming next:</span><span class="chip">Dyslipidemia Club</span><span class="chip">Immunity Shield Club</span><span class="chip">Allergy Care Club</span><span class="chip">Thyroid Care Club</span></div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap about-grid">
+    <div class="about-media">
+      <img src="images/hospital.webp" alt="MicroCheck clinical partner facility" loading="lazy">
+      <div class="since"><small>Serving since</small><b>14 Nov 2025</b></div>
+    </div>
+    <div class="about-copy">
+      <span class="eyebrow">About Us</span>
+      <h2>Your MicroCheck clinical home care platform.</h2>
+      <p class="lead">MicroCheck brings hospital-grade diagnostics and nursing care to every home. We connect clinical logistics, verified partner facilities and licensed professionals on one dispatch engine, cutting diagnostic delays and making chronic care easier to manage.</p>
+      <p>We are led by healthcare entrepreneurs and medical leaders with backgrounds in clinical governance, hospital administration and platform engineering.</p>
+      <p class="quote">Committed to hospital-grade care, delivered to your doorstep.</p>
+      <div class="phone-row">
+        <span class="phone-ic"><svg width="20" height="20"><use href="#i-phone"/></svg></span>
+        <div><small>For any questions</small><b>+91 90200 04000</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section book" id="contact">
+  <div class="wrap book-grid">
+    <div class="book-aside">
+      <span class="eyebrow">Quick Booking</span>
+      <h2>Book clinical care at your doorstep.</h2>
+      <p>Share a few details and our dispatch desk confirms your slot, usually within minutes. You pay nothing until the slot is locked.</p>
+      <ul class="hl-list">
+        <li><span class="extra-ic"><svg width="18" height="18"><use href="#i-check"/></svg></span><div><b>One request, any service</b><span>Lab collection, nursing visit or Diabetic Club.</span></div></li>
+        <li><span class="extra-ic"><svg width="18" height="18"><use href="#i-shield"/></svg></span><div><b>OTP-verified handoff</b><span>You know exactly who is at your door.</span></div></li>
+        <li><span class="extra-ic"><svg width="18" height="18"><use href="#i-phone"/></svg></span><div><b>Prefer to talk?</b><span>Call or WhatsApp +91 90200 04000, 24/7.</span></div></li>
+      </ul>
+    </div>
+
+    <form class="form-card" id="bookForm" novalidate>
+      <div class="row-2">
+        <div class="field"><label for="fullName">Full name</label><input id="fullName" name="fullName" autocomplete="name" placeholder="e.g. Anjali Menon"><span class="err" id="fullName-err" hidden>Enter the patient's name.</span></div>
+        <div class="field"><label for="mobile">Mobile number</label><input id="mobile" name="mobile" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile"><span class="err" id="mobile-err" hidden>Enter a 10-digit mobile number.</span></div>
+      </div>
+      <fieldset class="field" style="border:0;padding:0;margin:0">
+        <legend class="lbl" style="font:600 .86rem/1.2 var(--font-display);margin-bottom:7px">Service</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="service" id="svc-collection" value="Home Collection" checked><span><b>Home Collection</b><small>Lab sample pickup</small></span></label>
+          <label class="opt"><input type="radio" name="service" id="svc-homecare" value="Home Nursing"><span><b>Home Nursing</b><small>Clinical visit at home</small></span></label>
+          <label class="opt"><input type="radio" name="service" id="svc-diabetic" value="Diabetic Club"><span><b>Diabetic Club</b><small>Ongoing care plan</small></span></label>
+        </div>
+      </fieldset>
+      <div class="row-2">
+        <div class="field"><label for="date">Preferred date</label><input type="date" id="date" name="date"></div>
+        <fieldset class="field" style="border:0;padding:0;margin:0">
+          <legend class="lbl" style="font:600 .86rem/1.2 var(--font-display);margin-bottom:7px">Time of day</legend>
+          <div class="opts slots">
+            <label class="opt"><input type="radio" name="slot" id="slot-m" value="Morning" checked><span>Morning</span></label>
+            <label class="opt"><input type="radio" name="slot" id="slot-a" value="Afternoon"><span>Afternoon</span></label>
+            <label class="opt"><input type="radio" name="slot" id="slot-e" value="Evening"><span>Evening</span></label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="field"><label for="address">Address with landmark</label><textarea id="address" name="address" placeholder="House name, street, landmark, area"></textarea><span class="err" id="address-err" hidden>Add the address so the clinician can find you.</span></div>
+      <div class="form-foot">
+        <small>Not for emergencies. For chest pain, breathing trouble or stroke symptoms, call 112.</small>
+        <button class="btn btn-navy" type="submit">Request a visit</button>
+      </div>
+      <div class="done" id="done" hidden>
+        <h3>Your request is ready</h3>
+        <p>Send it to our dispatch desk on WhatsApp and we will confirm your slot.</p>
+        <pre id="summary"></pre>
+        <div class="btns">
+          <a class="btn btn-blue" id="waLink" href="https://wa.me/919020004000" target="_blank" rel="noopener noreferrer">Send on WhatsApp</a>
+          <button class="btn btn-ghost" type="button" id="copyBtn">Copy details</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="section" id="insights" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Health Bulletin</span>
+      <h2>Notes from the MicroCheck team.</h2>
+    </div>
+    <div class="posts">
+      <article class="post"><div class="post-meta"><b>Diabetes</b><time datetime="2026-11-12">12 Nov 2026</time></div><h3>World Diabetes Day: why structured home monitoring matters</h3><p>HbA1c trends, foot checks and timely nurse oversight work better as a steady rhythm than a once-a-year scramble.</p></article>
+      <article class="post"><div class="post-meta"><b>Diagnostics</b><time datetime="2026-11-05">5 Nov 2026</time></div><h3>Home sample collection checklist for smoother visits</h3><p>A short preparation list that keeps phlebotomy visits on time and sample quality high.</p></article>
+      <article class="post"><div class="post-meta"><b>Home Care</b><time datetime="2026-10-28">28 Oct 2026</time></div><h3>When home nursing support is the right next step</h3><p>Wound care, post-op support and vitals charting can often be handled at home, when it is clinically appropriate.</p></article>
+    </div>
+    <div class="notice" style="margin-top:40px"><svg width="20" height="20"><use href="#i-alert"/></svg><p><b>MicroCheck is not an emergency service.</b> If someone has chest pain, difficulty breathing, heavy bleeding, stroke symptoms or a severe allergic reaction, call local emergency services immediately.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-cta">
+      <div><h2>Ready when you are.</h2><p>Dispatch confirms quickly, and there is no payment until we lock your slot.</p></div>
+      <div class="btns"><a class="btn btn-navy" href="#contact">Book a visit</a><a class="btn btn-ghost" href="tel:+919020004000">+91 90200 04000</a></div>
+    </div>
+    <div class="f-cols">
+      <div class="f-brand">
+        <a class="logo" href="#home" aria-label="MicroCheck home"><svg width="36" height="40" aria-hidden="true"><use href="#i-drop"/></svg><span class="logo-word"><span class="m">micro</span><span class="c">check</span><span class="logo-tag">Healthcare, Home Delivered.</span></span></a>
+        <p>Hospital-grade diagnostics and nursing care, delivered through a verified network of partner labs and licensed professionals.</p>
+        <a href="https://wa.me/919020004000" target="_blank" rel="noopener noreferrer" style="color:#7fd0f5;font-weight:600">WhatsApp support ↗</a>
+      </div>
+      <div><h4>Legal &amp; Governance</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Clinical Disclaimer</a></li><li><a href="#">Aggregator Model Disclosures</a></li></ul></div>
+      <div><h4>Partnerships</h4><ul><li><a href="#">Partner With Us (Labs &amp; Diagnostic Centres)</a></li><li><a href="#">Join as Nurse / Phlebotomist</a></li><li><a href="#insights">Health Bulletin</a></li></ul></div>
+      <div><h4>Direct Support</h4><ul><li><a href="#contact">Patient Support Desk</a></li><li>Clinical Helpline: +91 90200 04000</li><li>Operating hours: 24/7 home triage</li></ul></div>
+    </div>
+    <div class="f-bottom"><span>© <span id="yr">2026</span> MicroCheck. All rights reserved.</span><span>Clinical aggregator model · Partner labs &amp; licensed professionals</span></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Duplicate strip tiles so the drift loops seamlessly
+  var track = document.getElementById('stripTrack');
+  Array.prototype.slice.call(track.children).forEach(function (t) {
+    var c = t.cloneNode(true); c.setAttribute('aria-hidden', 'true');
+    c.querySelectorAll('img').forEach(function (i) { i.alt = ''; });
+    track.appendChild(c);
+  });
+
+  // Mobile menu
+  var btn = document.getElementById('menuBtn'), menu = document.getElementById('mobileMenu');
+  btn.addEventListener('click', function () {
+    var open = menu.hidden; menu.hidden = !open; btn.setAttribute('aria-expanded', String(open));
+  });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); } });
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Default date = tomorrow
+  var d = new Date(); d.setDate(d.getDate() + 1);
+  var dateEl = document.getElementById('date');
+  dateEl.min = new Date().toISOString().slice(0, 10);
+  dateEl.value = d.toISOString().slice(0, 10);
+
+  // Plan buttons preselect Diabetic Club
+  var plan = '';
+  document.querySelectorAll('[data-plan]').forEach(function (a) {
+    a.addEventListener('click', function () { plan = a.getAttribute('data-plan'); document.getElementById('svc-diabetic').checked = true; });
+  });
+
+  var form = document.getElementById('bookForm');
+  function show(id, bad) { document.getElementById(id + '-err').hidden = !bad; document.getElementById(id).setAttribute('aria-invalid', bad ? 'true' : 'false'); }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = form.fullName.value.trim(), mob = form.mobile.value.replace(/\D/g, ''), addr = form.address.value.trim();
+    if (mob.length === 12 && mob.indexOf('91') === 0) mob = mob.slice(2);
+    show('fullName', !name); show('mobile', mob.length !== 10); show('address', !addr);
+    if (!name || mob.length !== 10 || !addr) { form.querySelector('[aria-invalid="true"]').focus(); return; }
+    var svc = form.querySelector('input[name="service"]:checked').value;
+    if (svc === 'Diabetic Club' && plan) svc += ' (' + plan + ')';
+    var when = dateEl.value ? new Date(dateEl.value + 'T00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Flexible';
+    var text = 'MicroCheck: Home Visit Request\nName: ' + name + '\nMobile: +91 ' + mob + '\nService: ' + svc + '\nSchedule: ' + when + ', ' + form.querySelector('input[name="slot"]:checked').value + '\nAddress: ' + addr;
+    document.getElementById('summary').textContent = text;
+    document.getElementById('waLink').href = 'https://wa.me/919020004000?text=' + encodeURIComponent(text);
+    var done = document.getElementById('done'); done.hidden = false; done.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    var b = this, t = document.getElementById('summary').textContent;
+    var ok = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy details'; }, 1800); };
+    var fallback = function () { var r = document.createRange(); r.selectNodeContents(document.getElementById('summary')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(ok, fallback); else fallback();
+  });
+})();
+</script>
+
+</body>
+</html>
