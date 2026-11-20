@@ -9,7 +9,7 @@
 <meta name="description" content="MicroCheck: book lab tests and health checkups with free home sample collection across Kerala.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap">
 <style>
 /* Layout: Healthians-style diagnostics store. Header (location, login, support) -> blue category bar with mega menus -> offer banner with built-in search -> service tiles -> concern grid -> package shelf + cart -> trust, process, club, FAQ. Fixed callback bar at the bottom. 1520px column, light theme only. */
 :root {
@@ -402,6 +402,50 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
 .drawer-foot small { color: var(--ink-2); font-size: .76rem; text-align: center; }
 .toast { position: fixed; left: 50%; bottom: calc(110px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 12px; font: 500 .88rem var(--font-head); z-index: 70; box-shadow: var(--shadow); max-width: calc(100% - 32px); }
 
+/* 3D intro (opens with the site) */
+.intro { position: fixed; inset: 0; z-index: 100; background: #2a80e2; color: #fff; overflow: hidden; transition: opacity .7s ease, transform .7s ease; }
+.intro.out { opacity: 0; transform: scale(1.04); pointer-events: none; }
+.intro canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.intro-grain { position: absolute; inset: 0; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.intro-ui { position: absolute; inset: 0; display: grid; grid-template-rows: auto 1fr auto; pointer-events: none;
+  padding: calc(18px + env(safe-area-inset-top, 0px)) max(22px, env(safe-area-inset-right, 0px)) calc(18px + env(safe-area-inset-bottom, 0px)) max(22px, env(safe-area-inset-left, 0px));
+  background: linear-gradient(90deg, rgba(10, 50, 120, .45), transparent 45%), linear-gradient(0deg, rgba(10, 45, 110, .45), transparent 35%); }
+.intro-ui button { pointer-events: auto; }
+.intro-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.intro-logo { display: inline-flex; align-items: center; gap: 8px; font: 600 1.25rem/1 var(--font-head); letter-spacing: -0.02em; }
+.intro-logo span b { font-weight: 600; opacity: .8; }
+.intro-steps { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.intro-steps span { font: 500 .78rem/1 var(--font-head); padding: 8px 12px; border-radius: 9px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22); transition: background .3s, color .3s; }
+.intro-steps span.on { background: #fff; color: #0d2138; }
+.intro-pill { background: #fff; color: #0d2138; border: 0; border-radius: 10px; padding: 10px 16px; font: 600 .86rem var(--font-head); cursor: pointer; }
+.intro-bottom { align-self: end; display: grid; grid-template-columns: 1.3fr .7fr; gap: 30px; align-items: end; padding-bottom: 22px; }
+.intro-copy { display: grid; gap: 14px; }
+.intro-eyebrow { font: 600 .8rem/1 var(--font-head); letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
+.intro-h { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: clamp(2.6rem, 6.4vw, 5.8rem); line-height: .98; letter-spacing: -0.015em; max-width: 12ch; text-wrap: balance; text-shadow: 0 6px 30px rgba(5, 30, 80, .25); }
+.intro-h em { font-style: italic; color: #cfeaff; }
+.intro-h.swap, .intro-eyebrow.swap, .intro-side p.swap { animation: introSwap .7s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes introSwap { from { opacity: 0; transform: translateY(18px); filter: blur(6px); } }
+.intro-side { display: grid; gap: 18px; justify-items: start; max-width: 34ch; justify-self: end; }
+.intro-side p { font-size: 1rem; line-height: 1.5; opacity: .95; text-shadow: 0 2px 12px rgba(5, 30, 80, .55); }
+.intro-acts { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.intro-dark { background: #0d1d33; color: #fff; border: 0; border-radius: 999px; padding: 14px 24px; font: 600 .95rem var(--font-head); cursor: pointer; box-shadow: 0 10px 30px rgba(5, 20, 45, .35); }
+.intro-link { background: none; border: 0; color: #fff; font: 600 .92rem var(--font-head); cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+.intro-bars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.intro-bars span { height: 3px; border-radius: 3px; background: rgba(255,255,255,.28); overflow: hidden; }
+.intro-bars i { display: block; height: 100%; width: 0; background: #fff; }
+@media (max-width: 760px) {
+  .intro-steps { display: none; }
+  .intro-bottom { grid-template-columns: 1fr; gap: 14px; padding-bottom: 14px; }
+  .intro-side { justify-self: start; }
+  .intro-h { font-size: clamp(2.3rem, 11vw, 3.4rem); }
+  .intro-side p { font-size: .92rem; }
+  .intro-ui { background: linear-gradient(0deg, rgba(10, 45, 110, .65), transparent 55%); }
+}
+.watch { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #0d2138; border: 0; border-radius: 999px; padding: 6px 16px 6px 6px; font: 600 .85rem var(--font-head); cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,.15); }
+.watch i { width: 30px; height: 30px; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; font-style: normal; }
+@media (prefers-reduced-motion: reduce) { .intro, .intro-h.swap, .intro-eyebrow.swap, .intro-side p.swap { transition: none; animation: none; } }
+
 @media (max-width: 1100px) {
   .shelf { grid-template-columns: repeat(3, 1fr); }
   .steps { grid-template-columns: repeat(3, 1fr); }
@@ -611,6 +655,7 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
           <div class="perk"><i><svg width="20" height="20"><use href="#i-bike"/></svg></i><span>Free Sample Collection<br>at <em>your home</em></span></div>
           <div class="perk"><i><svg width="20" height="20"><use href="#i-report"/></svg></i><span><em>Smart Reports</em> on<br>WhatsApp &amp; app</span></div>
           <div class="perk"><i><svg width="20" height="20"><use href="#i-steth"/></svg></i><span><em>Free Doctor &amp; Diet</em><br>Consultation</span></div>
+          <button class="watch" type="button" data-intro hidden><i><svg width="12" height="12" viewBox="0 0 24 24"><path d="M7 4v16l13-8Z" fill="currentColor"/></svg></i>Watch how it works</button>
         </div>
       </div>
     </div>
@@ -705,7 +750,7 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
 
 <section class="sec" id="how" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><div><h2>How home sample collection works</h2><p>Five simple steps from booking to report.</p></div></div>
+    <div class="sec-head"><div><h2>How home sample collection works</h2><p>Five simple steps from booking to report.</p></div><button class="watch" type="button" data-intro hidden><i><svg width="12" height="12" viewBox="0 0 24 24"><path d="M7 4v16l13-8Z" fill="currentColor"/></svg></i>Watch the 3D story</button></div>
     <ol class="steps">
       <li class="step"><span class="n">Book</span><i><svg width="22" height="22"><use href="#i-cart"/></svg></i><b>Book online</b><p>Pick a test or package, your address and a time slot.</p></li>
       <li class="step"><span class="n">Track</span><i><svg width="22" height="22"><use href="#i-scooter"/></svg></i><b>Phlebotomist on the way</b><p>A trained phlebotomist is assigned and reaches your door.</p></li>
@@ -842,6 +887,31 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
     <small>Our team confirms your slot on WhatsApp. Pay after the slot is confirmed.</small>
   </div>
 </aside>
+<div class="intro" id="intro" hidden role="dialog" aria-modal="true" aria-label="How MicroCheck works, a 3D story">
+  <canvas id="introCanvas" aria-hidden="true"></canvas>
+  <div class="intro-grain" aria-hidden="true"></div>
+  <div class="intro-ui">
+    <div class="intro-top">
+      <span class="intro-logo"><svg width="30" height="33" aria-hidden="true"><use href="#i-drop"/></svg><span>micro<b>check</b></span></span>
+      <div class="intro-steps" id="introSteps" aria-hidden="true"></div>
+      <button class="intro-pill" type="button" id="introSkip">Skip intro</button>
+    </div>
+    <div class="intro-bottom">
+      <div class="intro-copy">
+        <span class="intro-eyebrow" id="introEyebrow">01 · On the way</span>
+        <h2 class="intro-h" id="introH">A nurse rides <em>to your door.</em></h2>
+      </div>
+      <div class="intro-side">
+        <p id="introP">Book online and a verified MicroCheck nurse comes to your home at the time you pick.</p>
+        <div class="intro-acts">
+          <button class="intro-dark" type="button" id="introBook">Book a home test</button>
+          <button class="intro-link" type="button" id="introEnter">Enter website →</button>
+        </div>
+      </div>
+    </div>
+    <div class="intro-bars" id="introBars"></div>
+  </div>
+</div>
 <div class="toast" id="toast" role="status" hidden></div>
 <div class="vmodal" id="vmodal" hidden role="dialog" aria-modal="true" aria-label="Customer review video"><button class="x-btn" type="button" id="vClose" aria-label="Close video"><svg width="18" height="18"><use href="#i-x"/></svg></button><video id="vPlayer" controls playsinline></video></div>
 
@@ -1108,6 +1178,434 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   $('news').addEventListener('submit', function (e) { e.preventDefault(); toast('Thanks! You are subscribed.'); this.reset(); });
   $('yr').textContent = new Date().getFullYear();
   renderShelf(); renderCart();
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+<script>
+// 3D intro: nurse rides to the home -> draws blood -> lab analysis & culture -> report on WhatsApp -> happy patient.
+(function () {
+  var intro = document.getElementById('intro');
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STORY = [
+    { tag: 'On the way', eyebrow: '01 · On the way', h: 'A nurse rides <em>to your door.</em>', p: 'Book online and a verified MicroCheck nurse comes to your home at the time you pick.' },
+    { tag: 'Collection', eyebrow: '02 · Collection', h: 'Blood drawn, <em>gently, at home.</em>', p: 'One prick with a sealed, single-use kit. No travel, no waiting room.' },
+    { tag: 'Lab', eyebrow: '03 · Lab', h: 'Tested at an <em>accredited lab.</em>', p: 'Your sample is analysed and cultured at a certified partner lab.' },
+    { tag: 'Report', eyebrow: '04 · Report', h: 'Results land <em>on WhatsApp.</em>', p: 'Your report arrives on your phone as a PDF, with a free consultation.' },
+    { tag: 'Done', eyebrow: '05 · Done', h: 'Healthy, happy, <em>no queues.</em>', p: 'That is MicroCheck. Healthcare, home delivered.' }
+  ];
+  var CH = 4.2, TOTAL = CH * STORY.length, SPACING = 15;
+
+  function webglOK() { try { var c = document.createElement('canvas'); return !!(window.WebGLRenderingContext && (c.getContext('webgl') || c.getContext('experimental-webgl'))); } catch (e) { return false; } }
+  if (!window.THREE || !webglOK()) { document.querySelectorAll('[data-intro]').forEach(function (b) { b.hidden = true; }); return; }
+  var T = THREE;
+
+  // ---------- renderer / scene ----------
+  var canvas = document.getElementById('introCanvas');
+  var renderer, scene, camera, built = false, running = false, raf = 0, t0 = 0, chapter = -1;
+  var upd = []; // per-chapter updaters
+  var BG = 0x2b82e3;
+
+  function mat(c, r, m, extra) { var o = { color: c, roughness: r == null ? .55 : r, metalness: m || 0 }; for (var k in extra) o[k] = extra[k]; return new T.MeshStandardMaterial(o); }
+  function mesh(geo, m, cast) { var x = new T.Mesh(geo, m); x.castShadow = cast !== false; x.receiveShadow = true; return x; }
+  function roundRect(w, h, r) { var s = new T.Shape(), x = -w / 2, y = -h / 2; s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r); s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h); s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r); s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y); return s; }
+  function rbox(w, h, d, r, m) { var g = new T.ExtrudeGeometry(roundRect(w, h, r), { depth: d, bevelEnabled: true, bevelThickness: .05, bevelSize: .05, bevelSegments: 3, curveSegments: 8 }); g.translate(0, 0, -d / 2); return mesh(g, m); }
+  function heartGeo(s) { var h = new T.Shape(); h.moveTo(0, -.35); h.bezierCurveTo(-.1, -.25, -.5, 0, -.5, .2); h.bezierCurveTo(-.5, .45, -.2, .55, 0, .32); h.bezierCurveTo(.2, .55, .5, .45, .5, .2); h.bezierCurveTo(.5, 0, .1, -.25, 0, -.35); var g = new T.ExtrudeGeometry(h, { depth: .15, bevelEnabled: true, bevelThickness: .06, bevelSize: .06, bevelSegments: 3 }); g.center(); g.scale(s, s, s); return g; }
+  function canvasTex(w, h) { var c = document.createElement('canvas'); c.width = w; c.height = h; var tx = new T.CanvasTexture(c); tx.encoding = T.sRGBEncoding; tx.anisotropy = 4; return { c: c, x: c.getContext('2d'), tex: tx }; }
+  function ease(x) { x = Math.min(1, Math.max(0, x)); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  function easeOut(x) { x = Math.min(1, Math.max(0, x)); return 1 - Math.pow(1 - x, 3); }
+  function pop(x) { x = Math.min(1, Math.max(0, x)); var c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); }
+
+  var M = {};
+  function materials() {
+    M.white = mat(0xf7fbff, .45); M.navy = mat(0x13294b, .4, .1); M.green = mat(0x45b84f, .45); M.orange = mat(0xff7a3d, .5);
+    M.red = mat(0xe5383b, .35); M.blood = mat(0xb3121f, .25, 0, { emissive: 0x3a0005 }); M.purple = mat(0x7c5cff, .4);
+    M.glass = mat(0xffffff, .05, 0, { transparent: true, opacity: .35 }); M.skinA = mat(0xe9b48c, .65); M.skinB = mat(0xa86a45, .65);
+    M.hair = mat(0x1a1520, .7); M.scrub = mat(0xffffff, .6); M.scrubBlue = mat(0x9fd3f5, .6); M.pantsN = mat(0x1b3566, .6);
+    M.shirt = mat(0xff6a1a, .6); M.jeans = mat(0x263a68, .7); M.mouth = mat(0x7a2b2b, .5); M.cheek = mat(0xff8f8f, .8, 0, { transparent: true, opacity: .7 });
+    M.dark = mat(0x1a2030, .5); M.platform = mat(0xeef6fd, .8); M.rim = mat(0x8cc8f2, .5); M.road = mat(0x4a5b73, .9);
+    M.wall = mat(0xd8eaf8, .9); M.wood = mat(0xc98e5a, .7); M.leaf = mat(0x3fae5a, .7); M.cell = mat(0x1c58c9, .55, 0, { transparent: true, opacity: .55 });
+    M.pink = mat(0xff5d8f, .35, 0, { emissive: 0x5a0020 }); M.agar = mat(0xffd9b0, .6); M.colony = mat(0xe07b39, .5); M.liquid = mat(0x4fc3f7, .2, 0, { transparent: true, opacity: .8 });
+    M.window = mat(0xbfe6ff, .2, 0, { emissive: 0x6fb8ef, emissiveIntensity: .5 });
+  }
+
+  // ---------- characters ----------
+  function person(o) {
+    var g = new T.Group(), skin = o.skin, top = o.top;
+    var legs = [];
+    [-.15, .15].forEach(function (x) {
+      var p = new T.Group(); p.position.set(x, .95, 0);
+      var l = mesh(new T.CapsuleGeometry(.14, .55, 6, 12), o.pants); l.position.y = -.45; p.add(l);
+      var shoe = mesh(new T.SphereGeometry(.15, 14, 10), M.dark); shoe.scale.set(1, .6, 1.5); shoe.position.set(0, -.84, .06); p.add(shoe);
+      g.add(p); legs.push(p);
+    });
+    var torso = mesh(new T.CapsuleGeometry(.36, .55, 8, 18), top); torso.position.y = 1.38; torso.scale.z = .78; g.add(torso);
+    if (o.nurse) {
+      var collar = mesh(new T.TorusGeometry(.17, .035, 8, 24, Math.PI), M.scrubBlue, false); collar.position.set(0, 1.86, .17); collar.rotation.set(-.4, 0, Math.PI); g.add(collar);
+      var badge = mesh(new T.BoxGeometry(.16, .16, .03), M.white); badge.position.set(.17, 1.55, .29); g.add(badge);
+      var c1 = mesh(new T.BoxGeometry(.11, .03, .02), M.red, false), c2 = mesh(new T.BoxGeometry(.03, .11, .02), M.red, false);
+      c1.position.set(.17, 1.55, .31); c2.position.copy(c1.position); g.add(c1, c2);
+    }
+    var headG = new T.Group(); headG.position.y = 2.12; g.add(headG);
+    var head = mesh(new T.SphereGeometry(.34, 28, 20), skin); headG.add(head);
+    var hair = mesh(new T.SphereGeometry(.365, 28, 20, 0, Math.PI * 2, 0, Math.PI * .55), M.hair); hair.position.set(0, .02, -.04); hair.rotation.x = -.35; headG.add(hair);
+    if (o.bun) { var bun = mesh(new T.SphereGeometry(.15, 16, 12), M.hair); bun.position.set(0, .1, -.34); headG.add(bun); }
+    if (o.cap) {
+      var cap = mesh(new T.CylinderGeometry(.2, .25, .14, 24), M.white); cap.position.set(0, .33, -.02); cap.rotation.x = -.2; headG.add(cap);
+      var k1 = mesh(new T.BoxGeometry(.1, .025, .02), M.red, false), k2 = mesh(new T.BoxGeometry(.025, .1, .02), M.red, false);
+      k1.position.set(0, .34, .2); k2.position.copy(k1.position); headG.add(k1, k2);
+    }
+    [-.12, .12].forEach(function (x) {
+      var e;
+      if (o.happy) { e = mesh(new T.TorusGeometry(.06, .02, 8, 16, Math.PI), M.dark, false); e.position.set(x, .05, .315); }
+      else { e = mesh(new T.SphereGeometry(.045, 12, 10), M.dark, false); e.position.set(x, .04, .305); }
+      headG.add(e);
+      var ck = mesh(new T.SphereGeometry(.065, 12, 10), M.cheek, false); ck.scale.z = .3; ck.position.set(x * 1.7, -.07, .285); headG.add(ck);
+    });
+    if (o.happy) {
+      var mouth = mesh(new T.CircleGeometry(.13, 24, Math.PI, Math.PI), M.mouth, false); mouth.position.set(0, -.1, .33); headG.add(mouth);
+      var teeth = mesh(new T.PlaneGeometry(.2, .035), M.white, false); teeth.position.set(0, -.112, .332); headG.add(teeth);
+    } else {
+      var sm = mesh(new T.TorusGeometry(.09, .022, 8, 24, Math.PI), M.mouth, false); sm.rotation.z = Math.PI; sm.position.set(0, -.08, .315); headG.add(sm);
+    }
+    var arms = [];
+    [-.46, .46].forEach(function (x) {
+      var p = new T.Group(); p.position.set(x, 1.72, 0);
+      var a = mesh(new T.CapsuleGeometry(.1, .48, 6, 12), top); a.position.y = -.32; p.add(a);
+      var hnd = mesh(new T.SphereGeometry(.11, 14, 10), o.glove ? M.scrubBlue : skin); hnd.position.y = -.66; p.add(hnd);
+      p.rotation.z = x > 0 ? .08 : -.08;
+      g.add(p); arms.push(p);
+    });
+    if (o.scale) g.scale.setScalar(o.scale);
+    return { g: g, legs: legs, armL: arms[0], armR: arms[1], head: headG };
+  }
+  function sit(p) { p.legs.forEach(function (l) { l.rotation.x = -1.35; }); }
+  function nurse(extra) { var o = { skin: M.skinA, top: M.scrub, pants: M.pantsN, nurse: true, cap: true, bun: true, glove: true }; for (var k in extra) o[k] = extra[k]; return person(o); }
+  function patient(extra) { var o = { skin: M.skinB, top: M.shirt, pants: M.jeans }; for (var k in extra) o[k] = extra[k]; return person(o); }
+
+  function platform(x) {
+    var g = new T.Group(); g.position.x = x;
+    var top = mesh(new T.CylinderGeometry(5.4, 5.4, .5, 72), M.platform, false); top.position.y = -.25; g.add(top);
+    var rim = mesh(new T.CylinderGeometry(5.46, 5.1, .35, 72), M.rim, false); rim.position.y = -.62; g.add(rim);
+    var under = mesh(new T.CylinderGeometry(5.1, 3.4, 1.4, 72), mat(0x6fb3ea, .7), false); under.position.y = -1.45; g.add(under);
+    scene.add(g); return g;
+  }
+  function tree(g, x, z, s) {
+    var t = mesh(new T.CylinderGeometry(.08, .12, .7, 10), M.wood); t.position.set(x, .35, z);
+    var c = mesh(new T.IcosahedronGeometry(.55, 1), M.leaf); c.position.set(x, 1.05, z); c.scale.setScalar(s || 1);
+    g.add(t, c);
+  }
+
+  // ---------- chapters ----------
+  function build1(sx) {
+    var g = platform(sx);
+    var road = mesh(new T.BoxGeometry(10.2, .04, 1.7), M.road, false); road.position.set(0, .02, 1.3); g.add(road);
+    var dashes = new T.Group(); for (var i = -5; i < 5; i++) { var d = mesh(new T.BoxGeometry(.5, .02, .08), M.white, false); d.position.set(i + .5, .05, 1.3); dashes.add(d); } g.add(dashes);
+    var house = new T.Group(); house.position.set(2.5, 0, -1.6); g.add(house);
+    var hb = mesh(new T.BoxGeometry(2.2, 1.6, 1.8), mat(0xfff6ea, .8)); hb.position.y = .8; house.add(hb);
+    var roof = mesh(new T.ConeGeometry(1.75, 1.1, 4), M.orange); roof.position.y = 2.15; roof.rotation.y = Math.PI / 4; roof.scale.set(1, 1, .85); house.add(roof);
+    var door = mesh(new T.BoxGeometry(.45, .8, .05), M.navy); door.position.set(-.35, .4, .92); house.add(door);
+    var win = mesh(new T.BoxGeometry(.5, .45, .05), M.window); win.position.set(.5, .95, .92); house.add(win);
+    var pin = new T.Group(); pin.position.set(2.5, 3.4, -1.3); g.add(pin);
+    var pc = mesh(new T.ConeGeometry(.28, .6, 24), M.red); pc.rotation.x = Math.PI; pc.position.y = -.3; var ps = mesh(new T.SphereGeometry(.3, 24, 16), M.red); var pw = mesh(new T.SphereGeometry(.12, 16, 12), M.white, false); pw.position.z = .22; pin.add(pc, ps, pw);
+    tree(g, -3.4, -1.6, 1.1); tree(g, -1.8, -2.6, .9); tree(g, 4.3, .2, .8); tree(g, .2, -3.2, 1);
+    // scooter
+    var sc = new T.Group(); g.add(sc); sc.position.set(-4, 0, 1.3);
+    var body = mesh(new T.CapsuleGeometry(.3, 1.2, 8, 16), M.green); body.rotation.z = Math.PI / 2; body.position.set(0, .72, 0); sc.add(body);
+    var board = mesh(new T.BoxGeometry(1.1, .12, .5), M.navy); board.position.set(-.05, .45, 0); sc.add(board);
+    var col = mesh(new T.CylinderGeometry(.06, .06, 1.1, 10), M.navy); col.position.set(.78, 1.05, 0); col.rotation.z = -.3; sc.add(col);
+    var bar = mesh(new T.CylinderGeometry(.05, .05, .8, 10), M.navy); bar.rotation.x = Math.PI / 2; bar.position.set(.95, 1.55, 0); sc.add(bar);
+    var lamp = mesh(new T.SphereGeometry(.1, 14, 10), mat(0xfff1a8, .2, 0, { emissive: 0xffe066, emissiveIntensity: .8 })); lamp.position.set(.98, 1.12, 0); sc.add(lamp);
+    var seat = mesh(new T.CapsuleGeometry(.13, .5, 6, 12), M.navy); seat.rotation.z = Math.PI / 2; seat.position.set(-.25, 1.06, 0); sc.add(seat);
+    var box = mesh(new T.BoxGeometry(.55, .5, .55), M.white); box.position.set(-.9, 1.3, 0); sc.add(box);
+    var bx1 = mesh(new T.BoxGeometry(.3, .08, .02), M.red, false), bx2 = mesh(new T.BoxGeometry(.08, .3, .02), M.red, false); bx1.position.set(-.9, 1.3, .29); bx2.position.copy(bx1.position); sc.add(bx1, bx2);
+    var wheels = [];
+    [-.6, .78].forEach(function (x) { var w = new T.Group(); w.position.set(x, .32, 0); var tyre = mesh(new T.TorusGeometry(.24, .09, 12, 28), M.dark); var hub = mesh(new T.CylinderGeometry(.1, .1, .14, 16), M.white); hub.rotation.x = Math.PI / 2; var sp = mesh(new T.BoxGeometry(.4, .04, .05), M.white, false); w.add(tyre, hub, sp); sc.add(w); wheels.push(w); });
+    var n = nurse(); sit(n); n.g.rotation.y = Math.PI / 2; n.g.position.set(-.3, .15, 0); n.armL.rotation.x = n.armR.rotation.x = -1.25; sc.add(n.g);
+    var speed = new T.Group(); for (var k = 0; k < 4; k++) { var s = mesh(new T.BoxGeometry(.6, .04, .04), mat(0xffffff, .5, 0, { transparent: true, opacity: .8 }), false); s.position.set(-1.6 - k * .2, .7 + k * .22, (k % 2 ? .3 : -.3)); speed.add(s); } sc.add(speed);
+    return function (lt) {
+      var p = easeOut(lt / 3.1); sc.position.x = -4.2 + 5 * p; sc.position.y = Math.abs(Math.sin(lt * 14)) * .04 * (1 - p);
+      wheels.forEach(function (w) { w.rotation.z = -sc.position.x / .33; });
+      speed.children.forEach(function (s, i) { s.material.opacity = (1 - p) * (.5 + .5 * Math.sin(lt * 20 + i)); });
+      n.head.rotation.y = p > .9 ? Math.sin(lt * 3) * .15 - .5 : 0;
+      pin.position.y = 3.4 + Math.sin(lt * 4) * .12; pin.rotation.y = lt * 1.5; pin.scale.setScalar(.3 + .7 * pop(lt / .8));
+      if (p > .95) { n.armR.rotation.x = -2.6 + Math.sin(lt * 10) * .25; } else n.armR.rotation.x = -1.25;
+    };
+  }
+
+  function build2(sx) {
+    var g = platform(sx);
+    var wall = mesh(new T.BoxGeometry(8, 3.6, .2), M.wall); wall.position.set(0, 1.8, -2.6); g.add(wall);
+    var wall2 = mesh(new T.BoxGeometry(.2, 3.6, 3.8), M.wall); wall2.position.set(-3.6, 1.8, -.8); g.add(wall2);
+    var win = mesh(new T.BoxGeometry(1.6, 1.2, .05), M.window); win.position.set(-1.4, 2.2, -2.48); g.add(win);
+    var frame = mesh(new T.BoxGeometry(1.7, .08, .1), M.white); frame.position.set(-1.4, 2.2, -2.45); g.add(frame);
+    var rug = mesh(new T.CylinderGeometry(1.9, 1.9, .03, 48), mat(0xffe3cc, .9), false); rug.position.set(.4, .02, .2); g.add(rug);
+    var plant = new T.Group(); plant.position.set(2.9, 0, -1.9); g.add(plant);
+    var pot = mesh(new T.CylinderGeometry(.3, .22, .5, 16), M.orange); pot.position.y = .25; plant.add(pot);
+    for (var i = 0; i < 5; i++) { var lf = mesh(new T.SphereGeometry(.28, 12, 10), M.leaf); lf.scale.set(.5, 1.3, .5); lf.position.set(Math.cos(i * 1.3) * .15, .9, Math.sin(i * 1.3) * .15); lf.rotation.set(Math.cos(i) * .5, 0, Math.sin(i * 2) * .5); plant.add(lf); }
+    // chair + patient
+    var chair = new T.Group(); chair.position.set(1.4, 0, -.4); chair.rotation.y = -.75; g.add(chair);
+    var seat = rbox(1.1, .95, .18, .1, mat(0x2b4c7e, .6)); seat.rotation.x = -Math.PI / 2; seat.position.y = .8; chair.add(seat);
+    var back = rbox(1.1, 1.2, .16, .1, mat(0x2b4c7e, .6)); back.position.set(0, 1.4, -.45); chair.add(back);
+    [[-.45, -.35], [.45, -.35], [-.45, .35], [.45, .35]].forEach(function (p) { var l = mesh(new T.CylinderGeometry(.04, .04, .8, 8), M.navy); l.position.set(p[0], .4, p[1]); chair.add(l); });
+    var pt = patient(); sit(pt); pt.g.position.set(0, -.12, .05); chair.add(pt.g);
+    pt.armL.rotation.set(-1.35, 0, -.35);
+    var table = new T.Group(); table.position.set(.35, 0, .45); g.add(table);
+    var tt = mesh(new T.CylinderGeometry(.5, .5, .08, 32), M.white); tt.position.y = 1.0; var tl = mesh(new T.CylinderGeometry(.06, .08, 1, 10), M.navy); tl.position.y = .5; table.add(tt, tl);
+    var kit = mesh(new T.BoxGeometry(.35, .08, .25), mat(0x9fd3f5, .5)); kit.position.set(.1, 1.08, .1); table.add(kit);
+    var n = nurse(); n.g.position.set(-1.2, 0, .55); n.g.rotation.y = .95; g.add(n.g);
+    n.armR.rotation.set(-1.15, 0, .25); n.armL.rotation.set(-.9, 0, -.1);
+    var tube = new T.Group(); tube.position.set(-.05, 1.55, .9); g.add(tube);
+    var glass = mesh(new T.CylinderGeometry(.08, .08, .55, 20), M.glass, false); var fill = mesh(new T.CylinderGeometry(.065, .065, .5, 20), M.blood, false); fill.position.y = -.02; var cap = mesh(new T.CylinderGeometry(.095, .095, .12, 20), M.purple); cap.position.y = .32;
+    var fillG = new T.Group(); fillG.position.y = -.27; fill.position.y = .25; fillG.add(fill); tube.add(glass, fillG, cap); tube.rotation.z = .5;
+    var line = mesh(new T.TorusGeometry(.35, .015, 6, 30, Math.PI * .8), M.red, false); line.position.set(.2, 1.3, .8); line.rotation.z = -.9; g.add(line);
+    var hearts = [];
+    for (var h = 0; h < 3; h++) { var hm = mesh(heartGeo(.4), M.pink); hm.visible = false; g.add(hm); hearts.push(hm); }
+    var chip = new T.Group(); chip.position.set(-1.2, 3.25, .4); g.add(chip);
+    var ct = canvasTex(512, 128); var cx = ct.x;
+    cx.fillStyle = '#ffffff'; cx.beginPath(); cx.roundRect ? cx.roundRect(0, 0, 512, 128, 64) : cx.rect(0, 0, 512, 128); cx.fill();
+    cx.fillStyle = '#23944a'; cx.beginPath(); cx.arc(70, 64, 36, 0, 7); cx.fill(); cx.strokeStyle = '#fff'; cx.lineWidth = 9; cx.lineCap = 'round'; cx.beginPath(); cx.moveTo(52, 64); cx.lineTo(65, 78); cx.lineTo(89, 50); cx.stroke();
+    cx.fillStyle = '#0d2138'; cx.font = '600 52px Poppins, Inter, sans-serif'; cx.fillText('Gentle & quick', 130, 82); ct.tex.needsUpdate = true;
+    var chipM = new T.Mesh(new T.PlaneGeometry(1.9, .48), new T.MeshBasicMaterial({ map: ct.tex, transparent: true })); chip.add(chipM);
+    return function (lt) {
+      var f = easeOut((lt - .6) / 2.4); fillG.scale.y = Math.max(.001, f);
+      tube.position.y = 1.55 + Math.sin(lt * 2) * .03;
+      n.armR.rotation.x = -1.15 + Math.sin(lt * 2) * .04;
+      pt.head.rotation.z = Math.sin(lt * 1.5) * .06; pt.head.rotation.y = -.2;
+      n.head.rotation.y = .1 + Math.sin(lt * 1.2) * .08;
+      hearts.forEach(function (hm, i) { var s = lt - 2.4 - i * .35; hm.visible = s > 0; if (s > 0) { var k = (s % 1.6) / 1.6; hm.position.set(1.4 + (i - 1) * .45, 3.0 + k * 1.3, -.2); hm.scale.setScalar(pop(k * 3) * (1 - k * .4)); hm.rotation.y = Math.sin(lt * 3 + i) * .4; } });
+      chip.scale.setScalar(pop((lt - 2.9) / .5)); chip.visible = lt > 2.9;
+      chip.quaternion.copy(camera.quaternion);
+    };
+  }
+
+  function build3(sx) {
+    var g = platform(sx);
+    var bench = new T.Group(); g.add(bench);
+    var top = rbox(6.2, 2.2, .16, .12, M.white); top.rotation.x = -Math.PI / 2; top.position.set(0, 1.0, -.3); bench.add(top);
+    [[-2.8, -1.2], [2.8, -1.2], [-2.8, .6], [2.8, .6]].forEach(function (p) { var l = mesh(new T.BoxGeometry(.12, 1, .12), M.navy); l.position.set(p[0], .5, p[1]); bench.add(l); });
+    var shelfWall = mesh(new T.BoxGeometry(6.6, 2.6, .15), M.wall); shelfWall.position.set(0, 2.4, -1.65); g.add(shelfWall);
+    var ana = rbox(1.9, 1.6, 1.3, .18, mat(0xf4f8fc, .35)); ana.position.set(.3, 1.92, -.45); g.add(ana);
+    var stripe = mesh(new T.BoxGeometry(1.95, .1, 1.36), mat(0x0b8fd0, .4)); stripe.position.set(.3, 1.3, -.45); g.add(stripe);
+    var slot = mesh(new T.BoxGeometry(.5, .14, .4), M.navy); slot.position.set(.75, 2.82, -.45); g.add(slot);
+    var scr = canvasTex(512, 300); var screen = new T.Mesh(new T.PlaneGeometry(1.25, .73), new T.MeshBasicMaterial({ map: scr.tex })); screen.position.set(.15, 2.05, .27); g.add(screen);
+    var led = mesh(new T.SphereGeometry(.06, 12, 8), mat(0x4cd964, .3, 0, { emissive: 0x4cd964, emissiveIntensity: 1.2 }), false); led.position.set(.95, 1.55, .27); g.add(led);
+    var tube = new T.Group(); g.add(tube);
+    var glass = mesh(new T.CylinderGeometry(.08, .08, .55, 20), M.glass, false); var fill = mesh(new T.CylinderGeometry(.065, .065, .42, 20), M.blood, false); fill.position.y = -.05; var cap = mesh(new T.CylinderGeometry(.095, .095, .12, 20), M.purple); cap.position.y = .32; tube.add(glass, fill, cap);
+    // petri dish + colonies
+    var dish = new T.Group(); dish.position.set(-1.85, 1.1, .2); g.add(dish);
+    var base = mesh(new T.CylinderGeometry(.62, .62, .1, 40), M.glass, false); var agar = mesh(new T.CylinderGeometry(.56, .56, .06, 40), M.agar, false); agar.position.y = .01; dish.add(base, agar);
+    var lid = mesh(new T.CylinderGeometry(.64, .64, .04, 40), mat(0xffffff, .05, 0, { transparent: true, opacity: .18 }), false); lid.position.set(.9, -.03, -.1); dish.add(lid);
+    var colonies = [];
+    for (var i = 0; i < 18; i++) { var a = i * 2.4, r = .1 + (i * 37 % 10) / 22; var cm = mesh(new T.SphereGeometry(.035 + (i % 4) * .012, 10, 8), i % 5 ? M.colony : mat(0xf6e27a, .5), false); cm.scale.y = .5; cm.position.set(Math.cos(a) * r, .05, Math.sin(a) * r); cm.userData.t = .7 + i * .13; dish.add(cm); colonies.push(cm); }
+    // microscope
+    var mic = new T.Group(); mic.position.set(2.35, 1.08, -.2); g.add(mic);
+    var mb = rbox(.7, .5, .12, .08, M.navy); mb.rotation.x = -Math.PI / 2; var arm = mesh(new T.BoxGeometry(.14, 1.1, .2), M.white); arm.position.set(0, .6, -.15); arm.rotation.x = .15;
+    var tubeM = mesh(new T.CylinderGeometry(.1, .1, .7, 16), M.navy); tubeM.position.set(0, 1.05, .1); tubeM.rotation.x = -.5; var stage = mesh(new T.BoxGeometry(.5, .05, .4), M.white); stage.position.set(0, .45, .05);
+    mic.add(mb, arm, tubeM, stage);
+    // flasks
+    var fl = new T.Group(); fl.position.set(-2.6, 1.08, -1.0); g.add(fl);
+    var fg = mesh(new T.CylinderGeometry(.12, .38, .7, 24), M.glass, false); fg.position.y = .35; var fq = mesh(new T.CylinderGeometry(.24, .37, .3, 24), M.liquid, false); fq.position.y = .16; fl.add(fg, fq);
+    var bub = []; for (var b = 0; b < 4; b++) { var bm = mesh(new T.SphereGeometry(.04, 8, 6), mat(0xe3f6ff, .2, 0, { transparent: true, opacity: .8 }), false); fl.add(bm); bub.push(bm); }
+    function drawScreen(lt) {
+      var x = scr.x; x.fillStyle = '#0b1f3a'; x.fillRect(0, 0, 512, 300);
+      x.strokeStyle = 'rgba(120,180,240,.15)'; x.lineWidth = 2; for (var gx = 0; gx < 512; gx += 40) { x.beginPath(); x.moveTo(gx, 0); x.lineTo(gx, 300); x.stroke(); }
+      x.fillStyle = '#7fc4f0'; x.font = '600 26px Inter, sans-serif'; x.fillText(lt < 3.1 ? 'Analysing sample…' : 'Report ready', 24, 42);
+      var prog = Math.min(1, Math.max(0, (lt - .9) / 2)); x.strokeStyle = '#4cd964'; x.lineWidth = 5; x.lineJoin = 'round'; x.beginPath();
+      for (var px = 0; px <= 460 * prog; px += 4) { var yy = 150 + Math.sin(px * .05) * 18 + (px % 120 > 100 ? -50 : 0); if (px === 0) x.moveTo(26 + px, yy); else x.lineTo(26 + px, yy); } x.stroke();
+      var bars = [.6, .85, .45, .7, .55]; bars.forEach(function (v, i) { var hh = 70 * v * easeOut((lt - 1.4 - i * .15) / .6); x.fillStyle = i % 2 ? '#45b84f' : '#2fa8e4'; x.fillRect(30 + i * 44, 280 - hh, 30, hh); });
+      if (lt > 3.1) { var s = pop((lt - 3.1) / .4); x.save(); x.translate(440, 238); x.scale(s, s); x.fillStyle = '#45b84f'; x.beginPath(); x.arc(0, 0, 40, 0, 7); x.fill(); x.strokeStyle = '#fff'; x.lineWidth = 9; x.lineCap = 'round'; x.beginPath(); x.moveTo(-17, 0); x.lineTo(-4, 14); x.lineTo(19, -12); x.stroke(); x.restore(); }
+      scr.tex.needsUpdate = true;
+    }
+    return function (lt) {
+      var d = easeOut(lt / 1.1); tube.position.set(.75, 4.3 - 1.45 * d, -.45); tube.rotation.y = lt * 2;
+      tube.visible = lt < 1.3;
+      colonies.forEach(function (c) { c.scale.setScalar(Math.max(.001, pop((lt - c.userData.t) / .4))); c.scale.y *= .5; });
+      led.material.emissiveIntensity = lt < 3.1 ? (Math.sin(lt * 12) > 0 ? 1.4 : .1) : 1.4;
+      bub.forEach(function (bm, i) { var k = ((lt * .8 + i * .25) % 1); bm.position.set((i - 1.5) * .07, .1 + k * .55, 0); bm.material.opacity = .8 * (1 - k); });
+      drawScreen(lt);
+    };
+  }
+
+  function build4(sx) {
+    var g = platform(sx);
+    var stand = mesh(new T.CylinderGeometry(1.0, 1.2, .25, 48), M.white); stand.position.y = .12; g.add(stand);
+    var phone = new T.Group(); phone.position.set(0, 2.75, 0); g.add(phone);
+    var shell = rbox(2.3, 4.6, .22, .32, mat(0x0d1d33, .3, .3)); phone.add(shell);
+    var chat = canvasTex(512, 1024);
+    var screen = new T.Mesh(new T.PlaneGeometry(2.08, 4.36), new T.MeshBasicMaterial({ map: chat.tex })); screen.position.z = .17; phone.add(screen);
+    var badge = new T.Group(); badge.position.set(1.25, 2.4, .35); phone.add(badge);
+    var bc = mesh(new T.CylinderGeometry(.42, .42, .14, 32), mat(0x25d366, .35)); bc.rotation.x = Math.PI / 2; badge.add(bc);
+    var ck = new T.Shape(); ck.moveTo(-.2, 0); ck.lineTo(-.06, -.15); ck.lineTo(.22, .14); var ckG = new T.TubeGeometry(new T.CatmullRomCurve3([new T.Vector3(-.19, 0, .09), new T.Vector3(-.06, -.13, .09), new T.Vector3(.2, .14, .09)], false, 'catmullrom', 0), 20, .045, 8, false);
+    badge.add(mesh(ckG, M.white, false));
+    var ring = mesh(new T.TorusGeometry(.5, .03, 8, 40), mat(0x25d366, .4, 0, { transparent: true, opacity: .8 }), false); badge.add(ring);
+    var plane = new T.Group(); g.add(plane);
+    var pg = new T.BufferGeometry(); pg.setAttribute('position', new T.Float32BufferAttribute([0, 0, 0, -.5, .12, .25, -.5, .12, -.25, 0, 0, 0, -.5, .12, .25, -.42, -.05, 0, 0, 0, 0, -.42, -.05, 0, -.5, .12, -.25], 3)); pg.computeVertexNormals();
+    var pm = new T.Mesh(pg, new T.MeshStandardMaterial({ color: 0xffffff, side: T.DoubleSide, roughness: .5 })); pm.castShadow = true; plane.add(pm);
+    function bubble(x, y, w, h, color, lines, k, out) {
+      var c = chat.x; c.save(); c.globalAlpha = Math.min(1, k * 1.5); c.translate(0, (1 - easeOut(k)) * 30);
+      c.fillStyle = color; c.beginPath(); c.roundRect ? c.roundRect(x, y, w, h, 22) : c.rect(x, y, w, h); c.fill();
+      c.fillStyle = '#0d2138'; c.font = '500 30px Inter, sans-serif'; lines.forEach(function (ln, i) { c.fillText(ln, x + 24, y + 48 + i * 38); });
+      c.restore();
+    }
+    function draw(lt) {
+      var c = chat.x; c.fillStyle = '#efe7de'; c.fillRect(0, 0, 512, 1024);
+      c.fillStyle = 'rgba(0,0,0,.035)'; for (var i = 0; i < 40; i++) { c.beginPath(); c.arc((i * 97) % 512, (i * 211) % 1024, 10 + i % 7, 0, 7); c.fill(); }
+      c.fillStyle = '#128c7e'; c.fillRect(0, 0, 512, 140);
+      c.fillStyle = '#fff'; c.beginPath(); c.arc(70, 82, 34, 0, 7); c.fill();
+      c.fillStyle = '#0b8fd0'; c.beginPath(); c.arc(70, 82, 22, 0, 7); c.fill(); c.strokeStyle = '#fff'; c.lineWidth = 5; c.beginPath(); c.arc(70, 80, 11, .2, Math.PI - .2); c.stroke();
+      c.fillStyle = '#fff'; c.font = '700 34px Inter, sans-serif'; c.fillText('MicroCheck', 120, 80); c.font = '400 24px Inter, sans-serif'; c.fillStyle = '#d9fdd3'; c.fillText(lt < 2.6 ? 'typing…' : 'online', 120, 114);
+      var k1 = (lt - .5) / .5, k2 = (lt - 1.3) / .5, k3 = (lt - 2.6) / .5;
+      if (k1 > 0) bubble(28, 180, 380, 118, '#ffffff', ['Hi Anjali, your test', 'report is ready.'], k1);
+      if (k2 > 0) {
+        var cc = chat.x; cc.save(); cc.globalAlpha = Math.min(1, k2 * 1.5); cc.translate(0, (1 - easeOut(k2)) * 30);
+        cc.fillStyle = '#fff'; cc.beginPath(); cc.roundRect ? cc.roundRect(28, 320, 400, 170, 22) : cc.rect(28, 320, 400, 170); cc.fill();
+        cc.fillStyle = '#f2f4f7'; cc.beginPath(); cc.roundRect ? cc.roundRect(44, 336, 368, 110, 14) : cc.rect(44, 336, 368, 110); cc.fill();
+        cc.fillStyle = '#e5383b'; cc.fillRect(62, 352, 60, 78); cc.fillStyle = '#fff'; cc.font = '700 22px Inter, sans-serif'; cc.fillText('PDF', 70, 400);
+        cc.fillStyle = '#0d2138'; cc.font = '700 28px Inter, sans-serif'; cc.fillText('Lab_Report.pdf', 140, 384); cc.fillStyle = '#6b7c93'; cc.font = '400 22px Inter, sans-serif'; cc.fillText('2 pages · PDF', 140, 418);
+        cc.fillStyle = '#6b7c93'; cc.fillText('10:42', 352, 476); cc.restore();
+      }
+      if (k3 > 0) {
+        bubble(196, 520, 288, 84, '#d9fdd3', ['Thank you!'], k3);
+        if (k3 > .6) { var cc2 = chat.x; cc2.strokeStyle = lt > 3.3 ? '#34b7f1' : '#9aa7b4'; cc2.lineWidth = 4; cc2.lineCap = 'round'; [0, 12].forEach(function (o) { cc2.beginPath(); cc2.moveTo(420 + o, 570); cc2.lineTo(428 + o, 578); cc2.lineTo(444 + o, 560); cc2.stroke(); }); }
+      }
+      c.fillStyle = '#fff'; c.beginPath(); c.roundRect ? c.roundRect(24, 940, 380, 60, 30) : c.rect(24, 940, 380, 60); c.fill();
+      c.fillStyle = '#128c7e'; c.beginPath(); c.arc(456, 970, 32, 0, 7); c.fill();
+      chat.tex.needsUpdate = true;
+    }
+    return function (lt) {
+      phone.rotation.y = Math.sin(lt * .9) * .28 - .1; phone.position.y = 2.75 + Math.sin(lt * 1.6) * .08;
+      var pf = easeOut(lt / 1.2); plane.visible = lt < 1.25; plane.position.set(-4 + 4 * pf, 2.2 + Math.sin(pf * Math.PI) * 1.4, 1 - pf * .8); plane.rotation.z = Math.cos(pf * Math.PI) * .3; plane.scale.setScalar(1 - pf * .6);
+      var bk = pop((lt - 1.3) / .5); badge.scale.setScalar(Math.max(.001, bk)); badge.rotation.z = Math.sin(lt * 3) * .1;
+      var rk = ((lt - 1.3) % 1.2) / 1.2; ring.scale.setScalar(1 + rk * .8); ring.material.opacity = lt > 1.3 ? .8 * (1 - rk) : 0;
+      draw(lt);
+    };
+  }
+
+  function build5(sx) {
+    var g = platform(sx);
+    var pt = patient({ happy: true, scale: 1.45 }); pt.g.position.set(.7, 0, 0); pt.g.rotation.y = -.25; g.add(pt.g);
+    pt.armR.rotation.set(0, 0, 2.4);
+    var phG = new T.Group(); phG.position.set(0, -.8, 0); pt.armR.add(phG);
+    var ph = rbox(.2, .38, .04, .04, mat(0x0d1d33, .3)); phG.add(ph);
+    var phs = new T.Mesh(new T.PlaneGeometry(.17, .32), new T.MeshBasicMaterial({ color: 0x25d366, side: T.DoubleSide })); phs.position.z = .085; phG.add(phs);
+    var phs2 = phs.clone(); phs2.position.z = -.085; phG.add(phs2);
+    var tick = mesh(new T.TorusGeometry(.05, .012, 6, 16, Math.PI), M.white, false); tick.rotation.z = Math.PI; tick.position.z = .09; phG.add(tick);
+    var nr = nurse({ happy: true, scale: 1.2 }); nr.g.position.set(-1.6, 0, .4); nr.g.rotation.y = .45; g.add(nr.g);
+    var conf = new T.Group(); g.add(conf);
+    var cols = [0xffd166, 0x45b84f, 0x2fa8e4, 0xff7a3d, 0xff5d8f, 0xffffff];
+    for (var i = 0; i < 90; i++) { var c = new T.Mesh(new T.PlaneGeometry(.12, .2), new T.MeshStandardMaterial({ color: cols[i % cols.length], side: T.DoubleSide, roughness: .6 })); c.userData = { x: (Math.random() - .5) * 8, z: (Math.random() - .5) * 4, s: .6 + Math.random() * .8, o: Math.random() * 5, r: Math.random() * 6 }; conf.add(c); }
+    var hearts = []; for (var h = 0; h < 5; h++) { var hm = mesh(heartGeo(.35 + (h % 2) * .15), M.pink); g.add(hm); hearts.push(hm); }
+    var sun = mesh(new T.TorusGeometry(2.6, .05, 8, 80), mat(0xffffff, .5, 0, { transparent: true, opacity: .35 }), false); sun.position.set(.2, 3.2, -1.6); g.add(sun);
+    return function (lt) {
+      pt.g.position.y = Math.abs(Math.sin(lt * 4)) * .18; pt.head.rotation.z = Math.sin(lt * 4) * .08;
+      pt.armR.rotation.z = 2.4 + Math.sin(lt * 4) * .15;
+      nr.armL.rotation.z = -2.5 - Math.sin(lt * 9) * .35; nr.head.rotation.z = Math.sin(lt * 3) * .06;
+      conf.children.forEach(function (c) { var d = c.userData, y = 7 - ((lt * d.s * 2 + d.o) % 7.5); c.position.set(d.x + Math.sin(lt * 2 + d.r) * .3, y, d.z); c.rotation.set(lt * 3 + d.r, lt * 2 + d.r, 0); });
+      hearts.forEach(function (hm, i) { var k = ((lt * .5 + i * .2) % 1); hm.position.set(.7 + Math.sin(i * 2.1) * 1.6, 3.4 + k * 2.4, -.3 + Math.cos(i) * .5); hm.scale.setScalar(pop(Math.min(1, k * 4)) * (1 - k * .5)); hm.rotation.y = lt * 2 + i; });
+      sun.rotation.z = lt * .2; sun.scale.setScalar(1 + Math.sin(lt * 2) * .03);
+    };
+  }
+
+  var cells = [];
+  function build() {
+    renderer = new T.WebGLRenderer({ canvas: canvas, antialias: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.outputEncoding = T.sRGBEncoding; renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = .82;
+    renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+    scene = new T.Scene(); scene.background = new T.Color(BG); scene.fog = new T.Fog(BG, 16, 42);
+    camera = new T.PerspectiveCamera(40, 1, .1, 120);
+    materials();
+    scene.add(new T.HemisphereLight(0xe6f4ff, 0x3a6fc0, .7));
+    var sun = new T.DirectionalLight(0xffffff, 1.55); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+    var sc = sun.shadow.camera; sc.left = -8; sc.right = 8; sc.top = 8; sc.bottom = -8; sc.near = 1; sc.far = 40; sun.shadow.bias = -.0005; sun.shadow.radius = 4;
+    scene.add(sun, sun.target); camera.userData.sun = sun;
+    var fill = new T.DirectionalLight(0x9fd0ff, .45); fill.position.set(-10, 6, 6); scene.add(fill);
+    upd = [build1(0), build2(SPACING), build3(SPACING * 2), build4(SPACING * 3), build5(SPACING * 4)];
+    // floating blood cells (soft, far, fogged)
+    var cellGeo = new T.TorusGeometry(.7, .38, 18, 36);
+    for (var i = 0; i < 46; i++) {
+      var c = new T.Mesh(cellGeo, M.cell); var far = i % 3 === 0;
+      c.position.set(-12 + Math.random() * (SPACING * 4 + 24), -3 + Math.random() * 12, far ? -10 - Math.random() * 14 : -5 - Math.random() * 5);
+      c.scale.setScalar(.6 + Math.random() * 1.3); c.rotation.set(Math.random() * 3, Math.random() * 3, 0);
+      c.userData = { a: Math.random() * 6, s: .2 + Math.random() * .4, y: c.position.y };
+      scene.add(c); cells.push(c);
+    }
+    built = true; resize();
+  }
+
+  function resize() {
+    if (!renderer) return;
+    var w = intro.clientWidth || innerWidth, h = intro.clientHeight || innerHeight;
+    renderer.setSize(w, h, false); camera.aspect = w / h; camera.fov = w < 700 ? 52 : 38; camera.updateProjectionMatrix();
+  }
+  window.addEventListener('resize', resize);
+
+  // camera path: each chapter frames its island; on phones the camera sits further back and higher
+  function camFor(i, lt) {
+    var narrow = (intro.clientWidth || innerWidth) < 700, sx = i * SPACING;
+    var sway = Math.sin(lt * .5) * .5;
+    var offs = [[1.2, 3.6, 9.5, 0, 1.4], [1.0, 3.4, 8.6, .2, 1.6], [.8, 3.6, 8.4, 0, 1.7], [1.6, 3.4, 9.2, 0, 2.6], [.6, 3.4, 9.6, -.2, 2.4]][i];
+    var back = narrow ? 1.45 : 1;
+    var shiftX = narrow ? 0 : 1.2; // keep the action right of the headline on desktop
+    return { px: sx + offs[0] - shiftX + sway, py: offs[1] * (narrow ? 1.15 : 1), pz: offs[2] * back - lt * .12, tx: sx + offs[3] - shiftX, ty: offs[4] * (narrow ? .9 : 1), tz: 0 };
+  }
+
+  // ---------- UI ----------
+  var bars = document.getElementById('introBars'), steps = document.getElementById('introSteps');
+  bars.innerHTML = STORY.map(function () { return '<span><i></i></span>'; }).join('');
+  steps.innerHTML = STORY.map(function (s) { return '<span>' + s.tag + '</span>'; }).join('');
+  function setChapter(i) {
+    var s = STORY[i];
+    [['introEyebrow', s.eyebrow], ['introH', s.h], ['introP', s.p]].forEach(function (p) { var el = document.getElementById(p[0]); el.innerHTML = p[1]; el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); });
+    [].forEach.call(steps.children, function (el, k) { el.classList.toggle('on', k === i); });
+  }
+
+  var lastFocus = null;
+  function frame(now) {
+    if (!running) return;
+    var t = Math.max(0, (now - t0) / 1000);
+    if (t >= TOTAL + .4) { close(); return; }
+    var i = Math.min(STORY.length - 1, Math.floor(t / CH)), lt = t - i * CH;
+    if (i !== chapter) { chapter = i; setChapter(i); }
+    [].forEach.call(bars.children, function (b, k) { b.firstChild.style.width = (k < i ? 100 : k > i ? 0 : Math.min(100, lt / CH * 100)) + '%'; });
+    // camera: glide from previous island during the first 1.3s of each chapter
+    var a = camFor(i, lt), p = i > 0 ? camFor(i - 1, lt + CH) : a, k = i > 0 ? ease(lt / 1.3) : 1;
+    var lift = i > 0 ? Math.sin(k * Math.PI) * 1.6 : 0;
+    camera.position.set(p.px + (a.px - p.px) * k, p.py + (a.py - p.py) * k + lift, p.pz + (a.pz - p.pz) * k);
+    camera.lookAt(p.tx + (a.tx - p.tx) * k, p.ty + (a.ty - p.ty) * k, 0);
+    var sun = camera.userData.sun, fx = camera.position.x; sun.position.set(fx + 6, 14, 9); sun.target.position.set(fx - 1, 0, 0);
+    // run current chapter, and the previous one while it is still in view
+    upd[i](lt); if (i > 0 && lt < 1.3) upd[i - 1](lt + CH);
+    cells.forEach(function (c) { var d = c.userData; c.rotation.x += .003 * d.s * 4; c.rotation.y += .002 * d.s * 4; c.position.y = d.y + Math.sin(t * d.s + d.a) * .5; });
+    renderer.render(scene, camera);
+    raf = requestAnimationFrame(frame);
+  }
+
+  function open() {
+    try { if (!built) build(); } catch (e) { console.warn('Intro unavailable', e); return; }
+    lastFocus = document.activeElement;
+    intro.hidden = false; intro.classList.remove('out'); document.documentElement.style.overflow = 'hidden';
+    resize(); chapter = -1; t0 = performance.now(); running = true; raf = requestAnimationFrame(frame);
+    document.getElementById('introSkip').focus({ preventScroll: true });
+  }
+  function close(after) {
+    if (!running && intro.hidden) return;
+    running = false; cancelAnimationFrame(raf);
+    try { sessionStorage.setItem('mc-intro', '1'); } catch (e) {}
+    intro.classList.add('out'); document.documentElement.style.overflow = '';
+    setTimeout(function () { intro.hidden = true; if (after) after(); else if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); }, reduce ? 0 : 650);
+  }
+  document.getElementById('introSkip').addEventListener('click', function () { close(); });
+  document.getElementById('introEnter').addEventListener('click', function () { close(); });
+  document.getElementById('introBook').addEventListener('click', function () { close(function () { var el = document.getElementById('packages'); if (el) el.scrollIntoView({ behavior: 'auto' }); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && running) close(); });
+  document.addEventListener('visibilitychange', function () { if (document.hidden && running) { running = false; cancelAnimationFrame(raf); intro.dataset.pausedAt = performance.now(); } else if (!document.hidden && !intro.hidden && !running && intro.dataset.pausedAt) { t0 += performance.now() - (+intro.dataset.pausedAt); running = true; raf = requestAnimationFrame(frame); } });
+  document.querySelectorAll('[data-intro]').forEach(function (b) { b.hidden = false; b.addEventListener('click', open); });
+
+  // Play on first visit in this browser session (not for reduced-motion users; they can press the replay button).
+  var seen = false; try { seen = sessionStorage.getItem('mc-intro') === '1'; } catch (e) {}
+  if (!seen && !reduce) open();
 })();
 </script>
 
