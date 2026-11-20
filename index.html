@@ -6,413 +6,443 @@
 <link rel="icon" href="favicon.svg">
 <title>MicroCheck</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="MicroCheck: on-demand clinical home care and diagnostics delivered to your doorstep.">
+<meta name="description" content="MicroCheck: book lab tests and health checkups with free home sample collection across Kerala.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap">
 <style>
-/* Layout: centered sky-gradient hero + drifting photo strip, then calm white sections in a 1180px column; navy + brand blue pills as the only loud elements. */
+/* Layout: Healthians-style diagnostics store. Header (location, login, support) -> blue category bar with mega menus -> offer banner with built-in search -> service tiles -> concern grid -> package shelf + cart -> trust, process, club, FAQ. Fixed callback bar at the bottom. 1200px column. */
 :root {
-  --bg: #f5f9fc;
+  --bg: #f4f8fb;
   --surface: #ffffff;
-  --surface-2: #eef5fb;
-  --ink: #0b1f3a;
-  --ink-2: #4c5f79;
-  --line: #d9e6f1;
-  --blue: #0b9dd9;
-  --blue-deep: #1569b0;
-  --green: #4cb84f;
-  --green-soft: #e6f6e6;
-  --sky-1: #cfe8f8;
-  --sky-2: #eaf5fc;
-  --btn-bg: #0b1f3a;
-  --btn-fg: #ffffff;
-  --on-blue: #ffffff;
-  --shadow: 0 1px 2px rgba(11,31,58,.05), 0 8px 24px rgba(11,31,58,.07);
-  --font-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
-  --font-display: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --surface-2: #eef4f9;
+  --ink: #0d2138;
+  --ink-2: #56687f;
+  --line: #dde7f0;
+  --brand: #0b8fd0;
+  --brand-deep: #08679f;
+  --brand-ink: #0a5f99;
+  --brand-soft: #e2f3fc;
+  --green: #23944a;
+  --green-bright: #4cb84f;
+  --green-soft: #e4f6e8;
+  --coral: #f0643f;
+  --red: #e5383b;
+  --amber: #e8900c;
+  --amber-soft: #fff3dc;
+  --shadow: 0 1px 2px rgba(13,33,56,.05), 0 8px 24px rgba(13,33,56,.08);
+  --font-head: "Poppins", "Segoe UI", system-ui, sans-serif;
   --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
-  --r-lg: 22px;
-  --r-md: 14px;
-  --max: 1180px;
+  --max: 1200px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #071628; --surface: #0d2240; --surface-2: #0f2948; --ink: #e9f2fb; --ink-2: #9fb3cb;
-    --line: #1c3a5e; --blue: #3bb7ee; --blue-deep: #6cc6f2; --green: #67d06a; --green-soft: #12351f;
-    --sky-1: #0e3358; --sky-2: #0a1f3a; --btn-bg: #e9f2fb; --btn-fg: #0b1f3a; --on-blue: #04121f;
-    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.35);
+    --bg: #08131f; --surface: #0f1f31; --surface-2: #152b43; --ink: #e6eef7; --ink-2: #9db0c5; --line: #20374f;
+    --brand: #2fa8e4; --brand-deep: #0b6fa8; --brand-ink: #7cc9f2; --brand-soft: #10324d;
+    --green: #5ccf6a; --green-bright: #5ccf6a; --green-soft: #12301c; --amber: #ffc04d; --amber-soft: #3a2c0c;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #071628; --surface: #0d2240; --surface-2: #0f2948; --ink: #e9f2fb; --ink-2: #9fb3cb;
-  --line: #1c3a5e; --blue: #3bb7ee; --blue-deep: #6cc6f2; --green: #67d06a; --green-soft: #12351f;
-  --sky-1: #0e3358; --sky-2: #0a1f3a; --btn-bg: #e9f2fb; --btn-fg: #0b1f3a; --on-blue: #04121f;
-  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.35);
+  --bg: #08131f; --surface: #0f1f31; --surface-2: #152b43; --ink: #e6eef7; --ink-2: #9db0c5; --line: #20374f;
+  --brand: #2fa8e4; --brand-deep: #0b6fa8; --brand-ink: #7cc9f2; --brand-soft: #10324d;
+  --green: #5ccf6a; --green-bright: #5ccf6a; --green-soft: #12301c; --amber: #ffc04d; --amber-soft: #3a2c0c;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
   color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-h1, h2, h3, h4 { font-family: var(--font-display); margin: 0; letter-spacing: -0.02em; text-wrap: balance; line-height: 1.12; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; padding-bottom: 84px; }
+h1, h2, h3, h4 { font-family: var(--font-head); margin: 0; line-height: 1.25; text-wrap: balance; }
 p { margin: 0; }
 a { color: inherit; }
 img { max-width: 100%; display: block; }
-:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 8px; }
-
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; border-radius: 6px; }
 .wrap { max-width: var(--max); margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-.eyebrow { font-family: var(--font-display); font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--blue-deep); }
-.section { padding-block: clamp(64px, 9vw, 112px); }
-.section-head { display: grid; gap: 14px; max-width: 640px; margin-bottom: 44px; }
-.section-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.75rem); font-weight: 700; }
-.section-head p { color: var(--ink-2); font-size: 1.06rem; }
-.center { text-align: center; margin-inline: auto; justify-items: center; }
+.sec { padding-block: 40px; }
+.sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.sec-head h2 { font-size: clamp(1.3rem, 2.3vw, 1.7rem); font-weight: 700; }
+.sec-head p { color: var(--ink-2); margin-top: 2px; }
+.link { color: var(--brand-ink); font-weight: 600; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+.link:hover { text-decoration: underline; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 20px; border-radius: 10px; font: 600 .92rem/1 var(--font-head); text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: filter .2s, transform .15s; }
+.btn:hover { filter: brightness(1.07); }
+.btn:active { transform: scale(.98); }
+.btn-brand { background: var(--brand-deep); color: #fff; }
+.btn-outline { background: var(--surface); color: var(--brand-ink); border-color: var(--brand); }
+.btn-coral { background: var(--coral); color: #fff; }
+.btn-red { background: var(--red); color: #fff; }
+.btn-green { background: #23944a; color: #fff; }
+.btn-sm { min-height: 38px; padding: 8px 14px; font-size: .85rem; }
 
-/* Buttons */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 12px 24px; border-radius: 999px; font: 600 .98rem/1 var(--font-display); text-decoration: none; border: 0; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
-.btn:hover { transform: translateY(-1px); }
-.btn-navy { background: var(--btn-bg); color: var(--btn-fg); box-shadow: var(--shadow); }
-.btn-blue { background: var(--blue); color: var(--on-blue); box-shadow: var(--shadow); }
-.btn-ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
-.btn-pill { padding: 6px 6px 6px 20px; min-height: 46px; background: var(--blue); color: var(--on-blue); }
-.btn-pill .arrow { width: 34px; height: 34px; border-radius: 50%; background: var(--surface); color: var(--ink); display: grid; place-items: center; transition: transform .25s ease; }
-.btn-pill:hover .arrow { transform: rotate(45deg); }
+/* Header */
+.top { background: var(--surface); border-bottom: 1px solid var(--line); }
+.top-row { display: flex; align-items: center; gap: 22px; padding-block: 12px; }
+.logo { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; margin-right: auto; flex: none; }
+.logo-word { font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.03em; line-height: .9; }
+.logo-word .m { color: var(--brand); } .logo-word .c { color: var(--green-bright); }
+.logo-tag { display: block; font: 500 .6rem/1 var(--font-body); color: var(--ink-2); letter-spacing: .01em; margin-top: 5px; }
+.hi { display: flex; align-items: center; gap: 10px; text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
+.hi i { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); color: var(--ink-2); font-style: normal; flex: none; }
+.hi small { display: block; font-size: .74rem; color: var(--ink-2); line-height: 1.2; }
+.hi b { font: 600 .86rem/1.3 var(--font-head); }
+.hi select { border: 0; background: transparent; font: 600 .86rem var(--font-head); color: var(--ink); padding: 0; cursor: pointer; max-width: 150px; }
+.divider { width: 1px; align-self: stretch; background: var(--line); margin-block: 4px; }
+.cart-btn { position: relative; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); display: grid; place-items: center; cursor: pointer; flex: none; }
+.cart-count { position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; border-radius: 10px; background: var(--red); color: #fff; font: 700 .7rem/20px var(--font-head); text-align: center; padding: 0 5px; }
 
-/* Hero: one saturated blue "screen" (same in both themes), serif headline left, animated story centre, short pitch right */
-.hero { position: relative; margin-top: calc(-1 * env(safe-area-inset-top, 0px)); padding-top: env(safe-area-inset-top, 0px); overflow: hidden; color: #ffffff;
-  border-radius: 0 0 36px 36px;
-  background:
-    radial-gradient(55% 60% at 50% 38%, rgba(140, 205, 255, .55), transparent 70%),
-    radial-gradient(40% 50% at 100% 0%, rgba(11, 157, 217, .7), transparent 70%),
-    linear-gradient(165deg, #3aa2ef 0%, #1f7fe0 50%, #155fc4 100%); }
-.cells { position: absolute; inset: 0; pointer-events: none; }
-.cell { position: absolute; border-radius: 50%; width: var(--s); height: var(--s); left: var(--x); top: var(--y);
-  background: radial-gradient(circle, rgba(20, 70, 190, 0) 26%, rgba(20, 70, 190, .75) 33%, rgba(40, 95, 210, .55) 52%, rgba(40, 95, 210, 0) 68%);
-  filter: blur(var(--b)); opacity: .8; animation: cellFloat var(--d) ease-in-out infinite alternate; }
-@keyframes cellFloat { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(var(--tx), var(--ty)) rotate(40deg); } }
+/* Category bar + mega menus */
+.catbar { background: var(--brand-deep); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 41; background: var(--brand-deep); }
+.catbar .wrap { position: relative; }
+.cat-list { display: flex; align-items: stretch; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; }
+.cat-list::-webkit-scrollbar { display: none; }
+.cat-list > li { flex: none; }
+.cat-btn { display: flex; align-items: center; gap: 6px; height: 50px; padding: 0 14px; background: none; border: 0; color: #fff; font: 500 .95rem var(--font-head); cursor: pointer; text-decoration: none; white-space: nowrap; position: relative; }
+.cat-btn svg.chev { transition: transform .2s; opacity: .85; }
+.cat-btn[aria-expanded="true"] svg.chev { transform: rotate(180deg); }
+.cat-btn[aria-expanded="true"]::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 0; height: 3px; border-radius: 3px 3px 0 0; background: #ffc94d; }
+.cat-btn .new { position: absolute; top: 2px; right: 4px; font: 700 .58rem/1 var(--font-head); background: var(--red); color: #fff; padding: 3px 6px; border-radius: 6px; }
+.mega { position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); top: 100%; background: var(--surface); border-radius: 0 0 18px 18px; box-shadow: 0 24px 50px rgba(5,20,40,.25); display: grid; grid-template-columns: 300px 1fr; overflow: hidden; }
+.mega-why { padding: 22px; background: linear-gradient(170deg, var(--brand-soft), var(--surface-2)); display: grid; gap: 14px; align-content: start; }
+.mega-why h3 { font-size: 1rem; font-weight: 600; }
+.mega-why ul { list-style: none; margin: 0; padding: 16px; background: var(--surface); border-radius: 14px; display: grid; gap: 10px; font-size: .9rem; color: var(--ink-2); }
+.mega-why li { display: flex; gap: 10px; }
+.mega-why li::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--brand); flex: none; margin-top: 4px; box-shadow: inset 0 0 0 4px var(--brand-soft); }
+.mega-why .btn { width: 100%; }
+.mega-pk { padding: 22px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.mega-pk h3 { font-size: 1rem; font-weight: 600; }
+.mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.mini { border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 12px; background: linear-gradient(180deg, var(--surface), var(--brand-soft)); min-width: 0; }
+.mini h4 { font: 600 .95rem/1.3 var(--font-head); min-height: 2.6em; }
 
-.nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 20px; position: relative; z-index: 5; }
-.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-.logo-mark { width: 44px; height: 44px; border-radius: 14px; background: #ffffff; display: grid; place-items: center; flex: none; }
-.logo-word { font-family: var(--font-display); font-weight: 800; font-size: 1.45rem; letter-spacing: -0.03em; line-height: .9; }
-.logo-word .m { color: var(--blue); }
-.logo-word .c { color: var(--green); }
-.logo-tag { display: block; font: 500 .62rem/1 var(--font-body); color: var(--ink-2); letter-spacing: .02em; margin-top: 4px; }
-.hero .logo-word .m, .hero .logo-word .c { color: #ffffff; }
-.hero .logo-word .c { opacity: .82; }
-.hero .logo-tag { color: rgba(255, 255, 255, .78); }
-.nav-links { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0; }
-.nav-links a { display: block; text-decoration: none; font-size: .86rem; font-weight: 500; color: #ffffff; padding: 8px 14px; border-radius: 10px; background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .22); transition: background .2s; }
-.nav-links a:hover, .nav-links a[aria-current] { background: #ffffff; color: #0b1f3a; }
-.nav-actions { display: flex; align-items: center; gap: 10px; }
-.btn-white { background: #ffffff; color: #0b1f3a; min-height: 42px; padding: 10px 18px; border-radius: 12px; font-size: .9rem; }
-.menu-btn { display: none; width: 46px; height: 46px; border-radius: 14px; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.14); color: #ffffff; cursor: pointer; place-items: center; }
-.mobile-menu { display: grid; gap: 4px; padding: 10px; margin-bottom: 12px; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: var(--r-md); box-shadow: var(--shadow); position: relative; z-index: 6; }
-.mobile-menu a { padding: 12px 14px; border-radius: 10px; text-decoration: none; font-weight: 500; }
-.mobile-menu a:hover { background: var(--surface-2); }
+/* Shared package facts */
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.fact { display: flex; gap: 8px; align-items: center; }
+.fact i { width: 32px; height: 32px; border-radius: 9px; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; color: var(--brand-ink); font-style: normal; flex: none; }
+.fact small { display: block; font-size: .7rem; color: var(--ink-2); line-height: 1.2; }
+.fact b { font: 600 .82rem/1.3 var(--font-head); }
+.priceline { display: flex; align-items: center; gap: 10px; padding-top: 10px; border-top: 1px dashed var(--line); flex-wrap: wrap; }
+.priceline .lto { font-size: .68rem; line-height: 1.15; color: var(--ink-2); padding-right: 10px; border-right: 1px solid var(--line); }
+.priceline b { font: 700 1.12rem/1 var(--font-head); font-variant-numeric: tabular-nums; }
+.priceline s { color: var(--ink-2); font-size: .8rem; }
+.off { font: 600 .72rem/1 var(--font-head); color: var(--green); background: var(--green-soft); padding: 4px 8px; border-radius: 999px; }
+.actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.know { font-size: .84rem; font-weight: 500; text-decoration: underline; color: var(--ink-2); background: none; border: 0; padding: 0; cursor: pointer; }
+.book.added { background: var(--green-soft); color: var(--green); }
 
-.hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr minmax(300px, 400px) .78fr; gap: clamp(20px, 3vw, 48px); align-items: end; padding-block: clamp(16px, 3vw, 36px) clamp(40px, 5vw, 64px); }
-.hero h1 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(3rem, 6.4vw, 5.6rem); line-height: .98; letter-spacing: -0.02em; text-wrap: balance; }
-.hero h1 em { font-style: italic; color: #d6f0ff; }
-.hero-left { display: grid; gap: 22px; min-width: 0; padding-bottom: 8px; }
-.badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .26); font-size: .84rem; font-weight: 500; width: fit-content; }
-.hero-right { display: grid; gap: 22px; align-self: center; min-width: 0; }
-.hero-right p { font-size: 1.04rem; color: rgba(255, 255, 255, .9); max-width: 34ch; }
-.hero-ctas { display: flex; flex-wrap: wrap; gap: 10px; }
-.btn-dark { background: #0b1f3a; color: #ffffff; box-shadow: 0 10px 30px rgba(7, 22, 40, .35); }
-.btn-glass { background: rgba(255, 255, 255, .14); color: #ffffff; border: 1px solid rgba(255, 255, 255, .3); }
-.hero-note { display: grid; gap: 8px; font-size: .86rem; color: rgba(255, 255, 255, .85); }
-.hero-note span { display: inline-flex; align-items: center; gap: 8px; }
+/* Hero banner */
+.hero { padding-block: 18px 6px; }
+.banner { position: relative; border-radius: 22px; overflow: hidden; color: #fff; background: #0a6ea8; min-height: 450px; }
+.slide { position: absolute; inset: 0; opacity: 0; transition: opacity .6s ease; pointer-events: none; }
+.slide.on { opacity: 1; pointer-events: auto; }
+.s-a { background: radial-gradient(70% 90% at 80% 40%, #2aa7e6, transparent 70%), linear-gradient(115deg, #075e93, #0b8fd0); }
+.s-b { background: radial-gradient(70% 90% at 80% 40%, #63c766, transparent 70%), linear-gradient(115deg, #17723a, #2f9e44); }
+.s-c { background: radial-gradient(70% 90% at 80% 40%, #3d7fc0, transparent 70%), linear-gradient(115deg, #0d2138, #1a4a7a); }
+.slide-copy { position: absolute; left: 50px; top: 38px; width: min(56%, 620px); display: grid; gap: 10px; }
+.slide-copy .kick { font: 700 clamp(1.7rem, 3.4vw, 2.7rem)/1.1 var(--font-head); letter-spacing: -0.02em; }
+.slide-copy .kick span { font-weight: 400; font-size: .7em; }
+.slide-copy .rule { width: 210px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.8), transparent); margin: 6px 0; }
+.offer-name { font: 600 1.15rem var(--font-head); }
+.offer-row { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.offer-price { display: flex; align-items: flex-end; gap: 10px; }
+.offer-price small { font: 500 1rem/1.1 var(--font-head); }
+.offer-price b { font: 800 clamp(3rem, 6vw, 4.4rem)/.9 var(--font-head); letter-spacing: -0.03em; }
+.offer-price s { font: 600 1.4rem var(--font-head); opacity: .55; margin-bottom: 6px; }
+.offer-cta { display: inline-flex; align-items: center; gap: 10px; font: 700 clamp(1.3rem, 2.2vw, 1.8rem) var(--font-head); color: #fff; background: none; border: 0; cursor: pointer; padding: 0; }
+.offer-cta span { width: 34px; height: 34px; border: 2px solid #fff; border-radius: 50%; display: grid; place-items: center; }
+.slide-art { position: absolute; right: 0; bottom: 0; top: 0; width: 44%; display: flex; justify-content: center; align-items: flex-end; }
+.slide-art img { height: 100%; width: auto; max-width: none; object-fit: contain; object-position: bottom; }
+.slide-art.organ { align-items: center; }
+.slide-art.organ img { height: 58%; filter: drop-shadow(0 30px 40px rgba(0,0,0,.3)); margin-bottom: 70px; }
+.event { position: absolute; top: 26px; right: 30px; text-align: right; font: 800 1rem/1.05 var(--font-head); letter-spacing: .02em; text-transform: uppercase; }
+.event small { display: block; font-size: .62rem; letter-spacing: .1em; font-weight: 600; opacity: .9; }
+.included { position: absolute; right: 0; bottom: 0; width: 42%; background: rgba(240, 244, 248, .96); color: #0d2138; border-radius: 18px 0 0 0; padding: 14px 20px 16px; display: grid; gap: 10px; }
+.included h3 { font: 700 1.05rem var(--font-head); text-align: center; display: flex; align-items: center; gap: 12px; }
+.included h3::before, .included h3::after { content: ""; flex: 1; height: 1px; background: #9fb0c2; }
+.inc-row { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.inc-row span { display: inline-flex; gap: 6px; align-items: center; font: 500 .86rem var(--font-head); }
+.inc-row svg { color: #0a5f99; }
+.search-zone { position: absolute; left: 40px; bottom: 26px; width: min(56%, 640px); display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; z-index: 3; }
+.searchbar { display: flex; background: #fff; border-radius: 12px; overflow: visible; box-shadow: 0 10px 30px rgba(0,0,0,.18); position: relative; }
+.searchbar input { flex: 1; min-width: 0; height: 56px; border: 0; border-radius: 12px 0 0 12px; padding: 0 22px; font: 400 1rem var(--font-head); color: #0d2138; background: #fff; }
+.searchbar input:focus { outline: none; }
+.searchbar:focus-within { box-shadow: 0 0 0 3px #ffc94d, 0 10px 30px rgba(0,0,0,.18); }
+.searchbar button { border: 0; padding: 0 34px; border-radius: 0 12px 12px 0; background: var(--brand); color: #fff; font: 600 1.05rem var(--font-head); cursor: pointer; }
+.results { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); max-height: 320px; overflow: auto; z-index: 20; padding: 6px; }
+.res { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 10px; }
+.res:hover { background: var(--surface-2); }
+.res b { font: 600 .9rem var(--font-head); display: block; }
+.res small { color: var(--ink-2); font-size: .78rem; }
+.res-r { display: flex; gap: 10px; align-items: center; flex: none; }
+.res-r b { font: 700 .92rem var(--font-head); }
+.res-empty { padding: 14px; color: var(--ink-2); font-size: .9rem; }
+.perks { display: flex; gap: 22px; flex-wrap: wrap; }
+.perk { display: flex; gap: 10px; align-items: center; font: 500 .82rem/1.3 var(--font-head); font-style: italic; }
+.perk i { width: 36px; height: 36px; border-radius: 9px; background: #fff; color: var(--coral); display: grid; place-items: center; flex: none; font-style: normal; }
+.perk em { color: #ffd166; font-style: italic; }
+.dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+.dots button { width: 20px; height: 5px; border-radius: 3px; border: 0; background: #b8d6e8; cursor: pointer; padding: 0; transition: width .3s, background .3s; }
+.dots button.on { width: 30px; background: var(--brand-deep); }
 
-/* Story stage */
-.stage { position: relative; aspect-ratio: 9 / 10.6; width: 100%; max-width: 100%; border-radius: 30px; overflow: hidden;
-  background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.08)); border: 1px solid rgba(255, 255, 255, .35);
-  box-shadow: 0 30px 70px rgba(7, 30, 90, .35), inset 0 1px 0 rgba(255,255,255,.4); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-.stage svg.story { position: absolute; inset: 0; width: 100%; height: 100%; }
-.bars { position: absolute; top: 14px; left: 16px; right: 16px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; z-index: 3; }
-.bars button { height: 18px; padding: 7px 0; border: 0; background: none; cursor: pointer; }
-.bars button span { display: block; height: 4px; border-radius: 4px; background: rgba(255, 255, 255, .35); overflow: hidden; }
-.bars button span i { display: block; height: 100%; width: 0; background: #ffffff; border-radius: 4px; }
-.bars button.done span i { width: 100%; }
-.bars button.now span i { animation: fillBar var(--dur, 3.8s) linear forwards; }
-@keyframes fillBar { to { width: 100%; } }
-.caption { text-align: left; position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 3; background: rgba(255, 255, 255, .95); color: #0b1f3a; border-radius: 18px; padding: 12px 14px; display: flex; gap: 12px; align-items: center; box-shadow: 0 8px 24px rgba(7, 30, 90, .18); }
-.caption .num { width: 34px; height: 34px; border-radius: 11px; background: #0b9dd9; color: #fff; display: grid; place-items: center; font: 700 .9rem/1 var(--font-display); flex: none; }
-.caption b { display: block; font: 700 .96rem/1.25 var(--font-display); }
-.caption small { display: block; font-size: .8rem; color: #4c5f79; line-height: 1.35; }
+/* Service tiles */
+.tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); align-items: start; gap: 16px; padding-top: 22px; }
+.tile { display: grid; gap: 10px; text-align: center; text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; }
+.tile-box { position: relative; aspect-ratio: 1.45; border-radius: 16px; background: var(--t-bg); display: grid; place-items: center; transition: transform .2s; }
+.tile:hover .tile-box { transform: translateY(-3px); }
+.tile-box svg { width: 52px; height: 52px; color: var(--t-fg); }
+.tile-box img { height: 70%; width: auto; }
+.tile-badge { position: absolute; left: 10px; right: 10px; bottom: 8px; background: rgba(255,255,255,.9); color: #0a5f99; border-radius: 999px; padding: 4px; font: 500 .78rem var(--font-head); }
+.tile-name { font: 500 .92rem/1.3 var(--font-head); }
 
-.scene { opacity: 0; transition: opacity .5s ease; }
-.scene.on { opacity: 1; }
-.s1-wheel, .s2-fill, .s2-arm, .s2-chip, .s3-bar, .s3-dot, .s3-ok, .s4-ping, .s5-face, .s5-conf > *, .s5-chip, .s5-eye { transform-box: fill-box; }
-/* 1 · ride */
-.on .s1-houses { animation: slideL 2.4s linear infinite; }
-.on .s1-road { animation: dash 0.6s linear infinite; }
-.on .s1-scooter { animation: bob .45s ease-in-out infinite alternate; }
-.on .s1-wheel { animation: spin .5s linear infinite; transform-origin: center; }
-.on .s1-pin { animation: pinIn .8s 1.4s cubic-bezier(.3,1.6,.5,1) both, hop 1s 2.2s ease-in-out infinite alternate; }
-.on .s1-speed line { animation: speed .5s linear infinite; }
-@keyframes slideL { to { transform: translateX(-180px); } }
-@keyframes dash { to { stroke-dashoffset: -32; } }
-@keyframes bob { to { transform: translateY(-3px); } }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes pinIn { from { transform: translateY(-40px) scale(.4); opacity: 0; } }
-@keyframes hop { to { transform: translateY(-6px); } }
-@keyframes speed { from { transform: translateX(10px); opacity: 0; } 50% { opacity: 1; } to { transform: translateX(-24px); opacity: 0; } }
-/* 2 · draw */
-.on .s2-fill { animation: fillUp 2.2s .5s ease-out both; transform-origin: 50% 100%; }
-.on .s2-arm { animation: reach 1s ease-out both; transform-origin: 0% 50%; }
-.on .s2-chip { animation: popIn .5s 2.2s cubic-bezier(.3,1.6,.5,1) both; transform-origin: center; }
-.on .s2-heart { animation: floatUp 2.4s .8s ease-out infinite; }
-@keyframes fillUp { from { transform: scaleY(0); } }
-@keyframes reach { from { transform: rotate(-8deg); } }
-@keyframes popIn { from { transform: scale(0); opacity: 0; } }
-@keyframes floatUp { from { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } to { transform: translateY(-50px); opacity: 0; } }
-/* 3 · lab */
-.on .s3-tube { animation: tubeIn 1.1s .2s ease-in both; }
-.on .s3-line { animation: draw 1.6s 1.2s ease-out both; }
-.on .s3-bar { animation: fillUp .8s ease-out both; transform-origin: 50% 100%; }
-.on .s3-dot { animation: popIn .4s cubic-bezier(.3,1.6,.5,1) both; transform-origin: center; }
-.on .s3-ok { animation: popIn .5s 2.8s cubic-bezier(.3,1.6,.5,1) both; transform-origin: center; }
-.on .s3-led { animation: blink .5s steps(2) infinite; }
-@keyframes tubeIn { from { transform: translateY(-70px); } 70% { transform: translateY(6px); } to { transform: translateY(0); } }
-@keyframes draw { from { stroke-dashoffset: 220; } to { stroke-dashoffset: 0; } }
-@keyframes blink { 50% { opacity: .2; } }
-/* 4 · whatsapp */
-.on .s4-b { animation: msgIn .45s ease-out both; }
-.on .s4-b1 { animation-delay: .4s; } .on .s4-b2 { animation-delay: 1.2s; } .on .s4-b3 { animation-delay: 2.3s; }
-.on .s4-ping { animation: ping 1.4s .2s ease-out infinite; transform-origin: center; }
-.on .s4-tick { animation: tickBlue .3s 2.9s both; }
-@keyframes msgIn { from { transform: translateY(14px); opacity: 0; } }
-@keyframes ping { from { transform: scale(.6); opacity: .9; } to { transform: scale(1.8); opacity: 0; } }
-@keyframes tickBlue { from { stroke: #9aa7b4; } to { stroke: #34b7f1; } }
-/* 5 · happy */
-.on .s5-face { animation: nod 1.6s ease-in-out infinite alternate; transform-origin: 50% 100%; }
-.on .s5-h { animation: floatUp 2.2s ease-out infinite; }
-.on .s5-h2 { animation-delay: .7s; } .on .s5-h3 { animation-delay: 1.4s; }
-.on .s5-conf circle, .on .s5-conf rect { animation: popIn .5s cubic-bezier(.3,1.6,.5,1) both; transform-origin: center; }
-.on .s5-chip { animation: popIn .5s 1s cubic-bezier(.3,1.6,.5,1) both; transform-origin: center; }
-.on .s5-eye { animation: blinkEye 3s 1.5s infinite; transform-origin: center; }
-@keyframes nod { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
-@keyframes blinkEye { 0%, 92%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+/* Concerns */
+.concerns { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.concern { display: grid; justify-items: center; gap: 10px; padding: 16px 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; text-align: center; cursor: pointer; font: 500 .88rem/1.25 var(--font-head); transition: border-color .2s, transform .2s; }
+.concern:hover { border-color: var(--brand); transform: translateY(-2px); }
+.concern i { width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; font-style: normal; background: var(--c-bg); color: var(--c-fg); }
+.concern img { width: 40px; height: 40px; object-fit: contain; }
 
-/* Photo strip (below hero) */
-.strip-sec { padding-block: clamp(36px, 5vw, 56px) 0; }
-.strip { overflow: hidden; padding-bottom: 8px;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
-.strip-track { display: flex; gap: 16px; width: max-content; animation: drift 55s linear infinite; }
-.strip:hover .strip-track { animation-play-state: paused; }
-@keyframes drift { to { transform: translateX(calc(-50% - 8px)); } }
-.tile { width: clamp(200px, 22vw, 250px); aspect-ratio: 13 / 15; border-radius: var(--r-lg); overflow: hidden; position: relative; flex: none; background: var(--surface); }
-.tile img { width: 100%; height: 100%; object-fit: cover; }
-.tile-doc { background: linear-gradient(170deg, #bfe2f6, #e9f6fd); }
-.tile-doc img { object-position: top; }
-.tile-organ { display: grid; align-content: space-between; padding: 18px; border: 1px solid var(--line); }
-.tile-organ img { width: 76%; height: auto; margin: 6px auto 0; }
-.tile-label { font: 700 1.02rem/1.25 var(--font-display); }
-.tile-label small { display: block; font: 500 .8rem/1.4 var(--font-body); color: var(--ink-2); margin-top: 4px; }
-.tile-stat { padding: 22px; display: grid; align-content: space-between; color: #fff; }
-.tile-stat.navy { background: #0b1f3a; }
-.tile-stat.blue { background: linear-gradient(160deg, #0b9dd9, #1569b0); }
-.tile-stat.green { background: linear-gradient(160deg, #4cb84f, #2e8f3a); }
-.tile-stat .big { font: 400 clamp(2.8rem, 4vw, 3.6rem)/1 var(--font-serif); }
-.tile-stat p { font-size: .95rem; opacity: .9; }
-.tile-chip { position: absolute; left: 14px; bottom: 14px; right: 14px; background: rgba(255,255,255,.92); color: #0b1f3a; border-radius: 12px; padding: 10px 12px; font: 600 .84rem/1.3 var(--font-display); display: flex; gap: 8px; align-items: center; }
-.tile-chip i { width: 8px; height: 8px; border-radius: 50%; background: #4cb84f; flex: none; box-shadow: 0 0 0 4px rgba(76,184,79,.2); }
+/* Package shelf */
+.tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin-bottom: 16px; padding-bottom: 2px; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { white-space: nowrap; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; font: 500 .88rem var(--font-head); color: var(--ink-2); }
+.tab[aria-pressed="true"] { background: var(--brand-deep); color: #fff; border-color: var(--brand-deep); }
+.shelf { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.pkg { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; display: grid; grid-template-rows: auto auto 1fr auto auto; gap: 12px; min-width: 0; background-image: linear-gradient(180deg, var(--surface) 55%, var(--brand-soft)); transition: box-shadow .2s; }
+.pkg:hover { box-shadow: var(--shadow); }
+.pkg-top { display: flex; justify-content: space-between; gap: 8px; min-height: 22px; }
+.tag { font: 600 .7rem/1 var(--font-head); padding: 5px 8px; border-radius: 6px; background: var(--amber-soft); color: var(--amber); }
+.pkg h3 { font: 600 1rem/1.3 var(--font-head); }
+.pkg ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; font-size: .82rem; color: var(--ink-2); }
+.pkg li { display: flex; gap: 7px; }
+.pkg li svg { color: var(--green); flex: none; margin-top: 4px; }
+.pkg .lto { display: none; }
+.mini .priceline { gap: 8px; }
+.mini .lto { padding-right: 8px; }
+.sample-note { font-size: .78rem; color: var(--ink-2); margin-top: 12px; }
 
-/* Trust bar */
-.trust { background: var(--surface); border-block: 1px solid var(--line); }
-.trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-.trust-item { padding: 26px 22px; display: grid; gap: 4px; border-left: 1px solid var(--line); }
-.trust-item:first-child { border-left: 0; padding-left: 0; }
-.trust-item b { font: 800 1.75rem/1.1 var(--font-display); letter-spacing: -0.03em; color: var(--blue-deep); font-variant-numeric: tabular-nums; }
-.trust-item span { font-size: .9rem; color: var(--ink-2); }
+/* For whom */
+.whom { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.whom a { position: relative; overflow: hidden; display: grid; gap: 4px; align-content: start; min-height: 150px; padding: 18px; border-radius: 16px; text-decoration: none; background: var(--w-bg); color: #0d2138; }
+.whom small { font: 600 .72rem/1 var(--font-head); text-transform: uppercase; letter-spacing: .06em; opacity: .7; }
+.whom b { font: 600 1.06rem/1.3 var(--font-head); max-width: 15ch; }
+.whom span { font: 600 .84rem var(--font-head); margin-top: auto; padding-top: 18px; color: #0a5f99; }
+.whom svg.deco { position: absolute; right: -8px; bottom: -8px; width: 92px; height: 92px; opacity: .2; color: #0d2138; }
 
-/* Services */
-.services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.svc { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 26px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 14px; transition: transform .25s ease, box-shadow .25s ease; }
-.svc:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-.svc-img { background: var(--surface-2); border-radius: var(--r-md); aspect-ratio: 16 / 11; display: grid; place-items: center; overflow: hidden; }
-.svc-img img { width: 62%; mix-blend-mode: multiply; }
-:root[data-theme="dark"] .svc-img img { mix-blend-mode: normal; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .svc-img img { mix-blend-mode: normal; } }
-.svc h3 { font-size: 1.3rem; font-weight: 700; }
-.svc p { color: var(--ink-2); font-size: .97rem; }
-.svc ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-.svc li { font-size: .78rem; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: var(--surface-2); color: var(--blue-deep); }
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; list-style: none; padding: 0; margin: 0; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; display: grid; gap: 8px; align-content: start; }
+.step .n { font: 700 .7rem/1 var(--font-head); letter-spacing: .1em; color: var(--brand-ink); text-transform: uppercase; }
+.step i { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--brand-soft); color: var(--brand-ink); font-style: normal; }
+.step b { font: 600 .96rem/1.3 var(--font-head); }
+.step p { font-size: .84rem; color: var(--ink-2); }
 
-/* How it works */
-.how { background: var(--surface); }
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; counter-reset: step; position: relative; }
-.step { padding: 28px; border-radius: var(--r-lg); background: var(--surface-2); display: grid; gap: 10px; align-content: start; }
-.step-n { width: 44px; height: 44px; border-radius: 50%; background: var(--btn-bg); color: var(--btn-fg); display: grid; place-items: center; font: 700 1rem/1 var(--font-display); }
-.step h3 { font-size: 1.2rem; font-weight: 700; margin-top: 8px; }
-.step p { color: var(--ink-2); font-size: .96rem; }
-.how-extras { margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.extra { display: flex; gap: 14px; align-items: flex-start; padding: 6px 4px; }
-.extra-ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--green-soft); color: var(--green); flex: none; }
-.extra b { font-family: var(--font-display); display: block; margin-bottom: 2px; }
-.extra span { color: var(--ink-2); font-size: .92rem; }
+/* Why */
+.why { display: grid; grid-template-columns: .85fr 1.15fr; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+.why-media { position: relative; background: linear-gradient(160deg, #bfe2f6, #e9f6fd); min-height: 330px; }
+.why-media img { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); height: 100%; width: auto; max-width: none; }
+.why-copy { padding: 30px; display: grid; gap: 18px; align-content: center; min-width: 0; }
+.why-copy h2 { font-size: clamp(1.3rem, 2.3vw, 1.7rem); font-weight: 700; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.stats div { padding: 14px; border-radius: 14px; background: var(--brand-soft); }
+.stats b { display: block; font: 700 1.5rem/1.1 var(--font-head); color: var(--brand-ink); }
+.stats span { font-size: .8rem; color: var(--ink-2); }
+.feat { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.feat div { display: flex; gap: 10px; align-items: center; font: 500 .9rem/1.3 var(--font-head); }
+.feat i { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, #0b8fd0, #23944a); color: #fff; flex: none; font-style: normal; }
 
-/* Diabetic club */
-.club { background:
-  radial-gradient(50% 60% at 0% 0%, var(--green-soft), transparent 70%),
-  radial-gradient(50% 60% at 100% 100%, var(--sky-1), transparent 70%), var(--bg); }
-.club-top { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: end; margin-bottom: 44px; }
-.club-top h2 { font-size: clamp(1.9rem, 3.6vw, 2.75rem); font-weight: 700; margin-top: 12px; }
-.club-top p { color: var(--ink-2); font-size: 1.04rem; }
-.launch { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: .85rem; font-weight: 500; }
-.launch b { background: var(--green); color: #fff; border-radius: 999px; padding: 3px 10px; font: 700 .72rem/1.4 var(--font-display); letter-spacing: .06em; }
-.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
-.tier { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 28px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 18px; position: relative; }
-.tier.featured { background: #0b1f3a; color: #e9f2fb; border-color: #0b1f3a; box-shadow: 0 20px 50px rgba(11,31,58,.25); }
-:root[data-theme="dark"] .tier.featured { background: #12345c; border-color: var(--blue); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tier.featured { background: #12345c; border-color: var(--blue); } }
-.tier-tag { font: 700 .74rem/1 var(--font-display); letter-spacing: .12em; text-transform: uppercase; color: var(--blue-deep); }
-.tier.featured .tier-tag { color: #7fd0f5; }
-.tier h3 { font-size: 1.45rem; font-weight: 700; margin-top: 8px; }
-.tier-profile { font-size: .92rem; color: var(--ink-2); margin-top: 6px; }
-.tier.featured .tier-profile, .tier.featured dd { color: #b9c9dc; }
-.tier dl { margin: 0; display: grid; gap: 14px; padding-top: 18px; border-top: 1px solid var(--line); }
-.tier.featured dl { border-color: rgba(255,255,255,.14); }
-.tier dt { font: 700 .74rem/1 var(--font-display); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 5px; }
-.tier dd { margin: 0; font-size: .94rem; color: var(--ink-2); }
-.popular { position: absolute; top: 22px; right: 22px; background: var(--green); color: #fff; border-radius: 999px; padding: 5px 11px; font: 700 .72rem/1.2 var(--font-display); }
-.tier .btn { width: 100%; }
-.tier.featured .btn-ghost { background: #ffffff; color: #0b1f3a; border-color: #ffffff; }
-.upcoming { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
-.upcoming > span { font-size: .9rem; color: var(--ink-2); margin-right: 4px; }
-.chip { padding: 8px 14px; border-radius: 999px; border: 1px dashed var(--line); background: var(--surface); font-size: .86rem; font-weight: 500; }
+/* Club */
+.club { border-radius: 22px; padding: clamp(22px, 3vw, 34px); background: linear-gradient(120deg, #e4f6e8, #e2f3fc); display: grid; grid-template-columns: .9fr 1.4fr; gap: 26px; align-items: center; color: #0d2138; }
+.club .launch { display: inline-flex; font: 600 .72rem/1 var(--font-head); letter-spacing: .05em; background: #23944a; color: #fff; padding: 6px 10px; border-radius: 8px; }
+.club h2 { font-size: clamp(1.35rem, 2.5vw, 1.85rem); font-weight: 700; margin-top: 10px; }
+.club p { color: #3c5068; margin-top: 10px; }
+.club .acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+.club .btn-outline { background: #fff; color: #0a5f99; border-color: #0b8fd0; }
+.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.tier { background: #fff; border-radius: 14px; padding: 16px; display: grid; gap: 6px; align-content: start; border: 1px solid #d6e6f2; }
+.tier.pop { border: 2px solid #0b8fd0; }
+.tier small { font: 600 .7rem/1 var(--font-head); color: #0a5f99; letter-spacing: .08em; text-transform: uppercase; }
+.tier b { font: 600 1rem/1.3 var(--font-head); }
+.tier p { font-size: .8rem; color: #56687f; }
+.tier ul { list-style: none; padding: 0; margin: 4px 0 0; display: grid; gap: 4px; font-size: .8rem; color: #33475f; }
+.tier li::before { content: "✓ "; color: #23944a; font-weight: 700; }
 
-/* About */
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
-.about-media { position: relative; }
-.about-media img { border-radius: var(--r-lg); aspect-ratio: 4 / 3.4; object-fit: cover; width: 100%; }
-.since { position: absolute; left: -14px; bottom: 24px; background: var(--surface); border-radius: var(--r-md); padding: 16px 18px; box-shadow: var(--shadow); display: grid; gap: 2px; }
-.since small { font-size: .74rem; color: var(--ink-2); letter-spacing: .08em; text-transform: uppercase; font-weight: 600; }
-.since b { font: 800 1.35rem/1.2 var(--font-display); }
-.about-copy { display: grid; gap: 18px; min-width: 0; }
-.about-copy h2 { font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 700; }
-.about-copy p { color: var(--ink-2); }
-.about-copy .lead { color: var(--ink); font-size: 1.08rem; }
-.quote { border-left: 3px solid var(--green); padding: 4px 0 4px 18px; font: 600 1.08rem/1.5 var(--font-display); }
-.phone-row { display: flex; align-items: center; gap: 14px; padding: 14px 18px 14px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); width: fit-content; max-width: 100%; }
-.phone-ic { width: 44px; height: 44px; border-radius: 50%; background: var(--blue); color: var(--on-blue); display: grid; place-items: center; flex: none; }
-.phone-row small { display: block; font-size: .78rem; color: var(--ink-2); }
-.phone-row b { font: 700 1.1rem/1.2 var(--font-display); user-select: all; }
+/* Care services */
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.svc { display: grid; grid-template-columns: 90px 1fr; gap: 16px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+.svc img { width: 90px; height: 90px; object-fit: contain; background: var(--surface-2); border-radius: 14px; padding: 8px; }
+.svc b { font: 600 1rem/1.3 var(--font-head); display: block; }
+.svc p { font-size: .84rem; color: var(--ink-2); margin-top: 4px; }
 
-/* Booking */
-.book { background: var(--surface); }
-.book-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
-.book-aside { display: grid; gap: 22px; min-width: 0; }
-.book-aside h2 { font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 700; }
-.book-aside > p { color: var(--ink-2); }
-.hl-list { display: grid; gap: 14px; list-style: none; padding: 0; margin: 0; }
-.hl-list li { display: flex; gap: 12px; }
-.hl-list .extra-ic { width: 34px; height: 34px; border-radius: 10px; }
-.hl-list b { display: block; font-family: var(--font-display); }
-.hl-list span { color: var(--ink-2); font-size: .92rem; }
-.form-card { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(20px, 3vw, 32px); display: grid; gap: 18px; min-width: 0; }
-.field { display: grid; gap: 7px; min-width: 0; }
-.field > label, .field > .lbl { font: 600 .86rem/1.2 var(--font-display); }
-.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-input, textarea, select { width: 100%; font: inherit; font-size: .97rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-input:focus, textarea:focus { outline: 2px solid var(--blue); outline-offset: 0; border-color: transparent; }
-textarea { resize: vertical; min-height: 84px; }
-.opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.opt { position: relative; }
-.opt input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
-.opt span { display: grid; gap: 2px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); height: 100%; transition: border-color .2s, background .2s; }
-.opt span b { font: 700 .92rem/1.2 var(--font-display); }
-.opt span small { font-size: .78rem; color: var(--ink-2); }
-.opt input:checked + span { border-color: var(--blue); background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--blue); }
-.opt input:focus-visible + span { outline: 3px solid var(--blue); outline-offset: 2px; }
-.slots { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.slots .opt span { padding: 12px 4px; }
-.row-2 > * { min-width: 0; }
-.slots .opt span { text-align: center; font-weight: 600; font-size: .9rem; }
-.err { color: #d33a3a; font-size: .8rem; }
-.form-foot { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
-.form-foot small { color: var(--ink-2); font-size: .82rem; max-width: 34ch; }
-.done { display: grid; gap: 14px; padding: 22px; border-radius: var(--r-md); background: var(--green-soft); }
-.done h3 { font-size: 1.2rem; }
-.done pre { margin: 0; white-space: pre-wrap; font: .88rem/1.55 var(--font-body); color: var(--ink); background: var(--surface); padding: 14px; border-radius: 10px; border: 1px solid var(--line); }
-.done .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+/* App */
+.app { border-radius: 22px; background: linear-gradient(120deg, #08679f, #0b8fd0); color: #fff; display: grid; grid-template-columns: 1.2fr .8fr; gap: 20px; padding: clamp(22px, 3vw, 36px); align-items: center; overflow: hidden; }
+.app h2 { font-size: clamp(1.35rem, 2.5vw, 1.9rem); font-weight: 700; }
+.app p { opacity: .92; margin-top: 10px; max-width: 48ch; }
+.stores { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+.store { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px; border-radius: 12px; background: #0d2138; color: #fff; text-decoration: none; }
+.store small { display: block; font-size: .64rem; opacity: .8; line-height: 1.1; }
+.store b { font: 600 .95rem/1.1 var(--font-head); }
+.phone-mock { justify-self: center; width: 180px; aspect-ratio: 9 / 18; border-radius: 28px; background: #0d2138; padding: 9px; box-shadow: 0 20px 40px rgba(0,0,0,.3); transform: rotate(6deg); margin-bottom: -70px; }
+.phone-mock .scr { height: 100%; border-radius: 20px; background: #f4f8fb; padding: 12px 10px; display: grid; gap: 8px; align-content: start; }
+.phone-mock .bar { height: 26px; border-radius: 8px; background: #fff; border: 1px solid #dde7f0; }
+.phone-mock .card { border-radius: 10px; background: #fff; padding: 8px; border: 1px solid #dde7f0; display: grid; gap: 5px; }
+.phone-mock .card i { display: block; height: 6px; border-radius: 3px; background: #dde7f0; }
+.phone-mock .card i.b { width: 60%; background: #0b8fd0; }
+.phone-mock .card i.g { width: 40%; background: #4cb84f; }
 
-/* Insights */
-.posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.post { display: grid; gap: 10px; align-content: start; padding: 24px; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--surface); }
-.post-meta { display: flex; gap: 10px; align-items: center; font-size: .8rem; color: var(--ink-2); }
-.post-meta b { color: var(--blue-deep); font-weight: 600; }
-.post h3 { font-size: 1.15rem; font-weight: 700; }
-.post p { color: var(--ink-2); font-size: .94rem; }
-
-/* Notice + footer */
-.notice { display: flex; gap: 14px; align-items: flex-start; padding: 18px 20px; border-radius: var(--r-md); border: 1px solid var(--line); background: var(--surface); font-size: .92rem; color: var(--ink-2); }
-.notice svg { color: #e0803a; flex: none; margin-top: 2px; }
+/* FAQ + presence */
+.two { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; align-items: start; }
+.faq { display: grid; gap: 10px; }
+.faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 0 16px; }
+.faq summary { cursor: pointer; padding: 15px 0; font: 600 .95rem/1.35 var(--font-head); list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 1.3rem; line-height: 1; color: var(--brand-ink); }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { padding-bottom: 15px; color: var(--ink-2); font-size: .9rem; }
+.presence { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px; display: grid; gap: 14px; }
+.presence h3 { font-size: 1.1rem; font-weight: 600; }
+.districts { display: flex; flex-wrap: wrap; gap: 8px; }
+.districts span { padding: 7px 12px; border-radius: 999px; background: var(--surface-2); font-size: .84rem; font-weight: 500; }
+.contact-box { display: grid; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .9rem; }
+.contact-box div { display: flex; gap: 10px; align-items: center; }
+.contact-box b { font-family: var(--font-head); user-select: all; }
+.contact-box svg { color: var(--brand-ink); flex: none; }
+.notice { margin-top: 20px; display: flex; gap: 12px; padding: 14px 16px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); font-size: .86rem; color: var(--ink-2); }
+.notice svg { color: var(--amber); flex: none; margin-top: 2px; }
 .notice b { color: var(--ink); }
-footer { background: #071628; color: #c7d5e6; margin-top: clamp(64px, 9vw, 112px); }
-.f-cta { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; padding-block: 48px; border-bottom: 1px solid rgba(255,255,255,.1); }
-.f-cta h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700; }
-.f-cta p { margin-top: 8px; }
-.f-cta .btns { display: flex; flex-wrap: wrap; gap: 10px; }
-.f-cta .btn-navy { background: #fff; color: #0b1f3a; }
-.f-cta .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.25); }
-.f-cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; padding-block: 48px; }
-.f-cols h4 { color: #fff; font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
-.f-cols ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; font-size: .92rem; }
-.f-cols a { text-decoration: none; }
-.f-cols a:hover { color: #fff; }
-.f-brand { display: grid; gap: 14px; align-content: start; font-size: .92rem; max-width: 36ch; }
-.f-brand .logo-word .m { color: #3bb7ee; }
-.f-brand .logo-tag { color: #9fb3cb; }
-.f-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding-block: 22px 28px; border-top: 1px solid rgba(255,255,255,.1); font-size: .82rem; color: #8ea3bd; }
 
-.section-head h2, .club-top h2, .about-copy h2, .book-aside h2, .f-cta h2 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.01em; line-height: 1.04; font-size: clamp(2.3rem, 4.4vw, 3.5rem); }
-.f-cta h2 { font-size: clamp(2rem, 3.6vw, 2.9rem); }
-.trust-item b { font-family: var(--font-serif); font-weight: 400; font-size: 2.1rem; letter-spacing: 0; }
+/* Footer */
+footer { background: #0b1b2d; color: #b5c4d6; margin-top: 40px; font-size: .88rem; }
+.f-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr; gap: 28px; padding-block: 44px 30px; }
+footer h4 { color: #fff; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px; font-weight: 600; }
+footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+footer a { text-decoration: none; } footer a:hover { color: #fff; }
+.f-brand { display: grid; gap: 12px; align-content: start; }
+.f-brand .logo-word .m { color: #38b1ec; } .f-brand .logo-tag { color: #8ea3bd; }
+.news { display: flex; gap: 8px; margin-top: 8px; }
+.news input { flex: 1; min-width: 0; height: 42px; border-radius: 10px; border: 1px solid #23405f; background: #10263d; color: #fff; padding: 0 12px; font: inherit; }
+.news .btn { background: #0b8fd0; color: #fff; }
+.social { display: flex; gap: 8px; }
+.social a { width: 36px; height: 36px; border-radius: 50%; background: #16314d; display: grid; place-items: center; font: 600 .7rem var(--font-head); color: #fff; }
+.f-bottom { display: flex; flex-wrap: wrap; gap: 10px 20px; justify-content: space-between; border-top: 1px solid #1d3550; padding-block: 18px 26px; font-size: .8rem; color: #8ea3bd; }
+.f-bottom nav { display: flex; gap: 16px; flex-wrap: wrap; }
+
+/* Callback bar (fixed) */
+.callback { position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; padding-bottom: env(safe-area-inset-bottom, 0px); pointer-events: none; }
+.callback-in { pointer-events: auto; max-width: calc(var(--max) - 32px); margin: 0 auto; background: var(--brand-deep); color: #fff; border-radius: 18px 18px 0 0; padding: 12px 20px 14px; display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 8px; position: relative; box-shadow: 0 -8px 30px rgba(5,20,40,.2); }
+.callback-in > b { font: 600 .95rem var(--font-head); }
+.cb-form { display: flex; width: min(460px, 100%); }
+.cb-form input { flex: 1; min-width: 0; height: 44px; border: 0; border-radius: 8px 0 0 8px; padding: 0 16px; font: 400 .95rem var(--font-head); background: #eef3f7; color: #0d2138; }
+.cb-form .btn { border-radius: 0 8px 8px 0; min-height: 44px; }
+.cb-msg { font-size: .84rem; }
+.cb-msg a { color: #ffd166; font-weight: 600; }
+.cb-close { position: absolute; top: 8px; right: 10px; width: 30px; height: 30px; border-radius: 50%; border: 0; background: rgba(255,255,255,.15); color: #fff; cursor: pointer; display: grid; place-items: center; }
+
+/* Cart drawer */
+.scrim { position: fixed; inset: 0; background: rgba(5,15,28,.45); z-index: 60; }
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(420px, 100%); background: var(--surface); z-index: 61; display: grid; grid-template-rows: auto 1fr auto; box-shadow: -10px 0 40px rgba(0,0,0,.2); padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px); }
+.drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+.drawer-head h3 { font-size: 1.1rem; font-weight: 600; }
+.x-btn { width: 40px; height: 40px; border-radius: 10px; border: 0; background: var(--surface-2); display: grid; place-items: center; cursor: pointer; }
+.drawer-body { overflow: auto; padding: 14px 18px; display: grid; gap: 10px; align-content: start; }
+.line { display: flex; justify-content: space-between; gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; }
+.line b { font: 600 .9rem/1.3 var(--font-head); display: block; }
+.line small { color: var(--ink-2); font-size: .78rem; }
+.line .rm { border: 0; background: none; color: var(--red); font: 500 .8rem var(--font-head); cursor: pointer; padding: 0; }
+.line .pr { text-align: right; display: grid; gap: 6px; justify-items: end; }
+.empty { text-align: center; color: var(--ink-2); padding: 40px 10px; display: grid; gap: 12px; justify-items: center; }
+.drawer-foot { border-top: 1px solid var(--line); padding: 16px 18px; display: grid; gap: 12px; }
+.sum { display: grid; gap: 6px; font-size: .9rem; }
+.sum div { display: flex; justify-content: space-between; }
+.sum .tot { font: 700 1.1rem var(--font-head); padding-top: 6px; border-top: 1px dashed var(--line); }
+.sum .save { color: var(--green); font-weight: 500; }
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.fields input { width: 100%; height: 42px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); padding: 0 12px; font: inherit; color: var(--ink); min-width: 0; }
+.drawer-foot .btn { width: 100%; }
+.drawer-foot small { color: var(--ink-2); font-size: .76rem; text-align: center; }
+.toast { position: fixed; left: 50%; bottom: calc(110px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 12px; font: 500 .88rem var(--font-head); z-index: 70; box-shadow: var(--shadow); max-width: calc(100% - 32px); }
 
 @media (max-width: 1100px) {
-  .nav-links { display: none; }
-  .menu-btn { display: grid; }
-  .hero-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-  .hero-left { justify-items: center; }
-  .stage { max-width: 400px; }
-  .hero-right { justify-items: center; }
-  .hero-right p { margin-inline: auto; }
-  .hero-ctas, .hero-note { justify-content: center; }
-  .hero-note { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  .shelf { grid-template-columns: repeat(3, 1fr); }
+  .steps { grid-template-columns: repeat(3, 1fr); }
+  .tiles, .concerns { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .f-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .f-brand { grid-column: 1 / -1; }
+  .corp, .corp + .divider { display: none; }
+  .mini-grid { grid-template-columns: repeat(2, 1fr); }
+  .mini-grid .mini:nth-child(3) { display: none; }
 }
-@media (max-width: 980px) {
-  
-  .services, .tiers, .posts { grid-template-columns: 1fr; max-width: 560px; }
-  .steps, .how-extras { grid-template-columns: 1fr; }
-  .club-top, .about-grid, .book-grid { grid-template-columns: 1fr; }
-  .trust-grid { grid-template-columns: 1fr 1fr; }
-  .trust-item:nth-child(3) { border-left: 0; padding-left: 0; }
-  .trust-item:nth-child(n+3) { border-top: 1px solid var(--line); }
-  .f-cols { grid-template-columns: 1fr 1fr; }
-  .since { left: 12px; }
+@media (max-width: 900px) {
+  .why, .club, .two, .app { grid-template-columns: 1fr; }
+  .why-media { min-height: 260px; }
+  .shelf, .whom { grid-template-columns: repeat(2, 1fr); }
+  .phone-mock { display: none; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .mega { grid-template-columns: 1fr; max-height: 70vh; overflow: auto; }
+  .mega-why ul { display: none; }
+  .top-row { gap: 14px; }
+  .support small, .login span { display: none; }
+  .divider { display: none; }
+  /* banner stacks */
+  .banner { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr); background: none; }
+  .slides { position: relative; height: 340px; border-radius: 22px; overflow: hidden; }
+  .slide-copy { left: 24px; top: 24px; width: 62%; }
+  .slide-art { width: 46%; }
+  .included { display: none; }
+  .event { top: 18px; right: 18px; }
+  .search-zone { position: static; width: auto; min-width: 0; margin-top: 14px; }
+  .perks { color: var(--ink); gap: 12px; }
+  .perk i { background: var(--brand-soft); }
+  .perk em { color: var(--coral); }
 }
-@media (max-width: 560px) {
-  .row-2, .opts { grid-template-columns: 1fr; }
-  .slots { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .trust-item { padding: 20px 12px; }
-  .trust-item:nth-child(2n) { padding-right: 0; }
-  .f-cols { grid-template-columns: 1fr; }
-  .hero-ctas .btn { width: 100%; }
-  .nav-actions .btn-white { display: none; }
+@media (max-width: 600px) {
+  body { padding-bottom: 80px; }
+  .sec { padding-block: 30px; }
+  .top-row { padding-block: 10px; gap: 10px; }
+  .loc i, .support, .login { display: none; }
+  .hi select { max-width: 120px; }
+  .logo-word { font-size: 1.3rem; }
+  .cat-btn { height: 46px; padding: 0 12px; font-size: .88rem; }
+  .slides { height: 360px; }
+  .slide-copy { width: auto; right: 20px; left: 20px; top: 20px; gap: 6px; }
+  .slide-copy .kick { font-size: 1.5rem; }
+  .slide-copy .rule { display: none; }
+  .offer-name { font-size: .95rem; }
+  .offer-row { gap: 12px; }
+  .offer-price b { font-size: 2.6rem; }
+  .offer-price s { font-size: 1.05rem; }
+  .offer-cta { font-size: 1.1rem; }
+  .slide-art { width: 62%; height: 52%; top: auto; }
+  .slide-art.organ img { height: 70%; margin-bottom: 10px; }
+  .event { display: none; }
+  .searchbar input { height: 50px; padding: 0 14px; font-size: .92rem; }
+  .searchbar button { padding: 0 18px; font-size: .95rem; }
+  .perks { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .tile-name { font-size: .8rem; }
+  .tile-box svg { width: 38px; height: 38px; }
+  .tile-badge { font-size: .66rem; left: 6px; right: 6px; }
+  .concerns { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .concern { font-size: .78rem; padding: 12px 4px; }
+  .concern i { width: 48px; height: 48px; }
+  .shelf, .steps, .tiers, .feat, .mini-grid { grid-template-columns: 1fr; }
+  .mini-grid .mini:nth-child(n+2) { display: none; }
+  .stats { grid-template-columns: 1fr 1fr 1fr; }
+  .stats b { font-size: 1.15rem; }
+  .f-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .callback-in { border-radius: 16px 16px 0 0; padding: 10px 14px 12px; }
+  .callback-in > b { display: none; }
+  .callback-in { padding: 10px 52px 10px 12px; }
+  .cb-close { top: 50%; transform: translateY(-50%); }
+  .cb-form .btn { padding: 8px 12px; font-size: .84rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .strip-track, .cell { animation: none; }
-  .scene * { animation: none !important; }
-  .bars button.now span i { animation: none; width: 100%; }
-  .strip { overflow-x: auto; }
-  .btn, .svc, .btn-pill .arrow { transition: none; }
+  .slide, .concern, .tile-box, .btn, .dots button, .cat-btn svg.chev { transition: none; }
 }
 </style>
 </head>
@@ -421,536 +451,538 @@ footer { background: #071628; color: #c7d5e6; margin-top: clamp(64px, 9vw, 112px
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M13.8 16.6a1 1 0 0 0 1.2-.3l.4-.5A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.5.4a1 1 0 0 0-.3 1.2 14 14 0 0 0 6.4 6.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
-    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z M3 13l9 5 9-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
-    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z M12 9v4 M12 17h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-drop" viewBox="0 0 48 52"><defs><linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2fb3ea"/><stop offset="1" stop-color="#1569b0"/></linearGradient></defs><path d="M24 4H46V26A22 22 0 1 1 24 4Z" fill="url(#dg)"/><path d="M12 28c3.6 6 9 9.5 13 9.5s9.6-3.5 12.5-9.5" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z" fill="currentColor"/><circle cx="12" cy="10" r="2.6" fill="#fff"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2" fill="currentColor"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0Z" fill="currentColor"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M13.8 16.6a1 1 0 0 0 1.2-.3l.4-.5A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.5.4a1 1 0 0 0-.3 1.2 14 14 0 0 0 6.4 6.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20.5" r="1.5" fill="currentColor"/><circle cx="17" cy="20.5" r="1.5" fill="currentColor"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1Z" fill="currentColor"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M3.5 20.5 5 16a8.5 8.5 0 1 1 3.3 3.2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 10.5c.5 2 2 3.5 4.5 4.3l1.2-1.2 1.8.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-steth" viewBox="0 0 24 24"><path d="M6 3v6a5 5 0 0 0 10 0V3 M11 14v2a4 4 0 0 0 8 0v-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="19" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-report" viewBox="0 0 24 24"><path d="M9 3h6l1 2h3v16H5V5h3Z M9 12h6 M9 16h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0 M16 4.5a3.5 3.5 0 0 1 0 7 M18 14a6 6 0 0 1 4 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 14a4.5 4.5 0 0 0 8 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="9.5" r="1.2" fill="currentColor"/><circle cx="15" cy="9.5" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-lab" viewBox="0 0 24 24"><path d="M9 3h6 M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3 M7.5 15h9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-scooter" viewBox="0 0 24 24"><circle cx="6" cy="17" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="17" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 17h6l2-7h3 M6 14l2-5h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-drop2" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-tube" viewBox="0 0 24 24"><path d="M9 3h6 M10 3v13a2 2 0 0 0 4 0V3 M10 10h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="17.5" cy="17.5" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z M12 9v4 M12 17h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-bike" viewBox="0 0 24 24"><rect x="2" y="7" width="7" height="6" rx="1.5" fill="currentColor"/><path d="M5 9v2M4 10h2" stroke="#fff" stroke-width="1.2"/><circle cx="6" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 18h7l2-6h3 M10 13h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <!-- tile + concern icons -->
+    <symbol id="t-blood" viewBox="0 0 48 48"><rect x="12" y="6" width="10" height="34" rx="5" fill="#fff" stroke="#e5383b" stroke-width="2.5"/><rect x="14.5" y="20" width="5" height="17" rx="2.5" fill="#e5383b"/><rect x="11" y="4" width="12" height="7" rx="2" fill="#e5383b"/><circle cx="31" cy="24" r="8" fill="none" stroke="#0a5f99" stroke-width="3"/><path d="m37 30 6 6" stroke="#0a5f99" stroke-width="4" stroke-linecap="round"/><circle cx="29" cy="22" r="2" fill="#e5383b"/><circle cx="33" cy="26" r="1.6" fill="#e5383b"/></symbol>
+    <symbol id="t-rx" viewBox="0 0 48 48"><rect x="10" y="6" width="28" height="36" rx="4" fill="#fff" stroke="#0a5f99" stroke-width="2.5"/><path d="M16 16h16M16 22h16M16 28h10" stroke="#9fb0c2" stroke-width="2.5" stroke-linecap="round"/><circle cx="34" cy="36" r="8" fill="#23944a"/><path d="M34 40v-8M30.5 35.5 34 32l3.5 3.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="t-doc" viewBox="0 0 48 48"><circle cx="24" cy="15" r="8" fill="#f1c7a3"/><path d="M16 13a8 8 0 0 1 16 0c-3-3-13-3-16 0Z" fill="#2b2a33"/><path d="M9 44a15 15 0 0 1 30 0Z" fill="#fff" stroke="#0a5f99" stroke-width="2"/><path d="M20 30v5a4 4 0 0 0 8 0v-5" stroke="#0a5f99" stroke-width="2" fill="none"/><circle cx="28" cy="36" r="2" fill="#0a5f99"/></symbol>
+    <symbol id="t-nurse" viewBox="0 0 48 48"><path d="M8 22 24 9l16 13v20H8Z" fill="#fff" stroke="#0a5f99" stroke-width="2.5" stroke-linejoin="round"/><rect x="19" y="24" width="10" height="10" rx="2" fill="#e5383b"/><path d="M24 26v6M21 29h6" stroke="#fff" stroke-width="2"/></symbol>
+    <symbol id="t-club" viewBox="0 0 48 48"><path d="M24 6s12 13 12 22a12 12 0 0 1-24 0C12 19 24 6 24 6Z" fill="#fff" stroke="#c2255c" stroke-width="2.5"/><path d="M18 29h4l2-4 3 7 2-3h3" stroke="#c2255c" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="c-body" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 9h14 M12 9v5 M12 14l-3 7 M12 14l3 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="c-heart" viewBox="0 0 24 24"><path d="M12 20s-8-4.8-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6.2-8 11-8 11Z M4 12h4l2-3 3 6 2-3h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="c-fever" viewBox="0 0 24 24"><path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0Z M12 9v7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="c-thyroid" viewBox="0 0 24 24"><path d="M12 6c-2 0-3 2-5 2S3 9 3 13s3 5 5 5 3-2 4-4c1 2 2 4 4 4s5-1 5-5-2-5-4-5-3-2-5-2Z M12 6v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="c-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="c-women" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 14v7 M9 18h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="c-senior" viewBox="0 0 24 24"><circle cx="11" cy="4.5" r="2.3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 8v6l-2 7 M11 14l3 7 M8 11l3-2 3 2 M17 10v11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="c-allergy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 4a3 3 0 0 1 0 5.5A3 3 0 0 1 12 4Z M12 20a3 3 0 0 1 0-5.5A3 3 0 0 1 12 20Z M4 12a3 3 0 0 1 5.5 0A3 3 0 0 1 4 12Z M20 12a3 3 0 0 1-5.5 0A3 3 0 0 1 20 12Z" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="c-bone" viewBox="0 0 24 24"><path d="M8 10 14 16 M6.5 4.5a2 2 0 0 0-2 3 2 2 0 0 0 1 3.3L8 10l2-2-.8-2.5a2 2 0 0 0-2.7-1Z M17.5 19.5a2 2 0 0 0 2-3 2 2 0 0 0-1-3.3L16 14l-2 2 .8 2.5a2 2 0 0 0 2.7 1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
   </defs>
 </svg>
 
-<header class="hero" id="home">
-  <div class="cells" aria-hidden="true">
-    <span class="cell" style="--s:150px;--x:6%;--y:52%;--b:10px;--d:9s;--tx:30px;--ty:-24px"></span>
-    <span class="cell" style="--s:70px;--x:30%;--y:16%;--b:6px;--d:7s;--tx:-20px;--ty:18px"></span>
-    <span class="cell" style="--s:120px;--x:62%;--y:6%;--b:4px;--d:8s;--tx:-26px;--ty:22px"></span>
-    <span class="cell" style="--s:200px;--x:80%;--y:58%;--b:14px;--d:11s;--tx:-30px;--ty:-30px"></span>
-    <span class="cell" style="--s:90px;--x:46%;--y:80%;--b:8px;--d:10s;--tx:24px;--ty:-16px"></span>
-    <span class="cell" style="--s:60px;--x:92%;--y:22%;--b:5px;--d:6s;--tx:-14px;--ty:20px"></span>
-    <span class="cell" style="--s:110px;--x:22%;--y:86%;--b:12px;--d:12s;--tx:30px;--ty:-20px"></span>
-  </div>
-  <div class="wrap">
-    <nav class="nav" aria-label="Main">
-      <a class="logo" href="#home" aria-label="MicroCheck home">
-        <span class="logo-mark"><svg width="30" height="33" aria-hidden="true"><use href="#i-drop"/></svg></span>
-        <span class="logo-word"><span class="m">micro</span><span class="c">check</span><span class="logo-tag">Healthcare, Home Delivered.</span></span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#home" aria-current="page">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#how">How it Works</a></li>
-        <li><a href="#diabetic-club">Diabetes Club</a></li>
-        <li><a href="#about">About Us</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a class="btn btn-white" href="#contact">Contact us</a>
-        <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-      </div>
-    </nav>
-    <div class="mobile-menu" id="mobileMenu" hidden>
-      <a href="#services">Services</a>
-      <a href="#how">How it Works</a>
-      <a href="#diabetic-club">Diabetes Club</a>
-      <a href="#about">About Us</a>
-      <a href="#contact">Contact Us</a>
-      <a class="btn btn-navy" href="#contact">Book a Home Service</a>
-    </div>
-
-    <div class="hero-grid">
-      <div class="hero-left">
-        <span class="badge"><svg width="16" height="16"><use href="#i-shield"/></svg>Verified nurses · Certified partner labs</span>
-        <h1>Home blood tests, <em>results on WhatsApp.</em></h1>
-      </div>
-
-      <div class="stage" id="stage" role="region" aria-roledescription="animation" aria-label="How a MicroCheck home test works">
-        <div class="bars" id="bars"></div>
-        <svg class="story" viewBox="0 0 360 424" aria-hidden="true" style="font-family: Inter, system-ui, sans-serif">
-          <!-- 1 · Nurse rides to the patient's home -->
-          <g class="scene">
-            <circle cx="290" cy="96" r="26" fill="#fff" opacity=".25"/>
-            <g class="s1-houses">
-              <g><path d="M20 300v-64l45-34 45 34v64Z" fill="#fff" opacity=".28"/><rect x="52" y="262" width="22" height="38" rx="3" fill="#fff" opacity=".35"/><rect x="86" y="246" width="14" height="14" rx="2" fill="#fff" opacity=".45"/><circle cx="150" cy="262" r="16" fill="#fff" opacity=".2"/><rect x="148" y="270" width="4" height="30" fill="#fff" opacity=".25"/></g>
-              <g transform="translate(180 0)"><path d="M20 300v-64l45-34 45 34v64Z" fill="#fff" opacity=".28"/><rect x="52" y="262" width="22" height="38" rx="3" fill="#fff" opacity=".35"/><rect x="86" y="246" width="14" height="14" rx="2" fill="#fff" opacity=".45"/><circle cx="150" cy="262" r="16" fill="#fff" opacity=".2"/><rect x="148" y="270" width="4" height="30" fill="#fff" opacity=".25"/></g>
-              <g transform="translate(360 0)"><path d="M20 300v-64l45-34 45 34v64Z" fill="#fff" opacity=".28"/><rect x="52" y="262" width="22" height="38" rx="3" fill="#fff" opacity=".35"/><rect x="86" y="246" width="14" height="14" rx="2" fill="#fff" opacity=".45"/><circle cx="150" cy="262" r="16" fill="#fff" opacity=".2"/><rect x="148" y="270" width="4" height="30" fill="#fff" opacity=".25"/></g>
-            </g>
-            <rect x="0" y="300" width="360" height="124" fill="#0b1f3a" opacity=".25"/>
-            <line class="s1-road" x1="0" y1="322" x2="360" y2="322" stroke="#fff" stroke-width="3" stroke-dasharray="16 16" opacity=".6"/>
-            <g class="s1-pin"><path d="M296 214c-14-18-22-30-22-42a22 22 0 0 1 44 0c0 12-8 24-22 42Z" fill="#ff7a3d"/><circle cx="296" cy="172" r="9" fill="#fff"/></g>
-            <g class="s1-speed" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".85"><line x1="40" y1="232" x2="64" y2="232"/><line x1="28" y1="254" x2="58" y2="254" style="animation-delay:.2s"/><line x1="44" y1="276" x2="66" y2="276" style="animation-delay:.35s"/></g>
-            <g transform="translate(84 190)">
-              <g class="s1-scooter">
-                <rect x="-6" y="24" width="34" height="30" rx="6" fill="#fff"/><path d="M11 31v16M3 39h16" stroke="#4cb84f" stroke-width="4" stroke-linecap="round"/>
-                <path d="M14 84c0-16 10-28 26-28h44l18-28h12l14 56Z" fill="#4cb84f"/>
-                <rect x="32" y="46" width="46" height="12" rx="6" fill="#0b1f3a"/>
-                <path d="M108 30 98 6" stroke="#0b1f3a" stroke-width="5" stroke-linecap="round"/><path d="M92 6h14" stroke="#0b1f3a" stroke-width="6" stroke-linecap="round"/>
-                <circle cx="124" cy="46" r="5" fill="#ffe68a"/>
-                <path d="M56 50l26 8v22" stroke="#1d3a6e" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <rect x="40" y="0" width="30" height="52" rx="14" fill="#fff"/>
-                <rect x="46" y="12" width="10" height="10" rx="2" fill="#4cb84f"/>
-                <path d="M62 14 96 10" stroke="#fff" stroke-width="9" stroke-linecap="round"/><circle cx="98" cy="9" r="5" fill="#f1c7a3"/>
-                <path d="M42 -12q-10 6-6 16" stroke="#2b2a33" stroke-width="6" fill="none" stroke-linecap="round"/>
-                <circle cx="56" cy="-14" r="15" fill="#f1c7a3"/>
-                <path d="M40 -14a16 16 0 0 1 32 0Z" fill="#fff"/><path d="M56 -27v8M52 -23h8" stroke="#e5484d" stroke-width="2.5"/>
-                <circle cx="64" cy="-10" r="1.8" fill="#2b2a33"/><path d="M60 -4q4 3 8 0" stroke="#2b2a33" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-              </g>
-              <g class="s1-wheel"><circle cx="20" cy="94" r="16" fill="#0b1f3a"/><circle cx="20" cy="94" r="6" fill="#fff"/><path d="M20 80v28M6 94h28" stroke="#fff" stroke-width="2" opacity=".5"/></g>
-              <g class="s1-wheel"><circle cx="118" cy="94" r="16" fill="#0b1f3a"/><circle cx="118" cy="94" r="6" fill="#fff"/><path d="M118 80v28M104 94h28" stroke="#fff" stroke-width="2" opacity=".5"/></g>
-            </g>
-          </g>
-
-          <!-- 2 · Blood drawn at home, patient smiling -->
-          <g class="scene">
-            <rect x="0" y="300" width="360" height="124" fill="#0b1f3a" opacity=".18"/>
-            <rect x="34" y="64" width="84" height="72" rx="8" fill="#fff" opacity=".18"/><path d="M76 64v72M34 100h84" stroke="#fff" stroke-width="3" opacity=".25"/>
-            <rect x="282" y="150" width="18" height="110" rx="9" fill="#0b1f3a" opacity=".5"/>
-            <rect x="214" y="236" width="90" height="18" rx="9" fill="#0b1f3a" opacity=".5"/>
-            <path d="M226 254v46M292 254v46" stroke="#0b1f3a" stroke-width="6" opacity=".5"/>
-            <path d="M236 246h-30v50" stroke="#2b3f6e" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <rect x="226" y="160" width="58" height="88" rx="26" fill="#ff8a3d"/>
-            <rect x="138" y="226" width="84" height="10" rx="5" fill="#fff" opacity=".9"/><path d="M180 236v64" stroke="#fff" stroke-width="6" opacity=".7"/>
-            <path d="M234 188 202 206" stroke="#ff8a3d" stroke-width="16" stroke-linecap="round"/>
-            <path d="M204 206 166 222" stroke="#b9805c" stroke-width="12" stroke-linecap="round"/>
-            <path d="M206 199l6 12" stroke="#4cb84f" stroke-width="5"/>
-            <circle cx="256" cy="134" r="24" fill="#b9805c"/>
-            <path d="M232 132a24 24 0 0 1 48-4c-8-12-34-14-48 4Z" fill="#2b2a33"/>
-            <path d="M244 136q4-4 8 0M260 136q4-4 8 0" stroke="#2b2a33" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-            <path d="M247 145q9 8 18 0" stroke="#2b2a33" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-            <circle cx="243" cy="146" r="3.5" fill="#ff8a8a" opacity=".6"/><circle cx="270" cy="146" r="3.5" fill="#ff8a8a" opacity=".6"/>
-            <path d="M88 252v48M108 252v48" stroke="#1d3a6e" stroke-width="12" stroke-linecap="round"/>
-            <rect x="70" y="150" width="54" height="108" rx="24" fill="#fff"/>
-            <path d="M88 152l9 14 9-14" stroke="#c8ecff" stroke-width="4" fill="none"/>
-            <rect x="78" y="184" width="12" height="12" rx="2" fill="#4cb84f"/>
-            <circle cx="78" cy="110" r="8" fill="#2b2a33"/>
-            <circle cx="97" cy="124" r="22" fill="#f1c7a3"/>
-            <path d="M75 122a22 22 0 0 1 44-4c-10-10-32-12-44 4Z" fill="#2b2a33"/>
-            <path d="M80 104h34l-4-10H84Z" fill="#fff"/><path d="M97 95v7M93.5 98.5h7" stroke="#e5484d" stroke-width="2"/>
-            <circle cx="92" cy="125" r="2" fill="#2b2a33"/><circle cx="104" cy="125" r="2" fill="#2b2a33"/>
-            <path d="M93 133q5 4 10 0" stroke="#2b2a33" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-            <g class="s2-arm"><path d="M114 172 158 200" stroke="#fff" stroke-width="12" stroke-linecap="round"/><circle cx="162" cy="202" r="7" fill="#9fd8ff"/></g>
-            <path d="M172 214q8-20 10-38" stroke="#e5484d" stroke-width="2" fill="none"/>
-            <g><rect x="174" y="132" width="16" height="52" rx="8" fill="#fff" stroke="#0b1f3a" stroke-opacity=".2"/><rect class="s2-fill" x="177" y="148" width="10" height="33" rx="5" fill="#e5484d"/><rect x="173" y="126" width="18" height="12" rx="4" fill="#7c5cff"/></g>
-            <g class="s2-chip"><rect x="196" y="58" width="134" height="34" rx="17" fill="#fff"/><circle cx="214" cy="75" r="8" fill="#4cb84f"/><path d="M210 75l3 3 5-6" stroke="#fff" stroke-width="2" fill="none"/><text x="228" y="80" font-size="13" font-weight="700" fill="#0b1f3a">Gentle &amp; quick</text></g>
-            <g transform="translate(296 112)"><path class="s2-heart" d="M0 0c-4-6-14-4-14 4 0 6 8 11 14 15 6-4 14-9 14-15 0-8-10-10-14-4Z" fill="#ff6b8a"/></g>
-          </g>
-
-          <!-- 3 · Lab analysis: analyser + culture plate -->
-          <g class="scene">
-            <rect x="0" y="292" width="360" height="132" fill="#0b1f3a" opacity=".18"/>
-            <rect x="16" y="284" width="328" height="10" rx="5" fill="#fff" opacity=".9"/>
-            <g class="s3-tube"><rect x="190" y="58" width="16" height="56" rx="8" fill="#fff" stroke="#0b1f3a" stroke-opacity=".25"/><rect x="193" y="76" width="10" height="34" rx="5" fill="#e5484d"/><rect x="189" y="54" width="18" height="12" rx="4" fill="#7c5cff"/></g>
-            <rect x="176" y="110" width="44" height="14" rx="5" fill="#0b1f3a"/>
-            <rect x="120" y="118" width="160" height="166" rx="18" fill="#fff"/>
-            <rect x="136" y="138" width="128" height="80" rx="10" fill="#0b1f3a"/>
-            <polyline class="s3-line" points="146,190 166,190 174,170 184,206 194,160 204,196 214,182 254,182" fill="none" stroke="#4cd964" stroke-width="2.5" stroke-dasharray="220" stroke-linejoin="round"/>
-            <g class="s3-ok"><circle cx="248" cy="154" r="10" fill="#4cb84f"/><path d="M243 154l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.4" fill="none"/></g>
-            <rect class="s3-bar" x="140" y="246" width="14" height="26" rx="3" fill="#0b9dd9" style="animation-delay:1.5s"/>
-            <rect class="s3-bar" x="160" y="234" width="14" height="38" rx="3" fill="#4cb84f" style="animation-delay:1.7s"/>
-            <rect class="s3-bar" x="180" y="252" width="14" height="20" rx="3" fill="#0b9dd9" style="animation-delay:1.9s"/>
-            <rect class="s3-bar" x="200" y="242" width="14" height="30" rx="3" fill="#7c5cff" style="animation-delay:2.1s"/>
-            <circle class="s3-led" cx="252" cy="240" r="6" fill="#4cb84f"/><circle cx="252" cy="262" r="6" fill="#cfe8f8"/>
-            <ellipse cx="64" cy="276" rx="44" ry="12" fill="#fff"/><ellipse cx="64" cy="272" rx="36" ry="8" fill="#ffe4cf"/>
-            <circle class="s3-dot" cx="50" cy="271" r="3" fill="#e88a4a" style="animation-delay:.6s"/>
-            <circle class="s3-dot" cx="63" cy="268" r="3.5" fill="#e88a4a" style="animation-delay:1s"/>
-            <circle class="s3-dot" cx="76" cy="273" r="2.5" fill="#e88a4a" style="animation-delay:1.4s"/>
-            <circle class="s3-dot" cx="58" cy="275" r="2.5" fill="#d9703a" style="animation-delay:1.8s"/>
-            <circle class="s3-dot" cx="84" cy="269" r="3" fill="#d9703a" style="animation-delay:2.2s"/>
-            <circle class="s3-dot" cx="42" cy="268" r="2" fill="#e88a4a" style="animation-delay:2.5s"/>
-            <g fill="#fff"><rect x="296" y="272" width="42" height="12" rx="4"/><rect x="312" y="206" width="10" height="68" rx="5"/><rect x="300" y="186" width="16" height="40" rx="6" transform="rotate(-20 308 206)"/><rect x="294" y="244" width="30" height="6" rx="3"/></g>
-            <g><rect x="18" y="58" width="128" height="34" rx="17" fill="#fff"/><circle cx="36" cy="75" r="8" fill="#0b9dd9"/><path d="M33 71v5a3 3 0 0 0 6 0v-5" stroke="#fff" stroke-width="1.8" fill="none"/><text x="50" y="80" font-size="12.5" font-weight="700" fill="#0b1f3a">Accredited lab</text></g>
-          </g>
-
-          <!-- 4 · Report sent on WhatsApp -->
-          <g class="scene">
-            <rect x="104" y="50" width="152" height="296" rx="26" fill="#0b1f3a"/>
-            <rect x="112" y="58" width="136" height="280" rx="20" fill="#efe7de"/>
-            <path d="M112 78a20 20 0 0 1 20-20h96a20 20 0 0 1 20 20v20H112Z" fill="#128c7e"/>
-            <circle cx="131" cy="84" r="10" fill="#fff"/><use href="#i-drop" x="124" y="77" width="14" height="15"/>
-            <text x="147" y="83" font-size="10.5" font-weight="700" fill="#fff">MicroCheck</text><text x="147" y="93" font-size="7.5" fill="#d9fdd3">online</text>
-            <g class="s4-b s4-b1"><rect x="120" y="108" width="108" height="36" rx="10" fill="#fff"/><text x="128" y="123" font-size="9" fill="#0b1f3a">Hi Anjali, your test</text><text x="128" y="135" font-size="9" fill="#0b1f3a">report is ready.</text></g>
-            <g class="s4-b s4-b2"><rect x="120" y="152" width="114" height="52" rx="10" fill="#fff"/><rect x="127" y="159" width="100" height="38" rx="6" fill="#f2f4f7"/><rect x="133" y="165" width="18" height="25" rx="3" fill="#e5484d"/><text x="135.5" y="181" font-size="6.5" font-weight="700" fill="#fff">PDF</text><text x="157" y="175" font-size="8.5" font-weight="700" fill="#0b1f3a">Lab_Report.pdf</text><text x="157" y="187" font-size="7.5" fill="#6b7c93">2 pages · PDF</text></g>
-            <g class="s4-b s4-b3"><rect x="158" y="214" width="82" height="28" rx="10" fill="#d9fdd3"/><text x="166" y="232" font-size="9" fill="#0b1f3a">Thank you!</text><path class="s4-tick" d="M216 229l2.5 2.5 4.5-5M221 229l2.5 2.5 4.5-5" stroke="#9aa7b4" stroke-width="1.4" fill="none"/></g>
-            <rect x="118" y="310" width="100" height="20" rx="10" fill="#fff"/><circle cx="232" cy="320" r="10" fill="#128c7e"/><path d="M228 320h8M233 316l4 4-4 4" stroke="#fff" stroke-width="1.6" fill="none"/>
-            <circle class="s4-ping" cx="262" cy="64" r="16" fill="#25d366"/>
-            <circle cx="262" cy="64" r="16" fill="#25d366"/><path d="M255 64l5 5 9-10" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <g fill="#fff" opacity=".7"><path d="M40 170l40 14-16 6-6 16Z"/><path d="M64 190l-6 16" stroke="#fff"/></g>
-          </g>
-
-          <!-- 5 · Happy patient -->
-          <g class="scene">
-            <circle cx="180" cy="200" r="120" fill="#fff" opacity=".12"/><circle cx="180" cy="200" r="84" fill="#fff" opacity=".12"/>
-            <g class="s5-conf">
-              <circle cx="70" cy="120" r="5" fill="#ffd166" style="animation-delay:.2s"/><rect x="286" y="110" width="9" height="9" rx="2" fill="#4cd964" transform="rotate(20 290 114)" style="animation-delay:.4s"/>
-              <circle cx="300" cy="230" r="4" fill="#ff8a3d" style="animation-delay:.6s"/><rect x="56" y="230" width="8" height="8" rx="2" fill="#fff" style="animation-delay:.8s"/>
-              <circle cx="104" cy="96" r="3.5" fill="#fff" style="animation-delay:.5s"/><circle cx="260" cy="88" r="4" fill="#ffd166" style="animation-delay:.9s"/>
-            </g>
-            <path d="M96 346c0-56 38-92 84-92s84 36 84 92Z" fill="#ff8a3d"/>
-            <rect x="168" y="232" width="24" height="30" rx="8" fill="#b9805c"/>
-            <path d="M160 258l20 22 20-22" fill="#e9732a"/>
-            <g class="s5-face">
-              <circle cx="130" cy="196" r="9" fill="#b9805c"/><circle cx="230" cy="196" r="9" fill="#b9805c"/>
-              <circle cx="180" cy="190" r="50" fill="#b9805c"/>
-              <path d="M130 188c0-34 22-56 50-56s52 20 50 54c-10-18-30-28-50-28s-40 10-50 30Z" fill="#2b2a33"/>
-              <path class="s5-eye" d="M154 190q9-10 18 0M188 190q9-10 18 0" stroke="#2b2a33" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-              <path d="M158 207q22 30 44 0Z" fill="#7a2b2b"/><path d="M161 208h38q-2 6-5 8h-28q-3-2-5-8Z" fill="#fff"/>
-              <circle cx="148" cy="207" r="7" fill="#ff8a8a" opacity=".55"/><circle cx="212" cy="207" r="7" fill="#ff8a8a" opacity=".55"/>
-            </g>
-            <path d="M250 346 266 284" stroke="#ff8a3d" stroke-width="22" stroke-linecap="round"/>
-            <g transform="rotate(12 272 250)"><rect x="252" y="214" width="40" height="70" rx="8" fill="#0b1f3a"/><rect x="257" y="221" width="30" height="52" rx="5" fill="#25d366"/><path d="M265 247l5 5 9-10" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></g>
-            <circle cx="266" cy="282" r="12" fill="#b9805c"/>
-            <g transform="translate(96 168)"><path class="s5-h" d="M0 0c-4-6-14-4-14 4 0 6 8 11 14 15 6-4 14-9 14-15 0-8-10-10-14-4Z" fill="#ff6b8a"/></g>
-            <g transform="translate(250 150)"><path class="s5-h s5-h2" d="M0 0c-4-6-14-4-14 4 0 6 8 11 14 15 6-4 14-9 14-15 0-8-10-10-14-4Z" fill="#ff6b8a"/></g>
-            <g transform="translate(118 252)"><path class="s5-h s5-h3" d="M0 0c-3-5-11-3-11 3 0 5 6 9 11 12 5-3 11-7 11-12 0-6-8-8-11-3Z" fill="#fff"/></g>
-            <g class="s5-chip"><rect x="92" y="54" width="176" height="34" rx="17" fill="#fff"/><text x="180" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0b1f3a">No travel. No queues.</text></g>
-          </g>
-        </svg>
-        <div class="caption" aria-live="polite"><span class="num" id="capNum">1</span><div><b id="capTitle">Nurse on the way</b><small id="capText">A verified nurse rides to your home at the booked time.</small></div></div>
-      </div>
-
-      <div class="hero-right">
-        <p>A verified nurse collects your sample at home, an accredited partner lab runs the tests, and the report reaches your WhatsApp.</p>
-        <div class="hero-ctas">
-          <a class="btn btn-dark" href="#contact">Book a home test</a>
-          <a class="btn btn-glass" href="tel:+919020004000"><svg width="18" height="18"><use href="#i-phone"/></svg>+91 90200 04000</a>
-        </div>
-        <div class="hero-note">
-          <span><svg width="14" height="14"><use href="#i-check"/></svg>No payment until your slot is locked</span>
-          <span><svg width="14" height="14"><use href="#i-check"/></svg>24/7 home triage</span>
-        </div>
-      </div>
-    </div>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="logo" href="#top" aria-label="MicroCheck home">
+      <svg width="36" height="39" aria-hidden="true"><use href="#i-drop"/></svg>
+      <span class="logo-word"><span class="m">micro</span><span class="c">check</span><span class="logo-tag">Healthcare, Home Delivered.</span></span>
+    </a>
+    <label class="hi loc" for="city"><i><svg width="16" height="16"><use href="#i-pin"/></svg></i>
+      <span><small>Your Location</small>
+        <select id="city" aria-label="Your location"><option>Thiruvananthapuram</option><option>Kollam</option><option>Pathanamthitta</option><option>Alappuzha</option><option>Kottayam</option><option>Idukki</option><option selected>Ernakulam</option><option>Thrissur</option><option>Palakkad</option><option>Malappuram</option><option>Kozhikode</option><option>Wayanad</option><option>Kannur</option><option>Kasaragod</option></select>
+      </span>
+    </label>
+    <button class="hi login" type="button" id="loginBtn"><i><svg width="16" height="16"><use href="#i-user"/></svg></i><b>Login/Signup</b></button>
+    <a class="hi support" href="tel:+919020004000"><i><svg width="16" height="16"><use href="#i-phone"/></svg></i><span><small>Customer Support</small><b>+91 90200 04000</b></span></a>
+    <span class="divider"></span>
+    <a class="hi corp" href="https://wa.me/919020004000" target="_blank" rel="noopener noreferrer"><span><small>Book on WhatsApp</small><b>+91 90200 04000</b></span></a>
+    <button class="cart-btn" type="button" id="cartBtn" aria-label="Open cart"><svg width="22" height="22"><use href="#i-cart"/></svg><span class="cart-count" id="cartCount" hidden>0</span></button>
   </div>
 </header>
 
-<section class="strip-sec" aria-label="MicroCheck services at a glance">
-  <div class="strip">
-    <div class="strip-track" id="stripTrack">
-      <div class="tile tile-doc"><img src="images/doctor-hero.webp" alt="MicroCheck clinician in a white coat"><div class="tile-chip"><i></i>Licensed clinician dispatched</div></div>
-      <div class="tile tile-stat navy"><div class="big">24/7</div><p>Home triage support, day or night</p></div>
-      <div class="tile"><img src="images/hospital.webp" alt="MicroCheck clinical partner facility"><div class="tile-chip"><i></i>Accredited partner lab network</div></div>
-      <div class="tile tile-organ"><div class="tile-label">Home Sample Collection<small>Blood panels, biochemistry, microbiology</small></div><img src="images/brain.webp" alt=""></div>
-      <div class="tile tile-stat green"><div class="big">NABL+</div><p>Certified partner laboratories</p></div>
-      <div class="tile tile-organ"><div class="tile-label">Home Nursing<small>Wound care, IV therapy, post-op</small></div><img src="images/liver.webp" alt=""></div>
-      <div class="tile tile-stat blue"><div class="big">100%</div><p>Verified clinical professionals</p></div>
-      <div class="tile tile-organ"><div class="tile-label">Dialysis Support<small>Technician dispatch &amp; case management</small></div><img src="images/kidney.webp" alt=""></div>
-    </div>
-  </div>
-</section>
-
-<section class="trust" aria-label="Key facts">
-  <div class="wrap trust-grid">
-    <div class="trust-item"><b>100%</b><span>Verified clinical professionals</span></div>
-    <div class="trust-item"><b>NABL+</b><span>Certified partner labs</span></div>
-    <div class="trust-item"><b>Instant</b><span>Home booking &amp; dispatch</span></div>
-    <div class="trust-item"><b>24/7</b><span>Home triage support</span></div>
-  </div>
-</section>
-
-<section class="section" id="services">
+<nav class="catbar" aria-label="Test categories">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Our Services</span>
-      <h2>Hospital-grade care, without the hospital trip.</h2>
-      <p>Book a lab collection, a nursing visit or ongoing dialysis support. Every visit is handled by licensed professionals and accredited partner labs.</p>
-    </div>
-    <div class="services">
-      <article class="svc">
-        <div class="svc-img"><img src="images/brain.webp" alt="" loading="lazy"></div>
-        <h3>Home Sample Collection</h3>
-        <p>Phlebotomy, biochemical diagnostics, specialised blood panels and microbiology. Certified phlebotomists carry samples to partner labs on a cold chain.</p>
-        <ul><li>Blood panels</li><li>Microbiology</li><li>Cold-chain logistics</li></ul>
-      </article>
-      <article class="svc">
-        <div class="svc-img"><img src="images/liver.webp" alt="" loading="lazy"></div>
-        <h3>Clinical Home Care &amp; Nursing</h3>
-        <p>Wound care, post-op nursing, IV therapy, injections and vitals charting by licensed clinical nurses with certified procedural kits.</p>
-        <ul><li>Wound care</li><li>IV therapy</li><li>Vitals charting</li></ul>
-      </article>
-      <article class="svc">
-        <div class="svc-img"><img src="images/kidney.webp" alt="" loading="lazy"></div>
-        <h3>Dialysis Support &amp; Coordination</h3>
-        <p>Home maintenance coordination, verified technician dispatch and setup hygiene audits, with a dedicated case manager.</p>
-        <ul><li>Technician dispatch</li><li>Hygiene audits</li><li>Case management</li></ul>
-      </article>
-    </div>
+    <ul class="cat-list" id="catList">
+      <li><a class="cat-btn" href="#top" aria-label="Home"><svg width="18" height="18"><use href="#i-home"/></svg></a></li>
+    </ul>
+    <div class="mega" id="mega" hidden></div>
   </div>
-</section>
+</nav>
 
-<section class="section how" id="how">
+<main id="top">
+<section class="hero">
   <div class="wrap">
-    <div class="section-head center">
-      <span class="eyebrow">How it Works</span>
-      <h2>From booking to doorstep in three steps.</h2>
-      <p>Share a few details and our dispatch desk confirms your slot, usually within minutes.</p>
-    </div>
-    <ol class="steps" style="list-style:none;padding:0;margin:0">
-      <li class="step"><span class="step-n">1</span><h3>Tell us the need</h3><p>Choose the service, a preferred schedule and your address with a landmark.</p></li>
-      <li class="step"><span class="step-n">2</span><h3>Dispatch confirms</h3><p>Our desk locks your slot and assigns a verified clinician near you.</p></li>
-      <li class="step"><span class="step-n">3</span><h3>Care arrives</h3><p>A licensed clinician reaches your door, confirmed with an OTP handoff.</p></li>
-    </ol>
-    <div class="how-extras">
-      <div class="extra"><span class="extra-ic"><svg width="20" height="20"><use href="#i-layers"/></svg></span><div><b>One booking for every service</b><span>Home collection, nursing visits and Diabetic Club in a single request.</span></div></div>
-      <div class="extra"><span class="extra-ic"><svg width="20" height="20"><use href="#i-shield"/></svg></span><div><b>Verified dispatch</b><span>OTP-secured handoff, so the right clinician reaches the right address.</span></div></div>
-      <div class="extra"><span class="extra-ic"><svg width="20" height="20"><use href="#i-clock"/></svg></span><div><b>24/7 clinical triage</b><span>Urgent coordination with licensed home-care professionals, day or night.</span></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="section club" id="diabetic-club">
-  <div class="wrap">
-    <div class="club-top">
-      <div>
-        <span class="launch"><b>WORLD DIABETES DAY</b>Launching 14 November</span>
-        <h2>Take control of your sugar levels with the MicroCheck Diabetic Care Club.</h2>
-      </div>
-      <p>Three care plans for Type 1 and Type 2 diabetes. Each combines regular home lab tests, nursing oversight and progress tracking to help prevent long-term complications.</p>
-    </div>
-    <div class="tiers">
-      <article class="tier">
-        <div><span class="tier-tag">Tier 1</span><h3>Essential Care</h3><p class="tier-profile">Stable Type 2 · routine tracking</p></div>
-        <dl>
-          <div><dt>Diagnostics</dt><dd>HbA1c testing, FBS / PPBS monitoring</dd></div>
-          <div><dt>Support</dt><dd>Quarterly vitals check and digital report summary</dd></div>
-          <div><dt>Oversight</dt><dd>Standard digital tracking</dd></div>
-        </dl>
-        <span></span>
-        <a class="btn btn-ghost" href="#contact" data-plan="Essential Care">Join Essential Care</a>
-      </article>
-      <article class="tier featured">
-        <span class="popular">Most chosen</span>
-        <div><span class="tier-tag">Tier 2</span><h3>Advanced Control</h3><p class="tier-profile">Active management · escalation risk</p></div>
-        <dl>
-          <div><dt>Diagnostics</dt><dd>Bi-monthly HbA1c and full lipid profile; home urine microalbumin</dd></div>
-          <div><dt>Support</dt><dd>Monthly nurse visit; foot and wound inspection; emergency kit setup</dd></div>
-          <div><dt>Oversight</dt><dd>Routine doctor-facing digital trend summary</dd></div>
-        </dl>
-        <span></span>
-        <a class="btn btn-ghost" href="#contact" data-plan="Advanced Control">Join Advanced Control</a>
-      </article>
-      <article class="tier">
-        <div><span class="tier-tag">Tier 3</span><h3>360° Shield</h3><p class="tier-profile">Complex management · co-morbidities</p></div>
-        <dl>
-          <div><dt>Diagnostics</dt><dd>Monthly suite: HbA1c, renal profile, lipid panel</dd></div>
-          <div><dt>Support</dt><dd>Dedicated primary home nurse; full home care coordination</dd></div>
-          <div><dt>Oversight</dt><dd>Continuous progress tracking with early warning flags</dd></div>
-        </dl>
-        <span></span>
-        <a class="btn btn-ghost" href="#contact" data-plan="360° Shield">Join 360° Shield</a>
-      </article>
-    </div>
-    <div class="upcoming"><span>Coming next:</span><span class="chip">Dyslipidemia Club</span><span class="chip">Immunity Shield Club</span><span class="chip">Allergy Care Club</span><span class="chip">Thyroid Care Club</span></div>
-  </div>
-</section>
-
-<section class="section" id="about">
-  <div class="wrap about-grid">
-    <div class="about-media">
-      <img src="images/hospital.webp" alt="MicroCheck clinical partner facility" loading="lazy">
-      <div class="since"><small>Serving since</small><b>14 Nov 2025</b></div>
-    </div>
-    <div class="about-copy">
-      <span class="eyebrow">About Us</span>
-      <h2>Your MicroCheck clinical home care platform.</h2>
-      <p class="lead">MicroCheck brings hospital-grade diagnostics and nursing care to every home. We connect clinical logistics, verified partner facilities and licensed professionals on one dispatch engine, cutting diagnostic delays and making chronic care easier to manage.</p>
-      <p>We are led by healthcare entrepreneurs and medical leaders with backgrounds in clinical governance, hospital administration and platform engineering.</p>
-      <p class="quote">Committed to hospital-grade care, delivered to your doorstep.</p>
-      <div class="phone-row">
-        <span class="phone-ic"><svg width="20" height="20"><use href="#i-phone"/></svg></span>
-        <div><small>For any questions</small><b>+91 90200 04000</b></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section book" id="contact">
-  <div class="wrap book-grid">
-    <div class="book-aside">
-      <span class="eyebrow">Quick Booking</span>
-      <h2>Book clinical care at your doorstep.</h2>
-      <p>Share a few details and our dispatch desk confirms your slot, usually within minutes. You pay nothing until the slot is locked.</p>
-      <ul class="hl-list">
-        <li><span class="extra-ic"><svg width="18" height="18"><use href="#i-check"/></svg></span><div><b>One request, any service</b><span>Lab collection, nursing visit or Diabetic Club.</span></div></li>
-        <li><span class="extra-ic"><svg width="18" height="18"><use href="#i-shield"/></svg></span><div><b>OTP-verified handoff</b><span>You know exactly who is at your door.</span></div></li>
-        <li><span class="extra-ic"><svg width="18" height="18"><use href="#i-phone"/></svg></span><div><b>Prefer to talk?</b><span>Call or WhatsApp +91 90200 04000, 24/7.</span></div></li>
-      </ul>
-    </div>
-
-    <form class="form-card" id="bookForm" novalidate>
-      <div class="row-2">
-        <div class="field"><label for="fullName">Full name</label><input id="fullName" name="fullName" autocomplete="name" placeholder="e.g. Anjali Menon"><span class="err" id="fullName-err" hidden>Enter the patient's name.</span></div>
-        <div class="field"><label for="mobile">Mobile number</label><input id="mobile" name="mobile" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile"><span class="err" id="mobile-err" hidden>Enter a 10-digit mobile number.</span></div>
-      </div>
-      <fieldset class="field" style="border:0;padding:0;margin:0">
-        <legend class="lbl" style="font:600 .86rem/1.2 var(--font-display);margin-bottom:7px">Service</legend>
-        <div class="opts">
-          <label class="opt"><input type="radio" name="service" id="svc-collection" value="Home Collection" checked><span><b>Home Collection</b><small>Lab sample pickup</small></span></label>
-          <label class="opt"><input type="radio" name="service" id="svc-homecare" value="Home Nursing"><span><b>Home Nursing</b><small>Clinical visit at home</small></span></label>
-          <label class="opt"><input type="radio" name="service" id="svc-diabetic" value="Diabetic Club"><span><b>Diabetic Club</b><small>Ongoing care plan</small></span></label>
-        </div>
-      </fieldset>
-      <div class="row-2">
-        <div class="field"><label for="date">Preferred date</label><input type="date" id="date" name="date"></div>
-        <fieldset class="field" style="border:0;padding:0;margin:0">
-          <legend class="lbl" style="font:600 .86rem/1.2 var(--font-display);margin-bottom:7px">Time of day</legend>
-          <div class="opts slots">
-            <label class="opt"><input type="radio" name="slot" id="slot-m" value="Morning" checked><span>Morning</span></label>
-            <label class="opt"><input type="radio" name="slot" id="slot-a" value="Afternoon"><span>Afternoon</span></label>
-            <label class="opt"><input type="radio" name="slot" id="slot-e" value="Evening"><span>Evening</span></label>
+    <div class="banner" id="banner" aria-roledescription="carousel" aria-label="Offers">
+      <div class="slides">
+        <div class="slide s-a on">
+          <div class="slide-copy">
+            <div class="kick">Your health, <span>checked at home.</span><br>Results on WhatsApp.</div>
+            <div class="rule"></div>
+            <div class="offer-name">Full Body Checkup Essential · 64 tests</div>
+            <div class="offer-row"><div class="offer-price"><small>At<br>₹</small><b>1,299</b><s>₹2,600</s></div><button class="offer-cta" type="button" data-book="fb1">Book Now <span><svg width="16" height="16"><use href="#i-arrow"/></svg></span></button></div>
           </div>
-        </fieldset>
-      </div>
-      <div class="field"><label for="address">Address with landmark</label><textarea id="address" name="address" placeholder="House name, street, landmark, area"></textarea><span class="err" id="address-err" hidden>Add the address so the clinician can find you.</span></div>
-      <div class="form-foot">
-        <small>Not for emergencies. For chest pain, breathing trouble or stroke symptoms, call 112.</small>
-        <button class="btn btn-navy" type="submit">Request a visit</button>
-      </div>
-      <div class="done" id="done" hidden>
-        <h3>Your request is ready</h3>
-        <p>Send it to our dispatch desk on WhatsApp and we will confirm your slot.</p>
-        <pre id="summary"></pre>
-        <div class="btns">
-          <a class="btn btn-blue" id="waLink" href="https://wa.me/919020004000" target="_blank" rel="noopener noreferrer">Send on WhatsApp</a>
-          <button class="btn btn-ghost" type="button" id="copyBtn">Copy details</button>
+          <div class="slide-art"><img src="images/doctor-hero.webp" alt="MicroCheck doctor"></div>
+          <div class="event"><small>Kerala-wide</small>Free home<br>collection</div>
+          <div class="included"><h3>Tests Included</h3><div class="inc-row"><span><svg width="16" height="16"><use href="#i-drop2"/></svg>CBC</span><span><svg width="16" height="16"><use href="#c-heart"/></svg>Lipid</span><span><svg width="16" height="16"><use href="#c-thyroid"/></svg>Thyroid</span><span><svg width="16" height="16"><use href="#i-tube"/></svg>LFT</span><span><svg width="16" height="16"><use href="#i-tube"/></svg>KFT</span></div></div>
+        </div>
+        <div class="slide s-b" aria-hidden="true">
+          <div class="slide-copy">
+            <div class="kick">World Diabetes Day <span>special</span><br>Diabetic Care Club</div>
+            <div class="rule"></div>
+            <div class="offer-name">Diabetes Screening · HbA1c, FBS, PPBS + 9 more</div>
+            <div class="offer-row"><div class="offer-price"><small>At<br>₹</small><b>699</b><s>₹1,400</s></div><button class="offer-cta" type="button" data-book="db1" tabindex="-1">Book Now <span><svg width="16" height="16"><use href="#i-arrow"/></svg></span></button></div>
+          </div>
+          <div class="slide-art organ"><img src="images/brain.webp" alt=""></div>
+          <div class="event"><small>Launching</small>14 Nov</div>
+          <div class="included"><h3>Tests Included</h3><div class="inc-row"><span><svg width="16" height="16"><use href="#i-drop2"/></svg>HbA1c</span><span><svg width="16" height="16"><use href="#i-drop2"/></svg>FBS</span><span><svg width="16" height="16"><use href="#i-drop2"/></svg>PPBS</span><span><svg width="16" height="16"><use href="#i-tube"/></svg>Microalbumin</span></div></div>
+        </div>
+        <div class="slide s-c" aria-hidden="true">
+          <div class="slide-copy">
+            <div class="kick">Book online, <span>save more.</span><br>Extra 10% off</div>
+            <div class="rule"></div>
+            <div class="offer-name">Heart Health Checkup · 18 tests</div>
+            <div class="offer-row"><div class="offer-price"><small>At<br>₹</small><b>999</b><s>₹2,000</s></div><button class="offer-cta" type="button" data-book="ht1" tabindex="-1">Book Now <span><svg width="16" height="16"><use href="#i-arrow"/></svg></span></button></div>
+          </div>
+          <div class="slide-art organ"><img src="images/kidney.webp" alt=""></div>
+          <div class="included"><h3>Tests Included</h3><div class="inc-row"><span><svg width="16" height="16"><use href="#c-heart"/></svg>Lipid</span><span><svg width="16" height="16"><use href="#i-drop2"/></svg>hs-CRP</span><span><svg width="16" height="16"><use href="#i-drop2"/></svg>Sugar</span><span><svg width="16" height="16"><use href="#i-tube"/></svg>Kidney</span></div></div>
         </div>
       </div>
-    </form>
+      <div class="search-zone">
+        <form class="searchbar" id="searchForm" role="search">
+          <input id="q" type="search" placeholder="Find your Package/Test" autocomplete="off" aria-label="Find your package or test" aria-controls="results">
+          <button type="submit">Search</button>
+          <div class="results" id="results" hidden></div>
+        </form>
+        <div class="perks">
+          <div class="perk"><i><svg width="20" height="20"><use href="#i-bike"/></svg></i><span>Free Sample Collection<br>at <em>your home</em></span></div>
+          <div class="perk"><i><svg width="20" height="20"><use href="#i-report"/></svg></i><span><em>Smart Reports</em> on<br>WhatsApp &amp; app</span></div>
+          <div class="perk"><i><svg width="20" height="20"><use href="#i-steth"/></svg></i><span><em>Free Doctor &amp; Diet</em><br>Consultation</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="dots" id="dots"></div>
+
+    <div class="tiles">
+      <a class="tile" href="#packages"><span class="tile-box" style="--t-bg:#d9f1fb"><svg><use href="#t-blood"/></svg><span class="tile-badge">Up to 55% off</span></span><span class="tile-name">Blood Tests</span></a>
+      <a class="tile" href="#packages" data-filter="full"><span class="tile-box" style="--t-bg:#e4f6e8"><svg style="color:#23944a"><use href="#c-body"/></svg><span class="tile-badge">Up to 55% off</span></span><span class="tile-name">Full Body Checkups</span></a>
+      <label class="tile" for="rx"><span class="tile-box" style="--t-bg:#e6ecfb"><svg><use href="#t-rx"/></svg></span><span class="tile-name">Upload Prescription</span></label>
+      <a class="tile" href="https://wa.me/919020004000?text=I%20want%20a%20free%20doctor%20and%20diet%20consultation" target="_blank" rel="noopener noreferrer"><span class="tile-box" style="--t-bg:#fde9e3"><svg><use href="#t-doc"/></svg><span class="tile-badge">Free</span></span><span class="tile-name">Doctor &amp; Diet Consultation</span></a>
+      <a class="tile" href="#services"><span class="tile-box" style="--t-bg:#fdf1e1"><svg><use href="#t-nurse"/></svg></span><span class="tile-name">Home Nursing &amp; Dialysis</span></a>
+      <a class="tile" href="#club"><span class="tile-box" style="--t-bg:#fde8ef"><svg><use href="#t-club"/></svg><span class="tile-badge">New</span></span><span class="tile-name">Diabetic Care Club</span></a>
+    </div>
+    <input type="file" id="rx" accept="image/*,.pdf" hidden>
   </div>
 </section>
 
-<section class="section" id="insights" style="padding-bottom:0">
+<section class="sec" id="packages">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Health Bulletin</span>
-      <h2>Notes from the MicroCheck team.</h2>
-    </div>
-    <div class="posts">
-      <article class="post"><div class="post-meta"><b>Diabetes</b><time datetime="2026-11-12">12 Nov 2026</time></div><h3>World Diabetes Day: why structured home monitoring matters</h3><p>HbA1c trends, foot checks and timely nurse oversight work better as a steady rhythm than a once-a-year scramble.</p></article>
-      <article class="post"><div class="post-meta"><b>Diagnostics</b><time datetime="2026-11-05">5 Nov 2026</time></div><h3>Home sample collection checklist for smoother visits</h3><p>A short preparation list that keeps phlebotomy visits on time and sample quality high.</p></article>
-      <article class="post"><div class="post-meta"><b>Home Care</b><time datetime="2026-10-28">28 Oct 2026</time></div><h3>When home nursing support is the right next step</h3><p>Wound care, post-op support and vitals charting can often be handled at home, when it is clinically appropriate.</p></article>
-    </div>
-    <div class="notice" style="margin-top:40px"><svg width="20" height="20"><use href="#i-alert"/></svg><p><b>MicroCheck is not an emergency service.</b> If someone has chest pain, difficulty breathing, heavy bleeding, stroke symptoms or a severe allergic reaction, call local emergency services immediately.</p></div>
+    <div class="sec-head"><div><h2>Most booked health checkups</h2><p>Curated by doctors. Free home sample collection.</p></div><a class="link" href="#packages" id="seeAll">View all packages →</a></div>
+    <div class="tabs" id="tabs" role="toolbar" aria-label="Filter packages"></div>
+    <div class="shelf" id="shelf"></div>
+    <p class="sample-note">Prices shown are sample prices for the design.</p>
   </div>
 </section>
+
+<section class="sec" id="concerns" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>Find tests by health concern</h2><p>Pick a concern to see the right packages.</p></div></div>
+    <div class="concerns" id="concernGrid"></div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>Find the right health package</h2><p>Based on age, gender and health needs.</p></div></div>
+    <div class="whom">
+      <a href="#packages" data-filter="full" style="--w-bg:#e2f3fc"><small>For men</small><b>Full body &amp; heart checkups</b><span>View packages →</span><svg class="deco"><use href="#c-heart"/></svg></a>
+      <a href="#packages" data-filter="women" style="--w-bg:#fde8ef"><small>For women</small><b>Thyroid, iron &amp; PCOD care</b><span>View packages →</span><svg class="deco"><use href="#c-women"/></svg></a>
+      <a href="#packages" data-filter="senior" style="--w-bg:#e4f6e8"><small>For parents</small><b>Senior citizen &amp; diabetes checkups</b><span>View packages →</span><svg class="deco"><use href="#c-senior"/></svg></a>
+      <a href="#packages" data-filter="fever" style="--w-bg:#fff3dc"><small>For the family</small><b>Fever &amp; infection panels</b><span>View packages →</span><svg class="deco"><use href="#c-fever"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="why">
+      <div class="why-media"><img src="images/doctor-hero.webp" alt="MicroCheck doctor" loading="lazy"></div>
+      <div class="why-copy">
+        <h2>Why choose MicroCheck?</h2>
+        <div class="stats"><div><b>800+</b><span>Phlebotomists, the largest fleet</span></div><div><b>20 Lakh+</b><span>Satisfied customers</span></div><div><b>14</b><span>Districts across Kerala</span></div></div>
+        <div class="feat">
+          <div><i><svg width="16" height="16"><use href="#i-bike"/></svg></i>Free online booking &amp; sample collection</div>
+          <div><i><svg width="16" height="16"><use href="#i-steth"/></svg></i>Free doctor &amp; diet consultation</div>
+          <div><i><svg width="16" height="16"><use href="#i-report"/></svg></i>Fast &amp; accurate test reports</div>
+          <div><i><svg width="16" height="16"><use href="#i-shield"/></svg></i>NABL-certified partner labs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>How home sample collection works</h2><p>Five simple steps from booking to report.</p></div></div>
+    <ol class="steps">
+      <li class="step"><span class="n">Book</span><i><svg width="22" height="22"><use href="#i-cart"/></svg></i><b>Book online</b><p>Pick a test or package, your address and a time slot.</p></li>
+      <li class="step"><span class="n">Track</span><i><svg width="22" height="22"><use href="#i-scooter"/></svg></i><b>Phlebotomist on the way</b><p>A trained phlebotomist is assigned and reaches your door.</p></li>
+      <li class="step"><span class="n">Collect</span><i><svg width="22" height="22"><use href="#i-drop2"/></svg></i><b>Safe collection</b><p>One-prick collection with sealed, single-use kits.</p></li>
+      <li class="step"><span class="n">Test</span><i><svg width="22" height="22"><use href="#i-lab"/></svg></i><b>Tested at the lab</b><p>Samples travel to a certified partner lab for testing.</p></li>
+      <li class="step"><span class="n">Report</span><i><svg width="22" height="22"><use href="#i-report"/></svg></i><b>Report on your phone</b><p>Get the report on WhatsApp and the app, plus a free consultation.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="club" style="padding-top:0">
+  <div class="wrap">
+    <div class="club">
+      <div>
+        <span class="launch">WORLD DIABETES DAY · LAUNCHING 14 NOV</span>
+        <h2>MicroCheck Diabetic Care Club</h2>
+        <p>Three care plans for Type 1 and Type 2 diabetes, with regular home lab tests, nursing oversight and progress tracking.</p>
+        <div class="acts"><a class="btn btn-brand" href="https://wa.me/919020004000?text=I%20want%20to%20join%20the%20Diabetic%20Care%20Club" target="_blank" rel="noopener noreferrer">Join the club</a><a class="btn btn-outline" href="tel:+919020004000">Talk to a health advisor</a></div>
+      </div>
+      <div class="tiers">
+        <div class="tier"><small>Tier 1</small><b>Essential Care</b><p>Stable Type 2, routine tracking</p><ul><li>HbA1c, FBS / PPBS</li><li>Quarterly vitals check</li><li>Digital report summary</li></ul></div>
+        <div class="tier pop"><small>Tier 2 · Most chosen</small><b>Advanced Control</b><p>Active management</p><ul><li>Bi-monthly HbA1c + lipids</li><li>Monthly nurse visit</li><li>Foot &amp; wound checks</li></ul></div>
+        <div class="tier"><small>Tier 3</small><b>360° Shield</b><p>Complex care, co-morbidities</p><ul><li>Monthly test suite</li><li>Dedicated home nurse</li><li>Early warning flags</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="services" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>Care at home, beyond lab tests</h2><p>Licensed nurses and technicians, booked as easily as a test.</p></div></div>
+    <div class="svc-grid">
+      <div class="svc"><img src="images/brain.webp" alt="" loading="lazy"><div><b>Home Sample Collection</b><p>Blood panels, biochemistry and microbiology with cold-chain transport.</p></div></div>
+      <div class="svc"><img src="images/liver.webp" alt="" loading="lazy"><div><b>Home Nursing</b><p>Wound care, post-op care, IV therapy, injections and vitals.</p></div></div>
+      <div class="svc"><img src="images/kidney.webp" alt="" loading="lazy"><div><b>Dialysis Support</b><p>Technician dispatch, hygiene audits and a dedicated case manager.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="app">
+      <div>
+        <h2>Download the MicroCheck app</h2>
+        <p>Tracking your health is easy with the app. Book tests, and see your smart reports and health trackers anytime, anywhere.</p>
+        <div class="stores">
+          <a class="store" href="https://play.google.com/store" target="_blank" rel="noopener noreferrer"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3l10 9-10 9Z" fill="#4cb84f"/><path d="M4 3l13 7.5-3 1.5Z" fill="#38b1ec"/><path d="M4 21l13-7.5-3-1.5Z" fill="#f59f00"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>
+          <a class="store" href="https://www.apple.com/app-store/" target="_blank" rel="noopener noreferrer"><svg width="20" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3c0 2-1.5 3.5-3 3.5C13 4.6 14.5 3 16 3Zm3.5 13.5c-.8 1.9-2.2 4.5-4 4.5-1.4 0-1.8-.8-3.4-.8s-2.1.8-3.4.8C6.6 21 4 17 4 13.2 4 9.8 6.2 8 8.3 8c1.4 0 2.5.9 3.4.9.8 0 2.1-1 3.7-1 .6 0 2.6.1 3.9 2-3.2 1.9-2.6 6 .2 6.6Z" fill="#fff"/></svg><span><small>Download on the</small><b>App Store</b></span></a>
+        </div>
+      </div>
+      <div class="phone-mock" aria-hidden="true"><div class="scr"><div class="bar"></div><div class="card"><i class="b"></i><i></i><i class="g"></i></div><div class="card"><i class="b"></i><i></i><i></i></div><div class="card"><i class="b"></i><i class="g"></i></div><div class="card"><i></i><i class="b"></i></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="faq" style="padding-top:0">
+  <div class="wrap two">
+    <div>
+      <div class="sec-head"><div><h2>Frequently asked questions</h2></div></div>
+      <div class="faq">
+        <details open><summary>Is home sample collection free?</summary><p>Yes. Booking online and sample collection at your home are free. You only pay for the tests.</p></details>
+        <details><summary>How will I get my report?</summary><p>Reports are shared on WhatsApp and in the MicroCheck app. You can also book a free doctor and diet consultation to go through the results.</p></details>
+        <details><summary>Do I need to fast before my test?</summary><p>Some tests, such as fasting blood sugar and lipid profile, need 10 to 12 hours of fasting. Each package shows whether fasting is needed, and our team reminds you before the visit.</p></details>
+        <details><summary>Which areas do you cover?</summary><p>We collect samples in all 14 districts of Kerala. Choose your district at the top of the page.</p></details>
+        <details><summary>Can I book for my family members?</summary><p>Yes. Add tests to the cart and tell our team who each test is for when they confirm the booking.</p></details>
+      </div>
+    </div>
+    <aside class="presence" id="help">
+      <h3>Our presence</h3>
+      <div class="districts"><span>Thiruvananthapuram</span><span>Kollam</span><span>Pathanamthitta</span><span>Alappuzha</span><span>Kottayam</span><span>Idukki</span><span>Ernakulam</span><span>Thrissur</span><span>Palakkad</span><span>Malappuram</span><span>Kozhikode</span><span>Wayanad</span><span>Kannur</span><span>Kasaragod</span></div>
+      <div class="contact-box">
+        <div><svg width="18" height="18"><use href="#i-phone"/></svg><span>Call or WhatsApp <b>+91 90200 04000</b></span></div>
+        <div><svg width="18" height="18"><use href="#i-clock"/></svg><span>Home triage support, 24/7</span></div>
+      </div>
+    </aside>
+  </div>
+  <div class="wrap"><div class="notice"><svg width="20" height="20"><use href="#i-alert"/></svg><p><b>Not for emergencies.</b> For chest pain, breathing difficulty, heavy bleeding or stroke symptoms, call 112 immediately.</p></div></div>
+</section>
+</main>
 
 <footer>
   <div class="wrap">
-    <div class="f-cta">
-      <div><h2>Ready when you are.</h2><p>Dispatch confirms quickly, and there is no payment until we lock your slot.</p></div>
-      <div class="btns"><a class="btn btn-navy" href="#contact">Book a visit</a><a class="btn btn-ghost" href="tel:+919020004000">+91 90200 04000</a></div>
-    </div>
-    <div class="f-cols">
+    <div class="f-grid">
       <div class="f-brand">
-        <a class="logo" href="#home" aria-label="MicroCheck home"><svg width="36" height="40" aria-hidden="true"><use href="#i-drop"/></svg><span class="logo-word"><span class="m">micro</span><span class="c">check</span><span class="logo-tag">Healthcare, Home Delivered.</span></span></a>
-        <p>Hospital-grade diagnostics and nursing care, delivered through a verified network of partner labs and licensed professionals.</p>
-        <a href="https://wa.me/919020004000" target="_blank" rel="noopener noreferrer" style="color:#7fd0f5;font-weight:600">WhatsApp support ↗</a>
+        <a class="logo" href="#top" aria-label="MicroCheck home"><svg width="32" height="35" aria-hidden="true"><use href="#i-drop"/></svg><span class="logo-word"><span class="m">micro</span><span class="c">check</span><span class="logo-tag">Healthcare, Home Delivered.</span></span></a>
+        <p>Lab tests, health checkups and home care with free sample collection across Kerala.</p>
+        <div class="social" aria-label="Follow us"><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Instagram">ig</a><a href="#" aria-label="X">x</a><a href="#" aria-label="LinkedIn">in</a></div>
       </div>
-      <div><h4>Legal &amp; Governance</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Clinical Disclaimer</a></li><li><a href="#">Aggregator Model Disclosures</a></li></ul></div>
-      <div><h4>Partnerships</h4><ul><li><a href="#">Partner With Us (Labs &amp; Diagnostic Centres)</a></li><li><a href="#">Join as Nurse / Phlebotomist</a></li><li><a href="#insights">Health Bulletin</a></li></ul></div>
-      <div><h4>Direct Support</h4><ul><li><a href="#contact">Patient Support Desk</a></li><li>Clinical Helpline: +91 90200 04000</li><li>Operating hours: 24/7 home triage</li></ul></div>
+      <div><h4>Popular tests</h4><ul><li><a href="#packages">Full Body Checkup</a></li><li><a href="#packages">HbA1c</a></li><li><a href="#packages">Thyroid Profile</a></li><li><a href="#packages">Lipid Profile</a></li><li><a href="#packages">Vitamin D</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#help">Contact us</a></li><li><a href="#">Blog</a></li><li><a href="#faq">FAQ</a></li><li><a href="#">Partner with us</a></li><li><a href="#">Join as phlebotomist</a></li></ul></div>
+      <div><h4>Services</h4><ul><li><a href="#packages">Health packages</a></li><li><a href="#club">Diabetic Care Club</a></li><li><a href="#services">Home nursing</a></li><li><a href="#services">Dialysis support</a></li></ul></div>
+      <div><h4>Subscribe to our newsletter</h4><p>Health tips and offers, once a month.</p>
+        <form class="news" id="news"><input type="email" id="newsEmail" placeholder="Enter your email ID" aria-label="Email address" required><button class="btn btn-sm" type="submit">Submit</button></form>
+      </div>
     </div>
-    <div class="f-bottom"><span>© <span id="yr">2026</span> MicroCheck. All rights reserved.</span><span>Clinical aggregator model · Partner labs &amp; licensed professionals</span></div>
+    <div class="f-bottom"><span>© <span id="yr">2026</span> microcheck.com</span><nav><a href="#">Terms &amp; Conditions</a><a href="#">Privacy Policy</a><a href="#">Statutory Compliance</a></nav></div>
   </div>
 </footer>
 
+<div class="callback" id="callback">
+  <div class="callback-in">
+    <b>Get a Callback from our Health Advisor</b>
+    <form class="cb-form" id="cbForm" novalidate>
+      <input id="cbPhone" inputmode="tel" autocomplete="tel" placeholder="Enter your 10 digit mobile no." aria-label="Mobile number for callback">
+      <button class="btn btn-red" type="submit">Get a Call Back</button>
+    </form>
+    <p class="cb-msg" id="cbMsg" role="status" hidden></p>
+    <button class="cb-close" type="button" id="cbClose" aria-label="Hide callback bar"><svg width="14" height="14"><use href="#i-x"/></svg></button>
+  </div>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Your cart" role="dialog" aria-modal="true">
+  <div class="drawer-head"><h3>Your cart</h3><button class="x-btn" type="button" id="closeCart" aria-label="Close cart"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot" id="cartFoot">
+    <div class="sum" id="sum"></div>
+    <div class="fields"><input id="cName" placeholder="Patient name" autocomplete="name" aria-label="Patient name"><input id="cPhone" placeholder="Mobile number" inputmode="tel" autocomplete="tel" aria-label="Mobile number"></div>
+    <a class="btn btn-green" id="waBook" href="https://wa.me/919020004000" target="_blank" rel="noopener noreferrer"><svg width="18" height="18"><use href="#i-chat"/></svg>Book on WhatsApp</a>
+    <small>Our team confirms your slot on WhatsApp. Pay after the slot is confirmed.</small>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" hidden></div>
+
 <script>
 (function () {
-  // Duplicate strip tiles so the drift loops seamlessly
-  var track = document.getElementById('stripTrack');
-  Array.prototype.slice.call(track.children).forEach(function (t) {
-    var c = t.cloneNode(true); c.setAttribute('aria-hidden', 'true');
-    c.querySelectorAll('img').forEach(function (i) { i.alt = ''; });
-    track.appendChild(c);
-  });
-
-  // Mobile menu
-  var btn = document.getElementById('menuBtn'), menu = document.getElementById('mobileMenu');
-  btn.addEventListener('click', function () {
-    var open = menu.hidden; menu.hidden = !open; btn.setAttribute('aria-expanded', String(open));
-  });
-  menu.addEventListener('click', function (e) { if (e.target.closest('a')) { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); } });
-
-
-  // Hero story: nurse ride -> blood draw -> lab -> WhatsApp -> happy patient
-  var steps = [
-    ['Nurse on the way', 'A verified nurse rides to your home at the booked time.'],
-    ['Blood drawn at home', 'Gentle collection into sealed, labelled tubes.'],
-    ['Lab analysis', 'An accredited partner lab runs your tests and cultures.'],
-    ['Report on WhatsApp', 'Your report arrives on your phone as a PDF.'],
-    ['Happy, healthy patient', 'Results at home, with no travel and no waiting room.']
+  // SAMPLE DATA: replace names, test counts, report times and prices with MicroCheck's real catalogue.
+  var PACKAGES = [
+    { id: 'fb1', cat: 'full', name: 'Full Body Checkup Essential', tag: 'Most booked', tests: 64, tat: 24, inc: ['CBC, lipid profile', 'Liver & kidney function', 'Thyroid, blood sugar'], fasting: true, price: 1299, mrp: 2600 },
+    { id: 'fb2', cat: 'full', name: 'Full Body Checkup Advanced', tag: 'Best value', tests: 86, tat: 24, inc: ['Everything in Essential', 'Vitamin D & B12', 'HbA1c, iron studies'], fasting: true, price: 2199, mrp: 4800 },
+    { id: 'fb3', cat: 'full', name: 'Full Body Checkup Basic', tests: 45, tat: 24, inc: ['CBC, ESR', 'Lipid profile', 'Blood sugar, urine routine'], fasting: true, price: 899, mrp: 1800 },
+    { id: 'db1', cat: 'diabetes', name: 'Diabetes Screening', tag: 'Recommended', tests: 12, tat: 12, inc: ['HbA1c', 'Fasting & PP blood sugar', 'Urine microalbumin'], fasting: true, price: 699, mrp: 1400 },
+    { id: 'db2', cat: 'diabetes', name: 'HbA1c Test', tests: 1, tat: 12, inc: ['3-month average blood sugar'], fasting: false, price: 349, mrp: 700 },
+    { id: 'db3', cat: 'diabetes', name: 'Diabetes Care Advanced', tests: 32, tat: 24, inc: ['HbA1c, FBS, PPBS', 'Kidney & lipid profile', 'Urine microalbumin'], fasting: true, price: 1499, mrp: 3000 },
+    { id: 'ht1', cat: 'heart', name: 'Heart Health Checkup', tag: 'Popular', tests: 18, tat: 24, inc: ['Lipid profile', 'hs-CRP', 'Blood sugar'], fasting: true, price: 999, mrp: 2000 },
+    { id: 'ht2', cat: 'heart', name: 'Lipid Profile', tests: 8, tat: 12, inc: ['Total cholesterol', 'HDL, LDL', 'Triglycerides'], fasting: true, price: 349, mrp: 700 },
+    { id: 'ht3', cat: 'heart', name: 'Cardiac Risk Advanced', tests: 40, tat: 36, inc: ['Lipid profile, hs-CRP', 'Apolipoproteins', 'Homocysteine'], fasting: true, price: 2499, mrp: 5200 },
+    { id: 'th1', cat: 'thyroid', name: 'Thyroid Profile (T3, T4, TSH)', tests: 3, tat: 12, inc: ['Total T3', 'Total T4', 'TSH'], fasting: false, price: 399, mrp: 800 },
+    { id: 'th2', cat: 'thyroid', name: 'Thyroid Profile Advanced', tests: 6, tat: 24, inc: ['Free T3, free T4', 'TSH', 'Anti-TPO antibodies'], fasting: false, price: 999, mrp: 2000 },
+    { id: 'fv1', cat: 'fever', name: 'Fever Panel', tag: 'Seasonal', tests: 28, tat: 12, inc: ['CBC with ESR', 'Dengue NS1, malaria', 'Typhoid, urine routine'], fasting: false, price: 899, mrp: 1800 },
+    { id: 'fv2', cat: 'fever', name: 'Dengue NS1 Antigen', tests: 1, tat: 12, inc: ['Early dengue detection'], fasting: false, price: 499, mrp: 900 },
+    { id: 'fv3', cat: 'fever', name: 'Typhoid Test (Widal)', tests: 1, tat: 12, inc: ['Salmonella antibodies'], fasting: false, price: 249, mrp: 500 },
+    { id: 'wm1', cat: 'women', name: "Women's Wellness Checkup", tag: 'For her', tests: 70, tat: 24, inc: ['Thyroid & iron studies', 'Vitamin D, calcium', 'CBC, blood sugar'], fasting: true, price: 1799, mrp: 3900 },
+    { id: 'wm2', cat: 'women', name: 'PCOD Screening', tests: 14, tat: 36, inc: ['LH, FSH, prolactin', 'Testosterone', 'Insulin, blood sugar'], fasting: true, price: 1499, mrp: 3200 },
+    { id: 'vt1', cat: 'vitamin', name: 'Vitamin Check (D + B12)', tests: 2, tat: 24, inc: ['Vitamin D (25-OH)', 'Vitamin B12'], fasting: false, price: 999, mrp: 2400 },
+    { id: 'vt2', cat: 'vitamin', name: 'Vitamin D Test', tests: 1, tat: 24, inc: ['Vitamin D (25-OH)'], fasting: false, price: 599, mrp: 1400 },
+    { id: 'kd1', cat: 'kidney', name: 'Kidney Function Test', tests: 9, tat: 12, inc: ['Urea, creatinine', 'Uric acid', 'Electrolytes'], fasting: false, price: 549, mrp: 1100 },
+    { id: 'lv1', cat: 'liver', name: 'Liver Function Test', tests: 11, tat: 12, inc: ['Bilirubin', 'SGOT, SGPT', 'Albumin, ALP'], fasting: false, price: 549, mrp: 1100 },
+    { id: 'al1', cat: 'allergy', name: 'Allergy Screening', tests: 6, tat: 48, inc: ['Total IgE', 'Eosinophil count', 'CBC'], fasting: false, price: 1199, mrp: 2200 },
+    { id: 'sn1', cat: 'senior', name: 'Senior Citizen Checkup', tag: 'For parents', tests: 78, tat: 24, inc: ['Full body tests', 'HbA1c, kidney, liver', 'Vitamin D, calcium'], fasting: true, price: 1999, mrp: 4200 }
   ];
-  var DUR = 3800, stage = document.getElementById('stage');
-  var scenes = stage.querySelectorAll('.scene'), barsEl = document.getElementById('bars');
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  stage.style.setProperty('--dur', DUR + 'ms');
-  steps.forEach(function (st, i) {
-    var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Step ' + (i + 1) + ': ' + st[0]);
-    b.innerHTML = '<span><i></i></span>'; b.addEventListener('click', function () { go(i); });
-    barsEl.appendChild(b);
-  });
-  var bars = barsEl.children, cur = 0, timer;
-  function go(i) {
-    cur = i; clearTimeout(timer);
-    for (var k = 0; k < scenes.length; k++) { scenes[k].classList.remove('on'); bars[k].classList.remove('now'); bars[k].classList.toggle('done', k < i); }
-    void stage.offsetWidth;
-    scenes[i].classList.add('on'); bars[i].classList.add('now');
-    document.getElementById('capNum').textContent = i + 1;
-    document.getElementById('capTitle').textContent = steps[i][0];
-    document.getElementById('capText').textContent = steps[i][1];
-    if (!reduce) timer = setTimeout(function () { go((cur + 1) % steps.length); }, DUR);
+  var MOST_BOOKED = ['fb1', 'db1', 'ht1', 'fv1', 'fb2', 'th1', 'wm1', 'sn1'];
+  var MENUS = [
+    { key: 'full', label: 'Full Body Checkup', why: ['Many problems show up in blood before you feel them.', 'One visit covers heart, liver, kidney and sugar.', 'A yearly check makes changes easy to spot.'] },
+    { key: 'diabetes', label: 'Diabetes', why: ['Diabetes often has no early symptoms.', 'HbA1c shows your 3-month sugar average.', 'Regular checks help prevent complications.'] },
+    { key: 'heart', label: 'Heart', why: ['Heart issues often start silently.', 'Cholesterol and inflammation show up in a blood test.', 'Early tests can save lives.'] },
+    { key: 'thyroid', label: 'Thyroid', why: ['Thyroid problems are common, especially in women.', 'Tiredness and weight change can be early signs.', 'A simple blood test gives the answer.'] },
+    { key: 'fever', label: 'Fever', why: ['Dengue, malaria and typhoid can look alike.', 'One panel checks for the common causes.', 'Test early if fever lasts more than 2 days.'] },
+    { key: 'women', label: "Women's Health", why: ['Iron, thyroid and vitamin D problems are common.', 'PCOD can be checked with hormone tests.', 'Regular checks keep you ahead of changes.'] },
+    { key: 'vitamin', label: 'Vitamins', why: ['Low vitamin D and B12 cause tiredness and aches.', 'Both are checked with one blood draw.', 'Easy to correct once you know.'] },
+    { key: 'senior', label: 'Senior Citizen', isNew: true, why: ['Health needs change after 60.', 'One package covers sugar, heart, kidney and bones.', 'Collected at home, no travel needed.'] }
+  ];
+  var CONCERNS = [
+    { key: 'full', label: 'Full Body', icon: 'c-body', bg: '#e2f3fc', fg: '#0a5f99' },
+    { key: 'diabetes', label: 'Diabetes', icon: 'i-drop2', bg: '#fde8ef', fg: '#c2255c' },
+    { key: 'heart', label: 'Heart', icon: 'c-heart', bg: '#ffe9e3', fg: '#d9480f' },
+    { key: 'thyroid', label: 'Thyroid', icon: 'c-thyroid', bg: '#f1e9ff', fg: '#7048e8' },
+    { key: 'fever', label: 'Fever', icon: 'c-fever', bg: '#fff3dc', fg: '#e67700' },
+    { key: 'vitamin', label: 'Vitamins', icon: 'c-sun', bg: '#fff9db', fg: '#c99400' },
+    { key: 'kidney', label: 'Kidney', img: 'images/kidney.webp', bg: '#e2f3fc' },
+    { key: 'liver', label: 'Liver', img: 'images/liver.webp', bg: '#e4f6e8' },
+    { key: 'women', label: "Women's Health", icon: 'c-women', bg: '#fde8ef', fg: '#c2255c' },
+    { key: 'senior', label: 'Senior Citizen', icon: 'c-senior', bg: '#e4f6e8', fg: '#23944a' },
+    { key: 'allergy', label: 'Allergy', icon: 'c-allergy', bg: '#e6fcf5', fg: '#0ca678' },
+    { key: 'vitamin', label: 'Bone & Joints', icon: 'c-bone', bg: '#f1f3f5', fg: '#495057' }
+  ];
+  var TABS = [['all', 'Most booked'], ['full', 'Full body'], ['diabetes', 'Diabetes'], ['heart', 'Heart'], ['thyroid', 'Thyroid'], ['fever', 'Fever'], ['women', 'Women'], ['senior', 'Senior']];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var inr = function (n) { return '₹' + n.toLocaleString('en-IN'); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var byId = function (id) { return PACKAGES.filter(function (p) { return p.id === id; })[0]; };
+  var off = function (p) { return Math.round((1 - p.price / p.mrp) * 100); };
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cart = [];
+  try { cart = JSON.parse(localStorage.getItem('mc-cart') || '[]').filter(byId); } catch (e) { cart = []; }
+  function save() { try { localStorage.setItem('mc-cart', JSON.stringify(cart)); } catch (e) {} }
+  function inCart(id) { return cart.indexOf(id) > -1; }
+  function bookBtn(p, cls) { var a = inCart(p.id); return '<button class="btn btn-sm book ' + (a ? 'added' : 'btn-brand') + (cls || '') + '" type="button" data-add="' + p.id + '">' + (a ? '✓ Added' : 'Book Now') + '</button>'; }
+  function facts(p) {
+    return '<div class="facts"><div class="fact"><i><svg width="16" height="16"><use href="#i-tube"/></svg></i><span><small>Tests included</small><b>' + p.tests + (p.tests === 1 ? ' Test' : ' Tests') + '</b></span></div>' +
+      '<div class="fact"><i><svg width="16" height="16"><use href="#i-clock"/></svg></i><span><small>Report in</small><b>' + p.tat + ' Hrs.</b></span></div></div>';
   }
-  document.addEventListener('visibilitychange', function () { if (document.hidden) clearTimeout(timer); else go(cur); });
-  go(0);
+  function priceline(p) { return '<div class="priceline"><span class="lto">Limited<br>time offer</span><b>' + inr(p.price) + '</b><s>' + inr(p.mrp) + '</s><span class="off">' + off(p) + '% off</span></div>'; }
 
-  document.getElementById('yr').textContent = new Date().getFullYear();
-
-  // Default date = tomorrow
-  var d = new Date(); d.setDate(d.getDate() + 1);
-  var dateEl = document.getElementById('date');
-  dateEl.min = new Date().toISOString().slice(0, 10);
-  dateEl.value = d.toISOString().slice(0, 10);
-
-  // Plan buttons preselect Diabetic Club
-  var plan = '';
-  document.querySelectorAll('[data-plan]').forEach(function (a) {
-    a.addEventListener('click', function () { plan = a.getAttribute('data-plan'); document.getElementById('svc-diabetic').checked = true; });
+  // Category bar + mega menus
+  var catList = $('catList'), mega = $('mega'), openKey = null, closeT;
+  MENUS.forEach(function (m) {
+    var li = document.createElement('li');
+    li.innerHTML = '<button class="cat-btn" type="button" aria-expanded="false" aria-controls="mega" data-menu="' + m.key + '">' + m.label + '<svg class="chev" width="14" height="14"><use href="#i-chev"/></svg>' + (m.isNew ? '<span class="new">NEW</span>' : '') + '</button>';
+    catList.appendChild(li);
   });
+  function openMenu(key) {
+    clearTimeout(closeT);
+    if (openKey === key) return;
+    openKey = key;
+    var m = MENUS.filter(function (x) { return x.key === key; })[0];
+    var list = PACKAGES.filter(function (p) { return p.cat === key; }).slice(0, 3);
+    mega.innerHTML = '<div class="mega-why"><h3>Why ' + esc(m.label.replace(' Checkup', '')) + ' checkups matter</h3><ul>' + m.why.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul>' +
+      '<a class="btn btn-coral" href="tel:+919020004000">Talk to a Health Advisor <svg width="16" height="16"><use href="#i-arrow"/></svg></a></div>' +
+      '<div class="mega-pk"><h3>Preventive packages for ' + esc(m.label.replace(' Checkup', '').toLowerCase()) + '</h3><div class="mini-grid">' +
+      list.map(function (p) { return '<div class="mini"><h4>' + esc(p.name) + '</h4>' + facts(p) + priceline(p) + '<div class="actions"><button class="know" type="button" data-know="' + p.cat + '">Know More</button>' + bookBtn(p) + '</div></div>'; }).join('') + '</div></div>';
+    mega.hidden = false;
+    catList.querySelectorAll('[data-menu]').forEach(function (b) { b.setAttribute('aria-expanded', String(b.dataset.menu === key)); });
+  }
+  function closeMenu() { openKey = null; mega.hidden = true; catList.querySelectorAll('[data-menu]').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); }); }
+  var hoverable = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  catList.addEventListener('click', function (e) { var b = e.target.closest('[data-menu]'); if (!b) return; if (openKey === b.dataset.menu) closeMenu(); else openMenu(b.dataset.menu); });
+  if (hoverable) {
+    catList.addEventListener('mouseover', function (e) { var b = e.target.closest('[data-menu]'); if (b) openMenu(b.dataset.menu); });
+    $('catList').parentNode.addEventListener('mouseleave', function () { closeT = setTimeout(closeMenu, 180); });
+    mega.addEventListener('mouseenter', function () { clearTimeout(closeT); });
+  }
+  document.addEventListener('click', function (e) { if (!e.target.closest('.catbar')) closeMenu(); });
 
-  var form = document.getElementById('bookForm');
-  function show(id, bad) { document.getElementById(id + '-err').hidden = !bad; document.getElementById(id).setAttribute('aria-invalid', bad ? 'true' : 'false'); }
-  form.addEventListener('submit', function (e) {
+  // Concerns
+  $('concernGrid').innerHTML = CONCERNS.map(function (c) {
+    var art = c.img ? '<i style="--c-bg:' + c.bg + '"><img src="' + c.img + '" alt=""></i>' : '<i style="--c-bg:' + c.bg + ';--c-fg:' + c.fg + '"><svg width="26" height="26"><use href="#' + c.icon + '"/></svg></i>';
+    return '<button class="concern" type="button" data-cat="' + c.key + '">' + art + esc(c.label) + '</button>';
+  }).join('');
+
+  // Shelf
+  var filter = 'all', expanded = false;
+  $('tabs').innerHTML = TABS.map(function (t) { return '<button class="tab" type="button" data-tab="' + t[0] + '" aria-pressed="false">' + t[1] + '</button>'; }).join('');
+  function card(p) {
+    return '<article class="pkg"><div class="pkg-top">' + (p.tag ? '<span class="tag">' + esc(p.tag) + '</span>' : '<span></span>') + '<span class="off">' + off(p) + '% off</span></div>' +
+      '<h3>' + esc(p.name) + '</h3><ul>' + p.inc.map(function (i) { return '<li><svg width="12" height="12"><use href="#i-check"/></svg>' + esc(i) + '</li>'; }).join('') + '<li><svg width="12" height="12"><use href="#i-check"/></svg>' + (p.fasting ? 'Fasting required' : 'No fasting needed') + '</li></ul>' +
+      facts(p) + priceline(p) + '<div class="actions"><button class="know" type="button" data-know="' + p.cat + '">Know More</button>' + bookBtn(p) + '</div></article>';
+  }
+  function renderShelf() {
+    var list;
+    if (filter === 'all') list = expanded ? PACKAGES : MOST_BOOKED.map(byId);
+    else list = PACKAGES.filter(function (p) { return p.cat === filter; });
+    $('shelf').innerHTML = list.map(card).join('');
+    $('seeAll').hidden = filter === 'all' && expanded;
+    document.querySelectorAll('.tab').forEach(function (t) { t.setAttribute('aria-pressed', String(t.dataset.tab === filter && !(filter === 'all' && expanded))); });
+  }
+  function setFilter(f, scroll) {
+    filter = f; expanded = false; renderShelf();
+    if (scroll) $('packages').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  }
+  $('tabs').addEventListener('click', function (e) { var b = e.target.closest('[data-tab]'); if (b) setFilter(b.dataset.tab); });
+  $('concernGrid').addEventListener('click', function (e) { var b = e.target.closest('[data-cat]'); if (b) setFilter(b.dataset.cat, true); });
+  document.querySelectorAll('[data-filter]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); setFilter(a.dataset.filter, true); }); });
+  $('seeAll').addEventListener('click', function (e) { e.preventDefault(); filter = 'all'; expanded = true; renderShelf(); });
+  document.addEventListener('click', function (e) { var k = e.target.closest('[data-know]'); if (k) { closeMenu(); setFilter(k.dataset.know, true); } });
+
+  // Cart
+  function toast(msg) { var t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(function () { t.hidden = true; }, 2000); }
+  function add(id, openAfter) {
+    if (!inCart(id)) { cart.push(id); save(); toast(byId(id).name + ' added to cart'); }
+    renderAll(); if (openAfter) openCart();
+  }
+  function remove(id) { cart.splice(cart.indexOf(id), 1); save(); renderAll(); }
+  function totals() { var t = { price: 0, mrp: 0 }; cart.forEach(function (id) { var p = byId(id); t.price += p.price; t.mrp += p.mrp; }); t.online = Math.round(t.price * 0.10); t.pay = t.price - t.online; return t; }
+  function renderCart() {
+    var n = cart.length, t = totals();
+    $('cartCount').textContent = n; $('cartCount').hidden = !n;
+    if (!n) {
+      $('cartBody').innerHTML = '<div class="empty"><svg width="40" height="40"><use href="#i-cart"/></svg><b>Your cart is empty</b><span>Add a test or package to book a home collection.</span><button class="btn btn-brand btn-sm" type="button" id="browse">Browse packages</button></div>';
+      $('cartFoot').hidden = true; return;
+    }
+    $('cartFoot').hidden = false;
+    $('cartBody').innerHTML = cart.map(function (id) { var p = byId(id); return '<div class="line"><div><b>' + esc(p.name) + '</b><small>' + p.tests + (p.tests === 1 ? ' test' : ' tests') + ' · report in ' + p.tat + ' hrs</small></div><div class="pr"><b>' + inr(p.price) + '</b><button class="rm" type="button" data-remove="' + p.id + '">Remove</button></div></div>'; }).join('');
+    $('sum').innerHTML = '<div><span>Total MRP</span><span>' + inr(t.mrp) + '</span></div><div class="save"><span>Package discount</span><span>−' + inr(t.mrp - t.price) + '</span></div><div class="save"><span>Extra 10% online discount</span><span>−' + inr(t.online) + '</span></div><div><span>Home sample collection</span><span class="save">Free</span></div><div class="tot"><span>To pay</span><span>' + inr(t.pay) + '</span></div>';
+    updateWa();
+  }
+  function updateWa() {
+    if (!cart.length) return;
+    var t = totals(), name = $('cName').value.trim(), ph = $('cPhone').value.trim();
+    var msg = 'Hi MicroCheck, I want to book a home sample collection.\n\nTests:\n' + cart.map(function (id) { var p = byId(id); return '• ' + p.name + ' (' + inr(p.price) + ')'; }).join('\n') +
+      '\n\nTotal after 10% online discount: ' + inr(t.pay) + '\nLocation: ' + $('city').value + (name ? '\nName: ' + name : '') + (ph ? '\nMobile: ' + ph : '');
+    $('waBook').href = 'https://wa.me/919020004000?text=' + encodeURIComponent(msg);
+  }
+  function renderAll() { renderShelf(); renderCart(); if (openKey) { var k = openKey; openKey = null; openMenu(k); } if (!$('results').hidden) renderResults(); }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-add]'); if (a) { if (inCart(a.dataset.add)) openCart(); else add(a.dataset.add); }
+    var b = e.target.closest('[data-book]'); if (b) add(b.dataset.book, true);
+    var r = e.target.closest('[data-remove]'); if (r) remove(r.dataset.remove);
+    if (e.target.closest('#browse')) { closeCart(); $('packages').scrollIntoView(); }
+  });
+  ['cName', 'cPhone'].forEach(function (id) { $(id).addEventListener('input', updateWa); });
+  var lastFocus;
+  function openCart() { closeMenu(); lastFocus = document.activeElement; $('scrim').hidden = false; $('drawer').hidden = false; $('closeCart').focus(); }
+  function closeCart() { $('scrim').hidden = true; $('drawer').hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  $('cartBtn').addEventListener('click', openCart);
+  $('closeCart').addEventListener('click', closeCart); $('scrim').addEventListener('click', closeCart);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (!$('drawer').hidden) closeCart(); closeMenu(); $('results').hidden = true; } });
+  $('loginBtn').addEventListener('click', function () { toast('Login with OTP is available in the MicroCheck app'); });
+
+  // Search
+  var q = $('q');
+  function renderResults() {
+    var v = q.value.trim().toLowerCase();
+    if (!v) { $('results').hidden = true; return; }
+    var hits = PACKAGES.filter(function (p) { return (p.name + ' ' + p.inc.join(' ') + ' ' + p.cat).toLowerCase().indexOf(v) > -1; });
+    $('results').innerHTML = hits.length ? hits.map(function (p) {
+      return '<div class="res"><div><b>' + esc(p.name) + '</b><small>' + p.tests + (p.tests === 1 ? ' test' : ' tests') + ' · report in ' + p.tat + ' hrs</small></div><div class="res-r"><b>' + inr(p.price) + '</b>' + bookBtn(p) + '</div></div>';
+    }).join('') : '<div class="res-empty">No match for “' + esc(q.value) + '”. Call +91 90200 04000 and we will find the right test.</div>';
+    $('results').hidden = false;
+  }
+  q.addEventListener('input', renderResults);
+  $('searchForm').addEventListener('submit', function (e) { e.preventDefault(); renderResults(); });
+  document.addEventListener('click', function (e) { if (!e.target.closest('.searchbar')) $('results').hidden = true; });
+
+  // Location
+  try { var c = localStorage.getItem('mc-city'); if (c) $('city').value = c; } catch (e) {}
+  $('city').addEventListener('change', function () { try { localStorage.setItem('mc-city', this.value); } catch (e) {} toast('Sample collection location: ' + this.value); updateWa(); });
+
+  // Prescription
+  $('rx').addEventListener('change', function () { if (this.files[0]) toast(this.files[0].name + ' attached. Send it to us on WhatsApp to book.'); });
+
+  // Banner carousel
+  var slides = document.querySelectorAll('.slide'), dots = $('dots'), cur = 0, timer;
+  slides.forEach(function (s, i) { var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Show offer ' + (i + 1)); b.addEventListener('click', function () { show(i); }); dots.appendChild(b); });
+  function show(i) {
+    cur = i; clearTimeout(timer);
+    slides.forEach(function (s, k) { s.classList.toggle('on', k === i); s.setAttribute('aria-hidden', String(k !== i)); s.querySelectorAll('button').forEach(function (a) { a.tabIndex = k === i ? 0 : -1; }); });
+    [].forEach.call(dots.children, function (d, k) { d.classList.toggle('on', k === i); });
+    if (!reduce) timer = setTimeout(function () { show((cur + 1) % slides.length); }, 5500);
+  }
+  $('banner').addEventListener('mouseenter', function () { clearTimeout(timer); });
+  $('banner').addEventListener('mouseleave', function () { show(cur); });
+  $('banner').addEventListener('focusin', function () { clearTimeout(timer); });
+  show(0);
+
+  // Callback bar
+  $('cbForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    var name = form.fullName.value.trim(), mob = form.mobile.value.replace(/\D/g, ''), addr = form.address.value.trim();
-    if (mob.length === 12 && mob.indexOf('91') === 0) mob = mob.slice(2);
-    show('fullName', !name); show('mobile', mob.length !== 10); show('address', !addr);
-    if (!name || mob.length !== 10 || !addr) { form.querySelector('[aria-invalid="true"]').focus(); return; }
-    var svc = form.querySelector('input[name="service"]:checked').value;
-    if (svc === 'Diabetic Club' && plan) svc += ' (' + plan + ')';
-    var when = dateEl.value ? new Date(dateEl.value + 'T00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Flexible';
-    var text = 'MicroCheck: Home Visit Request\nName: ' + name + '\nMobile: +91 ' + mob + '\nService: ' + svc + '\nSchedule: ' + when + ', ' + form.querySelector('input[name="slot"]:checked').value + '\nAddress: ' + addr;
-    document.getElementById('summary').textContent = text;
-    document.getElementById('waLink').href = 'https://wa.me/919020004000?text=' + encodeURIComponent(text);
-    var done = document.getElementById('done'); done.hidden = false; done.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    var m = $('cbPhone').value.replace(/\D/g, ''); if (m.length === 12 && m.indexOf('91') === 0) m = m.slice(2);
+    var msg = $('cbMsg'); msg.hidden = false;
+    if (m.length !== 10) { msg.textContent = 'Enter a 10-digit mobile number.'; $('cbPhone').focus(); return; }
+    msg.innerHTML = 'Almost done: <a href="https://wa.me/919020004000?text=' + encodeURIComponent('Please call me back on +91 ' + m + ' about a lab test booking.') + '" target="_blank" rel="noopener noreferrer">send your callback request on WhatsApp</a> and an advisor will call +91 ' + m + '.';
   });
-  document.getElementById('copyBtn').addEventListener('click', function () {
-    var b = this, t = document.getElementById('summary').textContent;
-    var ok = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy details'; }, 1800); };
-    var fallback = function () { var r = document.createRange(); r.selectNodeContents(document.getElementById('summary')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); };
-    if (navigator.clipboard) navigator.clipboard.writeText(t).then(ok, fallback); else fallback();
-  });
+  $('cbClose').addEventListener('click', function () { $('callback').hidden = true; document.body.style.paddingBottom = '0'; });
+
+  $('news').addEventListener('submit', function (e) { e.preventDefault(); toast('Thanks! You are subscribed.'); this.reset(); });
+  $('yr').textContent = new Date().getFullYear();
+  renderShelf(); renderCart();
 })();
 </script>
 
