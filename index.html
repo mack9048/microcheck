@@ -6,401 +6,385 @@
 <link rel="icon" href="favicon.svg">
 <title>MicroCheck</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="MicroCheck: book lab tests and health checkups with free home sample collection across Kerala.">
+<meta name="description" content="MicroCheck: book lab tests and health checkups with free home sample collection across Kerala. Reports on WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
-/* Layout: Healthians-style diagnostics store. Header (location, login, support) -> blue category bar with mega menus -> offer banner with built-in search -> service tiles -> concern grid -> package shelf + cart -> trust, process, club, FAQ. Fixed callback bar at the bottom. 1520px column, light theme only. */
+/* MicroCheck identity: app-like health store. Search-first header + category chips, split hero (arch portrait with floating report cards),
+   coupon-ticket offers, one quick-actions card, ticket-style package cards, navy proof band, timeline steps, floating help button. 1440px column, light only. */
 :root {
-  --bg: #f4f8fb;
+  --bg: #f5f8fb;
   --surface: #ffffff;
-  --surface-2: #eef4f9;
-  --ink: #0d2138;
-  --ink-2: #56687f;
-  --line: #dde7f0;
-  --brand: #0b8fd0;
-  --brand-deep: #08679f;
-  --brand-ink: #0a5f99;
-  --brand-soft: #e2f3fc;
-  --green: #23944a;
-  --green-bright: #4cb84f;
-  --green-soft: #e4f6e8;
-  --coral: #f0643f;
+  --surface-2: #eef3f8;
+  --ink: #0c1b2e;
+  --ink-2: #5a6b80;
+  --line: #e2e9f0;
+  --navy: #0b2440;
+  --blue: #1287d6;
+  --blue-deep: #0a5a99;
+  --sky: #e6f3fc;
+  --green: #3bb54a;
+  --green-deep: #1e8a3a;
+  --mint: #e7f7eb;
+  --sun: #ff9f1c;
+  --sun-soft: #fff3df;
+  --rose: #e8436b;
   --red: #e5383b;
-  --amber: #e8900c;
-  --amber-soft: #fff3dc;
-  --shadow: 0 1px 2px rgba(13,33,56,.05), 0 8px 24px rgba(13,33,56,.08);
-  --font-head: "Poppins", "Segoe UI", system-ui, sans-serif;
-  --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
-  --max: 1520px;
+  --shadow: 0 1px 2px rgba(12,27,46,.04), 0 10px 30px rgba(12,27,46,.07);
+  --font-head: "Outfit", "Segoe UI", system-ui, sans-serif;
+  --font-body: "DM Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --max: 1440px;
   color-scheme: light;
 }
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; padding-bottom: 84px; }
-h1, h2, h3, h4 { font-family: var(--font-head); margin: 0; line-height: 1.25; text-wrap: balance; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15.5px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4 { font-family: var(--font-head); margin: 0; line-height: 1.15; letter-spacing: -0.015em; text-wrap: balance; }
 p { margin: 0; }
 a { color: inherit; }
 img { max-width: 100%; display: block; }
 button { font: inherit; color: inherit; }
-:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; border-radius: 6px; }
-.wrap { max-width: var(--max); margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-.sec { padding-block: 40px; }
-.sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
-.sec-head h2 { font-size: clamp(1.3rem, 2.3vw, 1.7rem); font-weight: 700; }
-.sec-head p { color: var(--ink-2); margin-top: 2px; }
-.link { color: var(--brand-ink); font-weight: 600; text-decoration: none; font-size: .9rem; white-space: nowrap; }
-.link:hover { text-decoration: underline; }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 20px; border-radius: 10px; font: 600 .92rem/1 var(--font-head); text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: filter .2s, transform .15s; }
-.btn:hover { filter: brightness(1.07); }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 8px; }
+.wrap { max-width: var(--max); margin-inline: auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.sec { padding-block: 56px; }
+.head2 { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px 24px; margin-bottom: 24px; flex-wrap: wrap; }
+.head2 h2 { font-size: clamp(1.55rem, 2.6vw, 2.1rem); font-weight: 600; }
+.head2 h2 span { color: var(--blue); }
+.head2 p { color: var(--ink-2); margin-top: 6px; max-width: 56ch; }
+.kicker { display: inline-flex; align-items: center; gap: 8px; font: 600 .78rem/1 var(--font-head); letter-spacing: .12em; text-transform: uppercase; color: var(--green-deep); margin-bottom: 10px; }
+.kicker::before { content: ""; width: 18px; height: 2px; border-radius: 2px; background: var(--green); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 12px 24px; border-radius: 999px; font: 600 .95rem/1 var(--font-head); text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: transform .15s, background .2s, box-shadow .2s; white-space: nowrap; }
 .btn:active { transform: scale(.98); }
-.btn-brand { background: var(--brand-deep); color: #fff; }
-.btn-outline { background: var(--surface); color: var(--brand-ink); border-color: var(--brand); }
-.btn-coral { background: var(--coral); color: #fff; }
-.btn-red { background: var(--red); color: #fff; }
-.btn-green { background: #23944a; color: #fff; }
-.btn-sm { min-height: 38px; padding: 8px 14px; font-size: .85rem; }
+.btn-navy { background: var(--navy); color: #fff; box-shadow: 0 8px 20px rgba(11,36,64,.18); }
+.btn-navy:hover { background: #12365e; }
+.btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--blue); color: var(--blue-deep); }
+.btn-green { background: #1fa855; color: #fff; }
+.btn-sm { min-height: 40px; padding: 9px 16px; font-size: .88rem; }
+.play-i { width: 30px; height: 30px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; margin-left: -12px; }
+
+/* Announcement */
+.announce { background: var(--navy); color: #d6e6f6; font-size: .84rem; text-align: center; padding: 8px max(20px, env(safe-area-inset-right, 0px)) 8px max(20px, env(safe-area-inset-left, 0px)); }
+.announce b { color: #fff; font-weight: 600; }
+.announce .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); margin: 0 10px 2px; }
 
 /* Header */
-.top { background: var(--surface); border-bottom: 1px solid var(--line); }
-.top-row { display: flex; align-items: center; gap: 22px; padding-block: 12px; }
-.logo { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; margin-right: auto; flex: none; }
-.logo-word { font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.03em; line-height: .9; }
-.logo-word .m { color: var(--brand); } .logo-word .c { color: var(--green-bright); }
-.logo-tag { display: block; font: 500 .6rem/1 var(--font-body); color: var(--ink-2); letter-spacing: .01em; margin-top: 5px; }
-.hi { display: flex; align-items: center; gap: 10px; text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
-.hi i { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); color: var(--ink-2); font-style: normal; flex: none; }
-.hi small { display: block; font-size: .74rem; color: var(--ink-2); line-height: 1.2; }
-.hi b { font: 600 .86rem/1.3 var(--font-head); }
-.hi select { border: 0; background: transparent; font: 600 .86rem var(--font-head); color: var(--ink); padding: 0; cursor: pointer; max-width: 150px; }
-.divider { width: 1px; align-self: stretch; background: var(--line); margin-block: 4px; }
-.cart-btn { position: relative; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); display: grid; place-items: center; cursor: pointer; flex: none; }
-.cart-count { position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; border-radius: 10px; background: var(--red); color: #fff; font: 700 .7rem/20px var(--font-head); text-align: center; padding: 0 5px; }
-
-/* Category bar + mega menus */
-.catbar { background: var(--brand-deep); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; }
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 41; background: var(--brand-deep); }
-.catbar .wrap { position: relative; }
-.cat-list { display: flex; align-items: stretch; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; }
-.cat-list::-webkit-scrollbar { display: none; }
-.cat-list > li { flex: none; }
-.cat-btn { display: flex; align-items: center; gap: 6px; height: 50px; padding: 0 14px; background: none; border: 0; color: #fff; font: 500 .95rem var(--font-head); cursor: pointer; text-decoration: none; white-space: nowrap; position: relative; }
-.cat-btn svg.chev { transition: transform .2s; opacity: .85; }
-.cat-btn[aria-expanded="true"] svg.chev { transform: rotate(180deg); }
-.cat-btn[aria-expanded="true"]::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 0; height: 3px; border-radius: 3px 3px 0 0; background: #ffc94d; }
-.cat-btn .new { position: absolute; top: 2px; right: 4px; font: 700 .58rem/1 var(--font-head); background: var(--red); color: #fff; padding: 3px 6px; border-radius: 6px; }
-.mega { position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); top: 100%; background: var(--surface); border-radius: 0 0 18px 18px; box-shadow: 0 24px 50px rgba(5,20,40,.25); display: grid; grid-template-columns: 300px 1fr; overflow: hidden; }
-.mega-why { padding: 22px; background: linear-gradient(170deg, var(--brand-soft), var(--surface-2)); display: grid; gap: 14px; align-content: start; }
-.mega-why h3 { font-size: 1rem; font-weight: 600; }
-.mega-why ul { list-style: none; margin: 0; padding: 16px; background: var(--surface); border-radius: 14px; display: grid; gap: 10px; font-size: .9rem; color: var(--ink-2); }
-.mega-why li { display: flex; gap: 10px; }
-.mega-why li::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--brand); flex: none; margin-top: 4px; box-shadow: inset 0 0 0 4px var(--brand-soft); }
-.mega-why .btn { width: 100%; }
-.mega-pk { padding: 22px; display: grid; gap: 14px; align-content: start; min-width: 0; }
-.mega-pk h3 { font-size: 1rem; font-weight: 600; }
-.mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.mini { border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 12px; background: linear-gradient(180deg, var(--surface), var(--brand-soft)); min-width: 0; }
-.mini h4 { font: 600 .95rem/1.3 var(--font-head); min-height: 2.6em; }
-
-/* Shared package facts */
-.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.fact { display: flex; gap: 8px; align-items: center; }
-.fact i { width: 32px; height: 32px; border-radius: 9px; background: #ffffff; border: 1px solid var(--line); display: grid; place-items: center; color: var(--brand-ink); font-style: normal; flex: none; }
-.fact small { display: block; font-size: .7rem; color: var(--ink-2); line-height: 1.2; }
-.fact b { font: 600 .82rem/1.3 var(--font-head); }
-.priceline { display: flex; align-items: center; gap: 10px; padding-top: 10px; border-top: 1px dashed var(--line); flex-wrap: wrap; }
-.priceline .lto { font-size: .68rem; line-height: 1.15; color: var(--ink-2); padding-right: 10px; border-right: 1px solid var(--line); }
-.priceline b { font: 700 1.12rem/1 var(--font-head); font-variant-numeric: tabular-nums; }
-.priceline s { color: var(--ink-2); font-size: .8rem; }
-.off { font: 600 .72rem/1 var(--font-head); color: var(--green); background: var(--green-soft); padding: 4px 8px; border-radius: 999px; }
-.actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.know { font-size: .84rem; font-weight: 500; text-decoration: underline; color: var(--ink-2); background: none; border: 0; padding: 0; cursor: pointer; }
-.book.added { background: var(--green-soft); color: var(--green); }
-
-/* Hero banner */
-.hero { padding-block: 18px 6px; }
-.banner { position: relative; border-radius: 22px; overflow: hidden; color: #fff; background: #0a6ea8; min-height: 450px; }
-.slide { position: absolute; inset: 0; opacity: 0; transition: opacity .6s ease; pointer-events: none; }
-.slide.on { opacity: 1; pointer-events: auto; }
-.s-a { background: radial-gradient(70% 90% at 80% 40%, #2aa7e6, transparent 70%), linear-gradient(115deg, #075e93, #0b8fd0); }
-.s-b { background: radial-gradient(70% 90% at 80% 40%, #63c766, transparent 70%), linear-gradient(115deg, #17723a, #2f9e44); }
-.s-c { background: radial-gradient(70% 90% at 80% 40%, #3d7fc0, transparent 70%), linear-gradient(115deg, #0d2138, #1a4a7a); }
-.slide-copy { position: absolute; left: 50px; top: 38px; width: min(56%, 620px); display: grid; gap: 10px; }
-.slide-copy .kick { font: 700 clamp(1.7rem, 3.4vw, 2.7rem)/1.1 var(--font-head); letter-spacing: -0.02em; }
-.slide-copy .kick span { font-weight: 400; font-size: .7em; }
-.slide-copy .rule { width: 210px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.8), transparent); margin: 6px 0; }
-.offer-name { font: 600 1.15rem var(--font-head); }
-.offer-row { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
-.offer-price { display: flex; align-items: flex-end; gap: 10px; }
-.offer-price small { font: 500 1rem/1.1 var(--font-head); }
-.offer-price b { font: 800 clamp(3rem, 6vw, 4.4rem)/.9 var(--font-head); letter-spacing: -0.03em; }
-.offer-price s { font: 600 1.4rem var(--font-head); opacity: .55; margin-bottom: 6px; }
-.offer-cta { display: inline-flex; align-items: center; gap: 10px; font: 700 clamp(1.3rem, 2.2vw, 1.8rem) var(--font-head); color: #fff; background: none; border: 0; cursor: pointer; padding: 0; }
-.offer-cta span { width: 34px; height: 34px; border: 2px solid #fff; border-radius: 50%; display: grid; place-items: center; }
-.slide-art { position: absolute; right: 0; bottom: 0; top: 0; width: 44%; display: flex; justify-content: center; align-items: flex-end; }
-.slide-art img { height: 100%; width: auto; max-width: none; object-fit: contain; object-position: bottom; }
-.slide-art.organ { align-items: center; }
-.slide-art.organ img { height: 58%; filter: drop-shadow(0 30px 40px rgba(0,0,0,.3)); margin-bottom: 70px; }
-.event { position: absolute; top: 26px; right: 30px; text-align: right; font: 800 1rem/1.05 var(--font-head); letter-spacing: .02em; text-transform: uppercase; }
-.event small { display: block; font-size: .62rem; letter-spacing: .1em; font-weight: 600; opacity: .9; }
-.included { position: absolute; right: 0; bottom: 0; width: 42%; background: rgba(240, 244, 248, .96); color: #0d2138; border-radius: 18px 0 0 0; padding: 14px 20px 16px; display: grid; gap: 10px; }
-.included h3 { font: 700 1.05rem var(--font-head); text-align: center; display: flex; align-items: center; gap: 12px; }
-.included h3::before, .included h3::after { content: ""; flex: 1; height: 1px; background: #9fb0c2; }
-.inc-row { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-.inc-row span { display: inline-flex; gap: 6px; align-items: center; font: 500 .86rem var(--font-head); }
-.inc-row svg { color: #0a5f99; }
-.search-zone { position: absolute; left: 40px; bottom: 26px; width: min(56%, 640px); display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; z-index: 3; }
-.searchbar { display: flex; background: #fff; border-radius: 12px; overflow: visible; box-shadow: 0 10px 30px rgba(0,0,0,.18); position: relative; }
-.searchbar input { flex: 1; min-width: 0; height: 56px; border: 0; border-radius: 12px 0 0 12px; padding: 0 22px; font: 400 1rem var(--font-head); color: #0d2138; background: #fff; }
-.searchbar input:focus { outline: none; }
-.searchbar:focus-within { box-shadow: 0 0 0 3px #ffc94d, 0 10px 30px rgba(0,0,0,.18); }
-.searchbar button { border: 0; padding: 0 34px; border-radius: 0 12px 12px 0; background: var(--brand); color: #fff; font: 600 1.05rem var(--font-head); cursor: pointer; }
-.results { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); max-height: 320px; overflow: auto; z-index: 20; padding: 6px; }
-.res { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 10px; }
+.hdr { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; background: rgba(255,255,255,.9); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 41; background: #fff; }
+.hdr-row { display: flex; align-items: center; gap: 16px; padding-block: 12px; }
+.logo { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; flex: none; }
+.logo-word { font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.035em; line-height: .9; }
+.logo-word .m { color: var(--blue); } .logo-word .c { color: var(--green); }
+.logo-tag { display: block; font: 500 .6rem/1 var(--font-body); color: var(--ink-2); margin-top: 5px; letter-spacing: .01em; }
+.loc { display: inline-flex; align-items: center; gap: 6px; height: 46px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); flex: none; cursor: pointer; }
+.loc svg { color: var(--green-deep); flex: none; }
+.loc select { border: 0; background: transparent; font: 600 .88rem var(--font-head); color: var(--ink); padding: 0; cursor: pointer; max-width: 150px; }
+.search { position: relative; flex: 1; min-width: 0; max-width: 620px; margin-inline: auto; }
+.search input { width: 100%; height: 48px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface-2); padding: 0 120px 0 48px; font: 500 .95rem var(--font-body); color: var(--ink); transition: border-color .2s, background .2s; }
+.search input:focus { outline: none; border-color: var(--blue); background: #fff; }
+.search > svg { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--ink-2); pointer-events: none; }
+.search .go { position: absolute; right: 5px; top: 5px; bottom: 5px; border: 0; border-radius: 999px; padding: 0 20px; background: var(--blue); color: #fff; font: 600 .9rem var(--font-head); cursor: pointer; }
+.results { position: absolute; top: calc(100% + 8px); left: 0; right: 0; background: #fff; border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 20px 50px rgba(12,27,46,.14); max-height: 380px; overflow: auto; z-index: 50; padding: 8px; }
+.res { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 14px; }
 .res:hover { background: var(--surface-2); }
-.res b { font: 600 .9rem var(--font-head); display: block; }
-.res small { color: var(--ink-2); font-size: .78rem; }
+.res b { font: 600 .92rem var(--font-head); display: block; }
+.res small { color: var(--ink-2); font-size: .8rem; }
 .res-r { display: flex; gap: 10px; align-items: center; flex: none; }
-.res-r b { font: 700 .92rem var(--font-head); }
+.res-r > b { font: 700 .95rem var(--font-head); }
 .res-empty { padding: 14px; color: var(--ink-2); font-size: .9rem; }
-.perks { display: flex; gap: 22px; flex-wrap: wrap; }
-.perk { display: flex; gap: 10px; align-items: center; font: 500 .82rem/1.3 var(--font-head); font-style: italic; }
-.perk i { width: 36px; height: 36px; border-radius: 9px; background: #fff; color: var(--coral); display: grid; place-items: center; flex: none; font-style: normal; }
-.perk em { color: #ffd166; font-style: italic; }
-.dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
-.dots button { width: 20px; height: 5px; border-radius: 3px; border: 0; background: #b8d6e8; cursor: pointer; padding: 0; transition: width .3s, background .3s; }
-.dots button.on { width: 30px; background: var(--brand-deep); }
+.hdr-acts { display: flex; align-items: center; gap: 8px; flex: none; }
+.circle-btn { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: #fff; display: grid; place-items: center; cursor: pointer; color: var(--ink); text-decoration: none; }
+.circle-btn:hover { border-color: var(--blue); color: var(--blue-deep); }
+.circle-btn.wa { color: #1fa855; }
+.cart-pill { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 8px 0 16px; border-radius: 999px; background: var(--navy); color: #fff; border: 0; cursor: pointer; font: 600 .9rem var(--font-head); }
+.cart-pill .n { min-width: 30px; height: 30px; border-radius: 999px; background: var(--green); display: grid; place-items: center; font-size: .82rem; padding: 0 8px; }
+.chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-block: 0 12px; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; padding: 6px 14px 6px 6px; border-radius: 999px; border: 1px solid var(--line); background: #fff; cursor: pointer; font: 500 .88rem var(--font-head); color: var(--ink); transition: background .2s, border-color .2s, color .2s; }
+.chip i { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--c, var(--sky)); color: var(--cf, var(--blue-deep)); font-style: normal; }
+.chip:hover { border-color: var(--blue); }
+.chip[aria-pressed="true"] { background: var(--navy); color: #fff; border-color: var(--navy); }
+.chip[aria-pressed="true"] i { background: rgba(255,255,255,.16); color: #fff; }
+.chip .new { font: 700 .6rem/1 var(--font-head); background: var(--sun); color: #fff; padding: 3px 6px; border-radius: 6px; }
 
-/* Service tiles */
-.tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: start; gap: 16px; padding-top: 22px; }
-.tile { display: grid; gap: 10px; text-align: center; text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; }
-.tile-box { position: relative; aspect-ratio: 1.45; border-radius: 18px; background: linear-gradient(160deg, #ffffff -30%, var(--t-bg) 60%); box-shadow: 0 6px 16px rgba(13,33,56,.06); display: grid; place-items: center; transition: transform .2s; }
-.tile:hover .tile-box { transform: translateY(-3px); }
-.tile-box svg { width: 64px; height: 64px; margin-bottom: 18px; color: var(--t-fg); }
-.tile-box img { height: 70%; width: auto; }
-.tile-badge { position: absolute; left: 10px; right: 10px; bottom: 8px; background: rgba(255,255,255,.75); color: #08679f; border-radius: 999px; padding: 4px; font: 500 .8rem var(--font-head); }
-.tile-name { font: 500 .92rem/1.3 var(--font-head); }
+/* Hero */
+.hero { padding-block: 22px 8px; }
+.hero-card { position: relative; overflow: hidden; border-radius: 36px; background:
+  radial-gradient(60% 80% at 85% 30%, rgba(18,135,214,.18), transparent 70%),
+  radial-gradient(40% 50% at 0% 100%, rgba(59,181,74,.14), transparent 70%),
+  linear-gradient(180deg, #ffffff, #eef6fc);
+  border: 1px solid var(--line); display: grid; grid-template-columns: 1.05fr .95fr; gap: 24px; min-height: 520px; }
+.hero-card::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(10,90,153,.12) 1px, transparent 1.2px); background-size: 22px 22px; -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 55%); mask-image: linear-gradient(90deg, #000 0%, transparent 55%); pointer-events: none; }
+.hero-copy { position: relative; padding: clamp(28px, 4.5vw, 64px); display: grid; gap: 22px; align-content: center; min-width: 0; }
+.tagline { display: inline-flex; align-items: center; gap: 8px; width: fit-content; padding: 7px 14px 7px 8px; border-radius: 999px; background: #fff; border: 1px solid var(--line); font: 500 .85rem var(--font-head); box-shadow: 0 4px 14px rgba(12,27,46,.05); }
+.tagline i { width: 22px; height: 22px; border-radius: 50%; background: var(--mint); color: var(--green-deep); display: grid; place-items: center; font-style: normal; }
+.hero h1 { font-size: clamp(2.4rem, 5vw, 4.3rem); font-weight: 600; line-height: 1.02; letter-spacing: -0.035em; max-width: 13ch; }
+.hero h1 .hl { color: var(--green-deep); position: relative; white-space: nowrap; }
+.hero h1 .hl svg { position: absolute; left: 0; right: 0; bottom: -.12em; width: 100%; height: .3em; color: var(--green); }
+.hero-sub { color: var(--ink-2); font-size: 1.08rem; max-width: 46ch; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.hero-points { display: flex; flex-wrap: wrap; gap: 10px 22px; padding-top: 6px; }
+.hero-points span { display: inline-flex; align-items: center; gap: 8px; font: 500 .9rem var(--font-head); }
+.hero-points svg { color: var(--green-deep); }
+.hero-art { position: relative; min-height: 480px; }
+.arch { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: min(82%, 440px); height: 92%; border-radius: 240px 240px 0 0; background: linear-gradient(170deg, #49b4f0, #1287d6 55%, #0a5a99); overflow: hidden; }
+.arch::before { content: ""; position: absolute; inset: 18px 18px 0; border-radius: 230px 230px 0 0; border: 1.5px dashed rgba(255,255,255,.35); border-bottom: 0; }
+.arch img { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); height: 96%; width: auto; max-width: none; }
+.float { position: absolute; background: #fff; border-radius: 18px; box-shadow: 0 16px 40px rgba(12,27,46,.14); padding: 12px 14px; display: flex; align-items: center; gap: 12px; font-size: .84rem; animation: bob 5s ease-in-out infinite; z-index: 2; }
+.float b { display: block; font: 600 .9rem/1.25 var(--font-head); }
+.float small { color: var(--ink-2); font-size: .78rem; }
+.float .ic { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; flex: none; }
+.f1 { left: 2%; top: 18%; } .f1 .ic { background: var(--mint); color: var(--green-deep); }
+.f2 { right: 0; top: 46%; animation-delay: -1.6s; } .f2 .ic { background: #e3f8ea; color: #1fa855; }
+.f3 { left: 6%; bottom: 10%; animation-delay: -3.2s; } .f3 .ic { background: var(--sun-soft); color: var(--sun); }
+.pdf { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 5px 8px; border-radius: 8px; background: var(--surface-2); font: 600 .74rem var(--font-head); }
+.pdf i { background: var(--red); color: #fff; font: 700 .58rem/1 var(--font-head); padding: 3px 4px; border-radius: 3px; font-style: normal; }
+@keyframes bob { 50% { transform: translateY(-8px); } }
 
-/* Promo cards (Healthians style) */
-.promos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding-top: 34px; }
-.promo { position: relative; overflow: hidden; border-radius: 18px; padding: 22px 22px 24px; border: 1px solid var(--p-line); background: var(--p-bg); display: grid; gap: 8px; align-content: start; min-height: 190px; }
-.promo .pill { width: fit-content; display: inline-flex; align-items: center; gap: 6px; font: 600 .7rem/1 var(--font-head); letter-spacing: .06em; text-transform: uppercase; color: #9a5b00; background: #fff3cf; border: 1px solid #f3d27a; padding: 6px 10px; border-radius: 999px; }
-.promo .pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #e8900c; }
-.promo h3 { font: 400 1.12rem/1.35 var(--font-head); max-width: 20ch; }
-.promo h3 b { font-weight: 700; }
-.promo p { font-size: .86rem; color: var(--ink-2); max-width: 30ch; }
-.promo .acts { display: flex; align-items: center; gap: 16px; margin-top: 10px; position: relative; z-index: 1; }
-.promo .acts a.plain { font: 600 .88rem var(--font-head); text-decoration: underline; }
-.promo svg.art { position: absolute; right: 14px; bottom: 12px; width: 104px; height: 104px; }
-/* Trust strip */
-.trustbar { margin-top: 26px; display: grid; grid-template-columns: auto repeat(4, minmax(0, 1fr)); align-items: center; gap: 20px; padding: 18px 26px; border: 1px solid var(--line); border-radius: 16px; background: #ffffff; }
-.trustbar h3 { font: 400 1.15rem/1.3 var(--font-head); padding-right: 24px; border-right: 1px dashed var(--line); }
-.trustbar h3 b { font-weight: 700; } .trustbar h3 em { font-style: normal; font-weight: 700; color: var(--brand); }
-.tb { display: flex; gap: 12px; align-items: center; font: 500 .92rem/1.3 var(--font-head); }
-.tb svg { width: 34px; height: 34px; color: #33475f; flex: none; }
+/* Offers (coupon tickets) */
+.offers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.coupon { position: relative; display: grid; grid-template-columns: 112px 1fr; min-height: 132px; border-radius: 20px; background: #fff; border: 1px solid var(--line); overflow: hidden; }
+.coupon .stub { background: var(--cb); color: #fff; display: grid; place-content: center; text-align: center; padding: 10px; border-right: 2px dashed rgba(255,255,255,.6); }
+.coupon .stub small { font: 500 .72rem/1 var(--font-head); opacity: .85; }
+.coupon .stub b { font: 700 1.55rem/1.05 var(--font-head); letter-spacing: -0.02em; }
+.coupon .stub s { font-size: .78rem; opacity: .75; }
+.coupon::before, .coupon::after { content: ""; position: absolute; left: 101px; width: 22px; height: 22px; border-radius: 50%; background: var(--bg); border: 1px solid var(--line); }
+.coupon::before { top: -12px; } .coupon::after { bottom: -12px; }
+.coupon .body { padding: 14px 16px; display: grid; gap: 4px; align-content: center; min-width: 0; }
+.coupon .body b { font: 600 .98rem/1.25 var(--font-head); }
+.coupon .body small { color: var(--ink-2); font-size: .8rem; }
+.coupon .body .btn { margin-top: 6px; width: fit-content; }
+.coupon.code .stub { background: linear-gradient(160deg, var(--sun), #f57c00); }
+.code-box { display: inline-flex; gap: 8px; align-items: center; margin-top: 6px; font: 700 .9rem var(--font-head); letter-spacing: .08em; padding: 6px 10px; border: 1.5px dashed var(--sun); border-radius: 10px; color: #b25b00; background: var(--sun-soft); width: fit-content; }
 
-/* Video reviews */
-.reviews h2.center { text-align: center; color: var(--brand-deep); font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 600; margin-bottom: 8px; }
-.reviews .sub { text-align: center; color: var(--ink-2); margin-bottom: 30px; }
-.rv-wrap { position: relative; }
-.rv-track { display: flex; gap: 28px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 2px 8px; }
-.rv-track::-webkit-scrollbar { display: none; }
-.rv { flex: 0 0 calc((100% - 4 * 28px) / 5); scroll-snap-align: start; position: relative; aspect-ratio: 222 / 352; border-radius: 26px; overflow: hidden; border: 0; padding: 0; cursor: pointer; text-align: left; color: #fff; background: #1d3a56; box-shadow: 0 10px 24px rgba(13,33,56,.12); }
-.rv img.poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.rv::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.05) 35%, rgba(0,0,0,.6)); }
-.rv .play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 70px; height: 70px; border-radius: 50%; border: 2.5px solid #fff; display: grid; place-items: center; background: rgba(255,255,255,.08); z-index: 1; transition: transform .2s, background .2s; }
-.rv:hover .play { transform: translate(-50%, -50%) scale(1.08); background: rgba(255,255,255,.2); }
-.rv .who { position: absolute; left: 22px; right: 22px; bottom: 20px; z-index: 1; display: grid; gap: 8px; }
-.rv .who b { font: 700 1.02rem/1.2 var(--font-head); padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.55); }
-.rv .who span { font: 500 .84rem var(--font-head); }
-.rv.sample { background: linear-gradient(170deg, var(--s1), var(--s2)); cursor: default; }
-.rv.sample::after { background: linear-gradient(180deg, transparent 40%, rgba(5,25,45,.45)); }
-.rv.sample svg.ph { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 70%; height: auto; opacity: .3; }
-.rv .slot { position: absolute; top: 16px; left: 16px; z-index: 1; font: 600 .68rem/1 var(--font-head); letter-spacing: .06em; text-transform: uppercase; background: rgba(255,255,255,.9); color: #08679f; padding: 6px 9px; border-radius: 999px; }
-.rv-dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
-.rv-dots button { width: 9px; height: 9px; border-radius: 50%; border: 0; padding: 0; background: #c9d6e0; cursor: pointer; }
-.rv-dots button.on { background: var(--brand); }
-.rv-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow); display: grid; place-items: center; cursor: pointer; z-index: 2; color: var(--ink); }
-.rv-arrow.prev { left: -14px; } .rv-arrow.next { right: -14px; }
-.rv-arrow.prev svg { transform: rotate(180deg); }
-@media (max-width: 1280px) { .rv { flex-basis: calc((100% - 3 * 28px) / 4); } }
-.rv-note { text-align: center; font-size: .78rem; color: var(--ink-2); margin-top: 10px; }
-.vmodal { position: fixed; inset: 0; z-index: 80; background: rgba(5,15,28,.8); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
-.vmodal video { width: min(420px, 100%); max-height: 82vh; border-radius: 20px; background: #000; }
-.vmodal .x-btn { position: absolute; top: max(16px, env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); background: #fff; }
+/* Quick actions */
+.qa-card { margin-top: 18px; background: #fff; border: 1px solid var(--line); border-radius: 26px; padding: 10px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.qa { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 18px; text-decoration: none; border: 0; background: none; cursor: pointer; text-align: left; position: relative; }
+.qa + .qa::before { content: ""; position: absolute; left: 0; top: 22%; bottom: 22%; width: 1px; background: var(--line); }
+.qa:hover { background: var(--surface-2); }
+.qa:hover::before, .qa:hover + .qa::before { opacity: 0; }
+.qa i { width: 48px; height: 48px; border-radius: 16px; display: grid; place-items: center; background: var(--q, var(--sky)); color: var(--qf, var(--blue-deep)); flex: none; font-style: normal; }
+.qa b { display: block; font: 600 .95rem/1.25 var(--font-head); }
+.qa small { color: var(--ink-2); font-size: .8rem; }
 
-/* Concerns */
-.concerns { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
-.concern { display: grid; justify-items: center; gap: 10px; padding: 16px 8px; background: linear-gradient(180deg, #ffffff, #f5f9fc); border: 1px solid var(--line); border-radius: 16px; text-align: center; cursor: pointer; font: 500 .88rem/1.25 var(--font-head); transition: border-color .2s, transform .2s; }
-.concern:hover { border-color: var(--brand); transform: translateY(-2px); }
-.concern i { width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; font-style: normal; background: var(--c-bg); color: var(--c-fg); }
-.concern img { width: 40px; height: 40px; object-fit: contain; }
+/* Packages (ticket cards) */
+.seg { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: #fff; border: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+.seg::-webkit-scrollbar { display: none; }
+.seg button { white-space: nowrap; border: 0; background: none; border-radius: 999px; padding: 8px 16px; font: 500 .88rem var(--font-head); color: var(--ink-2); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+.shelf { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.tk { position: relative; background: #fff; border: 1px solid var(--line); border-radius: 24px; display: grid; grid-template-rows: 1fr auto; transition: transform .2s, box-shadow .2s; }
+.tk:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.tk-top { padding: 20px 20px 18px; display: grid; gap: 12px; align-content: start; }
+.tk-head { display: flex; gap: 12px; align-items: flex-start; }
+.tk-ic { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: var(--c); color: var(--cf); flex: none; }
+.tk-head h3 { font-size: 1.05rem; font-weight: 600; line-height: 1.25; }
+.tk-head .tag { display: inline-block; margin-top: 5px; font: 600 .7rem/1 var(--font-head); color: var(--sun); background: var(--sun-soft); padding: 4px 8px; border-radius: 6px; }
+.tk-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .82rem; color: var(--ink-2); }
+.tk-meta span { display: inline-flex; align-items: center; gap: 5px; }
+.tk-meta svg { color: var(--blue); }
+.tk-inc { display: flex; flex-wrap: wrap; gap: 6px; }
+.tk-inc span { font-size: .76rem; padding: 4px 9px; border-radius: 999px; background: var(--surface-2); color: var(--ink); }
+.tk-bottom { position: relative; padding: 16px 20px 18px; display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 2px dashed var(--line); }
+.tk-bottom::before, .tk-bottom::after { content: ""; position: absolute; top: -12px; width: 22px; height: 22px; border-radius: 50%; background: var(--bg); border: 1px solid var(--line); }
+.tk-bottom::before { left: -12px; clip-path: inset(0 0 0 50%); } .tk-bottom::after { right: -12px; clip-path: inset(0 50% 0 0); }
+.price b { font: 700 1.35rem/1 var(--font-head); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.price s { color: var(--ink-2); font-size: .82rem; margin-left: 6px; }
+.price em { display: block; font-style: normal; font: 600 .78rem/1.4 var(--font-head); color: var(--green-deep); margin-top: 3px; }
+.add { min-height: 42px; padding: 9px 16px; }
+.add.added { background: var(--mint); color: var(--green-deep); box-shadow: none; }
+.note { font-size: .8rem; color: var(--ink-2); margin-top: 14px; }
 
-/* Package shelf */
-.tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin-bottom: 16px; padding-bottom: 2px; }
-.tabs::-webkit-scrollbar { display: none; }
-.tab { white-space: nowrap; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; font: 500 .88rem var(--font-head); color: var(--ink-2); }
-.tab[aria-pressed="true"] { background: var(--brand-deep); color: #fff; border-color: var(--brand-deep); }
-.shelf { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.pkg { border: 1px solid #d3e9f5; border-radius: 18px; padding: 18px; display: grid; grid-template-rows: auto auto 1fr auto auto; gap: 12px; min-width: 0; background: linear-gradient(160deg, #ffffff 0%, #f3fafe 45%, #e2f3fc 100%); box-shadow: 0 2px 10px rgba(11,143,208,.06); transition: box-shadow .2s, transform .2s; }
-.pkg:nth-child(4n+2) { background: linear-gradient(160deg, #ffffff 0%, #f4fbf5 45%, #e4f6e8 100%); border-color: #d2ecd8; }
-.pkg:nth-child(4n+3) { background: linear-gradient(160deg, #ffffff 0%, #fff8f3 45%, #fdeee5 100%); border-color: #f6e0d2; }
-.pkg:nth-child(4n+4) { background: linear-gradient(160deg, #ffffff 0%, #f8f5ff 45%, #eee8fd 100%); border-color: #e2dbf7; }
-.pkg:hover { transform: translateY(-2px); }
-.pkg:hover { box-shadow: var(--shadow); }
-.pkg-top { display: flex; justify-content: space-between; gap: 8px; min-height: 22px; }
-.tag { font: 600 .7rem/1 var(--font-head); padding: 5px 8px; border-radius: 6px; background: var(--amber-soft); color: var(--amber); }
-.pkg h3 { font: 600 1rem/1.3 var(--font-head); }
-.pkg ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; font-size: .82rem; color: var(--ink-2); }
-.pkg li { display: flex; gap: 7px; }
-.pkg li svg { color: var(--green); flex: none; margin-top: 4px; }
-.pkg .lto { display: none; }
-.mini .priceline { gap: 8px; }
-.mini .lto { padding-right: 8px; }
-.sample-note { font-size: .78rem; color: var(--ink-2); margin-top: 12px; }
+/* Concerns (list tiles) */
+.concerns { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.cn { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 18px; border: 1px solid var(--line); background: #fff; cursor: pointer; text-align: left; transition: border-color .2s, transform .2s; }
+.cn:hover { border-color: var(--blue); transform: translateY(-2px); }
+.cn i { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: var(--cf); flex: none; font-style: normal; }
+.cn img { width: 34px; height: 34px; object-fit: contain; }
+.cn span { flex: 1; min-width: 0; }
+.cn b { display: block; font: 600 .95rem/1.2 var(--font-head); }
+.cn small { color: var(--ink-2); font-size: .8rem; }
+.cn > svg { color: var(--ink-2); flex: none; }
 
 /* For whom */
-.whom { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.whom a { position: relative; overflow: hidden; display: grid; gap: 4px; align-content: start; min-height: 150px; padding: 18px; border-radius: 16px; text-decoration: none; background: var(--w-bg); color: #0d2138; }
-.whom small { font: 600 .72rem/1 var(--font-head); text-transform: uppercase; letter-spacing: .06em; opacity: .7; }
-.whom b { font: 600 1.06rem/1.3 var(--font-head); max-width: 15ch; }
-.whom span { font: 600 .84rem var(--font-head); margin-top: auto; padding-top: 18px; color: #0a5f99; }
-.whom svg.deco { position: absolute; right: -8px; bottom: -8px; width: 92px; height: 92px; opacity: .2; color: #0d2138; }
+.whom { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.wm { position: relative; overflow: hidden; display: grid; align-content: space-between; gap: 30px; min-height: 180px; padding: 22px; border-radius: 26px; text-decoration: none; color: #fff; background: var(--w); }
+.wm small { font: 600 .74rem/1 var(--font-head); letter-spacing: .1em; text-transform: uppercase; opacity: .85; }
+.wm b { display: block; margin-top: 8px; font: 600 1.25rem/1.2 var(--font-head); max-width: 13ch; }
+.wm span { display: inline-flex; align-items: center; gap: 8px; width: fit-content; font: 600 .86rem var(--font-head); background: rgba(255,255,255,.18); padding: 8px 14px; border-radius: 999px; }
+.wm svg.deco { position: absolute; right: -14px; top: -14px; width: 130px; height: 130px; opacity: .16; color: #fff; }
 
-/* Steps */
-.steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; list-style: none; padding: 0; margin: 0; }
-.step { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; display: grid; gap: 8px; align-content: start; }
-.step .n { font: 700 .7rem/1 var(--font-head); letter-spacing: .1em; color: var(--brand-ink); text-transform: uppercase; }
-.step i { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--brand-soft); color: var(--brand-ink); font-style: normal; }
-.step b { font: 600 .96rem/1.3 var(--font-head); }
-.step p { font-size: .84rem; color: var(--ink-2); }
+/* Proof band */
+.proof { border-radius: 32px; background: var(--navy); color: #fff; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; position: relative; }
+.proof::after { content: ""; position: absolute; right: -120px; top: -120px; width: 380px; height: 380px; border-radius: 50%; border: 60px solid rgba(18,135,214,.18); }
+.proof-l { padding: clamp(28px, 4vw, 52px); display: grid; gap: 26px; align-content: center; position: relative; z-index: 1; }
+.proof-l h2 { font-size: clamp(1.6rem, 2.8vw, 2.3rem); font-weight: 600; }
+.nums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.nums div { border-top: 1px solid rgba(255,255,255,.18); padding-top: 14px; }
+.nums b { display: block; font: 600 clamp(1.8rem, 3.2vw, 2.6rem)/1 var(--font-head); letter-spacing: -0.03em; }
+.nums b em { font-style: normal; color: var(--green); }
+.nums span { font-size: .84rem; color: #b6c8dc; }
+.proof-r { padding: clamp(28px, 4vw, 52px); display: grid; gap: 12px; align-content: center; position: relative; z-index: 1; }
+.pf { display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 18px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
+.pf i { width: 40px; height: 40px; border-radius: 12px; background: rgba(59,181,74,.18); color: #7be08a; display: grid; place-items: center; flex: none; font-style: normal; }
+.pf b { font: 500 .98rem/1.3 var(--font-head); }
 
-/* Why */
-.why { display: grid; grid-template-columns: .85fr 1.15fr; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
-.why-media { position: relative; background: linear-gradient(160deg, #bfe2f6, #e9f6fd); min-height: 330px; }
-.why-media img { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); height: 100%; width: auto; max-width: none; }
-.why-copy { padding: 30px; display: grid; gap: 18px; align-content: center; min-width: 0; }
-.why-copy h2 { font-size: clamp(1.3rem, 2.3vw, 1.7rem); font-weight: 700; }
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.stats div { padding: 14px; border-radius: 14px; background: var(--brand-soft); }
-.stats b { display: block; font: 700 1.5rem/1.1 var(--font-head); color: var(--brand-ink); }
-.stats span { font-size: .8rem; color: var(--ink-2); }
-.feat { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.feat div { display: flex; gap: 10px; align-items: center; font: 500 .9rem/1.3 var(--font-head); }
-.feat i { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, #0b8fd0, #23944a); color: #fff; flex: none; font-style: normal; }
+/* Timeline */
+.tl { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; position: relative; }
+.tl::before { content: ""; position: absolute; left: 24px; right: 24px; top: 24px; height: 2px; background: repeating-linear-gradient(90deg, var(--blue) 0 8px, transparent 8px 16px); opacity: .5; }
+.tl li { position: relative; display: grid; gap: 10px; align-content: start; }
+.tl .dot { width: 50px; height: 50px; border-radius: 50%; background: #fff; border: 2px solid var(--blue); display: grid; place-items: center; color: var(--blue-deep); position: relative; z-index: 1; }
+.tl li:last-child .dot { background: var(--green); border-color: var(--green); color: #fff; }
+.tl small { font: 600 .74rem/1 var(--font-head); color: var(--ink-2); letter-spacing: .1em; text-transform: uppercase; margin-top: 4px; }
+.tl b { font: 600 1.05rem/1.25 var(--font-head); }
+.tl p { font-size: .88rem; color: var(--ink-2); }
 
 /* Club */
-.club { border-radius: 22px; padding: clamp(22px, 3vw, 34px); background: linear-gradient(120deg, #e4f6e8, #e2f3fc); display: grid; grid-template-columns: .9fr 1.4fr; gap: 26px; align-items: center; color: #0d2138; }
-.club .launch { display: inline-flex; font: 600 .72rem/1 var(--font-head); letter-spacing: .05em; background: #23944a; color: #fff; padding: 6px 10px; border-radius: 8px; }
-.club h2 { font-size: clamp(1.35rem, 2.5vw, 1.85rem); font-weight: 700; margin-top: 10px; }
-.club p { color: #3c5068; margin-top: 10px; }
-.club .acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
-.club .btn-outline { background: #fff; color: #0a5f99; border-color: #0b8fd0; }
-.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.tier { background: #fff; border-radius: 14px; padding: 16px; display: grid; gap: 6px; align-content: start; border: 1px solid #d6e6f2; }
-.tier.pop { border: 2px solid #0b8fd0; }
-.tier small { font: 600 .7rem/1 var(--font-head); color: #0a5f99; letter-spacing: .08em; text-transform: uppercase; }
-.tier b { font: 600 1rem/1.3 var(--font-head); }
-.tier p { font-size: .8rem; color: #56687f; }
-.tier ul { list-style: none; padding: 0; margin: 4px 0 0; display: grid; gap: 4px; font-size: .8rem; color: #33475f; }
-.tier li::before { content: "✓ "; color: #23944a; font-weight: 700; }
+.club { border-radius: 32px; padding: clamp(24px, 3.5vw, 44px); background: linear-gradient(130deg, #145c2c, #1e8a3a 55%, #3bb54a); color: #fff; display: grid; grid-template-columns: .9fr 1.4fr; gap: 28px; align-items: center; position: relative; overflow: hidden; }
+.club::before { content: ""; position: absolute; left: -80px; bottom: -120px; width: 320px; height: 320px; border-radius: 50%; background: rgba(255,255,255,.07); }
+.club > * { position: relative; }
+.club .launch { display: inline-flex; font: 600 .72rem/1 var(--font-head); letter-spacing: .08em; background: rgba(255,255,255,.18); padding: 7px 12px; border-radius: 999px; }
+.club h2 { font-size: clamp(1.6rem, 2.8vw, 2.3rem); font-weight: 600; margin-top: 14px; }
+.club p { color: #d9f3df; margin-top: 12px; }
+.club .acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+.club .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.45); }
+.club .btn-navy { background: #fff; color: #145c2c; box-shadow: none; }
+.tiers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.tier { background: #fff; color: var(--ink); border-radius: 22px; padding: 20px; display: grid; gap: 6px; align-content: start; }
+.tier.pop { box-shadow: 0 0 0 3px #ffd166; }
+.tier small { font: 600 .72rem/1 var(--font-head); color: var(--green-deep); letter-spacing: .08em; text-transform: uppercase; }
+.tier b { font: 600 1.1rem/1.25 var(--font-head); }
+.tier p { font-size: .82rem; color: var(--ink-2); }
+.tier ul { list-style: none; padding: 0; margin: 6px 0 0; display: grid; gap: 6px; font-size: .84rem; }
+.tier li { display: flex; gap: 8px; } .tier li svg { color: var(--green); flex: none; margin-top: 4px; }
 
-/* Care services */
-.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.svc { display: grid; grid-template-columns: 90px 1fr; gap: 16px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
-.svc img { width: 90px; height: 90px; object-fit: contain; background: var(--surface-2); border-radius: 14px; padding: 8px; }
-.svc b { font: 600 1rem/1.3 var(--font-head); display: block; }
-.svc p { font-size: .84rem; color: var(--ink-2); margin-top: 4px; }
+/* Services */
+.svc-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.svc { position: relative; overflow: hidden; border-radius: 26px; background: #fff; border: 1px solid var(--line); padding: 24px; display: grid; gap: 8px; min-height: 220px; align-content: end; }
+.svc img { position: absolute; right: -10px; top: -6px; width: 150px; height: 150px; object-fit: contain; }
+.svc b { font: 600 1.15rem/1.25 var(--font-head); }
+.svc p { color: var(--ink-2); font-size: .9rem; max-width: 30ch; }
+
+/* Reviews */
+.rv-track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 2px 10px; }
+.rv-track::-webkit-scrollbar { display: none; }
+.rv { flex: 0 0 calc((100% - 4 * 20px) / 5); scroll-snap-align: start; position: relative; aspect-ratio: 3 / 4.4; border-radius: 22px; overflow: hidden; border: 0; padding: 0; cursor: pointer; text-align: left; color: #fff; background: #1d3a56; }
+.rv img.poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rv::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.6)); }
+.rv .play { position: absolute; right: 14px; top: 14px; width: 46px; height: 46px; border-radius: 50%; background: #fff; color: var(--navy); display: grid; place-items: center; z-index: 1; transition: transform .2s; }
+.rv:hover .play { transform: scale(1.08); }
+.rv .who { position: absolute; left: 18px; right: 18px; bottom: 16px; z-index: 1; }
+.rv .who b { display: block; font: 600 1.02rem/1.2 var(--font-head); }
+.rv .who span { font-size: .82rem; opacity: .9; }
+.rv.sample { background: linear-gradient(170deg, var(--s1), var(--s2)); cursor: default; }
+.rv.sample svg.ph { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 70%; height: auto; opacity: .3; }
+.rv .slot { position: absolute; top: 16px; left: 16px; z-index: 1; font: 600 .68rem/1 var(--font-head); letter-spacing: .06em; text-transform: uppercase; background: rgba(255,255,255,.9); color: var(--blue-deep); padding: 6px 9px; border-radius: 999px; }
+.rv-nav { display: flex; gap: 8px; }
+.rv-nav button { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: #fff; display: grid; place-items: center; cursor: pointer; }
+.rv-nav button:hover { border-color: var(--blue); }
+.rv-nav .prev svg { transform: rotate(180deg); }
+.rv-note { font-size: .8rem; color: var(--ink-2); margin-top: 8px; }
+.vmodal { position: fixed; inset: 0; z-index: 80; background: rgba(5,15,28,.82); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.vmodal video { width: min(420px, 100%); max-height: 82vh; border-radius: 20px; background: #000; }
+.vmodal .x { position: absolute; top: max(16px, env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); }
 
 /* App */
-.app { border-radius: 22px; background: linear-gradient(120deg, #08679f, #0b8fd0); color: #fff; display: grid; grid-template-columns: 1.2fr .8fr; gap: 20px; padding: clamp(22px, 3vw, 36px); align-items: center; overflow: hidden; }
-.app h2 { font-size: clamp(1.35rem, 2.5vw, 1.9rem); font-weight: 700; }
-.app p { opacity: .92; margin-top: 10px; max-width: 48ch; }
-.stores { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
-.store { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px; border-radius: 12px; background: #0d2138; color: #fff; text-decoration: none; }
-.store small { display: block; font-size: .64rem; opacity: .8; line-height: 1.1; }
-.store b { font: 600 .95rem/1.1 var(--font-head); }
-.phone-mock { justify-self: center; width: 180px; aspect-ratio: 9 / 18; border-radius: 28px; background: #0d2138; padding: 9px; box-shadow: 0 20px 40px rgba(0,0,0,.3); transform: rotate(6deg); margin-bottom: -70px; }
-.phone-mock .scr { height: 100%; border-radius: 20px; background: #f4f8fb; padding: 12px 10px; display: grid; gap: 8px; align-content: start; }
-.phone-mock .bar { height: 26px; border-radius: 8px; background: #fff; border: 1px solid #dde7f0; }
-.phone-mock .card { border-radius: 10px; background: #fff; padding: 8px; border: 1px solid #dde7f0; display: grid; gap: 5px; }
-.phone-mock .card i { display: block; height: 6px; border-radius: 3px; background: #dde7f0; }
-.phone-mock .card i.b { width: 60%; background: #0b8fd0; }
-.phone-mock .card i.g { width: 40%; background: #4cb84f; }
+.app { border-radius: 32px; background: linear-gradient(120deg, #e6f3fc, #e7f7eb); border: 1px solid var(--line); display: grid; grid-template-columns: 1.2fr .8fr; gap: 20px; padding: clamp(24px, 3.5vw, 44px); align-items: center; overflow: hidden; }
+.app h2 { font-size: clamp(1.6rem, 2.8vw, 2.3rem); font-weight: 600; }
+.app p { color: var(--ink-2); margin-top: 10px; max-width: 50ch; }
+.stores { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+.store { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 14px; background: var(--navy); color: #fff; text-decoration: none; }
+.store small { display: block; font-size: .66rem; opacity: .8; line-height: 1.1; }
+.store b { font: 600 .98rem/1.1 var(--font-head); }
+.phone-mock { justify-self: center; width: 190px; aspect-ratio: 9 / 18; border-radius: 32px; background: var(--navy); padding: 9px; box-shadow: 0 24px 50px rgba(11,36,64,.25); transform: rotate(-6deg); margin-bottom: -80px; }
+.phone-mock .scr { height: 100%; border-radius: 24px; background: #f5f8fb; padding: 14px 10px; display: grid; gap: 8px; align-content: start; }
+.phone-mock .bar { height: 26px; border-radius: 999px; background: #fff; border: 1px solid #e2e9f0; }
+.phone-mock .card { border-radius: 12px; background: #fff; padding: 8px; border: 1px solid #e2e9f0; display: grid; gap: 5px; }
+.phone-mock .card i { display: block; height: 6px; border-radius: 3px; background: #e2e9f0; }
+.phone-mock .card i.b { width: 60%; background: var(--blue); } .phone-mock .card i.g { width: 40%; background: var(--green); }
 
 /* FAQ + presence */
-.two { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; align-items: start; }
+.two { display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; align-items: start; }
 .faq { display: grid; gap: 10px; }
-.faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 0 16px; }
-.faq summary { cursor: pointer; padding: 15px 0; font: 600 .95rem/1.35 var(--font-head); list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.faq details { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 0 20px; }
+.faq summary { cursor: pointer; padding: 18px 0; font: 600 1rem/1.35 var(--font-head); list-style: none; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; font-size: 1.3rem; line-height: 1; color: var(--brand-ink); }
-.faq details[open] summary::after { content: "−"; }
-.faq details p { padding-bottom: 15px; color: var(--ink-2); font-size: .9rem; }
-.presence { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px; display: grid; gap: 14px; }
-.presence h3 { font-size: 1.1rem; font-weight: 600; }
+.faq summary::after { content: ""; width: 28px; height: 28px; border-radius: 50%; background: var(--surface-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath d='M12 5v14M5 12h14' stroke='%230a5a99' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center no-repeat; flex: none; transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { padding-bottom: 18px; color: var(--ink-2); font-size: .92rem; }
+.presence { background: #fff; border: 1px solid var(--line); border-radius: 26px; padding: 24px; display: grid; gap: 16px; }
+.presence h3 { font-size: 1.2rem; font-weight: 600; }
 .districts { display: flex; flex-wrap: wrap; gap: 8px; }
-.districts span { padding: 7px 12px; border-radius: 999px; background: var(--surface-2); font-size: .84rem; font-weight: 500; }
-.contact-box { display: grid; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .9rem; }
+.districts span { padding: 7px 12px; border-radius: 999px; background: var(--surface-2); font-size: .84rem; }
+.contact-box { display: grid; gap: 10px; padding-top: 16px; border-top: 1px solid var(--line); font-size: .92rem; }
 .contact-box div { display: flex; gap: 10px; align-items: center; }
 .contact-box b { font-family: var(--font-head); user-select: all; }
-.contact-box svg { color: var(--brand-ink); flex: none; }
-.notice { margin-top: 20px; display: flex; gap: 12px; padding: 14px 16px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); font-size: .86rem; color: var(--ink-2); }
-.notice svg { color: var(--amber); flex: none; margin-top: 2px; }
-.notice b { color: var(--ink); }
+.contact-box svg { color: var(--blue); flex: none; }
+.notice { margin-top: 22px; display: flex; gap: 12px; padding: 14px 18px; border-radius: 16px; background: var(--sun-soft); font-size: .88rem; color: #6b4a12; }
+.notice svg { color: var(--sun); flex: none; margin-top: 2px; }
+.notice b { color: #4a3000; }
 
 /* Footer */
-footer { background: #0b1b2d; color: #b5c4d6; margin-top: 40px; font-size: .88rem; }
-.f-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr; gap: 28px; padding-block: 44px 30px; }
-footer h4 { color: #fff; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px; font-weight: 600; }
-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+footer { background: var(--navy); color: #b6c8dc; margin-top: 56px; font-size: .9rem; border-radius: 36px 36px 0 0; }
+.f-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1.3fr; gap: 28px; padding-block: 52px 32px; }
+footer h4 { color: #fff; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 14px; font-weight: 600; }
+footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; }
 footer a { text-decoration: none; } footer a:hover { color: #fff; }
-.f-brand { display: grid; gap: 12px; align-content: start; }
-.f-brand .logo-word .m { color: #38b1ec; } .f-brand .logo-tag { color: #8ea3bd; }
-.news { display: flex; gap: 8px; margin-top: 8px; }
-.news input { flex: 1; min-width: 0; height: 42px; border-radius: 10px; border: 1px solid #23405f; background: #10263d; color: #fff; padding: 0 12px; font: inherit; }
-.news .btn { background: #0b8fd0; color: #fff; }
+.f-brand { display: grid; gap: 14px; align-content: start; }
+.f-brand .logo-word .m { color: #4cb8f0; } .f-brand .logo-tag { color: #8ea3bd; }
+.news { display: flex; gap: 6px; margin-top: 10px; padding: 5px; border-radius: 999px; background: #10304f; }
+.news input { flex: 1; min-width: 0; height: 40px; border: 0; background: transparent; color: #fff; padding: 0 12px; font: inherit; }
+.news input:focus { outline: none; }
+.news .btn { background: var(--green); color: #fff; min-height: 40px; }
 .social { display: flex; gap: 8px; }
-.social a { width: 36px; height: 36px; border-radius: 50%; background: #16314d; display: grid; place-items: center; font: 600 .7rem var(--font-head); color: #fff; }
-.f-bottom { display: flex; flex-wrap: wrap; gap: 10px 20px; justify-content: space-between; border-top: 1px solid #1d3550; padding-block: 18px 26px; font-size: .8rem; color: #8ea3bd; }
+.social a { width: 38px; height: 38px; border-radius: 50%; background: #15385c; display: grid; place-items: center; font: 600 .72rem var(--font-head); color: #fff; }
+.f-bottom { display: flex; flex-wrap: wrap; gap: 10px 20px; justify-content: space-between; border-top: 1px solid #1c3f63; padding-block: 18px calc(26px + env(safe-area-inset-bottom, 0px)); font-size: .82rem; color: #8ea3bd; }
 .f-bottom nav { display: flex; gap: 16px; flex-wrap: wrap; }
 
-/* Callback bar (fixed) */
-.callback { position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; padding-bottom: env(safe-area-inset-bottom, 0px); pointer-events: none; }
-.callback-in { pointer-events: auto; max-width: calc(var(--max) - 32px); margin: 0 auto; background: var(--brand-deep); color: #fff; border-radius: 18px 18px 0 0; padding: 12px 20px 14px; display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 8px; position: relative; box-shadow: 0 -8px 30px rgba(5,20,40,.2); }
-.callback-in > b { font: 600 .95rem var(--font-head); }
-.cb-form { display: flex; width: min(460px, 100%); }
-.cb-form input { flex: 1; min-width: 0; height: 44px; border: 0; border-radius: 8px 0 0 8px; padding: 0 16px; font: 400 .95rem var(--font-head); background: #eef3f7; color: #0d2138; }
-.cb-form .btn { border-radius: 0 8px 8px 0; min-height: 44px; }
-.cb-msg { font-size: .84rem; }
-.cb-msg a { color: #ffd166; font-weight: 600; }
-.cb-close { position: absolute; top: 8px; right: 10px; width: 30px; height: 30px; border-radius: 50%; border: 0; background: rgba(255,255,255,.15); color: #fff; cursor: pointer; display: grid; place-items: center; }
+/* Help button */
+.help { position: fixed; right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 45; display: grid; justify-items: end; gap: 12px; }
+.help-btn { display: inline-flex; align-items: center; gap: 10px; height: 56px; padding: 0 22px 0 8px; border-radius: 999px; border: 0; background: var(--navy); color: #fff; font: 600 .95rem var(--font-head); cursor: pointer; box-shadow: 0 14px 34px rgba(11,36,64,.3); }
+.help-btn i { width: 42px; height: 42px; border-radius: 50%; background: var(--green); display: grid; place-items: center; font-style: normal; }
+.help-panel { width: min(340px, calc(100vw - 40px)); background: #fff; border-radius: 24px; box-shadow: 0 24px 60px rgba(12,27,46,.22); border: 1px solid var(--line); padding: 20px; display: grid; gap: 12px; }
+.help-panel h3 { font-size: 1.1rem; font-weight: 600; }
+.help-panel p { font-size: .86rem; color: var(--ink-2); }
+.cb-form { display: flex; gap: 6px; padding: 5px; border-radius: 999px; border: 1.5px solid var(--line); }
+.cb-form:focus-within { border-color: var(--blue); }
+.cb-form input { flex: 1; min-width: 0; border: 0; padding: 0 12px; font: inherit; color: var(--ink); background: transparent; }
+.cb-form input:focus { outline: none; }
+.cb-msg { font-size: .84rem; color: var(--ink-2); }
+.cb-msg a { color: var(--blue-deep); font-weight: 600; }
+.or { display: flex; align-items: center; gap: 10px; font-size: .78rem; color: var(--ink-2); }
+.or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.help-panel .btn { width: 100%; }
+
+/* Mobile cart bar */
+.mbar { display: none; }
 
 /* Cart drawer */
 .scrim { position: fixed; inset: 0; background: rgba(5,15,28,.45); z-index: 60; }
-.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(420px, 100%); background: var(--surface); z-index: 61; display: grid; grid-template-rows: auto 1fr auto; box-shadow: -10px 0 40px rgba(0,0,0,.2); padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px); }
-.drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--line); }
-.drawer-head h3 { font-size: 1.1rem; font-weight: 600; }
-.x-btn { width: 40px; height: 40px; border-radius: 10px; border: 0; background: var(--surface-2); display: grid; place-items: center; cursor: pointer; }
-.drawer-body { overflow: auto; padding: 14px 18px; display: grid; gap: 10px; align-content: start; }
-.line { display: flex; justify-content: space-between; gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; }
-.line b { font: 600 .9rem/1.3 var(--font-head); display: block; }
-.line small { color: var(--ink-2); font-size: .78rem; }
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(430px, 100%); background: #fff; z-index: 61; display: grid; grid-template-rows: auto 1fr auto; box-shadow: -10px 0 40px rgba(0,0,0,.2); padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px); border-radius: 28px 0 0 28px; }
+.drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+.drawer-head h3 { font-size: 1.2rem; font-weight: 600; }
+.drawer-body { overflow: auto; padding: 16px 20px; display: grid; gap: 10px; align-content: start; }
+.line { display: flex; justify-content: space-between; gap: 10px; padding: 14px; border: 1px solid var(--line); border-radius: 16px; }
+.line b { font: 600 .92rem/1.3 var(--font-head); display: block; }
+.line small { color: var(--ink-2); font-size: .8rem; }
 .line .rm { border: 0; background: none; color: var(--red); font: 500 .8rem var(--font-head); cursor: pointer; padding: 0; }
 .line .pr { text-align: right; display: grid; gap: 6px; justify-items: end; }
 .empty { text-align: center; color: var(--ink-2); padding: 40px 10px; display: grid; gap: 12px; justify-items: center; }
-.drawer-foot { border-top: 1px solid var(--line); padding: 16px 18px; display: grid; gap: 12px; }
-.sum { display: grid; gap: 6px; font-size: .9rem; }
+.drawer-foot { border-top: 1px solid var(--line); padding: 16px 20px; display: grid; gap: 12px; }
+.sum { display: grid; gap: 6px; font-size: .92rem; }
 .sum div { display: flex; justify-content: space-between; }
-.sum .tot { font: 700 1.1rem var(--font-head); padding-top: 6px; border-top: 1px dashed var(--line); }
-.sum .save { color: var(--green); font-weight: 500; }
+.sum .tot { font: 600 1.15rem var(--font-head); padding-top: 8px; border-top: 1px dashed var(--line); }
+.sum .save { color: var(--green-deep); }
 .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.fields input { width: 100%; height: 42px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); padding: 0 12px; font: inherit; color: var(--ink); min-width: 0; }
+.fields input { width: 100%; height: 44px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface-2); padding: 0 12px; font: inherit; color: var(--ink); min-width: 0; }
 .drawer-foot .btn { width: 100%; }
-.drawer-foot small { color: var(--ink-2); font-size: .76rem; text-align: center; }
-.toast { position: fixed; left: 50%; bottom: calc(110px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 12px; font: 500 .88rem var(--font-head); z-index: 70; box-shadow: var(--shadow); max-width: calc(100% - 32px); }
+.drawer-foot small { color: var(--ink-2); font-size: .78rem; text-align: center; }
+.toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--navy); color: #fff; padding: 11px 18px; border-radius: 999px; font: 500 .9rem var(--font-head); z-index: 70; box-shadow: var(--shadow); max-width: calc(100% - 32px); }
 
 /* 3D intro (opens with the site) */
 .intro { position: fixed; inset: 0; z-index: 100; background: #2a80e2; color: #fff; overflow: hidden; transition: opacity .7s ease, transform .7s ease; }
@@ -446,90 +430,100 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
 .watch i { width: 30px; height: 30px; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; font-style: normal; }
 @media (prefers-reduced-motion: reduce) { .intro, .intro-h.swap, .intro-eyebrow.swap, .intro-side p.swap { transition: none; animation: none; } }
 
-@media (max-width: 1100px) {
-  .shelf { grid-template-columns: repeat(3, 1fr); }
-  .steps { grid-template-columns: repeat(3, 1fr); }
-  .tiles, .concerns { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .promos { grid-template-columns: 1fr; }
-  .rv { flex-basis: calc((100% - 2 * 28px) / 3); }
-  .trustbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .trustbar h3 { grid-column: 1 / -1; border-right: 0; padding-right: 0; }
+@media (max-width: 1200px) {
+  .shelf { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .offers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .qa-card { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .qa:nth-child(4)::before { display: none; }
+  .rv { flex-basis: calc((100% - 3 * 20px) / 4); }
   .f-grid { grid-template-columns: 1fr 1fr 1fr; }
   .f-brand { grid-column: 1 / -1; }
-  .corp, .corp + .divider { display: none; }
-  .mini-grid { grid-template-columns: repeat(2, 1fr); }
-  .mini-grid .mini:nth-child(3) { display: none; }
+  .hdr-acts .login-lbl { display: none; }
 }
-@media (max-width: 900px) {
-  .why, .club, .two, .app { grid-template-columns: 1fr; }
-  .why-media { min-height: 260px; }
-  .shelf, .whom { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 960px) {
+  .hero-card { grid-template-columns: minmax(0, 1fr); }
+  .hero-art { min-height: 400px; }
+  .concerns, .whom { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .proof, .club, .two, .app { grid-template-columns: minmax(0, 1fr); }
+  .tl { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .tl::before { left: 24px; right: auto; top: 24px; bottom: 24px; width: 2px; height: auto; background: repeating-linear-gradient(180deg, var(--blue) 0 8px, transparent 8px 16px); }
+  .tl li { grid-template-columns: 50px minmax(0, 1fr); column-gap: 16px; row-gap: 2px; }
+  .tl li .dot { grid-row: span 3; }
+  .tl small { margin-top: 0; }
+  .svc-grid { grid-template-columns: minmax(0, 1fr); }
   .phone-mock { display: none; }
-  .svc-grid { grid-template-columns: 1fr; }
-  .mega { grid-template-columns: 1fr; max-height: 70vh; overflow: auto; }
-  .mega-why ul { display: none; }
-  .top-row { gap: 14px; }
-  .support small, .login span { display: none; }
-  .divider { display: none; }
-  /* banner stacks */
-  .banner { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr); background: none; }
-  .slides { position: relative; height: 340px; border-radius: 22px; overflow: hidden; }
-  .slide-copy { left: 24px; top: 24px; width: 62%; }
-  .slide-art { width: 46%; }
-  .included { display: none; }
-  .event { top: 18px; right: 18px; }
-  .search-zone { position: static; width: auto; min-width: 0; margin-top: 14px; }
-  .perks { color: var(--ink); gap: 12px; }
-  .perk i { background: var(--brand-soft); }
-  .perk em { color: var(--coral); }
+  .rv { flex-basis: calc((100% - 2 * 20px) / 3); }
+  .hdr-row { flex-wrap: wrap; }
+  .search { order: 5; flex-basis: 100%; max-width: none; }
+  .loc { margin-left: auto; }
 }
-@media (max-width: 600px) {
-  body { padding-bottom: 80px; }
-  .sec { padding-block: 30px; }
-  .top-row { padding-block: 10px; gap: 10px; }
-  .loc i, .support, .login { display: none; }
-  .hi select { max-width: 120px; }
+@media (max-width: 640px) {
+  body.has-cart { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  .sec { padding-block: 40px; }
+  .announce .extra { display: none; }
+  .hdr-row { gap: 10px; padding-block: 10px; }
   .logo-word { font-size: 1.3rem; }
-  .cat-btn { height: 46px; padding: 0 12px; font-size: .88rem; }
-  .slides { height: 360px; }
-  .slide-copy { width: auto; right: 20px; left: 20px; top: 20px; gap: 6px; }
-  .slide-copy .kick { font-size: 1.5rem; }
-  .slide-copy .rule { display: none; }
-  .offer-name { font-size: .95rem; }
-  .offer-row { gap: 12px; }
-  .offer-price b { font-size: 2.6rem; }
-  .offer-price s { font-size: 1.05rem; }
-  .offer-cta { font-size: 1.1rem; }
-  .slide-art { width: 62%; height: 52%; top: auto; }
-  .slide-art.organ img { height: 70%; margin-bottom: 10px; }
-  .event { display: none; }
-  .searchbar input { height: 50px; padding: 0 14px; font-size: .92rem; }
-  .searchbar button { padding: 0 18px; font-size: .95rem; }
-  .perks { display: grid; grid-template-columns: 1fr; gap: 8px; }
-  .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-  .tile-name { font-size: .8rem; }
-  .tile-box svg { width: 38px; height: 38px; }
-  .tile-badge { font-size: .66rem; left: 6px; right: 6px; }
-  .concerns { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .concern { font-size: .78rem; padding: 12px 4px; }
-  .concern i { width: 48px; height: 48px; }
-  .shelf, .steps, .tiers, .feat, .mini-grid { grid-template-columns: 1fr; }
-  .rv-track { gap: 14px; }
-  .rv { flex-basis: 72%; }
-  .rv-arrow { display: none; }
-  .mini-grid .mini:nth-child(n+2) { display: none; }
-  .stats { grid-template-columns: 1fr 1fr 1fr; }
-  .stats b { font-size: 1.15rem; }
+  .loc { height: 40px; padding: 0 10px; }
+  .loc select { max-width: 72px; font-size: .8rem; }
+  .loc { gap: 3px; padding: 0 8px; }
+  .hdr-row { column-gap: 8px; }
+  .logo-tag { display: none; }
+  .logo svg { width: 30px; height: 33px; }
+  .hdr-row { flex-wrap: wrap; }
+  .loc { margin-left: auto; }
+  .hdr-acts .circle-btn.hide-sm, .cart-pill .lbl { display: none; }
+  .cart-pill { padding: 0 6px 0 12px; height: 40px; }
+  .search input { height: 46px; padding-right: 92px; }
+  .search .go { padding: 0 14px; }
+  .hero-card { border-radius: 28px; }
+  .hero-copy { padding: 26px 22px 6px; gap: 18px; }
+  .hero h1 { font-size: 2.3rem; }
+  .hero-art { min-height: 360px; }
+  .arch { width: 78%; }
+  .float { font-size: .78rem; padding: 10px; gap: 10px; }
+  .float .ic { width: 32px; height: 32px; }
+  .f1 { left: 0; top: 8%; } .f2 { right: 0; top: 44%; } .f3 { left: 0; bottom: 6%; }
+  .hero-ctas .btn { flex: 1 1 auto; }
+  .offers { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; gap: 12px; padding-bottom: 4px; }
+  .offers::-webkit-scrollbar { display: none; }
+  .coupon { flex: 0 0 86%; scroll-snap-align: start; }
+  .qa-card { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 6px; }
+  .qa { flex-direction: column; text-align: center; gap: 8px; padding: 14px 6px; }
+  .qa small { display: none; }
+  .qa::before { display: none; }
+  .qa:last-child { grid-column: 1 / -1; flex-direction: row; justify-content: center; }
+  .shelf, .concerns { grid-template-columns: minmax(0, 1fr); }
+  .whom { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .wm { min-height: 160px; padding: 16px; border-radius: 20px; }
+  .wm b { font-size: 1.02rem; }
+  .nums { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .tiers { grid-template-columns: minmax(0, 1fr); }
+  .rv-track { gap: 12px; }
+  .rv { flex-basis: 64%; }
+  .rv-nav { display: none; }
   .f-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .callback-in { border-radius: 16px 16px 0 0; padding: 10px 14px 12px; }
-  .callback-in > b { display: none; }
-  .callback-in { padding: 10px 52px 10px 12px; }
-  .cb-close { top: 50%; transform: translateY(-50%); }
-  .cb-form .btn { padding: 8px 12px; font-size: .84rem; }
+  .help { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); right: calc(14px + env(safe-area-inset-right, 0px)); }
+  .help-btn { height: 52px; padding: 0 6px; }
+  .help-btn .lbl { display: none; }
+  body:not(.has-cart) .help { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+  body:not(.has-cart) .mbar { display: none; }
+  .mbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 44; background: #fff; border-top: 1px solid var(--line); gap: 12px; align-items: center; padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); box-shadow: 0 -8px 24px rgba(12,27,46,.08); }
+  .mbar .info { flex: 1; min-width: 0; }
+  .mbar .info b { display: block; font: 600 1.05rem var(--font-head); }
+  .mbar .info small { color: var(--ink-2); font-size: .78rem; }
+  .drawer { border-radius: 0; }
+  .toast { bottom: calc(150px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (max-width: 380px) {
+  .logo-word { font-size: 1.12rem; }
+  .logo svg { width: 26px; height: 28px; }
+  .loc select { max-width: 64px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .slide, .concern, .tile-box, .btn, .dots button, .cat-btn svg.chev { transition: none; }
+  .float { animation: none; }
+  .btn, .tk, .cn, .rv .play, .faq summary::after { transition: none; }
 }
 </style>
 </head>
@@ -578,171 +572,133 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
     <symbol id="c-bone" viewBox="0 0 24 24"><path d="M8 10 14 16 M6.5 4.5a2 2 0 0 0-2 3 2 2 0 0 0 1 3.3L8 10l2-2-.8-2.5a2 2 0 0 0-2.7-1Z M17.5 19.5a2 2 0 0 0 2-3 2 2 0 0 0-1-3.3L16 14l-2 2 .8 2.5a2 2 0 0 0 2.7 1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
   </defs>
 </svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7Z" fill="currentColor"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-pinline" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></symbol>
+  <symbol id="i-squiggle" viewBox="0 0 200 20" preserveAspectRatio="none"><path d="M2 14C40 4 80 4 110 10s60 6 88-4" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></symbol>
+</defs></svg>
 
-<header class="top">
-  <div class="wrap top-row">
-    <a class="logo" href="#top" aria-label="MicroCheck home">
-      <svg width="36" height="39" aria-hidden="true"><use href="#i-drop"/></svg>
-      <span class="logo-word"><span class="m">micro</span><span class="c">check</span><span class="logo-tag">Healthcare, Home Delivered.</span></span>
-    </a>
-    <label class="hi loc" for="city"><i><svg width="16" height="16"><use href="#i-pin"/></svg></i>
-      <span><small>Your Location</small>
-        <select id="city" aria-label="Your location"><option>Thiruvananthapuram</option><option>Kollam</option><option>Pathanamthitta</option><option>Alappuzha</option><option>Kottayam</option><option>Idukki</option><option selected>Ernakulam</option><option>Thrissur</option><option>Palakkad</option><option>Malappuram</option><option>Kozhikode</option><option>Wayanad</option><option>Kannur</option><option>Kasaragod</option></select>
-      </span>
-    </label>
-    <button class="hi login" type="button" id="loginBtn"><i><svg width="16" height="16"><use href="#i-user"/></svg></i><b>Login/Signup</b></button>
-    <a class="hi support" href="tel:+919020004000"><i><svg width="16" height="16"><use href="#i-phone"/></svg></i><span><small>Customer Support</small><b>+91 90200 04000</b></span></a>
-    <span class="divider"></span>
-    <a class="hi corp" href="https://wa.me/919020004000" target="_blank" rel="noopener noreferrer"><span><small>Book on WhatsApp</small><b>+91 90200 04000</b></span></a>
-    <button class="cart-btn" type="button" id="cartBtn" aria-label="Open cart"><svg width="22" height="22"><use href="#i-cart"/></svg><span class="cart-count" id="cartCount" hidden>0</span></button>
+<div class="announce"><b>Free home sample collection</b> in all 14 districts of Kerala<span class="extra"><span class="dot"></span>Extra 10% off when you book online</span></div>
+
+<header class="hdr">
+  <div class="wrap">
+    <div class="hdr-row">
+      <a class="logo" href="#top" aria-label="MicroCheck home">
+        <svg width="36" height="39" aria-hidden="true"><use href="#i-drop"/></svg>
+        <span class="logo-word"><span class="m">micro</span><span class="c">check</span><span class="logo-tag">Healthcare, Home Delivered.</span></span>
+      </a>
+      <label class="loc" for="city"><svg width="18" height="18"><use href="#i-pinline"/></svg>
+        <select id="city" aria-label="Your district"><option>Thiruvananthapuram</option><option>Kollam</option><option>Pathanamthitta</option><option>Alappuzha</option><option>Kottayam</option><option>Idukki</option><option selected>Ernakulam</option><option>Thrissur</option><option>Palakkad</option><option>Malappuram</option><option>Kozhikode</option><option>Wayanad</option><option>Kannur</option><option>Kasaragod</option></select>
+      </label>
+      <form class="search" id="searchForm" role="search">
+        <svg width="18" height="18"><use href="#i-search"/></svg>
+        <input id="q" type="search" placeholder="Search tests, e.g. HbA1c, thyroid, full body" autocomplete="off" aria-label="Search tests and packages" aria-controls="results">
+        <button class="go" type="submit">Search</button>
+        <div class="results" id="results" hidden></div>
+      </form>
+      <div class="hdr-acts">
+        <a class="circle-btn wa hide-sm" href="https://wa.me/919020004000" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp"><svg width="20" height="20"><use href="#i-chat"/></svg></a>
+        <button class="circle-btn hide-sm" type="button" id="loginBtn" aria-label="Login"><svg width="18" height="18"><use href="#i-user"/></svg></button>
+        <button class="cart-pill" type="button" id="cartBtn" aria-label="Open cart"><svg width="18" height="18"><use href="#i-cart"/></svg><span class="lbl">Cart</span><span class="n" id="cartCount">0</span></button>
+      </div>
+    </div>
+    <nav class="chips" id="chips" aria-label="Browse by category"></nav>
   </div>
 </header>
-
-<nav class="catbar" aria-label="Test categories">
-  <div class="wrap">
-    <ul class="cat-list" id="catList">
-      <li><a class="cat-btn" href="#top" aria-label="Home"><svg width="18" height="18"><use href="#i-home"/></svg></a></li>
-    </ul>
-    <div class="mega" id="mega" hidden></div>
-  </div>
-</nav>
 
 <main id="top">
 <section class="hero">
   <div class="wrap">
-    <div class="banner" id="banner" aria-roledescription="carousel" aria-label="Offers">
-      <div class="slides">
-        <div class="slide s-a on">
-          <div class="slide-copy">
-            <div class="kick">Your health, <span>checked at home.</span><br>Results on WhatsApp.</div>
-            <div class="rule"></div>
-            <div class="offer-name">Full Body Checkup Essential · 64 tests</div>
-            <div class="offer-row"><div class="offer-price"><small>At<br>₹</small><b>1,299</b><s>₹2,600</s></div><button class="offer-cta" type="button" data-book="fb1">Book Now <span><svg width="16" height="16"><use href="#i-arrow"/></svg></span></button></div>
-          </div>
-          <div class="slide-art"><img src="images/doctor-hero.webp" alt="MicroCheck doctor"></div>
-          <div class="event"><small>Kerala-wide</small>Free home<br>collection</div>
-          <div class="included"><h3>Tests Included</h3><div class="inc-row"><span><svg width="16" height="16"><use href="#i-drop2"/></svg>CBC</span><span><svg width="16" height="16"><use href="#c-heart"/></svg>Lipid</span><span><svg width="16" height="16"><use href="#c-thyroid"/></svg>Thyroid</span><span><svg width="16" height="16"><use href="#i-tube"/></svg>LFT</span><span><svg width="16" height="16"><use href="#i-tube"/></svg>KFT</span></div></div>
+    <div class="hero-card">
+      <div class="hero-copy">
+        <span class="tagline"><i><svg width="12" height="12"><use href="#i-check"/></svg></i>Trusted by 20 Lakh+ customers in Kerala</span>
+        <h1>Lab tests at home. Reports on <span class="hl">WhatsApp.<svg aria-hidden="true"><use href="#i-squiggle"/></svg></span></h1>
+        <p class="hero-sub">A trained phlebotomist collects your sample at home, a certified partner lab runs the tests, and your report reaches your phone.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-navy" href="#packages">Book a home test <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
+          <button class="btn btn-ghost" type="button" data-intro hidden><span class="play-i"><svg width="12" height="12"><use href="#i-play"/></svg></span>Watch how it works</button>
         </div>
-        <div class="slide s-b" aria-hidden="true">
-          <div class="slide-copy">
-            <div class="kick">World Diabetes Day <span>special</span><br>Diabetic Care Club</div>
-            <div class="rule"></div>
-            <div class="offer-name">Diabetes Screening · HbA1c, FBS, PPBS + 9 more</div>
-            <div class="offer-row"><div class="offer-price"><small>At<br>₹</small><b>699</b><s>₹1,400</s></div><button class="offer-cta" type="button" data-book="db1" tabindex="-1">Book Now <span><svg width="16" height="16"><use href="#i-arrow"/></svg></span></button></div>
-          </div>
-          <div class="slide-art organ"><img src="images/brain.webp" alt=""></div>
-          <div class="event"><small>Launching</small>14 Nov</div>
-          <div class="included"><h3>Tests Included</h3><div class="inc-row"><span><svg width="16" height="16"><use href="#i-drop2"/></svg>HbA1c</span><span><svg width="16" height="16"><use href="#i-drop2"/></svg>FBS</span><span><svg width="16" height="16"><use href="#i-drop2"/></svg>PPBS</span><span><svg width="16" height="16"><use href="#i-tube"/></svg>Microalbumin</span></div></div>
-        </div>
-        <div class="slide s-c" aria-hidden="true">
-          <div class="slide-copy">
-            <div class="kick">Book online, <span>save more.</span><br>Extra 10% off</div>
-            <div class="rule"></div>
-            <div class="offer-name">Heart Health Checkup · 18 tests</div>
-            <div class="offer-row"><div class="offer-price"><small>At<br>₹</small><b>999</b><s>₹2,000</s></div><button class="offer-cta" type="button" data-book="ht1" tabindex="-1">Book Now <span><svg width="16" height="16"><use href="#i-arrow"/></svg></span></button></div>
-          </div>
-          <div class="slide-art organ"><img src="images/kidney.webp" alt=""></div>
-          <div class="included"><h3>Tests Included</h3><div class="inc-row"><span><svg width="16" height="16"><use href="#c-heart"/></svg>Lipid</span><span><svg width="16" height="16"><use href="#i-drop2"/></svg>hs-CRP</span><span><svg width="16" height="16"><use href="#i-drop2"/></svg>Sugar</span><span><svg width="16" height="16"><use href="#i-tube"/></svg>Kidney</span></div></div>
+        <div class="hero-points">
+          <span><svg width="18" height="18"><use href="#i-bike"/></svg>Free home collection</span>
+          <span><svg width="18" height="18"><use href="#i-shield"/></svg>NABL partner labs</span>
+          <span><svg width="18" height="18"><use href="#i-steth"/></svg>Free doctor &amp; diet consult</span>
         </div>
       </div>
-      <div class="search-zone">
-        <form class="searchbar" id="searchForm" role="search">
-          <input id="q" type="search" placeholder="Find your Package/Test" autocomplete="off" aria-label="Find your package or test" aria-controls="results">
-          <button type="submit">Search</button>
-          <div class="results" id="results" hidden></div>
-        </form>
-        <div class="perks">
-          <div class="perk"><i><svg width="20" height="20"><use href="#i-bike"/></svg></i><span>Free Sample Collection<br>at <em>your home</em></span></div>
-          <div class="perk"><i><svg width="20" height="20"><use href="#i-report"/></svg></i><span><em>Smart Reports</em> on<br>WhatsApp &amp; app</span></div>
-          <div class="perk"><i><svg width="20" height="20"><use href="#i-steth"/></svg></i><span><em>Free Doctor &amp; Diet</em><br>Consultation</span></div>
-          <button class="watch" type="button" data-intro hidden><i><svg width="12" height="12" viewBox="0 0 24 24"><path d="M7 4v16l13-8Z" fill="currentColor"/></svg></i>Watch how it works</button>
-        </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="arch"><img src="images/doctor-hero.webp" alt=""></div>
+        <div class="float f1"><span class="ic"><svg width="20" height="20"><use href="#i-drop2"/></svg></span><span><b>Sample collected</b><small>At home, sealed kit</small></span></div>
+        <div class="float f2"><span class="ic"><svg width="20" height="20"><use href="#i-chat"/></svg></span><span><b>Your report is ready</b><span class="pdf"><i>PDF</i>Lab_Report.pdf</span></span></div>
+        <div class="float f3"><span class="ic"><svg width="20" height="20"><use href="#i-team"/></svg></span><span><b>800+ phlebotomists</b><small>Across Kerala</small></span></div>
       </div>
     </div>
-    <div class="dots" id="dots"></div>
+  </div>
+</section>
 
-    <div class="tiles">
-      <a class="tile" href="#packages"><span class="tile-box" style="--t-bg:#d9f1fb"><svg><use href="#t-blood"/></svg><span class="tile-badge">Up to 55% off</span></span><span class="tile-name">Blood Tests</span></a>
-      <a class="tile" href="#packages" data-filter="full"><span class="tile-box" style="--t-bg:#e4f6e8"><svg style="color:#23944a"><use href="#c-body"/></svg><span class="tile-badge">Up to 55% off</span></span><span class="tile-name">Full Body Checkups</span></a>
-      <label class="tile" for="rx"><span class="tile-box" style="--t-bg:#e6ecfb"><svg><use href="#t-rx"/></svg></span><span class="tile-name">Upload Prescription</span></label>
-      <a class="tile" href="#services"><span class="tile-box" style="--t-bg:#fdf1e1"><svg><use href="#t-nurse"/></svg></span><span class="tile-name">Home Nursing &amp; Dialysis</span></a>
-      <a class="tile" href="#club"><span class="tile-box" style="--t-bg:#fde8ef"><svg><use href="#t-club"/></svg><span class="tile-badge">New</span></span><span class="tile-name">Diabetic Care Club</span></a>
+<section class="sec" style="padding-block:28px 0">
+  <div class="wrap">
+    <div class="head2"><div><h2>Offers for you</h2></div></div>
+    <div class="offers">
+      <div class="coupon" style="--cb:linear-gradient(160deg,#1287d6,#0a5a99)"><div class="stub"><small>At</small><b>₹1,299</b><s>₹2,600</s></div><div class="body"><b>Full Body Checkup Essential</b><small>64 tests · report in 24 hrs</small><button class="btn btn-navy btn-sm" type="button" data-book="fb1">Book now</button></div></div>
+      <div class="coupon" style="--cb:linear-gradient(160deg,#3bb54a,#1e8a3a)"><div class="stub"><small>At</small><b>₹699</b><s>₹1,400</s></div><div class="body"><b>Diabetes Screening</b><small>HbA1c, FBS, PPBS + 9 more</small><button class="btn btn-navy btn-sm" type="button" data-book="db1">Book now</button></div></div>
+      <div class="coupon" style="--cb:linear-gradient(160deg,#e8436b,#b8264e)"><div class="stub"><small>At</small><b>₹999</b><s>₹2,000</s></div><div class="body"><b>Heart Health Checkup</b><small>18 tests incl. lipid &amp; hs-CRP</small><button class="btn btn-navy btn-sm" type="button" data-book="ht1">Book now</button></div></div>
+      <div class="coupon code"><div class="stub"><small>Extra</small><b>10%</b><small>OFF</small></div><div class="body"><b>On every online booking</b><small>Applied automatically in your cart</small><span class="code-box">BOOKONLINE</span></div></div>
+    </div>
+
+    <div class="qa-card">
+      <a class="qa" href="#packages" style="--q:#e6f3fc;--qf:#0a5a99"><i><svg width="28" height="28"><use href="#t-blood"/></svg></i><span><b>Book a lab test</b><small>Packages &amp; single tests</small></span></a>
+      <label class="qa" for="rx" style="--q:#eef0fd;--qf:#3d4fc4"><i><svg width="28" height="28"><use href="#t-rx"/></svg></i><span><b>Upload prescription</b><small>We pick the right tests</small></span></label>
+      <a class="qa" href="#services" style="--q:#fff3df;--qf:#b25b00"><i><svg width="28" height="28"><use href="#t-nurse"/></svg></i><span><b>Home nursing</b><small>Wound care, IV, post-op</small></span></a>
+      <a class="qa" href="#services" style="--q:#e7f7eb;--qf:#1e8a3a"><i><img src="images/kidney.webp" alt="" width="30" height="30"></i><span><b>Dialysis support</b><small>Technician at home</small></span></a>
+      <a class="qa" href="#club" style="--q:#fde8ef;--qf:#b8264e"><i><svg width="28" height="28"><use href="#t-club"/></svg></i><span><b>Diabetic Care Club</b><small>New · plans from Tier 1</small></span></a>
     </div>
     <input type="file" id="rx" accept="image/*,.pdf" hidden>
-
-    <div class="promos">
-      <div class="promo" style="--p-bg:linear-gradient(120deg,#e9f8fe,#d8f0fb);--p-line:#c3e4f4">
-        <h3>Book on WhatsApp in <b>under a minute</b></h3>
-        <p>Send the tests you need and your address. Our team confirms the slot.</p>
-        <div class="acts"><a class="btn btn-brand btn-sm" href="https://wa.me/919020004000?text=Hi%20MicroCheck%2C%20I%20want%20to%20book%20a%20test" target="_blank" rel="noopener noreferrer">Chat now <svg width="14" height="14"><use href="#i-arrow"/></svg></a><a class="plain" href="tel:+919020004000">Call us</a></div>
-        <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><rect x="22" y="10" width="46" height="80" rx="9" fill="#0b8fd0"/><rect x="26" y="18" width="38" height="62" rx="5" fill="#fff"/><rect x="30" y="24" width="24" height="9" rx="4" fill="#d9fdd3"/><rect x="36" y="38" width="24" height="9" rx="4" fill="#e2f3fc"/><rect x="30" y="52" width="20" height="9" rx="4" fill="#d9fdd3"/><circle cx="74" cy="70" r="16" fill="#25a244"/><path d="M67 70l5 5 9-10" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
-      </div>
-      <div class="promo" style="--p-bg:linear-gradient(120deg,#fff6ef,#fdebe2);--p-line:#f6dccd">
-        <h3>Understand your report with a <b>free doctor &amp; diet consultation</b></h3>
-        <p>Included with every test. Ask questions and get a diet plan.</p>
-        <div class="acts"><a class="btn btn-coral btn-sm" href="https://wa.me/919020004000?text=I%20want%20a%20free%20doctor%20and%20diet%20consultation" target="_blank" rel="noopener noreferrer">Book consultation <svg width="14" height="14"><use href="#i-arrow"/></svg></a></div>
-        <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><path d="M18 76a32 32 0 0 1 64 0" fill="#f6c9b4"/><path d="M50 76 22 76a32 32 0 0 1 28-30Z" fill="#fde6da"/><circle cx="50" cy="66" r="0"/><path d="M14 76a36 36 0 0 1 72 0" fill="none" stroke="#f0643f" stroke-width="5" stroke-linecap="round"/><path d="M50 76 66 52" stroke="#0d2138" stroke-width="5" stroke-linecap="round"/><circle cx="50" cy="76" r="6" fill="#0d2138"/><rect x="58" y="12" width="32" height="26" rx="6" fill="#fff" stroke="#f0643f" stroke-width="3"/><path d="M64 22h20M64 29h12" stroke="#f0643f" stroke-width="3" stroke-linecap="round"/></svg>
-      </div>
-      <div class="promo" style="--p-bg:linear-gradient(120deg,#f6f2ff,#e9f1fd);--p-line:#dcd6f3">
-        <span class="pill">New launch</span>
-        <h3>Join the <b>MicroCheck Diabetic Care Club</b></h3>
-        <p>Home HbA1c tests, nurse visits and progress tracking in one plan.</p>
-        <div class="acts"><a class="btn btn-sm" style="background:#0d4c7a;color:#fff" href="#club">See plans <svg width="14" height="14"><use href="#i-arrow"/></svg></a></div>
-        <svg class="art" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 10s26 28 26 46a26 26 0 0 1-52 0c0-18 26-46 26-46Z" fill="#fde8ef" stroke="#c2255c" stroke-width="3"/><path d="M34 58h8l5-9 6 16 4-7h9" stroke="#c2255c" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="80" cy="22" r="4" fill="#e8900c"/><circle cx="18" cy="34" r="3" fill="#0b8fd0"/></svg>
-      </div>
-    </div>
-
-    <div class="trustbar">
-      <h3>Why <em>20 Lakh+</em> customers<br><b>trust MicroCheck</b></h3>
-      <div class="tb"><svg viewBox="0 0 24 24"><use href="#i-shield"/></svg>NABL-certified<br>partner labs</div>
-      <div class="tb"><svg viewBox="0 0 24 24"><use href="#i-clock"/></svg>On-time sample<br>collection</div>
-      <div class="tb"><svg viewBox="0 0 24 24"><use href="#i-report"/></svg>Smart reports on<br>WhatsApp</div>
-      <div class="tb"><svg viewBox="0 0 24 24"><use href="#i-steth"/></svg>Free report<br>consultation</div>
-    </div>
   </div>
 </section>
 
 <section class="sec" id="packages">
   <div class="wrap">
-    <div class="sec-head"><div><h2>Most booked health checkups</h2><p>Curated by doctors. Free home sample collection.</p></div><a class="link" href="#packages" id="seeAll">View all packages →</a></div>
-    <div class="tabs" id="tabs" role="toolbar" aria-label="Filter packages"></div>
+    <div class="head2">
+      <div><span class="kicker">Health checkups</span><h2>Popular with <span>Kerala families</span></h2><p>Curated by doctors. Home collection is free on every package.</p></div>
+      <div class="seg" id="tabs" role="toolbar" aria-label="Filter packages"></div>
+    </div>
     <div class="shelf" id="shelf"></div>
-    <p class="sample-note">Prices shown are sample prices for the design.</p>
+    <p class="note">Prices shown are sample prices for the design. <a class="link" href="#packages" id="seeAll">Show all packages →</a></p>
   </div>
 </section>
 
 <section class="sec" id="concerns" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><div><h2>Find tests by health concern</h2><p>Pick a concern to see the right packages.</p></div></div>
+    <div class="head2"><div><span class="kicker">By health concern</span><h2>What would you like to check?</h2></div></div>
     <div class="concerns" id="concernGrid"></div>
   </div>
 </section>
 
 <section class="sec" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><div><h2>Find the right health package</h2><p>Based on age, gender and health needs.</p></div></div>
+    <div class="head2"><div><span class="kicker">For every age</span><h2>Checkups for the whole family</h2></div></div>
     <div class="whom">
-      <a href="#packages" data-filter="full" style="--w-bg:#e2f3fc"><small>For men</small><b>Full body &amp; heart checkups</b><span>View packages →</span><svg class="deco"><use href="#c-heart"/></svg></a>
-      <a href="#packages" data-filter="women" style="--w-bg:#fde8ef"><small>For women</small><b>Thyroid, iron &amp; PCOD care</b><span>View packages →</span><svg class="deco"><use href="#c-women"/></svg></a>
-      <a href="#packages" data-filter="senior" style="--w-bg:#e4f6e8"><small>For parents</small><b>Senior citizen &amp; diabetes checkups</b><span>View packages →</span><svg class="deco"><use href="#c-senior"/></svg></a>
-      <a href="#packages" data-filter="fever" style="--w-bg:#fff3dc"><small>For the family</small><b>Fever &amp; infection panels</b><span>View packages →</span><svg class="deco"><use href="#c-fever"/></svg></a>
+      <a class="wm" href="#packages" data-filter="full" style="--w:linear-gradient(150deg,#1287d6,#0a5a99)"><div><small>For men</small><b>Full body &amp; heart checkups</b></div><span>View packages <svg width="14" height="14"><use href="#i-arrow"/></svg></span><svg class="deco"><use href="#c-heart"/></svg></a>
+      <a class="wm" href="#packages" data-filter="women" style="--w:linear-gradient(150deg,#e8436b,#b8264e)"><div><small>For women</small><b>Thyroid, iron &amp; PCOD care</b></div><span>View packages <svg width="14" height="14"><use href="#i-arrow"/></svg></span><svg class="deco"><use href="#c-women"/></svg></a>
+      <a class="wm" href="#packages" data-filter="senior" style="--w:linear-gradient(150deg,#3bb54a,#1e8a3a)"><div><small>For parents</small><b>Senior &amp; diabetes checkups</b></div><span>View packages <svg width="14" height="14"><use href="#i-arrow"/></svg></span><svg class="deco"><use href="#c-senior"/></svg></a>
+      <a class="wm" href="#packages" data-filter="fever" style="--w:linear-gradient(150deg,#ff9f1c,#e07000)"><div><small>For the family</small><b>Fever &amp; infection panels</b></div><span>View packages <svg width="14" height="14"><use href="#i-arrow"/></svg></span><svg class="deco"><use href="#c-fever"/></svg></a>
     </div>
   </div>
 </section>
 
 <section class="sec" style="padding-top:0">
   <div class="wrap">
-    <div class="why">
-      <div class="why-media"><img src="images/doctor-hero.webp" alt="MicroCheck doctor" loading="lazy"></div>
-      <div class="why-copy">
-        <h2>Why choose MicroCheck?</h2>
-        <div class="stats"><div><b>800+</b><span>Phlebotomists, the largest fleet</span></div><div><b>20 Lakh+</b><span>Satisfied customers</span></div><div><b>14</b><span>Districts across Kerala</span></div></div>
-        <div class="feat">
-          <div><i><svg width="16" height="16"><use href="#i-bike"/></svg></i>Free online booking &amp; sample collection</div>
-          <div><i><svg width="16" height="16"><use href="#i-steth"/></svg></i>Free doctor &amp; diet consultation</div>
-          <div><i><svg width="16" height="16"><use href="#i-report"/></svg></i>Fast &amp; accurate test reports</div>
-          <div><i><svg width="16" height="16"><use href="#i-shield"/></svg></i>NABL-certified partner labs</div>
-        </div>
+    <div class="proof">
+      <div class="proof-l">
+        <div><span class="kicker" style="color:#7be08a">Why MicroCheck</span><h2>Kerala's home lab test network, at your doorstep</h2></div>
+        <div class="nums"><div><b>800<em>+</em></b><span>Phlebotomists, the largest fleet</span></div><div><b>20L<em>+</em></b><span>Satisfied customers</span></div><div><b>14</b><span>Districts covered</span></div></div>
+      </div>
+      <div class="proof-r">
+        <div class="pf"><i><svg width="20" height="20"><use href="#i-bike"/></svg></i><b>Free online booking &amp; sample collection</b></div>
+        <div class="pf"><i><svg width="20" height="20"><use href="#i-steth"/></svg></i><b>Free doctor &amp; diet consultation</b></div>
+        <div class="pf"><i><svg width="20" height="20"><use href="#i-report"/></svg></i><b>Fast, accurate reports on WhatsApp &amp; app</b></div>
+        <div class="pf"><i><svg width="20" height="20"><use href="#i-shield"/></svg></i><b>NABL-certified partner labs</b></div>
       </div>
     </div>
   </div>
@@ -750,13 +706,13 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
 
 <section class="sec" id="how" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><div><h2>How home sample collection works</h2><p>Five simple steps from booking to report.</p></div><button class="watch" type="button" data-intro hidden><i><svg width="12" height="12" viewBox="0 0 24 24"><path d="M7 4v16l13-8Z" fill="currentColor"/></svg></i>Watch the 3D story</button></div>
-    <ol class="steps">
-      <li class="step"><span class="n">Book</span><i><svg width="22" height="22"><use href="#i-cart"/></svg></i><b>Book online</b><p>Pick a test or package, your address and a time slot.</p></li>
-      <li class="step"><span class="n">Track</span><i><svg width="22" height="22"><use href="#i-scooter"/></svg></i><b>Phlebotomist on the way</b><p>A trained phlebotomist is assigned and reaches your door.</p></li>
-      <li class="step"><span class="n">Collect</span><i><svg width="22" height="22"><use href="#i-drop2"/></svg></i><b>Safe collection</b><p>One-prick collection with sealed, single-use kits.</p></li>
-      <li class="step"><span class="n">Test</span><i><svg width="22" height="22"><use href="#i-lab"/></svg></i><b>Tested at the lab</b><p>Samples travel to a certified partner lab for testing.</p></li>
-      <li class="step"><span class="n">Report</span><i><svg width="22" height="22"><use href="#i-report"/></svg></i><b>Report on your phone</b><p>Get the report on WhatsApp and the app, plus a free consultation.</p></li>
+    <div class="head2"><div><span class="kicker">How it works</span><h2>From booking to report in five steps</h2></div><button class="btn btn-ghost" type="button" data-intro hidden><span class="play-i"><svg width="12" height="12"><use href="#i-play"/></svg></span>Watch the 3D story</button></div>
+    <ol class="tl">
+      <li><span class="dot"><svg width="22" height="22"><use href="#i-cart"/></svg></span><small>Step 1</small><b>Book online</b><p>Pick a test or package, your address and a time slot.</p></li>
+      <li><span class="dot"><svg width="22" height="22"><use href="#i-scooter"/></svg></span><small>Step 2</small><b>Phlebotomist arrives</b><p>A trained phlebotomist is assigned and reaches your door.</p></li>
+      <li><span class="dot"><svg width="22" height="22"><use href="#i-drop2"/></svg></span><small>Step 3</small><b>Safe collection</b><p>One prick, with sealed single-use kits.</p></li>
+      <li><span class="dot"><svg width="22" height="22"><use href="#i-lab"/></svg></span><small>Step 4</small><b>Tested at the lab</b><p>Samples go to a certified partner lab.</p></li>
+      <li><span class="dot"><svg width="22" height="22"><use href="#i-check"/></svg></span><small>Step 5</small><b>Report on your phone</b><p>On WhatsApp and the app, with a free consultation.</p></li>
     </ol>
   </div>
 </section>
@@ -768,12 +724,12 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
         <span class="launch">WORLD DIABETES DAY · LAUNCHING 14 NOV</span>
         <h2>MicroCheck Diabetic Care Club</h2>
         <p>Three care plans for Type 1 and Type 2 diabetes, with regular home lab tests, nursing oversight and progress tracking.</p>
-        <div class="acts"><a class="btn btn-brand" href="https://wa.me/919020004000?text=I%20want%20to%20join%20the%20Diabetic%20Care%20Club" target="_blank" rel="noopener noreferrer">Join the club</a><a class="btn btn-outline" href="tel:+919020004000">Talk to a health advisor</a></div>
+        <div class="acts"><a class="btn btn-navy" href="https://wa.me/919020004000?text=I%20want%20to%20join%20the%20Diabetic%20Care%20Club" target="_blank" rel="noopener noreferrer">Join the club</a><a class="btn btn-ghost" href="tel:+919020004000">Talk to us</a></div>
       </div>
       <div class="tiers">
-        <div class="tier"><small>Tier 1</small><b>Essential Care</b><p>Stable Type 2, routine tracking</p><ul><li>HbA1c, FBS / PPBS</li><li>Quarterly vitals check</li><li>Digital report summary</li></ul></div>
-        <div class="tier pop"><small>Tier 2 · Most chosen</small><b>Advanced Control</b><p>Active management</p><ul><li>Bi-monthly HbA1c + lipids</li><li>Monthly nurse visit</li><li>Foot &amp; wound checks</li></ul></div>
-        <div class="tier"><small>Tier 3</small><b>360° Shield</b><p>Complex care, co-morbidities</p><ul><li>Monthly test suite</li><li>Dedicated home nurse</li><li>Early warning flags</li></ul></div>
+        <div class="tier"><small>Tier 1</small><b>Essential Care</b><p>Stable Type 2, routine tracking</p><ul><li><svg width="12" height="12"><use href="#i-check"/></svg>HbA1c, FBS / PPBS</li><li><svg width="12" height="12"><use href="#i-check"/></svg>Quarterly vitals check</li><li><svg width="12" height="12"><use href="#i-check"/></svg>Digital report summary</li></ul></div>
+        <div class="tier pop"><small>Tier 2 · Most chosen</small><b>Advanced Control</b><p>Active management</p><ul><li><svg width="12" height="12"><use href="#i-check"/></svg>Bi-monthly HbA1c + lipids</li><li><svg width="12" height="12"><use href="#i-check"/></svg>Monthly nurse visit</li><li><svg width="12" height="12"><use href="#i-check"/></svg>Foot &amp; wound checks</li></ul></div>
+        <div class="tier"><small>Tier 3</small><b>360° Shield</b><p>Complex care, co-morbidities</p><ul><li><svg width="12" height="12"><use href="#i-check"/></svg>Monthly test suite</li><li><svg width="12" height="12"><use href="#i-check"/></svg>Dedicated home nurse</li><li><svg width="12" height="12"><use href="#i-check"/></svg>Early warning flags</li></ul></div>
       </div>
     </div>
   </div>
@@ -781,25 +737,19 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
 
 <section class="sec" id="services" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><div><h2>Care at home, beyond lab tests</h2><p>Licensed nurses and technicians, booked as easily as a test.</p></div></div>
+    <div class="head2"><div><span class="kicker">Beyond lab tests</span><h2>Care at home</h2><p>Licensed nurses and technicians, booked as easily as a test.</p></div></div>
     <div class="svc-grid">
-      <div class="svc"><img src="images/brain.webp" alt="" loading="lazy"><div><b>Home Sample Collection</b><p>Blood panels, biochemistry and microbiology with cold-chain transport.</p></div></div>
-      <div class="svc"><img src="images/liver.webp" alt="" loading="lazy"><div><b>Home Nursing</b><p>Wound care, post-op care, IV therapy, injections and vitals.</p></div></div>
-      <div class="svc"><img src="images/kidney.webp" alt="" loading="lazy"><div><b>Dialysis Support</b><p>Technician dispatch, hygiene audits and a dedicated case manager.</p></div></div>
+      <div class="svc"><img src="images/brain.webp" alt="" loading="lazy"><b>Home Sample Collection</b><p>Blood panels, biochemistry and microbiology with cold-chain transport.</p></div>
+      <div class="svc"><img src="images/liver.webp" alt="" loading="lazy"><b>Home Nursing</b><p>Wound care, post-op care, IV therapy, injections and vitals.</p></div>
+      <div class="svc"><img src="images/kidney.webp" alt="" loading="lazy"><b>Dialysis Support</b><p>Technician dispatch, hygiene audits and a dedicated case manager.</p></div>
     </div>
   </div>
 </section>
 
-<section class="sec reviews" id="reviews" style="padding-top:0">
+<section class="sec" id="reviews" style="padding-top:0">
   <div class="wrap">
-    <h2 class="center">MicroCheck Reviews</h2>
-    <p class="sub">Hear from families across Kerala who book their tests at home.</p>
-    <div class="rv-wrap">
-      <button class="rv-arrow prev" type="button" id="rvPrev" aria-label="Previous reviews"><svg width="18" height="18"><use href="#i-arrow"/></svg></button>
-      <div class="rv-track" id="rvTrack"></div>
-      <button class="rv-arrow next" type="button" id="rvNext" aria-label="Next reviews"><svg width="18" height="18"><use href="#i-arrow"/></svg></button>
-    </div>
-    <div class="rv-dots" id="rvDots"></div>
+    <div class="head2"><div><span class="kicker">Reviews</span><h2>What families say</h2></div><div class="rv-nav"><button class="prev" type="button" id="rvPrev" aria-label="Previous reviews"><svg width="18" height="18"><use href="#i-arrow"/></svg></button><button type="button" id="rvNext" aria-label="Next reviews"><svg width="18" height="18"><use href="#i-arrow"/></svg></button></div></div>
+    <div class="rv-track" id="rvTrack"></div>
     <p class="rv-note" id="rvNote" hidden>Sample slots: real customer videos appear here once added.</p>
   </div>
 </section>
@@ -808,8 +758,9 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="app">
       <div>
-        <h2>Download the MicroCheck app</h2>
-        <p>Tracking your health is easy with the app. Book tests, and see your smart reports and health trackers anytime, anywhere.</p>
+        <span class="kicker">MicroCheck app</span>
+        <h2>Your health, tracked in one app</h2>
+        <p>Book tests, follow your phlebotomist, and keep smart reports and health trackers in one place. On Android and iPhone.</p>
         <div class="stores">
           <a class="store" href="https://play.google.com/store" target="_blank" rel="noopener noreferrer"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3l10 9-10 9Z" fill="#4cb84f"/><path d="M4 3l13 7.5-3 1.5Z" fill="#38b1ec"/><path d="M4 21l13-7.5-3-1.5Z" fill="#f59f00"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>
           <a class="store" href="https://www.apple.com/app-store/" target="_blank" rel="noopener noreferrer"><svg width="20" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3c0 2-1.5 3.5-3 3.5C13 4.6 14.5 3 16 3Zm3.5 13.5c-.8 1.9-2.2 4.5-4 4.5-1.4 0-1.8-.8-3.4-.8s-2.1.8-3.4.8C6.6 21 4 17 4 13.2 4 9.8 6.2 8 8.3 8c1.4 0 2.5.9 3.4.9.8 0 2.1-1 3.7-1 .6 0 2.6.1 3.9 2-3.2 1.9-2.6 6 .2 6.6Z" fill="#fff"/></svg><span><small>Download on the</small><b>App Store</b></span></a>
@@ -823,7 +774,7 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
 <section class="sec" id="faq" style="padding-top:0">
   <div class="wrap two">
     <div>
-      <div class="sec-head"><div><h2>Frequently asked questions</h2></div></div>
+      <div class="head2"><div><span class="kicker">FAQ</span><h2>Questions, answered</h2></div></div>
       <div class="faq">
         <details open><summary>Is home sample collection free?</summary><p>Yes. Booking online and sample collection at your home are free. You only pay for the tests.</p></details>
         <details><summary>How will I get my report?</summary><p>Reports are shared on WhatsApp and in the MicroCheck app. You can also book a free doctor and diet consultation to go through the results.</p></details>
@@ -832,7 +783,7 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
         <details><summary>Can I book for my family members?</summary><p>Yes. Add tests to the cart and tell our team who each test is for when they confirm the booking.</p></details>
       </div>
     </div>
-    <aside class="presence" id="help">
+    <aside class="presence" id="help-info">
       <h3>Our presence</h3>
       <div class="districts"><span>Thiruvananthapuram</span><span>Kollam</span><span>Pathanamthitta</span><span>Alappuzha</span><span>Kottayam</span><span>Idukki</span><span>Ernakulam</span><span>Thrissur</span><span>Palakkad</span><span>Malappuram</span><span>Kozhikode</span><span>Wayanad</span><span>Kannur</span><span>Kasaragod</span></div>
       <div class="contact-box">
@@ -854,31 +805,33 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
         <div class="social" aria-label="Follow us"><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Instagram">ig</a><a href="#" aria-label="X">x</a><a href="#" aria-label="LinkedIn">in</a></div>
       </div>
       <div><h4>Popular tests</h4><ul><li><a href="#packages">Full Body Checkup</a></li><li><a href="#packages">HbA1c</a></li><li><a href="#packages">Thyroid Profile</a></li><li><a href="#packages">Lipid Profile</a></li><li><a href="#packages">Vitamin D</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="#help">Contact us</a></li><li><a href="#">Blog</a></li><li><a href="#faq">FAQ</a></li><li><a href="#">Partner with us</a></li><li><a href="#">Join as phlebotomist</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#help-info">Contact us</a></li><li><a href="#">Blog</a></li><li><a href="#faq">FAQ</a></li><li><a href="#">Partner with us</a></li><li><a href="#">Join as phlebotomist</a></li></ul></div>
       <div><h4>Services</h4><ul><li><a href="#packages">Health packages</a></li><li><a href="#club">Diabetic Care Club</a></li><li><a href="#services">Home nursing</a></li><li><a href="#services">Dialysis support</a></li></ul></div>
-      <div><h4>Subscribe to our newsletter</h4><p>Health tips and offers, once a month.</p>
-        <form class="news" id="news"><input type="email" id="newsEmail" placeholder="Enter your email ID" aria-label="Email address" required><button class="btn btn-sm" type="submit">Submit</button></form>
+      <div><h4>Newsletter</h4><p>Health tips and offers, once a month.</p>
+        <form class="news" id="news"><input type="email" id="newsEmail" placeholder="Your email" aria-label="Email address" required><button class="btn btn-sm" type="submit">Subscribe</button></form>
       </div>
     </div>
     <div class="f-bottom"><span>© <span id="yr">2026</span> microcheck.com</span><nav><a href="#">Terms &amp; Conditions</a><a href="#">Privacy Policy</a><a href="#">Statutory Compliance</a></nav></div>
   </div>
 </footer>
 
-<div class="callback" id="callback">
-  <div class="callback-in">
-    <b>Get a Callback from our Health Advisor</b>
-    <form class="cb-form" id="cbForm" novalidate>
-      <input id="cbPhone" inputmode="tel" autocomplete="tel" placeholder="Enter your 10 digit mobile no." aria-label="Mobile number for callback">
-      <button class="btn btn-red" type="submit">Get a Call Back</button>
-    </form>
+<div class="help" id="help">
+  <div class="help-panel" id="helpPanel" hidden role="dialog" aria-label="Get help booking">
+    <h3>Need help choosing a test?</h3>
+    <p>Leave your number and a health advisor will call you back.</p>
+    <form class="cb-form" id="cbForm" novalidate><input id="cbPhone" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile number" aria-label="Mobile number for callback"><button class="btn btn-navy btn-sm" type="submit">Call me</button></form>
     <p class="cb-msg" id="cbMsg" role="status" hidden></p>
-    <button class="cb-close" type="button" id="cbClose" aria-label="Hide callback bar"><svg width="14" height="14"><use href="#i-x"/></svg></button>
+    <div class="or">or</div>
+    <a class="btn btn-green btn-sm" href="https://wa.me/919020004000?text=Hi%20MicroCheck%2C%20I%20need%20help%20choosing%20a%20test" target="_blank" rel="noopener noreferrer"><svg width="16" height="16"><use href="#i-chat"/></svg>Chat on WhatsApp</a>
   </div>
+  <button class="help-btn" type="button" id="helpBtn" aria-expanded="false" aria-controls="helpPanel"><i><svg width="20" height="20"><use href="#i-phone"/></svg></i><span class="lbl">Need help?</span></button>
 </div>
+
+<div class="mbar" id="mbar"><div class="info"><b id="mTotal">₹0</b><small id="mItems">Your cart is empty</small></div><button class="btn btn-navy btn-sm" type="button" id="mCart">View cart</button></div>
 
 <div class="scrim" id="scrim" hidden></div>
 <aside class="drawer" id="drawer" hidden aria-label="Your cart" role="dialog" aria-modal="true">
-  <div class="drawer-head"><h3>Your cart</h3><button class="x-btn" type="button" id="closeCart" aria-label="Close cart"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
+  <div class="drawer-head"><h3>Your cart</h3><button class="circle-btn" type="button" id="closeCart" aria-label="Close cart"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
   <div class="drawer-body" id="cartBody"></div>
   <div class="drawer-foot" id="cartFoot">
     <div class="sum" id="sum"></div>
@@ -887,6 +840,8 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
     <small>Our team confirms your slot on WhatsApp. Pay after the slot is confirmed.</small>
   </div>
 </aside>
+<div class="vmodal" id="vmodal" hidden role="dialog" aria-modal="true" aria-label="Customer review video"><button class="circle-btn x" type="button" id="vClose" aria-label="Close video"><svg width="18" height="18"><use href="#i-x"/></svg></button><video id="vPlayer" controls playsinline></video></div>
+
 <div class="intro" id="intro" hidden role="dialog" aria-modal="true" aria-label="How MicroCheck works, a 3D story">
   <canvas id="introCanvas" aria-hidden="true"></canvas>
   <div class="intro-grain" aria-hidden="true"></div>
@@ -913,61 +868,51 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   </div>
 </div>
 <div class="toast" id="toast" role="status" hidden></div>
-<div class="vmodal" id="vmodal" hidden role="dialog" aria-modal="true" aria-label="Customer review video"><button class="x-btn" type="button" id="vClose" aria-label="Close video"><svg width="18" height="18"><use href="#i-x"/></svg></button><video id="vPlayer" controls playsinline></video></div>
 
 <script>
 (function () {
   // SAMPLE DATA: replace names, test counts, report times and prices with MicroCheck's real catalogue.
   var PACKAGES = [
-    { id: 'fb1', cat: 'full', name: 'Full Body Checkup Essential', tag: 'Most booked', tests: 64, tat: 24, inc: ['CBC, lipid profile', 'Liver & kidney function', 'Thyroid, blood sugar'], fasting: true, price: 1299, mrp: 2600 },
-    { id: 'fb2', cat: 'full', name: 'Full Body Checkup Advanced', tag: 'Best value', tests: 86, tat: 24, inc: ['Everything in Essential', 'Vitamin D & B12', 'HbA1c, iron studies'], fasting: true, price: 2199, mrp: 4800 },
-    { id: 'fb3', cat: 'full', name: 'Full Body Checkup Basic', tests: 45, tat: 24, inc: ['CBC, ESR', 'Lipid profile', 'Blood sugar, urine routine'], fasting: true, price: 899, mrp: 1800 },
-    { id: 'db1', cat: 'diabetes', name: 'Diabetes Screening', tag: 'Recommended', tests: 12, tat: 12, inc: ['HbA1c', 'Fasting & PP blood sugar', 'Urine microalbumin'], fasting: true, price: 699, mrp: 1400 },
-    { id: 'db2', cat: 'diabetes', name: 'HbA1c Test', tests: 1, tat: 12, inc: ['3-month average blood sugar'], fasting: false, price: 349, mrp: 700 },
-    { id: 'db3', cat: 'diabetes', name: 'Diabetes Care Advanced', tests: 32, tat: 24, inc: ['HbA1c, FBS, PPBS', 'Kidney & lipid profile', 'Urine microalbumin'], fasting: true, price: 1499, mrp: 3000 },
+    { id: 'fb1', cat: 'full', name: 'Full Body Checkup Essential', tag: 'Most booked', tests: 64, tat: 24, inc: ['CBC', 'Lipid profile', 'Liver & kidney', 'Thyroid', 'Blood sugar'], fasting: true, price: 1299, mrp: 2600 },
+    { id: 'fb2', cat: 'full', name: 'Full Body Checkup Advanced', tag: 'Best value', tests: 86, tat: 24, inc: ['Everything in Essential', 'Vitamin D & B12', 'HbA1c', 'Iron studies'], fasting: true, price: 2199, mrp: 4800 },
+    { id: 'fb3', cat: 'full', name: 'Full Body Checkup Basic', tests: 45, tat: 24, inc: ['CBC, ESR', 'Lipid profile', 'Blood sugar', 'Urine routine'], fasting: true, price: 899, mrp: 1800 },
+    { id: 'db1', cat: 'diabetes', name: 'Diabetes Screening', tag: 'Recommended', tests: 12, tat: 12, inc: ['HbA1c', 'Fasting sugar', 'PP sugar', 'Urine microalbumin'], fasting: true, price: 699, mrp: 1400 },
+    { id: 'db2', cat: 'diabetes', name: 'HbA1c Test', tests: 1, tat: 12, inc: ['3-month average sugar'], fasting: false, price: 349, mrp: 700 },
+    { id: 'db3', cat: 'diabetes', name: 'Diabetes Care Advanced', tests: 32, tat: 24, inc: ['HbA1c, FBS, PPBS', 'Kidney profile', 'Lipid profile', 'Microalbumin'], fasting: true, price: 1499, mrp: 3000 },
     { id: 'ht1', cat: 'heart', name: 'Heart Health Checkup', tag: 'Popular', tests: 18, tat: 24, inc: ['Lipid profile', 'hs-CRP', 'Blood sugar'], fasting: true, price: 999, mrp: 2000 },
     { id: 'ht2', cat: 'heart', name: 'Lipid Profile', tests: 8, tat: 12, inc: ['Total cholesterol', 'HDL, LDL', 'Triglycerides'], fasting: true, price: 349, mrp: 700 },
-    { id: 'ht3', cat: 'heart', name: 'Cardiac Risk Advanced', tests: 40, tat: 36, inc: ['Lipid profile, hs-CRP', 'Apolipoproteins', 'Homocysteine'], fasting: true, price: 2499, mrp: 5200 },
+    { id: 'ht3', cat: 'heart', name: 'Cardiac Risk Advanced', tests: 40, tat: 36, inc: ['Lipid profile', 'hs-CRP', 'Apolipoproteins', 'Homocysteine'], fasting: true, price: 2499, mrp: 5200 },
     { id: 'th1', cat: 'thyroid', name: 'Thyroid Profile (T3, T4, TSH)', tests: 3, tat: 12, inc: ['Total T3', 'Total T4', 'TSH'], fasting: false, price: 399, mrp: 800 },
-    { id: 'th2', cat: 'thyroid', name: 'Thyroid Profile Advanced', tests: 6, tat: 24, inc: ['Free T3, free T4', 'TSH', 'Anti-TPO antibodies'], fasting: false, price: 999, mrp: 2000 },
-    { id: 'fv1', cat: 'fever', name: 'Fever Panel', tag: 'Seasonal', tests: 28, tat: 12, inc: ['CBC with ESR', 'Dengue NS1, malaria', 'Typhoid, urine routine'], fasting: false, price: 899, mrp: 1800 },
+    { id: 'th2', cat: 'thyroid', name: 'Thyroid Profile Advanced', tests: 6, tat: 24, inc: ['Free T3, free T4', 'TSH', 'Anti-TPO'], fasting: false, price: 999, mrp: 2000 },
+    { id: 'fv1', cat: 'fever', name: 'Fever Panel', tag: 'Monsoon', tests: 28, tat: 12, inc: ['CBC with ESR', 'Dengue NS1', 'Malaria', 'Typhoid', 'Urine routine'], fasting: false, price: 899, mrp: 1800 },
     { id: 'fv2', cat: 'fever', name: 'Dengue NS1 Antigen', tests: 1, tat: 12, inc: ['Early dengue detection'], fasting: false, price: 499, mrp: 900 },
     { id: 'fv3', cat: 'fever', name: 'Typhoid Test (Widal)', tests: 1, tat: 12, inc: ['Salmonella antibodies'], fasting: false, price: 249, mrp: 500 },
-    { id: 'wm1', cat: 'women', name: "Women's Wellness Checkup", tag: 'For her', tests: 70, tat: 24, inc: ['Thyroid & iron studies', 'Vitamin D, calcium', 'CBC, blood sugar'], fasting: true, price: 1799, mrp: 3900 },
-    { id: 'wm2', cat: 'women', name: 'PCOD Screening', tests: 14, tat: 36, inc: ['LH, FSH, prolactin', 'Testosterone', 'Insulin, blood sugar'], fasting: true, price: 1499, mrp: 3200 },
+    { id: 'wm1', cat: 'women', name: "Women's Wellness Checkup", tag: 'For her', tests: 70, tat: 24, inc: ['Thyroid', 'Iron studies', 'Vitamin D', 'Calcium', 'CBC'], fasting: true, price: 1799, mrp: 3900 },
+    { id: 'wm2', cat: 'women', name: 'PCOD Screening', tests: 14, tat: 36, inc: ['LH, FSH', 'Prolactin', 'Testosterone', 'Insulin'], fasting: true, price: 1499, mrp: 3200 },
     { id: 'vt1', cat: 'vitamin', name: 'Vitamin Check (D + B12)', tests: 2, tat: 24, inc: ['Vitamin D (25-OH)', 'Vitamin B12'], fasting: false, price: 999, mrp: 2400 },
     { id: 'vt2', cat: 'vitamin', name: 'Vitamin D Test', tests: 1, tat: 24, inc: ['Vitamin D (25-OH)'], fasting: false, price: 599, mrp: 1400 },
     { id: 'kd1', cat: 'kidney', name: 'Kidney Function Test', tests: 9, tat: 12, inc: ['Urea, creatinine', 'Uric acid', 'Electrolytes'], fasting: false, price: 549, mrp: 1100 },
     { id: 'lv1', cat: 'liver', name: 'Liver Function Test', tests: 11, tat: 12, inc: ['Bilirubin', 'SGOT, SGPT', 'Albumin, ALP'], fasting: false, price: 549, mrp: 1100 },
     { id: 'al1', cat: 'allergy', name: 'Allergy Screening', tests: 6, tat: 48, inc: ['Total IgE', 'Eosinophil count', 'CBC'], fasting: false, price: 1199, mrp: 2200 },
-    { id: 'sn1', cat: 'senior', name: 'Senior Citizen Checkup', tag: 'For parents', tests: 78, tat: 24, inc: ['Full body tests', 'HbA1c, kidney, liver', 'Vitamin D, calcium'], fasting: true, price: 1999, mrp: 4200 }
+    { id: 'sn1', cat: 'senior', name: 'Senior Citizen Checkup', tag: 'For parents', tests: 78, tat: 24, inc: ['Full body tests', 'HbA1c', 'Kidney & liver', 'Vitamin D'], fasting: true, price: 1999, mrp: 4200 }
   ];
-  var MOST_BOOKED = ['fb1', 'db1', 'ht1', 'fv1', 'fb2', 'th1', 'wm1', 'sn1'];
-  var MENUS = [
-    { key: 'full', label: 'Full Body Checkup', why: ['Many problems show up in blood before you feel them.', 'One visit covers heart, liver, kidney and sugar.', 'A yearly check makes changes easy to spot.'] },
-    { key: 'diabetes', label: 'Diabetes', why: ['Diabetes often has no early symptoms.', 'HbA1c shows your 3-month sugar average.', 'Regular checks help prevent complications.'] },
-    { key: 'heart', label: 'Heart', why: ['Heart issues often start silently.', 'Cholesterol and inflammation show up in a blood test.', 'Early tests can save lives.'] },
-    { key: 'thyroid', label: 'Thyroid', why: ['Thyroid problems are common, especially in women.', 'Tiredness and weight change can be early signs.', 'A simple blood test gives the answer.'] },
-    { key: 'fever', label: 'Fever', why: ['Dengue, malaria and typhoid can look alike.', 'One panel checks for the common causes.', 'Test early if fever lasts more than 2 days.'] },
-    { key: 'women', label: "Women's Health", why: ['Iron, thyroid and vitamin D problems are common.', 'PCOD can be checked with hormone tests.', 'Regular checks keep you ahead of changes.'] },
-    { key: 'vitamin', label: 'Vitamins', why: ['Low vitamin D and B12 cause tiredness and aches.', 'Both are checked with one blood draw.', 'Easy to correct once you know.'] },
-    { key: 'senior', label: 'Senior Citizen', isNew: true, why: ['Health needs change after 60.', 'One package covers sugar, heart, kidney and bones.', 'Collected at home, no travel needed.'] }
-  ];
-  var CONCERNS = [
-    { key: 'full', label: 'Full Body', icon: 'c-body', bg: '#e2f3fc', fg: '#0a5f99' },
-    { key: 'diabetes', label: 'Diabetes', icon: 'i-drop2', bg: '#fde8ef', fg: '#c2255c' },
-    { key: 'heart', label: 'Heart', icon: 'c-heart', bg: '#ffe9e3', fg: '#d9480f' },
-    { key: 'thyroid', label: 'Thyroid', icon: 'c-thyroid', bg: '#f1e9ff', fg: '#7048e8' },
-    { key: 'fever', label: 'Fever', icon: 'c-fever', bg: '#fff3dc', fg: '#e67700' },
-    { key: 'vitamin', label: 'Vitamins', icon: 'c-sun', bg: '#fff9db', fg: '#c99400' },
-    { key: 'kidney', label: 'Kidney', img: 'images/kidney.webp', bg: '#e2f3fc' },
-    { key: 'liver', label: 'Liver', img: 'images/liver.webp', bg: '#e4f6e8' },
-    { key: 'women', label: "Women's Health", icon: 'c-women', bg: '#fde8ef', fg: '#c2255c' },
-    { key: 'senior', label: 'Senior Citizen', icon: 'c-senior', bg: '#e4f6e8', fg: '#23944a' },
-    { key: 'allergy', label: 'Allergy', icon: 'c-allergy', bg: '#e6fcf5', fg: '#0ca678' },
-    { key: 'vitamin', label: 'Bone & Joints', icon: 'c-bone', bg: '#f1f3f5', fg: '#495057' }
-  ];
-  var TABS = [['all', 'Most booked'], ['full', 'Full body'], ['diabetes', 'Diabetes'], ['heart', 'Heart'], ['thyroid', 'Thyroid'], ['fever', 'Fever'], ['women', 'Women'], ['senior', 'Senior']];
+  var POPULAR = ['fb1', 'db1', 'ht1', 'fv1', 'fb2', 'th1', 'wm1', 'sn1'];
+  var CATS = {
+    full: { label: 'Full Body', icon: 'c-body', c: '#e6f3fc', cf: '#0a5a99' },
+    diabetes: { label: 'Diabetes', icon: 'i-drop2', c: '#fde8ef', cf: '#b8264e' },
+    heart: { label: 'Heart', icon: 'c-heart', c: '#ffe9e1', cf: '#d9480f' },
+    thyroid: { label: 'Thyroid', icon: 'c-thyroid', c: '#efe9ff', cf: '#6741d9' },
+    fever: { label: 'Fever', icon: 'c-fever', c: '#fff3df', cf: '#c46a00' },
+    women: { label: "Women's Health", icon: 'c-women', c: '#fde8ef', cf: '#b8264e' },
+    vitamin: { label: 'Vitamins', icon: 'c-sun', c: '#fff8d6', cf: '#a57d00' },
+    senior: { label: 'Senior Citizen', icon: 'c-senior', c: '#e7f7eb', cf: '#1e8a3a', isNew: true },
+    kidney: { label: 'Kidney', img: 'images/kidney.webp', c: '#e6f3fc' },
+    liver: { label: 'Liver', img: 'images/liver.webp', c: '#e7f7eb' },
+    allergy: { label: 'Allergy', icon: 'c-allergy', c: '#e3faf3', cf: '#0c8a63' }
+  };
+  var CHIP_ORDER = ['all', 'full', 'diabetes', 'heart', 'thyroid', 'fever', 'women', 'vitamin', 'senior'];
+  var TAB_ORDER = ['all', 'full', 'diabetes', 'heart', 'women', 'senior'];
+  var CONCERN_ORDER = ['full', 'diabetes', 'heart', 'thyroid', 'fever', 'vitamin', 'kidney', 'liver', 'women', 'senior', 'allergy'];
 
   var $ = function (id) { return document.getElementById(id); };
   var inr = function (n) { return '₹' + n.toLocaleString('en-IN'); };
@@ -975,94 +920,57 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   var byId = function (id) { return PACKAGES.filter(function (p) { return p.id === id; })[0]; };
   var off = function (p) { return Math.round((1 - p.price / p.mrp) * 100); };
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var icon = function (c, size) { var d = CATS[c]; return d.img ? '<img src="' + d.img + '" alt="" width="' + size + '" height="' + size + '">' : '<svg width="' + size + '" height="' + size + '"><use href="#' + d.icon + '"/></svg>'; };
   var cart = [];
   try { cart = JSON.parse(localStorage.getItem('mc-cart') || '[]').filter(byId); } catch (e) { cart = []; }
   function save() { try { localStorage.setItem('mc-cart', JSON.stringify(cart)); } catch (e) {} }
   function inCart(id) { return cart.indexOf(id) > -1; }
-  function bookBtn(p, cls) { var a = inCart(p.id); return '<button class="btn btn-sm book ' + (a ? 'added' : 'btn-brand') + (cls || '') + '" type="button" data-add="' + p.id + '">' + (a ? '✓ Added' : 'Book Now') + '</button>'; }
-  function facts(p) {
-    return '<div class="facts"><div class="fact"><i><svg width="16" height="16"><use href="#i-tube"/></svg></i><span><small>Tests included</small><b>' + p.tests + (p.tests === 1 ? ' Test' : ' Tests') + '</b></span></div>' +
-      '<div class="fact"><i><svg width="16" height="16"><use href="#i-clock"/></svg></i><span><small>Report in</small><b>' + p.tat + ' Hrs.</b></span></div></div>';
-  }
-  function priceline(p) { return '<div class="priceline"><span class="lto">Limited<br>time offer</span><b>' + inr(p.price) + '</b><s>' + inr(p.mrp) + '</s><span class="off">' + off(p) + '% off</span></div>'; }
+  function addBtn(p, small) { var a = inCart(p.id); return '<button class="btn btn-navy add' + (small ? ' btn-sm' : '') + (a ? ' added' : '') + '" type="button" data-add="' + p.id + '">' + (a ? '<svg width="14" height="14"><use href="#i-check"/></svg>Added' : '<svg width="14" height="14"><use href="#i-plus"/></svg>Add') + '</button>'; }
 
-  // Category bar + mega menus
-  var catList = $('catList'), mega = $('mega'), openKey = null, closeT;
-  MENUS.forEach(function (m) {
-    var li = document.createElement('li');
-    li.innerHTML = '<button class="cat-btn" type="button" aria-expanded="false" aria-controls="mega" data-menu="' + m.key + '">' + m.label + '<svg class="chev" width="14" height="14"><use href="#i-chev"/></svg>' + (m.isNew ? '<span class="new">NEW</span>' : '') + '</button>';
-    catList.appendChild(li);
-  });
-  function openMenu(key) {
-    clearTimeout(closeT);
-    if (openKey === key) return;
-    openKey = key;
-    var m = MENUS.filter(function (x) { return x.key === key; })[0];
-    var list = PACKAGES.filter(function (p) { return p.cat === key; }).slice(0, 3);
-    mega.innerHTML = '<div class="mega-why"><h3>Why ' + esc(m.label.replace(' Checkup', '')) + ' checkups matter</h3><ul>' + m.why.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul>' +
-      '<a class="btn btn-coral" href="tel:+919020004000">Talk to a Health Advisor <svg width="16" height="16"><use href="#i-arrow"/></svg></a></div>' +
-      '<div class="mega-pk"><h3>Preventive packages for ' + esc(m.label.replace(' Checkup', '').toLowerCase()) + '</h3><div class="mini-grid">' +
-      list.map(function (p) { return '<div class="mini"><h4>' + esc(p.name) + '</h4>' + facts(p) + priceline(p) + '<div class="actions"><button class="know" type="button" data-know="' + p.cat + '">Know More</button>' + bookBtn(p) + '</div></div>'; }).join('') + '</div></div>';
-    mega.hidden = false;
-    catList.querySelectorAll('[data-menu]').forEach(function (b) { b.setAttribute('aria-expanded', String(b.dataset.menu === key)); });
-  }
-  function closeMenu() { openKey = null; mega.hidden = true; catList.querySelectorAll('[data-menu]').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); }); }
-  var hoverable = matchMedia('(hover: hover) and (pointer: fine)').matches;
-  catList.addEventListener('click', function (e) { var b = e.target.closest('[data-menu]'); if (!b) return; if (openKey === b.dataset.menu) closeMenu(); else openMenu(b.dataset.menu); });
-  if (hoverable) {
-    catList.addEventListener('mouseover', function (e) { var b = e.target.closest('[data-menu]'); if (b) openMenu(b.dataset.menu); });
-    $('catList').parentNode.addEventListener('mouseleave', function () { closeT = setTimeout(closeMenu, 180); });
-    mega.addEventListener('mouseenter', function () { clearTimeout(closeT); });
-  }
-  document.addEventListener('click', function (e) { if (!e.target.closest('.catbar')) closeMenu(); });
-
-  // Concerns
-  $('concernGrid').innerHTML = CONCERNS.map(function (c) {
-    var art = c.img ? '<i style="--c-bg:' + c.bg + '"><img src="' + c.img + '" alt=""></i>' : '<i style="--c-bg:' + c.bg + ';--c-fg:' + c.fg + '"><svg width="26" height="26"><use href="#' + c.icon + '"/></svg></i>';
-    return '<button class="concern" type="button" data-cat="' + c.key + '">' + art + esc(c.label) + '</button>';
-  }).join('');
-
-  // Shelf
+  // Category chips (header) + tabs (section)
   var filter = 'all', expanded = false;
-  $('tabs').innerHTML = TABS.map(function (t) { return '<button class="tab" type="button" data-tab="' + t[0] + '" aria-pressed="false">' + t[1] + '</button>'; }).join('');
-  function card(p) {
-    return '<article class="pkg"><div class="pkg-top">' + (p.tag ? '<span class="tag">' + esc(p.tag) + '</span>' : '<span></span>') + '<span class="off">' + off(p) + '% off</span></div>' +
-      '<h3>' + esc(p.name) + '</h3><ul>' + p.inc.map(function (i) { return '<li><svg width="12" height="12"><use href="#i-check"/></svg>' + esc(i) + '</li>'; }).join('') + '<li><svg width="12" height="12"><use href="#i-check"/></svg>' + (p.fasting ? 'Fasting required' : 'No fasting needed') + '</li></ul>' +
-      facts(p) + priceline(p) + '<div class="actions"><button class="know" type="button" data-know="' + p.cat + '">Know More</button>' + bookBtn(p) + '</div></article>';
+  $('chips').innerHTML = CHIP_ORDER.map(function (k) {
+    if (k === 'all') return '<button class="chip" type="button" data-f="all" aria-pressed="true"><i><svg width="15" height="15"><use href="#i-home"/></svg></i>All tests</button>';
+    var d = CATS[k]; return '<button class="chip" type="button" data-f="' + k + '" aria-pressed="false" style="--c:' + d.c + ';--cf:' + (d.cf || '#0a5a99') + '"><i>' + icon(k, 15) + '</i>' + d.label + (d.isNew ? '<span class="new">NEW</span>' : '') + '</button>';
+  }).join('');
+  $('tabs').innerHTML = TAB_ORDER.map(function (k) { return '<button type="button" data-f="' + k + '" aria-pressed="' + (k === 'all') + '">' + (k === 'all' ? 'Most booked' : CATS[k].label) + '</button>'; }).join('');
+
+  function ticket(p) {
+    var d = CATS[p.cat];
+    return '<article class="tk"><div class="tk-top"><div class="tk-head"><span class="tk-ic" style="--c:' + d.c + ';--cf:' + (d.cf || '#0a5a99') + '">' + icon(p.cat, 22) + '</span><div><h3>' + esc(p.name) + '</h3>' + (p.tag ? '<span class="tag">' + esc(p.tag) + '</span>' : '') + '</div></div>' +
+      '<div class="tk-meta"><span><svg width="14" height="14"><use href="#i-tube"/></svg>' + p.tests + (p.tests === 1 ? ' test' : ' tests') + '</span><span><svg width="14" height="14"><use href="#i-clock"/></svg>Report in ' + p.tat + ' hrs</span><span>' + (p.fasting ? 'Fasting needed' : 'No fasting') + '</span></div>' +
+      '<div class="tk-inc">' + p.inc.map(function (i) { return '<span>' + esc(i) + '</span>'; }).join('') + '</div></div>' +
+      '<div class="tk-bottom"><div class="price"><b>' + inr(p.price) + '</b><s>' + inr(p.mrp) + '</s><em>You save ' + off(p) + '%</em></div>' + addBtn(p) + '</div></article>';
   }
   function renderShelf() {
-    var list;
-    if (filter === 'all') list = expanded ? PACKAGES : MOST_BOOKED.map(byId);
-    else list = PACKAGES.filter(function (p) { return p.cat === filter; });
-    $('shelf').innerHTML = list.map(card).join('');
+    var list = filter === 'all' ? (expanded ? PACKAGES : POPULAR.map(byId)) : PACKAGES.filter(function (p) { return p.cat === filter; });
+    $('shelf').innerHTML = list.map(ticket).join('');
     $('seeAll').hidden = filter === 'all' && expanded;
-    document.querySelectorAll('.tab').forEach(function (t) { t.setAttribute('aria-pressed', String(t.dataset.tab === filter && !(filter === 'all' && expanded))); });
+    document.querySelectorAll('[data-f]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.f === filter)); });
   }
-  function setFilter(f, scroll) {
-    filter = f; expanded = false; renderShelf();
-    if (scroll) $('packages').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
-  }
-  $('tabs').addEventListener('click', function (e) { var b = e.target.closest('[data-tab]'); if (b) setFilter(b.dataset.tab); });
-  $('concernGrid').addEventListener('click', function (e) { var b = e.target.closest('[data-cat]'); if (b) setFilter(b.dataset.cat, true); });
-  document.querySelectorAll('[data-filter]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); setFilter(a.dataset.filter, true); }); });
+  function setFilter(f, scroll) { filter = f; expanded = false; renderShelf(); if (scroll) $('packages').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }
+  document.addEventListener('click', function (e) { var b = e.target.closest('[data-f]'); if (b) setFilter(b.dataset.f, !!b.closest('#chips')); });
   $('seeAll').addEventListener('click', function (e) { e.preventDefault(); filter = 'all'; expanded = true; renderShelf(); });
-  document.addEventListener('click', function (e) { var k = e.target.closest('[data-know]'); if (k) { closeMenu(); setFilter(k.dataset.know, true); } });
+  document.querySelectorAll('[data-filter]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); setFilter(a.dataset.filter, true); }); });
+
+  // Concerns
+  $('concernGrid').innerHTML = CONCERN_ORDER.map(function (k) {
+    var d = CATS[k], n = PACKAGES.filter(function (p) { return p.cat === k; }).length;
+    return '<button class="cn" type="button" data-cat="' + k + '"><i style="--c:' + d.c + ';--cf:' + (d.cf || '#0a5a99') + '">' + icon(k, d.img ? 34 : 22) + '</i><span><b>' + d.label + '</b><small>' + n + (n === 1 ? ' package' : ' packages') + '</small></span><svg width="16" height="16"><use href="#i-arrow"/></svg></button>';
+  }).join('') + '<button class="cn" type="button" data-cat="all"><i style="--c:#0b2440;--cf:#fff"><svg width="20" height="20"><use href="#i-search"/></svg></i><span><b>All tests</b><small>' + PACKAGES.length + ' packages</small></span><svg width="16" height="16"><use href="#i-arrow"/></svg></button>';
+  $('concernGrid').addEventListener('click', function (e) { var b = e.target.closest('[data-cat]'); if (b) setFilter(b.dataset.cat, true); });
 
   // Cart
   function toast(msg) { var t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(function () { t.hidden = true; }, 2000); }
-  function add(id, openAfter) {
-    if (!inCart(id)) { cart.push(id); save(); toast(byId(id).name + ' added to cart'); }
-    renderAll(); if (openAfter) openCart();
-  }
+  function add(id, openAfter) { if (!inCart(id)) { cart.push(id); save(); toast(byId(id).name + ' added'); } renderAll(); if (openAfter) openCart(); }
   function remove(id) { cart.splice(cart.indexOf(id), 1); save(); renderAll(); }
-  function totals() { var t = { price: 0, mrp: 0 }; cart.forEach(function (id) { var p = byId(id); t.price += p.price; t.mrp += p.mrp; }); t.online = Math.round(t.price * 0.10); t.pay = t.price - t.online; return t; }
+  function totals() { var t = { price: 0, mrp: 0 }; cart.forEach(function (id) { var p = byId(id); t.price += p.price; t.mrp += p.mrp; }); t.online = Math.round(t.price * .10); t.pay = t.price - t.online; return t; }
   function renderCart() {
     var n = cart.length, t = totals();
-    $('cartCount').textContent = n; $('cartCount').hidden = !n;
-    if (!n) {
-      $('cartBody').innerHTML = '<div class="empty"><svg width="40" height="40"><use href="#i-cart"/></svg><b>Your cart is empty</b><span>Add a test or package to book a home collection.</span><button class="btn btn-brand btn-sm" type="button" id="browse">Browse packages</button></div>';
-      $('cartFoot').hidden = true; return;
-    }
+    $('cartCount').textContent = n; document.body.classList.toggle('has-cart', n > 0);
+    $('mTotal').textContent = n ? inr(t.pay) : '₹0';
+    $('mItems').textContent = n ? n + (n === 1 ? ' item' : ' items') + ' · free home collection' : 'Your cart is empty';
+    if (!n) { $('cartBody').innerHTML = '<div class="empty"><svg width="40" height="40"><use href="#i-cart"/></svg><b>Your cart is empty</b><span>Add a test or package to book a home collection.</span><button class="btn btn-navy btn-sm" type="button" id="browse">Browse packages</button></div>'; $('cartFoot').hidden = true; return; }
     $('cartFoot').hidden = false;
     $('cartBody').innerHTML = cart.map(function (id) { var p = byId(id); return '<div class="line"><div><b>' + esc(p.name) + '</b><small>' + p.tests + (p.tests === 1 ? ' test' : ' tests') + ' · report in ' + p.tat + ' hrs</small></div><div class="pr"><b>' + inr(p.price) + '</b><button class="rm" type="button" data-remove="' + p.id + '">Remove</button></div></div>'; }).join('');
     $('sum').innerHTML = '<div><span>Total MRP</span><span>' + inr(t.mrp) + '</span></div><div class="save"><span>Package discount</span><span>−' + inr(t.mrp - t.price) + '</span></div><div class="save"><span>Extra 10% online discount</span><span>−' + inr(t.online) + '</span></div><div><span>Home sample collection</span><span class="save">Free</span></div><div class="tot"><span>To pay</span><span>' + inr(t.pay) + '</span></div>';
@@ -1071,11 +979,10 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   function updateWa() {
     if (!cart.length) return;
     var t = totals(), name = $('cName').value.trim(), ph = $('cPhone').value.trim();
-    var msg = 'Hi MicroCheck, I want to book a home sample collection.\n\nTests:\n' + cart.map(function (id) { var p = byId(id); return '• ' + p.name + ' (' + inr(p.price) + ')'; }).join('\n') +
-      '\n\nTotal after 10% online discount: ' + inr(t.pay) + '\nLocation: ' + $('city').value + (name ? '\nName: ' + name : '') + (ph ? '\nMobile: ' + ph : '');
+    var msg = 'Hi MicroCheck, I want to book a home sample collection.\n\nTests:\n' + cart.map(function (id) { var p = byId(id); return '• ' + p.name + ' (' + inr(p.price) + ')'; }).join('\n') + '\n\nTotal after 10% online discount: ' + inr(t.pay) + '\nDistrict: ' + $('city').value + (name ? '\nName: ' + name : '') + (ph ? '\nMobile: ' + ph : '');
     $('waBook').href = 'https://wa.me/919020004000?text=' + encodeURIComponent(msg);
   }
-  function renderAll() { renderShelf(); renderCart(); if (openKey) { var k = openKey; openKey = null; openMenu(k); } if (!$('results').hidden) renderResults(); }
+  function renderAll() { renderShelf(); renderCart(); if (!$('results').hidden) renderResults(); }
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-add]'); if (a) { if (inCart(a.dataset.add)) openCart(); else add(a.dataset.add); }
     var b = e.target.closest('[data-book]'); if (b) add(b.dataset.book, true);
@@ -1084,11 +991,10 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   });
   ['cName', 'cPhone'].forEach(function (id) { $(id).addEventListener('input', updateWa); });
   var lastFocus;
-  function openCart() { closeMenu(); lastFocus = document.activeElement; $('scrim').hidden = false; $('drawer').hidden = false; $('closeCart').focus(); }
+  function openCart() { lastFocus = document.activeElement; $('scrim').hidden = false; $('drawer').hidden = false; $('closeCart').focus(); }
   function closeCart() { $('scrim').hidden = true; $('drawer').hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
-  $('cartBtn').addEventListener('click', openCart);
+  $('cartBtn').addEventListener('click', openCart); $('mCart').addEventListener('click', openCart);
   $('closeCart').addEventListener('click', closeCart); $('scrim').addEventListener('click', closeCart);
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (!$('drawer').hidden) closeCart(); closeMenu(); $('results').hidden = true; } });
   $('loginBtn').addEventListener('click', function () { toast('Login with OTP is available in the MicroCheck app'); });
 
   // Search
@@ -1097,84 +1003,59 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
     var v = q.value.trim().toLowerCase();
     if (!v) { $('results').hidden = true; return; }
     var hits = PACKAGES.filter(function (p) { return (p.name + ' ' + p.inc.join(' ') + ' ' + p.cat).toLowerCase().indexOf(v) > -1; });
-    $('results').innerHTML = hits.length ? hits.map(function (p) {
-      return '<div class="res"><div><b>' + esc(p.name) + '</b><small>' + p.tests + (p.tests === 1 ? ' test' : ' tests') + ' · report in ' + p.tat + ' hrs</small></div><div class="res-r"><b>' + inr(p.price) + '</b>' + bookBtn(p) + '</div></div>';
-    }).join('') : '<div class="res-empty">No match for “' + esc(q.value) + '”. Call +91 90200 04000 and we will find the right test.</div>';
+    $('results').innerHTML = hits.length ? hits.map(function (p) { return '<div class="res"><div><b>' + esc(p.name) + '</b><small>' + p.tests + (p.tests === 1 ? ' test' : ' tests') + ' · report in ' + p.tat + ' hrs</small></div><div class="res-r"><b>' + inr(p.price) + '</b>' + addBtn(p, true) + '</div></div>'; }).join('')
+      : '<div class="res-empty">No match for “' + esc(q.value) + '”. Call +91 90200 04000 and we will find the right test.</div>';
     $('results').hidden = false;
   }
   q.addEventListener('input', renderResults);
   $('searchForm').addEventListener('submit', function (e) { e.preventDefault(); renderResults(); });
-  document.addEventListener('click', function (e) { if (!e.target.closest('.searchbar')) $('results').hidden = true; });
+  document.addEventListener('click', function (e) { if (!e.target.closest('.search')) $('results').hidden = true; });
 
-  // Location
+  // District
   try { var c = localStorage.getItem('mc-city'); if (c) $('city').value = c; } catch (e) {}
-  $('city').addEventListener('change', function () { try { localStorage.setItem('mc-city', this.value); } catch (e) {} toast('Sample collection location: ' + this.value); updateWa(); });
-
-  // Prescription
+  $('city').addEventListener('change', function () { try { localStorage.setItem('mc-city', this.value); } catch (e) {} toast('Collection district: ' + this.value); updateWa(); });
   $('rx').addEventListener('change', function () { if (this.files[0]) toast(this.files[0].name + ' attached. Send it to us on WhatsApp to book.'); });
 
-  // Banner carousel
-  var slides = document.querySelectorAll('.slide'), dots = $('dots'), cur = 0, timer;
-  slides.forEach(function (s, i) { var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Show offer ' + (i + 1)); b.addEventListener('click', function () { show(i); }); dots.appendChild(b); });
-  function show(i) {
-    cur = i; clearTimeout(timer);
-    slides.forEach(function (s, k) { s.classList.toggle('on', k === i); s.setAttribute('aria-hidden', String(k !== i)); s.querySelectorAll('button').forEach(function (a) { a.tabIndex = k === i ? 0 : -1; }); });
-    [].forEach.call(dots.children, function (d, k) { d.classList.toggle('on', k === i); });
-    if (!reduce) timer = setTimeout(function () { show((cur + 1) % slides.length); }, 5500);
-  }
-  $('banner').addEventListener('mouseenter', function () { clearTimeout(timer); });
-  $('banner').addEventListener('mouseleave', function () { show(cur); });
-  $('banner').addEventListener('focusin', function () { clearTimeout(timer); });
-  show(0);
-
-  // Callback bar
+  // Help button + callback
+  function setHelp(open) { $('helpPanel').hidden = !open; $('helpBtn').setAttribute('aria-expanded', String(open)); if (open) $('cbPhone').focus(); }
+  $('helpBtn').addEventListener('click', function () { setHelp($('helpPanel').hidden); });
+  document.addEventListener('click', function (e) { if (!e.target.closest('#help')) setHelp(false); });
   $('cbForm').addEventListener('submit', function (e) {
     e.preventDefault();
     var m = $('cbPhone').value.replace(/\D/g, ''); if (m.length === 12 && m.indexOf('91') === 0) m = m.slice(2);
     var msg = $('cbMsg'); msg.hidden = false;
     if (m.length !== 10) { msg.textContent = 'Enter a 10-digit mobile number.'; $('cbPhone').focus(); return; }
-    msg.innerHTML = 'Almost done: <a href="https://wa.me/919020004000?text=' + encodeURIComponent('Please call me back on +91 ' + m + ' about a lab test booking.') + '" target="_blank" rel="noopener noreferrer">send your callback request on WhatsApp</a> and an advisor will call +91 ' + m + '.';
+    msg.innerHTML = 'One more step: <a href="https://wa.me/919020004000?text=' + encodeURIComponent('Please call me back on +91 ' + m + ' about a lab test booking.') + '" target="_blank" rel="noopener noreferrer">send the callback request on WhatsApp</a> and an advisor will call +91 ' + m + '.';
   });
-  $('cbClose').addEventListener('click', function () { $('callback').hidden = true; document.body.style.paddingBottom = '0'; });
 
   // Video reviews.
   // ADD REAL CUSTOMERS HERE (with their permission): put the video and a poster image in videos/, then add
   // { name: 'Customer name', city: 'District', video: 'videos/file.mp4', poster: 'videos/file.jpg' }
-  // Sample slots below show only while this list has no real entries.
+  // Sample slots show only while this list is empty.
   var REVIEWS = [];
-  var SAMPLE_COLORS = [['#7cc7ea', '#2f86c0'], ['#8fd49a', '#2f9e44'], ['#f6b996', '#e0703e'], ['#b9a8ee', '#6b55c9'], ['#7cc7ea', '#2f86c0'], ['#8fd49a', '#2f9e44']];
-  var list = REVIEWS.length ? REVIEWS : SAMPLE_COLORS.map(function (c, i) { return { sample: true, c: c, n: i + 1 }; });
+  var SAMPLE = [['#7cc7ea', '#1287d6'], ['#8fd49a', '#1e8a3a'], ['#ffb98a', '#e0703e'], ['#f59ab5', '#b8264e'], ['#7cc7ea', '#0a5a99'], ['#8fd49a', '#1e8a3a']];
+  var rlist = REVIEWS.length ? REVIEWS : SAMPLE.map(function (c) { return { sample: true, c: c }; });
   var person = '<svg class="ph" viewBox="0 0 100 110" aria-hidden="true"><circle cx="50" cy="34" r="22" fill="#fff"/><path d="M8 110c0-26 19-44 42-44s42 18 42 44Z" fill="#fff"/></svg>';
-  $('rvTrack').innerHTML = list.map(function (v, i) {
-    if (v.sample) return '<div class="rv sample" style="--s1:' + v.c[0] + ';--s2:' + v.c[1] + '"><span class="slot">Sample slot</span>' + person + '<span class="play"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M8 5v14l11-7Z" fill="#fff"/></svg></span><span class="who"><b>Customer name</b><span>Kerala district</span></span></div>';
-    return '<button class="rv" type="button" data-video="' + i + '" aria-label="Play review from ' + esc(v.name) + ', ' + esc(v.city) + '"><img class="poster" src="' + esc(v.poster) + '" alt="" loading="lazy"><span class="play"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M8 5v14l11-7Z" fill="#fff"/></svg></span><span class="who"><b>' + esc(v.name) + '</b><span>' + esc(v.city) + '</span></span></button>';
+  var playI = '<span class="play"><svg width="18" height="18"><use href="#i-play"/></svg></span>';
+  $('rvTrack').innerHTML = rlist.map(function (v, i) {
+    if (v.sample) return '<div class="rv sample" style="--s1:' + v.c[0] + ';--s2:' + v.c[1] + '"><span class="slot">Sample slot</span>' + person + playI + '<span class="who"><b>Customer name</b><span>Kerala district</span></span></div>';
+    return '<button class="rv" type="button" data-video="' + i + '" aria-label="Play review from ' + esc(v.name) + ', ' + esc(v.city) + '"><img class="poster" src="' + esc(v.poster) + '" alt="" loading="lazy">' + playI + '<span class="who"><b>' + esc(v.name) + '</b><span>' + esc(v.city) + '</span></span></button>';
   }).join('');
   $('rvNote').hidden = !!REVIEWS.length;
   var track = $('rvTrack');
-  function pageCount() { return Math.max(1, Math.ceil((track.scrollWidth - 4) / track.clientWidth)); }
-  function renderDots() {
-    var n = pageCount(), cur = Math.round(track.scrollLeft / track.clientWidth);
-    $('rvDots').innerHTML = n > 1 ? Array.apply(null, Array(n)).map(function (_, i) { return '<button type="button" aria-label="Review page ' + (i + 1) + '" class="' + (i === cur ? 'on' : '') + '" data-page="' + i + '"></button>'; }).join('') : '';
-  }
-  function go(dir) { track.scrollBy({ left: dir * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' }); }
-  $('rvPrev').addEventListener('click', function () { go(-1); });
-  $('rvNext').addEventListener('click', function () { go(1); });
-  $('rvDots').addEventListener('click', function (e) { var b = e.target.closest('[data-page]'); if (b) track.scrollTo({ left: b.dataset.page * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' }); });
-  var dotT; track.addEventListener('scroll', function () { clearTimeout(dotT); dotT = setTimeout(renderDots, 80); });
-  window.addEventListener('resize', renderDots);
-  renderDots();
+  function go(dir) { track.scrollBy({ left: dir * track.clientWidth * .8, behavior: reduce ? 'auto' : 'smooth' }); }
+  $('rvPrev').addEventListener('click', function () { go(-1); }); $('rvNext').addEventListener('click', function () { go(1); });
   var vLast;
   track.addEventListener('click', function (e) {
-    var b = e.target.closest('[data-video]'); if (!b) return;
-    vLast = b; var v = REVIEWS[+b.dataset.video];
+    var b = e.target.closest('[data-video]'); if (!b) return; vLast = b; var v = REVIEWS[+b.dataset.video];
     $('vPlayer').src = v.video; $('vPlayer').poster = v.poster || ''; $('vmodal').hidden = false; $('vClose').focus();
     var pr = $('vPlayer').play(); if (pr && pr.catch) pr.catch(function () {});
   });
   function closeVideo() { $('vPlayer').pause(); $('vPlayer').removeAttribute('src'); $('vPlayer').load(); $('vmodal').hidden = true; if (vLast) vLast.focus(); }
   $('vClose').addEventListener('click', closeVideo);
   $('vmodal').addEventListener('click', function (e) { if (e.target === this) closeVideo(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('vmodal').hidden) closeVideo(); });
 
+  document.addEventListener('keydown', function (e) { if (e.key !== 'Escape') return; if (!$('vmodal').hidden) closeVideo(); else if (!$('drawer').hidden) closeCart(); setHelp(false); $('results').hidden = true; });
   $('news').addEventListener('submit', function (e) { e.preventDefault(); toast('Thanks! You are subscribed.'); this.reset(); });
   $('yr').textContent = new Date().getFullYear();
   renderShelf(); renderCart();
