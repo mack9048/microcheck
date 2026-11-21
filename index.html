@@ -361,21 +361,29 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .tl b { font: 600 1.05rem/1.25 var(--font-head); }
 .tl p { font-size: .88rem; color: var(--ink-2); }
 
-/* How it works: compact step cards */
-.road-steps { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 28px; }
-.road-steps li { position: relative; background: linear-gradient(170deg, color-mix(in srgb, var(--pc) 9%, #fff), #ffffff 70%); border: 1px solid color-mix(in srgb, var(--pc) 28%, #fff); border-radius: 18px; padding: 16px; display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 12px; row-gap: 2px; align-items: start; }
-.road-steps li:not(:last-child)::after { content: ""; position: absolute; right: -22px; top: 50%; width: 16px; height: 16px; margin-top: -8px; background: var(--ink-2); opacity: .45;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12h14m-6-6 6 6-6 6' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12h14m-6-6 6 6-6 6' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat; }
-.road-steps .rn { grid-row: span 2; width: 40px; height: 40px; border-radius: 12px; background: var(--pc); color: #fff; display: grid; place-items: center; }
-.road-steps b { font: 600 .98rem/1.2 var(--font-display); text-transform: uppercase; color: var(--pc); }
-.road-steps p { font-size: .84rem; color: var(--ink-2); }
-@media (max-width: 1100px) { .road-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); } .road-steps li:nth-child(3)::after { display: none; } }
-@media (max-width: 640px) {
-  .road-steps { grid-template-columns: minmax(0, 1fr); gap: 10px; }
-  .road-steps li { padding: 12px 14px; }
-  .road-steps li::after { display: none; }
+/* How it works: pathway graphic */
+.road-steps { --n: 5; list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; position: relative; counter-reset: st; }
+.road-steps::before { content: ""; position: absolute; left: 10%; right: 10%; top: 33px; height: 6px; border-radius: 6px; background: linear-gradient(90deg, #e5384f, #f08c00, #4f9d33, #1287d6, #7048e8); opacity: .9; }
+.road-steps::after { content: ""; position: absolute; left: 10%; top: 30px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px rgba(255,255,255,.5), 0 0 16px 4px rgba(18,135,214,.55); animation: pathDot 6s cubic-bezier(.45,0,.55,1) infinite; }
+@keyframes pathDot { 0% { left: 10%; opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { left: 90%; opacity: 0; } }
+.road-steps li { position: relative; display: grid; justify-items: center; text-align: center; gap: 6px; counter-increment: st; }
+.road-steps .rn { position: relative; z-index: 1; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--pc) 60%, #fff), var(--pc) 70%); box-shadow: 0 0 0 7px var(--bg), 0 0 0 9px color-mix(in srgb, var(--pc) 30%, #fff), 0 12px 24px color-mix(in srgb, var(--pc) 35%, transparent); margin-bottom: 8px; }
+.road-steps .rn svg { width: 26px; height: 26px; }
+.road-steps .rn::after { content: counter(st); position: absolute; top: -4px; right: -6px; width: 24px; height: 24px; border-radius: 50%; background: #fff; color: var(--pc); font: 700 .75rem/24px var(--font-head); box-shadow: 0 3px 8px rgba(12,27,46,.15); }
+.road-steps b { font: 600 1rem/1.2 var(--font-display); text-transform: uppercase; color: var(--pc); }
+.road-steps p { font-size: .84rem; color: var(--ink-2); max-width: 24ch; }
+@media (max-width: 900px) {
+  .road-steps { grid-template-columns: minmax(0, 1fr); gap: 22px; padding-left: 6px; }
+  .road-steps::before { left: 27.5px; right: auto; top: 28px; bottom: 28px; width: 5px; height: auto; background: linear-gradient(180deg, #e5384f, #f08c00, #4f9d33, #1287d6, #7048e8); }
+  .road-steps::after { left: 30px; top: 28px; margin: -6px 0 0 -6px; animation-name: pathDotV; }
+  @keyframes pathDotV { 0% { top: 28px; opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { top: calc(100% - 28px); opacity: 0; } }
+  .road-steps li { grid-template-columns: 48px minmax(0, 1fr); justify-items: start; text-align: left; column-gap: 16px; row-gap: 2px; align-items: center; }
+  .road-steps .rn { grid-row: span 2; width: 48px; height: 48px; margin: 0; box-shadow: 0 0 0 4px var(--bg), 0 6px 14px color-mix(in srgb, var(--pc) 30%, transparent); }
+  .road-steps .rn svg { width: 20px; height: 20px; }
+  .road-steps .rn::after { display: none; }
+  .road-steps p { max-width: none; }
 }
+@media (prefers-reduced-motion: reduce) { .road-steps::after { display: none; } }
 
 /* Club */
 .club { border-radius: 32px; padding: clamp(24px, 3.5vw, 44px); background: linear-gradient(130deg, #145c2c, #1e8a3a 55%, #3bb54a); color: #fff; display: grid; grid-template-columns: .9fr 1.4fr; gap: 28px; align-items: center; position: relative; overflow: hidden; }
