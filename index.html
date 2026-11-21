@@ -232,7 +232,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .code-box { display: inline-flex; gap: 8px; align-items: center; margin-top: 6px; font: 700 .9rem var(--font-head); letter-spacing: .08em; padding: 6px 10px; border: 1.5px dashed var(--sun); border-radius: 10px; color: #b25b00; background: var(--sun-soft); width: fit-content; }
 
 /* Quick actions */
-.qa-card { margin-top: 18px; background: #fff; border: 1px solid var(--line); border-radius: 26px; padding: 10px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.qa-card { margin-top: 18px; background: #fff; border: 1px solid var(--line); border-radius: 26px; padding: 10px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .qa { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 18px; text-decoration: none; border: 0; background: none; cursor: pointer; text-align: left; position: relative; }
 .qa + .qa::before { content: ""; position: absolute; left: 0; top: 22%; bottom: 22%; width: 1px; background: var(--line); }
 .qa:hover { background: var(--surface-2); }
@@ -582,8 +582,8 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
 @media (max-width: 1200px) {
   .shelf > .tk { flex-basis: calc((100% - 2 * 18px) / 3); }
   .offers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .qa-card { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .qa:nth-child(4)::before { display: none; }
+  .qa-card { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .qa:nth-child(3)::before { display: none; }
   .rv { flex-basis: calc((100% - 3 * 20px) / 4); }
   .f-grid { grid-template-columns: 1fr 1fr 1fr; }
   .f-brand { grid-column: 1 / -1; }
@@ -648,7 +648,6 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   .qa { flex-direction: column; text-align: center; gap: 8px; padding: 14px 6px; }
   .qa small { display: none; }
   .qa::before { display: none; }
-  .qa:last-child { grid-column: 1 / -1; flex-direction: row; justify-content: center; }
   .shelf { gap: 12px; }
   .shelf > .tk { flex-basis: 86%; }
   .shelf-nav { display: none; }
@@ -823,7 +822,6 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
       <a class="qa" href="#packages" style="--q:#e6f3fc;--qf:#0a5a99"><i><svg width="28" height="28"><use href="#t-blood"/></svg></i><span><b>Book a lab test</b><small>Packages &amp; single tests</small></span></a>
       <label class="qa" for="rx" style="--q:#eef0fd;--qf:#3d4fc4"><i><svg width="28" height="28"><use href="#t-rx"/></svg></i><span><b>Upload prescription</b><small>We pick the right tests</small></span></label>
       <a class="qa" href="#services" style="--q:#fff3df;--qf:#b25b00"><i><svg width="28" height="28"><use href="#t-nurse"/></svg></i><span><b>Home nursing</b><small>Wound care, IV, post-op</small></span></a>
-      <a class="qa" href="#services" style="--q:#e7f7eb;--qf:#1e8a3a"><i><img src="images/kidney.webp" alt="" width="30" height="30"></i><span><b>Dialysis support</b><small>Technician at home</small></span></a>
       <a class="qa" href="#club" style="--q:#fde8ef;--qf:#b8264e"><i><svg width="28" height="28"><use href="#t-club"/></svg></i><span><b>Diabetic Care Club</b><small>New · plans from Tier 1</small></span></a>
     </div>
     <input type="file" id="rx" accept="image/*,.pdf" hidden>
