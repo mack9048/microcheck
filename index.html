@@ -293,15 +293,20 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .note { font-size: .8rem; color: var(--ink-2); margin-top: 14px; }
 
 /* Concerns (list tiles) */
-.concerns { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.cn { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 18px; border: 1px solid var(--line); background: #fff; cursor: pointer; text-align: left; transition: border-color .2s, transform .2s; }
-.cn:hover { border-color: var(--blue); transform: translateY(-2px); }
-.cn i { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: var(--cf); flex: none; font-style: normal; }
-.cn img { width: 34px; height: 34px; object-fit: contain; }
-.cn span { flex: 1; min-width: 0; }
-.cn b { display: block; font: 600 .95rem/1.2 var(--font-head); }
-.cn small { color: var(--ink-2); font-size: .8rem; }
-.cn > svg { color: var(--ink-2); flex: none; }
+.concerns { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; }
+.cn { position: relative; overflow: hidden; display: grid; align-content: space-between; gap: 18px; min-height: 168px; padding: 16px; border-radius: 22px; border: 1px solid color-mix(in srgb, var(--cf) 14%, transparent); background: linear-gradient(160deg, var(--c) 0%, color-mix(in srgb, var(--c) 35%, #fff) 100%); cursor: pointer; text-align: left; color: var(--ink); transition: transform .25s, box-shadow .25s; }
+.cn:hover { transform: translateY(-4px); box-shadow: 0 16px 32px color-mix(in srgb, var(--cf) 18%, transparent); }
+.cn i { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: #fff; color: var(--cf); font-style: normal; box-shadow: 0 6px 14px rgba(12,27,46,.06); }
+.cn img { width: 38px; height: 38px; object-fit: contain; }
+.cn > span { display: grid; gap: 4px; min-width: 0; }
+.cn b { font: 600 1.05rem/1.15 var(--font-display); text-transform: uppercase; color: #222831; }
+.cn small { font-size: .8rem; color: var(--ink-2); }
+.cn small em { font-style: normal; font-weight: 600; color: var(--cf); }
+.cn > svg { position: absolute; top: 16px; right: 16px; width: 34px; height: 34px; padding: 9px; border-radius: 50%; background: var(--cf); color: #fff; opacity: 0; transform: translate(-6px, 6px) rotate(-45deg); transition: opacity .25s, transform .25s; }
+.cn:hover > svg, .cn:focus-visible > svg { opacity: 1; transform: none; }
+.cn.all { background: linear-gradient(160deg, #123a66, #0b2440); border-color: #0b2440; }
+.cn.all b { color: #fff; } .cn.all small { color: #9fb6cf; } .cn.all i { background: rgba(255,255,255,.12); color: #fff; box-shadow: none; }
+.cn.all > svg { background: #fff; color: #0b2440; opacity: 1; transform: none; }
 
 /* For whom */
 .whom { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
@@ -581,7 +586,8 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   .hero-card::after { background: linear-gradient(180deg, rgba(10,45,110,.55) 0%, rgba(10,45,110,.2) 45%, transparent 60%); }
   .hero-art { position: relative; inset: auto; height: 440px; margin-top: -10px; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 70px); mask-image: linear-gradient(180deg, transparent 0, #000 70px); }
   .stage3d .fallback { inset: 0; }
-  .concerns, .whom { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .whom { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .concerns { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .shelf > .tk { flex-basis: calc((100% - 18px) / 2.15); }
   .proof, .club, .two, .app { grid-template-columns: minmax(0, 1fr); }
   .tl { grid-template-columns: minmax(0, 1fr); gap: 16px; }
@@ -638,12 +644,13 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   .shelf { gap: 12px; }
   .shelf > .tk { flex-basis: 86%; }
   .shelf-nav { display: none; }
-  .concerns { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .cn { padding: 10px; gap: 10px; border-radius: 14px; }
-  .cn i { width: 38px; height: 38px; }
-  .cn img { width: 28px; height: 28px; }
-  .cn b { font-size: .86rem; }
-  .cn small { font-size: .72rem; }
+  .concerns { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .cn { min-height: 0; padding: 12px 10px; gap: 10px; border-radius: 16px; justify-items: center; text-align: center; }
+  .cn i { width: 44px; height: 44px; border-radius: 14px; }
+  .cn img { width: 30px; height: 30px; }
+  .cn b { font-size: .82rem; }
+  .cn small { font-size: .7rem; }
+  .cn small .cnt { display: none; }
   .cn > svg { display: none; }
   .whom { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .wm { min-height: 160px; padding: 16px; border-radius: 20px; }
@@ -1181,9 +1188,10 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
 
   // Concerns
   $('concernGrid').innerHTML = CONCERN_ORDER.map(function (k) {
-    var d = CATS[k], n = PACKAGES.filter(function (p) { return p.cat === k; }).length;
-    return '<button class="cn" type="button" data-cat="' + k + '"><i style="--c:' + d.c + ';--cf:' + (d.cf || '#0a5a99') + '">' + icon(k, d.img ? 34 : 22) + '</i><span><b>' + d.label + '</b><small>' + n + (n === 1 ? ' package' : ' packages') + '</small></span><svg width="16" height="16"><use href="#i-arrow"/></svg></button>';
-  }).join('') + '<button class="cn" type="button" data-cat="all"><i style="--c:#0b2440;--cf:#fff"><svg width="20" height="20"><use href="#i-search"/></svg></i><span><b>All tests</b><small>' + PACKAGES.length + ' packages</small></span><svg width="16" height="16"><use href="#i-arrow"/></svg></button>';
+    var d = CATS[k], list = PACKAGES.filter(function (p) { return p.cat === k; }), n = list.length;
+    var min = Math.min.apply(null, list.map(function (p) { return p.price; }));
+    return '<button class="cn" type="button" data-cat="' + k + '" style="--c:' + d.c + ';--cf:' + (d.cf || '#0a5a99') + '"><i>' + icon(k, d.img ? 38 : 24) + '</i><span><b>' + d.label + '</b><small>from <em>' + inr(min) + '</em><span class="cnt"> · ' + n + (n === 1 ? ' package' : ' packages') + '</span></small></span><svg><use href="#i-arrow"/></svg></button>';
+  }).join('') + '<button class="cn all" type="button" data-cat="all" style="--cf:#0b2440"><i><svg width="22" height="22"><use href="#i-search"/></svg></i><span><b>All tests</b><small>' + PACKAGES.length + ' packages</small></span><svg><use href="#i-arrow"/></svg></button>';
   $('concernGrid').addEventListener('click', function (e) { var b = e.target.closest('[data-cat]'); if (b) setFilter(b.dataset.cat, true); });
 
   // Cart
