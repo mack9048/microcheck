@@ -356,33 +356,22 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .tl b { font: 600 1.05rem/1.25 var(--font-head); }
 .tl p { font-size: .88rem; color: var(--ink-2); }
 
-/* How it works: winding road */
-.road { position: relative; }
-.road-stage { position: relative; height: 300px; margin-inline: calc(-1 * max(20px, env(safe-area-inset-left, 0px))); }
-.road-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.road-steps { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
-.road-steps li { position: relative; background: linear-gradient(180deg, #ffffff, #f3f7fb); border: 1px solid var(--line); border-radius: 20px; padding: 30px 16px 18px; text-align: center; box-shadow: 0 8px 22px rgba(12,27,46,.06); transition: transform .35s, box-shadow .35s, opacity .35s, border-color .35s; }
-.road-steps .rn { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--pc) 70%, #fff), var(--pc)); color: #fff; display: grid; place-items: center; font: 600 1rem/1 var(--font-display); box-shadow: 0 0 0 4px #fff, 0 6px 14px rgba(12,27,46,.18); }
-.road-steps b { display: block; font: 600 1.02rem/1.15 var(--font-display); text-transform: uppercase; color: var(--pc); letter-spacing: .01em; }
-.road-steps p { margin-top: 6px; font-size: .86rem; color: var(--ink-2); }
-.road.anim .road-steps li { opacity: .55; }
-.road.anim .road-steps li.on { opacity: 1; transform: translateY(-4px); border-color: color-mix(in srgb, var(--pc) 45%, #fff); box-shadow: 0 14px 30px rgba(12,27,46,.1); }
-.pin .pin-in { transform-box: fill-box; transform-origin: 50% 100%; transition: transform .45s cubic-bezier(.3,1.6,.5,1); }
-.road.anim .pin .pin-in { transform: scale(0); }
-.road.anim .pin.on .pin-in { transform: scale(1); }
-.pin .shadow { transition: opacity .3s; }
-.road.anim .pin .shadow { opacity: 0; }
-.road.anim .pin.on .shadow { opacity: 1; }
-.road .center { transition: opacity .6s; }
+/* How it works: compact step cards */
+.road-steps { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 28px; }
+.road-steps li { position: relative; background: linear-gradient(170deg, color-mix(in srgb, var(--pc) 9%, #fff), #ffffff 70%); border: 1px solid color-mix(in srgb, var(--pc) 28%, #fff); border-radius: 18px; padding: 16px; display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 12px; row-gap: 2px; align-items: start; }
+.road-steps li:not(:last-child)::after { content: ""; position: absolute; right: -22px; top: 50%; width: 16px; height: 16px; margin-top: -8px; background: var(--ink-2); opacity: .45;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12h14m-6-6 6 6-6 6' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12h14m-6-6 6 6-6 6' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat; }
+.road-steps .rn { grid-row: span 2; width: 40px; height: 40px; border-radius: 12px; background: var(--pc); color: #fff; display: grid; place-items: center; }
+.road-steps b { font: 600 .98rem/1.2 var(--font-display); text-transform: uppercase; color: var(--pc); }
+.road-steps p { font-size: .84rem; color: var(--ink-2); }
+@media (max-width: 1100px) { .road-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); } .road-steps li:nth-child(3)::after { display: none; } }
 @media (max-width: 640px) {
-  .road-stage { position: absolute; left: 0; top: 0; bottom: 0; width: 96px; height: auto; margin: 0; overflow: hidden; border-radius: 0 0 18px 18px; }
-  .road-stage svg { overflow: hidden; }
-  .road-steps { grid-template-columns: minmax(0, 1fr); margin: 0 0 0 96px; gap: 18px; padding-block: 6px; }
-  .road-steps li { text-align: left; padding: 14px 16px 14px 50px; }
-  .road-steps .rn { top: 50%; left: 10px; transform: translateY(-50%); width: 32px; height: 32px; font-size: .9rem; box-shadow: 0 4px 10px rgba(12,27,46,.15); }
-  .road-steps .rn svg { width: 15px; height: 15px; }
-  .road.anim .road-steps li.on { transform: translateX(3px); }
+  .road-steps { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .road-steps li { padding: 12px 14px; }
+  .road-steps li::after { display: none; }
 }
+
 /* Club */
 .club { border-radius: 32px; padding: clamp(24px, 3.5vw, 44px); background: linear-gradient(130deg, #145c2c, #1e8a3a 55%, #3bb54a); color: #fff; display: grid; grid-template-columns: .9fr 1.4fr; gap: 28px; align-items: center; position: relative; overflow: hidden; }
 .club::before { content: ""; position: absolute; left: -80px; bottom: -120px; width: 320px; height: 320px; border-radius: 50%; background: rgba(255,255,255,.07); }
@@ -878,7 +867,6 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="head2"><div><span class="kicker">How it works</span><h2>From booking to report in five steps</h2></div><button class="btn btn-ghost" type="button" data-intro hidden><span class="play-i"><svg width="12" height="12"><use href="#i-play"/></svg></span>Watch the 3D story</button></div>
     <div class="road" id="road">
-      <div class="road-stage"><svg id="roadSvg" aria-hidden="true"></svg></div>
       <ol class="road-steps" id="roadSteps">
       <li style="--pc:#e5384f"><span class="rn" aria-hidden="true"><svg width="18" height="18"><use href="#i-cart"/></svg></span><b>Book online</b><p>Pick a test or package, your address and a time slot.</p></li>
       <li style="--pc:#f08c00"><span class="rn" aria-hidden="true"><svg width="18" height="18"><use href="#i-scooter"/></svg></span><b>Phlebotomist arrives</b><p>A trained phlebotomist is assigned and reaches your door.</p></li>
@@ -1356,91 +1344,6 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
     else { visible = true; raf2 = requestAnimationFrame(loop); }
   })();
 
-  // How it works: winding road with map pins; a scooter travels along it and lights each step
-  (function () {
-    var road = $('road'), svg = $('roadSvg'), items = road.querySelectorAll('.road-steps li');
-    var NS = 'http://www.w3.org/2000/svg', ICONS = ['i-cart', 'i-scooter', 'i-drop2', 'i-lab', 'i-report'];
-    var colors = [].map.call(items, function (li) { return getComputedStyle(li).getPropertyValue('--pc').trim(); });
-    var mq = matchMedia('(max-width: 640px)'), path, L, fr = [], pins = [], rider, raf3 = 0, t0 = 0, visible = false, first = true;
-    function el(n, a) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); return e; }
-    function smooth(pts) { // Catmull-Rom through the points, as cubic Beziers
-      var d = 'M' + pts[0][0] + ' ' + pts[0][1];
-      for (var i = 0; i < pts.length - 1; i++) {
-        var p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
-        d += ' C' + (p1[0] + (p2[0] - p0[0]) / 6) + ' ' + (p1[1] + (p2[1] - p0[1]) / 6) + ',' + (p2[0] - (p3[0] - p1[0]) / 6) + ' ' + (p2[1] - (p3[1] - p1[1]) / 6) + ',' + p2[0] + ' ' + p2[1];
-      }
-      return d;
-    }
-    function layout() {
-      var box = svg.getBoundingClientRect(), W = box.width, H = box.height, vert = mq.matches, pts, targets;
-      if (!W || !H) return;
-      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.innerHTML = '';
-      if (vert) {
-        var r0 = road.getBoundingClientRect();
-        targets = [].map.call(items, function (li, i) { var rr = li.getBoundingClientRect(); return [i % 2 ? 66 : 30, rr.top - r0.top + rr.height / 2]; });
-        pts = [[48, 0]].concat(targets).concat([[48, H]]);
-      } else {
-        targets = [].map.call(items, function (li, i) { var rr = li.getBoundingClientRect(); return [rr.left - box.left + rr.width / 2, H * [.42, .26, .72, .7, .3][i]]; });
-        pts = [[-40, H * .62]].concat(targets).concat([[W + 40, H * .5]]);
-      }
-      var d = smooth(pts), sw = vert ? 26 : 46;
-      svg.appendChild(el('path', { d: d, fill: 'none', stroke: 'rgba(18,135,214,.12)', 'stroke-width': sw + 22, 'stroke-linecap': 'round' }));
-      var edge = el('path', { d: d, fill: 'none', stroke: '#ffffff', 'stroke-width': sw + 12, 'stroke-linecap': 'round', class: 'edge' });
-      path = el('path', { d: d, fill: 'none', stroke: '#1c2654', 'stroke-width': sw, 'stroke-linecap': 'round' });
-      var center = el('path', { d: d, fill: 'none', stroke: '#ffffff', 'stroke-width': vert ? 2 : 3, 'stroke-dasharray': vert ? '8 8' : '14 12', 'stroke-linecap': 'round', class: 'center' });
-      svg.appendChild(edge); svg.appendChild(path); svg.appendChild(center);
-      L = path.getTotalLength();
-      // fraction of the road where each pin sits (closest point to each target)
-      fr = targets.map(function (t) { var best = 0, bd = 1e9; for (var l = 0; l <= L; l += 3) { var q = path.getPointAtLength(l), dd = (q.x - t[0]) * (q.x - t[0]) + (q.y - t[1]) * (q.y - t[1]); if (dd < bd) { bd = dd; best = l; } } return best / L; });
-      var sc = vert ? .62 : 1;
-      pins = fr.map(function (f, i) {
-        var q = path.getPointAtLength(f * L), g = el('g', { class: 'pin', transform: 'translate(' + q.x + ' ' + q.y + ') scale(' + sc + ')' });
-        var gid = 'pg' + i, grad = el('linearGradient', { id: gid, x1: 0, y1: 0, x2: 0, y2: 1 });
-        grad.appendChild(el('stop', { offset: 0, 'stop-color': '#ffffff', 'stop-opacity': .45 })); grad.appendChild(el('stop', { offset: .5, 'stop-color': '#ffffff', 'stop-opacity': 0 }));
-        g.appendChild(grad);
-        g.appendChild(el('ellipse', { class: 'shadow', cx: 0, cy: 3, rx: 15, ry: 5, fill: 'rgba(0,0,0,.28)' }));
-        var inn = el('g', { class: 'pin-in' });
-        var shape = 'M0 0 C-6 -14 -26 -26 -26 -48 A26 26 0 1 1 26 -48 C26 -26 6 -14 0 0Z';
-        inn.appendChild(el('path', { d: shape, fill: colors[i] }));
-        inn.appendChild(el('path', { d: shape, fill: 'url(#' + gid + ')' }));
-        inn.appendChild(el('circle', { cx: 0, cy: -48, r: 17, fill: 'rgba(255,255,255,.22)', stroke: 'rgba(255,255,255,.7)', 'stroke-width': 1.5 }));
-        var u = el('use', { href: '#' + ICONS[i], x: -10, y: -58, width: 20, height: 20, style: 'color:#fff' }); u.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#' + ICONS[i]);
-        inn.appendChild(u); g.appendChild(inn); svg.appendChild(g); return g;
-      });
-      rider = el('g', { class: 'rider' });
-      rider.appendChild(el('circle', { r: vert ? 11 : 15, fill: '#ffffff', stroke: '#1287d6', 'stroke-width': 2.5 }));
-      var ru = el('use', { href: '#i-scooter', x: vert ? -7 : -9, y: vert ? -7 : -9, width: vert ? 14 : 18, height: vert ? 14 : 18, style: 'color:#1287d6' }); rider.appendChild(ru);
-      svg.appendChild(rider);
-      if (reduce) { paint(1, 1); rider.style.display = 'none'; }
-      else paint(first ? 0 : 1, 0);
-      road._len = L;
-    }
-    function paint(draw, p) {
-      [svg.querySelector('.edge'), path].forEach(function (e) { e.style.strokeDasharray = L; e.style.strokeDashoffset = L * (1 - draw); });
-      svg.querySelector('.center').style.opacity = draw >= 1 ? 1 : 0;
-      var q = path.getPointAtLength(Math.max(0, Math.min(1, p)) * L); rider.setAttribute('transform', 'translate(' + q.x + ' ' + q.y + ')'); rider.style.opacity = draw >= 1 && p > 0 && p < 1.02 ? 1 : 0;
-      fr.forEach(function (f, i) { var on = p >= f - .005; pins[i].classList.toggle('on', on); items[i].classList.toggle('on', on); });
-    }
-    var DRAW = 1300, RIDE = 5200, HOLD = 2200;
-    function loop(now) {
-      if (!visible) return;
-      if (!t0) t0 = now;
-      var e = now - t0, drawT = first ? DRAW : 0;
-      if (e < drawT) paint(ease(e / drawT), 0);
-      else { var k = (e - drawT) / RIDE; paint(1, k < 1 ? ease(k) * 1.02 : 1.02); if (e > drawT + RIDE + HOLD) { first = false; t0 = now; } }
-      raf3 = requestAnimationFrame(loop);
-    }
-    function ease(x) { x = Math.min(1, Math.max(0, x)); return x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
-    if (!reduce) road.classList.add('anim');
-    layout();
-    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { layout(); }, 120); });
-    if (reduce) return;
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) {
-      visible = en[0].isIntersecting; cancelAnimationFrame(raf3);
-      if (visible) { t0 = 0; raf3 = requestAnimationFrame(loop); }
-    }, { threshold: .3 }).observe(road);
-    else { visible = true; raf3 = requestAnimationFrame(loop); }
-  })();
 
   // Count-up numbers when the proof band comes into view
   (function () {
