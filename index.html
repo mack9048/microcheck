@@ -110,6 +110,52 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .chip[aria-pressed="true"] i { background: rgba(255,255,255,.16); color: #fff; }
 .chip .new { font: 700 .6rem/1 var(--font-head); background: var(--sun); color: #fff; padding: 3px 6px; border-radius: 6px; }
 
+/* Category mega menu */
+.mega { position: absolute; left: 0; right: 0; top: 100%; z-index: 39; }
+.mega-in { max-width: var(--max); margin-inline: auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.mega-box { display: grid; grid-template-columns: 310px minmax(0, 1fr); background: #fff; border: 1px solid var(--line); border-top: 0; border-radius: 0 0 28px 28px; box-shadow: 0 30px 60px rgba(12,27,46,.18); overflow: hidden; animation: megaIn .22s ease-out; }
+@keyframes megaIn { from { opacity: 0; transform: translateY(-6px); } }
+.mega-why { padding: 24px; display: grid; gap: 16px; align-content: start; background: linear-gradient(165deg, var(--c, #e6f3fc), #ffffff 85%); }
+.mega-why h3 { font: 800 1.05rem/1.15 var(--font-display); text-transform: uppercase; color: #222831; }
+.mega-why ul { list-style: none; margin: 0; padding: 16px; display: grid; gap: 12px; background: #fff; border-radius: 18px; box-shadow: 0 6px 18px rgba(12,27,46,.06); font-size: .92rem; color: var(--ink-2); }
+.mega-why li { display: flex; gap: 10px; }
+.mega-why li svg { flex: none; margin-top: 3px; color: #fff; background: var(--green); border-radius: 50%; padding: 3px; }
+.mega-why .btn { width: 100%; background: var(--sun); color: #fff; }
+.mega-why .btn:hover { background: #f08c00; }
+.mega-pk { padding: 24px; display: grid; gap: 16px; align-content: start; min-width: 0; }
+.mega-pk .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.mega-pk h3 { font: 800 1.05rem/1.15 var(--font-display); text-transform: uppercase; color: #222831; }
+.mega-pk .all { font: 600 .88rem var(--font-head); color: var(--blue-deep); background: none; border: 0; cursor: pointer; padding: 0; white-space: nowrap; }
+.mini-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.mini { border: 1px solid #d6e9f6; border-radius: 20px; padding: 16px; display: grid; gap: 14px; background: linear-gradient(170deg, #ffffff 40%, #e9f5fd); min-width: 0; }
+.mini h4 { font: 600 1rem/1.3 var(--font-head); min-height: 2.6em; }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.fact { display: flex; gap: 8px; align-items: center; }
+.fact i { width: 34px; height: 34px; border-radius: 10px; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; color: var(--blue-deep); font-style: normal; flex: none; }
+.fact small { display: block; font-size: .72rem; color: var(--ink-2); line-height: 1.2; }
+.fact b { font: 600 .86rem/1.3 var(--font-head); }
+.pline { display: flex; align-items: center; gap: 8px; padding-top: 12px; border-top: 1px dashed #c9dceb; flex-wrap: wrap; }
+.pline .lto { font-size: .68rem; line-height: 1.15; color: var(--ink-2); padding-right: 8px; border-right: 1px solid var(--line); }
+.pline b { font: 800 1.2rem/1 var(--font-display); }
+.pline s { color: var(--ink-2); font-size: .8rem; }
+.pline .off { font: 600 .72rem/1 var(--font-head); color: var(--green-deep); background: var(--mint); padding: 5px 8px; border-radius: 999px; }
+.mini .acts { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.know { background: none; border: 0; padding: 0; cursor: pointer; font-size: .86rem; color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; }
+.know:hover { color: var(--blue-deep); }
+.chip[aria-expanded="true"] { border-color: var(--blue); background: var(--sky); color: var(--blue-deep); }
+.chip[aria-expanded="true"] i { background: #fff; color: var(--blue-deep); }
+.chip .chev { transition: transform .2s; opacity: .6; margin-left: -2px; }
+.chip[aria-expanded="true"] .chev { transform: rotate(180deg); }
+@media (max-width: 960px) {
+  .mega-box { grid-template-columns: minmax(0, 1fr); max-height: calc(100vh - 170px); overflow: auto; border-radius: 0 0 22px 22px; }
+  .mega-why { padding: 18px; gap: 12px; }
+  .mega-why ul { display: none; }
+  .mega-pk { padding: 0 18px 18px; }
+  .mini-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; gap: 12px; }
+  .mini-grid::-webkit-scrollbar { display: none; }
+  .mini { flex: 0 0 82%; scroll-snap-align: start; }
+}
+
 /* Hero */
 .hero { padding-block: 22px 8px; }
 .hero-card { position: relative; overflow: hidden; border-radius: 36px; min-height: 620px; display: flex; align-items: center; color: #fff;
@@ -607,6 +653,7 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
     </div>
     <nav class="chips" id="chips" aria-label="Browse by category"></nav>
   </div>
+  <div class="mega" id="mega" hidden><div class="mega-in"><div class="mega-box" id="megaBox"></div></div></div>
 </header>
 
 <main id="top">
@@ -934,7 +981,7 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   var filter = 'all', expanded = false;
   $('chips').innerHTML = CHIP_ORDER.map(function (k) {
     if (k === 'all') return '<button class="chip" type="button" data-f="all" aria-pressed="true"><i><svg width="15" height="15"><use href="#i-home"/></svg></i>All tests</button>';
-    var d = CATS[k]; return '<button class="chip" type="button" data-f="' + k + '" aria-pressed="false" style="--c:' + d.c + ';--cf:' + (d.cf || '#0a5a99') + '"><i>' + icon(k, 15) + '</i>' + d.label + (d.isNew ? '<span class="new">NEW</span>' : '') + '</button>';
+    var d = CATS[k]; return '<button class="chip" type="button" data-menu="' + k + '" aria-expanded="false" aria-controls="mega" aria-pressed="false" data-chipf="' + k + '" style="--c:' + d.c + ';--cf:' + (d.cf || '#0a5a99') + '"><i>' + icon(k, 15) + '</i>' + d.label + (d.isNew ? '<span class="new">NEW</span>' : '') + '<svg class="chev" width="12" height="12"><use href="#i-chev"/></svg></button>';
   }).join('');
   $('tabs').innerHTML = TAB_ORDER.map(function (k) { return '<button type="button" data-f="' + k + '" aria-pressed="' + (k === 'all') + '">' + (k === 'all' ? 'Most booked' : CATS[k].label) + '</button>'; }).join('');
 
@@ -949,10 +996,51 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
     var list = filter === 'all' ? (expanded ? PACKAGES : POPULAR.map(byId)) : PACKAGES.filter(function (p) { return p.cat === filter; });
     $('shelf').innerHTML = list.map(ticket).join('');
     $('seeAll').hidden = filter === 'all' && expanded;
-    document.querySelectorAll('[data-f]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.f === filter)); });
+    document.querySelectorAll('#tabs [data-f], #chips [data-f]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.f === filter)); });
+    document.querySelectorAll('[data-chipf]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.chipf === filter)); });
   }
   function setFilter(f, scroll) { filter = f; expanded = false; renderShelf(); if (scroll) $('packages').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }
-  document.addEventListener('click', function (e) { var b = e.target.closest('[data-f]'); if (b) setFilter(b.dataset.f, !!b.closest('#chips')); });
+  document.addEventListener('click', function (e) {
+    var m = e.target.closest('[data-menu]'); if (m) { if (openKey === m.dataset.menu) closeMenu(); else openMenu(m.dataset.menu); return; }
+    var b = e.target.closest('[data-f]'); if (b) { var fromNav = !!b.closest('#chips, #mega'); closeMenu(); setFilter(b.dataset.f, fromNav); }
+    else if (!e.target.closest('#mega')) closeMenu();
+  });
+
+  // Mega menu: why it matters + three packages per category
+  var WHY = {
+    full: ['Many problems show up in blood before you feel them.', 'One visit covers heart, liver, kidney and sugar.', 'A yearly check makes changes easy to spot.'],
+    diabetes: ['Diabetes often has no early symptoms.', 'HbA1c shows your 3-month sugar average.', 'Regular checks help prevent complications.'],
+    heart: ['Heart issues often start silently.', 'Cholesterol and inflammation show up in a blood test.', 'Early tests can save lives.'],
+    thyroid: ['Thyroid problems are common, especially in women.', 'Tiredness and weight change can be early signs.', 'A simple blood test gives the answer.'],
+    fever: ['Dengue, malaria and typhoid can look alike.', 'One panel checks for the common causes.', 'Test early if fever lasts more than 2 days.'],
+    women: ['Iron, thyroid and vitamin D problems are common.', 'PCOD can be checked with hormone tests.', 'Regular checks keep you ahead of changes.'],
+    vitamin: ['Low vitamin D and B12 cause tiredness and aches.', 'Both are checked with one blood draw.', 'Easy to correct once you know.'],
+    senior: ['Health needs change after 60.', 'One package covers sugar, heart, kidney and bones.', 'Collected at home, no travel needed.']
+  };
+  var openKey = null, closeT;
+  function mini(p) {
+    return '<div class="mini"><h4>' + esc(p.name) + '</h4>' +
+      '<div class="facts"><div class="fact"><i><svg width="16" height="16"><use href="#i-tube"/></svg></i><span><small>Tests included</small><b>' + p.tests + (p.tests === 1 ? ' test' : ' tests') + '</b></span></div><div class="fact"><i><svg width="16" height="16"><use href="#i-clock"/></svg></i><span><small>Report in</small><b>' + p.tat + ' hrs</b></span></div></div>' +
+      '<div class="pline"><span class="lto">Limited<br>time offer</span><b>' + inr(p.price) + '</b><s>' + inr(p.mrp) + '</s><span class="off">' + off(p) + '% off</span></div>' +
+      '<div class="acts"><button class="know" type="button" data-f="' + p.cat + '">Know more</button>' + addBtn(p, true) + '</div></div>';
+  }
+  function renderMega() {
+    var k = openKey, d = CATS[k], name = d.label.toLowerCase();
+    var list = PACKAGES.filter(function (p) { return p.cat === k; }).slice(0, 3);
+    $('megaBox').innerHTML = '<div class="mega-why" style="--c:' + d.c + '"><h3>Why ' + esc(name) + ' checkups matter</h3><ul>' + WHY[k].map(function (w) { return '<li><svg width="16" height="16"><use href="#i-check"/></svg>' + esc(w) + '</li>'; }).join('') + '</ul>' +
+      '<a class="btn" href="tel:+919020004000">Talk to a health advisor <svg width="16" height="16"><use href="#i-arrow"/></svg></a></div>' +
+      '<div class="mega-pk"><div class="row"><h3>Preventive packages for ' + esc(name) + '</h3><button class="all" type="button" data-f="' + k + '">View all →</button></div><div class="mini-grid">' + list.map(mini).join('') + '</div></div>';
+  }
+  function openMenu(k) {
+    clearTimeout(closeT); if (openKey === k) return; openKey = k; renderMega(); $('mega').hidden = false;
+    document.querySelectorAll('[data-menu]').forEach(function (b) { b.setAttribute('aria-expanded', String(b.dataset.menu === k)); });
+  }
+  function closeMenu() { if (!openKey) return; openKey = null; $('mega').hidden = true; document.querySelectorAll('[data-menu]').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); }); }
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    $('chips').addEventListener('mouseover', function (e) { var b = e.target.closest('[data-menu]'); if (b) openMenu(b.dataset.menu); else if (e.target.closest('[data-f]')) closeMenu(); });
+    document.querySelector('.hdr').addEventListener('mouseleave', function () { closeT = setTimeout(closeMenu, 220); });
+    document.querySelector('.hdr').addEventListener('mouseenter', function () { clearTimeout(closeT); });
+  }
   $('seeAll').addEventListener('click', function (e) { e.preventDefault(); filter = 'all'; expanded = true; renderShelf(); });
   document.querySelectorAll('[data-filter]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); setFilter(a.dataset.filter, true); }); });
 
@@ -985,7 +1073,7 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
     var msg = 'Hi MicroCheck, I want to book a home sample collection.\n\nTests:\n' + cart.map(function (id) { var p = byId(id); return '• ' + p.name + ' (' + inr(p.price) + ')'; }).join('\n') + '\n\nTotal after 10% online discount: ' + inr(t.pay) + '\nDistrict: ' + $('city').value + (name ? '\nName: ' + name : '') + (ph ? '\nMobile: ' + ph : '');
     $('waBook').href = 'https://wa.me/919020004000?text=' + encodeURIComponent(msg);
   }
-  function renderAll() { renderShelf(); renderCart(); if (!$('results').hidden) renderResults(); }
+  function renderAll() { renderShelf(); renderCart(); if (!$('results').hidden) renderResults(); if (openKey) renderMega(); }
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-add]'); if (a) { if (inCart(a.dataset.add)) openCart(); else add(a.dataset.add); }
     var b = e.target.closest('[data-book]'); if (b) add(b.dataset.book, true);
@@ -1058,7 +1146,7 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   $('vClose').addEventListener('click', closeVideo);
   $('vmodal').addEventListener('click', function (e) { if (e.target === this) closeVideo(); });
 
-  document.addEventListener('keydown', function (e) { if (e.key !== 'Escape') return; if (!$('vmodal').hidden) closeVideo(); else if (!$('drawer').hidden) closeCart(); setHelp(false); $('results').hidden = true; });
+  document.addEventListener('keydown', function (e) { if (e.key !== 'Escape') return; closeMenu(); if (!$('vmodal').hidden) closeVideo(); else if (!$('drawer').hidden) closeCart(); setHelp(false); $('results').hidden = true; });
   $('news').addEventListener('submit', function (e) { e.preventDefault(); toast('Thanks! You are subscribed.'); this.reset(); });
   $('yr').textContent = new Date().getFullYear();
   renderShelf(); renderCart();
