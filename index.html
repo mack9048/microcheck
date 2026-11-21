@@ -315,10 +315,30 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Timeline */
 .tl { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; position: relative; }
-.tl::before { content: ""; position: absolute; left: 24px; right: 24px; top: 24px; height: 2px; background: repeating-linear-gradient(90deg, var(--blue) 0 8px, transparent 8px 16px); opacity: .5; }
+.tl::before { content: ""; position: absolute; left: 24px; right: calc((100% - 4 * 18px) / 5 - 25px); top: 24px; height: 2px; background: repeating-linear-gradient(90deg, var(--blue) 0 8px, transparent 8px 16px); opacity: .5; }
 .tl li { position: relative; display: grid; gap: 10px; align-content: start; }
 .tl .dot { width: 50px; height: 50px; border-radius: 50%; background: #fff; border: 2px solid var(--blue); display: grid; place-items: center; color: var(--blue-deep); position: relative; z-index: 1; }
-.tl li:last-child .dot { background: var(--green); border-color: var(--green); color: #fff; }
+.tl li:last-of-type .dot { background: var(--green); border-color: var(--green); color: #fff; }
+/* animated line + arrow (JS adds .anim; without it every step shows as done) */
+.tl.anim::before { right: auto; width: var(--tl-len, 0); }
+.tl.anim.vert::before { bottom: auto; width: 2px; height: var(--tl-len, 0); }
+.tl-fill { position: absolute; z-index: 0; background: linear-gradient(90deg, var(--blue), #34b4f0); border-radius: 3px; pointer-events: none; display: none; }
+.tl.anim .tl-fill { display: block; }
+.tl.vert .tl-fill { background: linear-gradient(180deg, var(--blue), #34b4f0); }
+.tl-arrow { position: absolute; z-index: 2; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; background: #fff; box-shadow: 0 4px 12px rgba(18,135,214,.35); display: none; place-items: center; color: var(--blue); pointer-events: none; }
+.tl.anim .tl-arrow { display: grid; }
+.tl-arrow svg { transition: transform .2s; }
+.tl.vert .tl-arrow svg { transform: rotate(90deg); }
+.tl.anim .tl-arrow.done { opacity: 0; transition: opacity .3s; }
+.tl.anim li .dot { background: #fff; border-color: #b9d9f0; color: #8fb3cf; transition: background .3s, border-color .3s, color .3s, transform .3s; }
+.tl.anim li b, .tl.anim li p, .tl.anim li small { opacity: .45; transition: opacity .4s; }
+.tl.anim li.on .dot { background: var(--blue); border-color: var(--blue); color: #fff; animation: tlPop .5s cubic-bezier(.3,1.6,.5,1); }
+.tl.anim li.on:last-of-type .dot { background: var(--green); border-color: var(--green); }
+.tl.anim li.on .dot::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid currentColor; color: var(--blue); animation: tlRing .9s ease-out; }
+.tl.anim li.on:last-of-type .dot::after { color: var(--green); }
+.tl.anim li.on b, .tl.anim li.on p, .tl.anim li.on small { opacity: 1; }
+@keyframes tlPop { 40% { transform: scale(1.15); } }
+@keyframes tlRing { from { transform: scale(1); opacity: .8; } to { transform: scale(1.7); opacity: 0; } }
 .tl small { font: 600 .74rem/1 var(--font-head); color: var(--ink-2); letter-spacing: .1em; text-transform: uppercase; margin-top: 4px; }
 .tl b { font: 600 1.05rem/1.25 var(--font-head); }
 .tl p { font-size: .88rem; color: var(--ink-2); }
@@ -408,6 +428,11 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .notice svg { color: var(--sun); flex: none; margin-top: 2px; }
 .notice b { color: #4a3000; }
 
+/* Presence strip + footer safety line */
+.presence.wide { grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px 28px; }
+.presence.wide .contact-box { border-top: 0; padding-top: 0; }
+@media (max-width: 960px) { .presence.wide { grid-template-columns: minmax(0, 1fr); } .presence.wide .contact-box { border-top: 1px solid var(--line); padding-top: 16px; } }
+.f-safety { font-size: .78rem; color: #8ea3bd; padding-bottom: 14px; }
 /* Footer */
 footer { background: var(--navy); color: #b6c8dc; margin-top: 56px; font-size: .9rem; border-radius: 36px 36px 0 0; }
 .f-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1.3fr; gap: 28px; padding-block: 52px 32px; }
@@ -812,7 +837,7 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
 <section class="sec" id="how" style="padding-top:0">
   <div class="wrap">
     <div class="head2"><div><span class="kicker">How it works</span><h2>From booking to report in five steps</h2></div><button class="btn btn-ghost" type="button" data-intro hidden><span class="play-i"><svg width="12" height="12"><use href="#i-play"/></svg></span>Watch the 3D story</button></div>
-    <ol class="tl">
+    <ol class="tl" id="tl">
       <li><span class="dot"><svg width="22" height="22"><use href="#i-cart"/></svg></span><small>Step 1</small><b>Book online</b><p>Pick a test or package, your address and a time slot.</p></li>
       <li><span class="dot"><svg width="22" height="22"><use href="#i-scooter"/></svg></span><small>Step 2</small><b>Phlebotomist arrives</b><p>A trained phlebotomist is assigned and reaches your door.</p></li>
       <li><span class="dot"><svg width="22" height="22"><use href="#i-drop2"/></svg></span><small>Step 3</small><b>Safe collection</b><p>One prick, with sealed single-use kits.</p></li>
@@ -876,19 +901,9 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   </div>
 </section>
 
-<section class="sec" id="faq" style="padding-top:0">
-  <div class="wrap two">
-    <div>
-      <div class="head2"><div><span class="kicker">FAQ</span><h2>Questions, answered</h2></div></div>
-      <div class="faq">
-        <details open><summary>Is home sample collection free?</summary><p>Yes. Booking online and sample collection at your home are free. You only pay for the tests.</p></details>
-        <details><summary>How will I get my report?</summary><p>Reports are shared on WhatsApp and in the MicroCheck app. You can also book a free doctor and diet consultation to go through the results.</p></details>
-        <details><summary>Do I need to fast before my test?</summary><p>Some tests, such as fasting blood sugar and lipid profile, need 10 to 12 hours of fasting. Each package shows whether fasting is needed, and our team reminds you before the visit.</p></details>
-        <details><summary>Which areas do you cover?</summary><p>We collect samples in all 14 districts of Kerala. Choose your district at the top of the page.</p></details>
-        <details><summary>Can I book for my family members?</summary><p>Yes. Add tests to the cart and tell our team who each test is for when they confirm the booking.</p></details>
-      </div>
-    </div>
-    <aside class="presence" id="help-info">
+<section class="sec" id="presence" style="padding-top:0">
+  <div class="wrap">
+    <aside class="presence wide" id="help-info">
       <h3>Our presence</h3>
       <div class="districts"><span>Thiruvananthapuram</span><span>Kollam</span><span>Pathanamthitta</span><span>Alappuzha</span><span>Kottayam</span><span>Idukki</span><span>Ernakulam</span><span>Thrissur</span><span>Palakkad</span><span>Malappuram</span><span>Kozhikode</span><span>Wayanad</span><span>Kannur</span><span>Kasaragod</span></div>
       <div class="contact-box">
@@ -897,7 +912,6 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
       </div>
     </aside>
   </div>
-  <div class="wrap"><div class="notice"><svg width="20" height="20"><use href="#i-alert"/></svg><p><b>Not for emergencies.</b> For chest pain, breathing difficulty, heavy bleeding or stroke symptoms, call 112 immediately.</p></div></div>
 </section>
 </main>
 
@@ -910,12 +924,13 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
         <div class="social" aria-label="Follow us"><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Instagram">ig</a><a href="#" aria-label="X">x</a><a href="#" aria-label="LinkedIn">in</a></div>
       </div>
       <div><h4>Popular tests</h4><ul><li><a href="#packages">Full Body Checkup</a></li><li><a href="#packages">HbA1c</a></li><li><a href="#packages">Thyroid Profile</a></li><li><a href="#packages">Lipid Profile</a></li><li><a href="#packages">Vitamin D</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="#help-info">Contact us</a></li><li><a href="#">Blog</a></li><li><a href="#faq">FAQ</a></li><li><a href="#">Partner with us</a></li><li><a href="#">Join as phlebotomist</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#help-info">Contact us</a></li><li><a href="#">Blog</a></li><li><a href="#">Partner with us</a></li><li><a href="#">Join as phlebotomist</a></li></ul></div>
       <div><h4>Services</h4><ul><li><a href="#packages">Health packages</a></li><li><a href="#club">Diabetic Care Club</a></li><li><a href="#services">Home nursing</a></li><li><a href="#services">Dialysis support</a></li></ul></div>
       <div><h4>Newsletter</h4><p>Health tips and offers, once a month.</p>
         <form class="news" id="news"><input type="email" id="newsEmail" placeholder="Your email" aria-label="Email address" required><button class="btn btn-sm" type="submit">Subscribe</button></form>
       </div>
     </div>
+    <p class="f-safety">MicroCheck is not an emergency service. For chest pain, breathing difficulty, heavy bleeding or stroke symptoms, call 112.</p>
     <div class="f-bottom"><span>© <span id="yr">2026</span> microcheck.com</span><nav><a href="#">Terms &amp; Conditions</a><a href="#">Privacy Policy</a><a href="#">Statutory Compliance</a></nav></div>
   </div>
 </footer>
@@ -946,7 +961,7 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
     <div class="mcats" id="mcats"></div>
     <p class="mnav-label">Explore</p>
     <nav class="mlinks">
-      <a href="#packages">Health checkups</a><a href="#club">Diabetic Care Club</a><a href="#services">Home nursing &amp; dialysis</a><a href="#how">How it works</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a>
+      <a href="#packages">Health checkups</a><a href="#club">Diabetic Care Club</a><a href="#services">Home nursing &amp; dialysis</a><a href="#how">How it works</a><a href="#reviews">Reviews</a><a href="#presence">Our presence</a>
     </nav>
     <div class="mnav-acts">
       <a class="btn btn-navy btn-sm" href="tel:+919020004000"><svg width="16" height="16"><use href="#i-phone"/></svg>Call us</a>
@@ -1257,6 +1272,46 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeNav(); });
   (mq.addEventListener ? mq.addEventListener('change', placeNav) : mq.addListener(placeNav));
   placeNav();
+
+  // How-it-works: a line with an arrow grows from step 1 to 5, lighting each step as it passes; replays while in view
+  (function () {
+    var tl = $('tl'); if (!tl || reduce) return;
+    var dots = [].map.call(tl.querySelectorAll('.dot'), function (d) { return d; }), items = tl.querySelectorAll('li');
+    var fill = document.createElement('span'); fill.className = 'tl-fill';
+    var arrow = document.createElement('span'); arrow.className = 'tl-arrow'; arrow.innerHTML = '<svg width="14" height="14"><use href="#i-arrow"/></svg>';
+    tl.appendChild(fill); tl.appendChild(arrow); tl.classList.add('anim');
+    var a, bpt, vert, len, raf2 = 0, t0 = 0, visible = false, DRAW = 4200, HOLD = 2200;
+    function measure() {
+      var r0 = tl.getBoundingClientRect(), c = dots.map(function (d) { var r = d.getBoundingClientRect(); return { x: r.left - r0.left + r.width / 2, y: r.top - r0.top + r.height / 2 }; });
+      a = c[0]; bpt = c[c.length - 1]; vert = Math.abs(bpt.x - a.x) < 5; len = vert ? bpt.y - a.y : bpt.x - a.x;
+      tl.classList.toggle('vert', vert); tl.style.setProperty('--tl-len', len + 'px');
+      tl._c = c;
+    }
+    function paint(p) {
+      var d = len * p;
+      if (vert) { fill.style.cssText = 'left:' + (a.x - 1.5) + 'px;top:' + a.y + 'px;width:3px;height:' + d + 'px'; arrow.style.left = a.x + 'px'; arrow.style.top = (a.y + d) + 'px'; }
+      else { fill.style.cssText = 'left:' + a.x + 'px;top:' + (a.y - 1.5) + 'px;height:3px;width:' + d + 'px'; arrow.style.left = (a.x + d) + 'px'; arrow.style.top = a.y + 'px'; }
+      var reached = tl._c.map(function (c) { return vert ? c.y - a.y : c.x - a.x; });
+      [].forEach.call(items, function (li, i) { li.classList.toggle('on', d >= reached[i] - 2); });
+      arrow.classList.toggle('done', p >= 1);
+    }
+    function loop(now) {
+      if (!visible) return;
+      if (!t0) t0 = now;
+      var e = now - t0, p = Math.min(1, e / DRAW);
+      paint(1 - Math.pow(1 - p, 1.6) * (1 - p * .0)); // gentle ease-out
+      if (e > DRAW + HOLD) t0 = now;
+      raf2 = requestAnimationFrame(loop);
+    }
+    measure(); paint(0);
+    window.addEventListener('resize', function () { measure(); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) {
+      visible = en[0].isIntersecting;
+      cancelAnimationFrame(raf2);
+      if (visible) { measure(); t0 = 0; raf2 = requestAnimationFrame(loop); }
+    }, { threshold: .35 }).observe(tl);
+    else { visible = true; raf2 = requestAnimationFrame(loop); }
+  })();
   $('news').addEventListener('submit', function (e) { e.preventDefault(); toast('Thanks! You are subscribed.'); this.reset(); });
   $('yr').textContent = new Date().getFullYear();
   renderShelf(); renderCart();
