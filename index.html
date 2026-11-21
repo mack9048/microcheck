@@ -128,19 +128,23 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .hero-points { display: flex; flex-wrap: wrap; gap: 10px 22px; padding-top: 6px; }
 .hero-points span { display: inline-flex; align-items: center; gap: 8px; font: 500 .9rem var(--font-head); }
 .hero-points svg { color: var(--green-deep); }
-.hero-art { position: relative; min-height: 480px; }
-.arch { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: min(82%, 440px); height: 92%; border-radius: 240px 240px 0 0; background: linear-gradient(170deg, #49b4f0, #1287d6 55%, #0a5a99); overflow: hidden; }
-.arch::before { content: ""; position: absolute; inset: 18px 18px 0; border-radius: 230px 230px 0 0; border: 1.5px dashed rgba(255,255,255,.35); border-bottom: 0; }
-.arch img { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); height: 96%; width: auto; max-width: none; }
-.float { position: absolute; background: #fff; border-radius: 18px; box-shadow: 0 16px 40px rgba(12,27,46,.14); padding: 12px 14px; display: flex; align-items: center; gap: 12px; font-size: .84rem; animation: bob 5s ease-in-out infinite; z-index: 2; }
-.float b { display: block; font: 600 .9rem/1.25 var(--font-head); }
-.float small { color: var(--ink-2); font-size: .78rem; }
-.float .ic { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; flex: none; }
-.f1 { left: 2%; top: 18%; } .f1 .ic { background: var(--mint); color: var(--green-deep); }
-.f2 { right: 0; top: 46%; animation-delay: -1.6s; } .f2 .ic { background: #e3f8ea; color: #1fa855; }
-.f3 { left: 6%; bottom: 10%; animation-delay: -3.2s; } .f3 .ic { background: var(--sun-soft); color: var(--sun); }
-.pdf { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 5px 8px; border-radius: 8px; background: var(--surface-2); font: 600 .74rem var(--font-head); }
-.pdf i { background: var(--red); color: #fff; font: 700 .58rem/1 var(--font-head); padding: 3px 4px; border-radius: 3px; font-style: normal; }
+.hero-art { position: relative; min-height: 500px; padding: 16px 16px 16px 0; }
+.stage3d { position: absolute; inset: 16px 16px 16px 0; border-radius: 28px; overflow: hidden; background: radial-gradient(70% 70% at 60% 35%, #49a3f0, #2b82e3 60%, #1f6fcf); box-shadow: 0 24px 50px rgba(18,90,170,.25); isolation: isolate; }
+.stage3d canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage3d .fallback { position: absolute; inset: 0; display: flex; justify-content: center; align-items: flex-end; }
+.stage3d .fallback img { height: 94%; width: auto; max-width: none; }
+.stage3d.live .fallback { display: none; }
+.stage3d:not(.live) .hs-bars, .stage3d:not(.live) .hs-cap { display: none; }
+.hs-bars { position: absolute; top: 14px; left: 16px; right: 60px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; z-index: 2; }
+.hs-bars button { border: 0; background: none; padding: 8px 0; cursor: pointer; }
+.hs-bars span { display: block; height: 4px; border-radius: 4px; background: rgba(255,255,255,.35); overflow: hidden; }
+.hs-bars i { display: block; height: 100%; width: 0; background: #fff; }
+.hs-cap { position: absolute; left: 14px; bottom: 14px; right: 14px; z-index: 2; display: flex; align-items: center; gap: 12px; padding: 10px 14px 10px 10px; border-radius: 18px; background: rgba(255,255,255,.94); box-shadow: 0 10px 30px rgba(10,40,90,.2); width: fit-content; max-width: calc(100% - 28px); }
+.hs-n { width: 36px; height: 36px; border-radius: 12px; background: var(--navy); color: #fff; display: grid; place-items: center; font: 600 .85rem var(--font-head); flex: none; }
+.hs-cap b { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 1.35rem; line-height: 1.1; color: var(--ink); }
+.hs-cap b.swap { animation: introSwap .6s cubic-bezier(.2,.7,.2,1) both; }
+.hs-full { position: absolute; top: 8px; right: 10px; z-index: 2; width: 40px; height: 40px; border-radius: 12px; border: 0; background: rgba(255,255,255,.2); color: #fff; display: grid; place-items: center; cursor: pointer; }
+.hs-full:hover { background: rgba(255,255,255,.32); }
 @keyframes bob { 50% { transform: translateY(-8px); } }
 
 /* Offers (coupon tickets) */
@@ -442,7 +446,8 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
 }
 @media (max-width: 960px) {
   .hero-card { grid-template-columns: minmax(0, 1fr); }
-  .hero-art { min-height: 400px; }
+  .hero-art { min-height: 440px; padding: 0 16px 16px; }
+  .stage3d { inset: 0 16px 16px; }
   .concerns, .whom { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .proof, .club, .two, .app { grid-template-columns: minmax(0, 1fr); }
@@ -479,11 +484,9 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   .hero-card { border-radius: 28px; }
   .hero-copy { padding: 26px 22px 6px; gap: 18px; }
   .hero h1 { font-size: 2.3rem; }
-  .hero-art { min-height: 360px; }
-  .arch { width: 78%; }
-  .float { font-size: .78rem; padding: 10px; gap: 10px; }
-  .float .ic { width: 32px; height: 32px; }
-  .f1 { left: 0; top: 8%; } .f2 { right: 0; top: 44%; } .f3 { left: 0; bottom: 6%; }
+  .hero-art { min-height: 420px; padding: 0 10px 10px; }
+  .stage3d { inset: 0 10px 10px; border-radius: 22px; }
+  .hs-cap b { font-size: 1.15rem; }
   .hero-ctas .btn { flex: 1 1 auto; }
   .offers { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; gap: 12px; padding-bottom: 4px; }
   .offers::-webkit-scrollbar { display: none; }
@@ -522,7 +525,6 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .float { animation: none; }
   .btn, .tk, .cn, .rv .play, .faq summary::after { transition: none; }
 }
 </style>
@@ -626,11 +628,13 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
           <span><svg width="18" height="18"><use href="#i-steth"/></svg>Free doctor &amp; diet consult</span>
         </div>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="arch"><img src="images/doctor-hero.webp" alt=""></div>
-        <div class="float f1"><span class="ic"><svg width="20" height="20"><use href="#i-drop2"/></svg></span><span><b>Sample collected</b><small>At home, sealed kit</small></span></div>
-        <div class="float f2"><span class="ic"><svg width="20" height="20"><use href="#i-chat"/></svg></span><span><b>Your report is ready</b><span class="pdf"><i>PDF</i>Lab_Report.pdf</span></span></div>
-        <div class="float f3"><span class="ic"><svg width="20" height="20"><use href="#i-team"/></svg></span><span><b>800+ phlebotomists</b><small>Across Kerala</small></span></div>
+      <div class="hero-art">
+        <div class="stage3d" id="heroStage" role="img" aria-label="3D story: a nurse rides to the home, draws blood, the lab tests it, the report arrives on WhatsApp, and the patient is happy">
+          <div class="fallback" aria-hidden="true"><img src="images/doctor-hero.webp" alt=""></div>
+          <div class="hs-bars" id="hsBars"></div>
+          <div class="hs-cap" aria-live="polite"><span class="hs-n" id="hsNum">01</span><b id="hsTitle">A nurse rides to your door.</b></div>
+          <button class="hs-full" type="button" data-intro hidden aria-label="Play full screen"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
       </div>
     </div>
   </div>
@@ -1415,78 +1419,121 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
     built = true; resize();
   }
 
+  // One renderer, two homes: full-screen intro on first visit, then the hero stage (looping).
+  var heroStage = document.getElementById('heroStage'), mode = 'intro', heroVisible = true, pausedAt = 0;
+  function host() { return mode === 'hero' ? heroStage : intro; }
   function resize() {
     if (!renderer) return;
-    var w = intro.clientWidth || innerWidth, h = intro.clientHeight || innerHeight;
-    renderer.setSize(w, h, false); camera.aspect = w / h; camera.fov = w < 700 ? 52 : 38; camera.updateProjectionMatrix();
+    var el = host(), w = el.clientWidth || innerWidth, h = el.clientHeight || innerHeight;
+    renderer.setSize(w, h, false); camera.aspect = w / h;
+    camera.fov = mode === 'hero' ? (w / h < 1 ? 46 : 40) : (w < 700 ? 52 : 38);
+    camera.updateProjectionMatrix();
   }
   window.addEventListener('resize', resize);
 
-  // camera path: each chapter frames its island; on phones the camera sits further back and higher
+  // camera path: each chapter frames its island; in tall frames the camera sits further back and higher
   function camFor(i, lt) {
-    var narrow = (intro.clientWidth || innerWidth) < 700, sx = i * SPACING;
+    var narrow = mode === 'hero' ? camera.aspect < 1 : (intro.clientWidth || innerWidth) < 700, sx = i * SPACING;
     var sway = Math.sin(lt * .5) * .5;
     var offs = [[1.2, 3.6, 9.5, 0, 1.4], [1.0, 3.4, 8.6, .2, 1.6], [.8, 3.6, 8.4, 0, 1.7], [1.6, 3.4, 9.2, 0, 2.6], [.6, 3.4, 9.6, -.2, 2.4]][i];
-    var back = narrow ? 1.45 : 1;
-    var shiftX = narrow ? 0 : 1.2; // keep the action right of the headline on desktop
+    var back = mode === 'hero' ? (narrow ? 1.2 : 1.12) : (narrow ? 1.45 : 1);
+    var shiftX = narrow || mode === 'hero' ? 0 : 1.2; // full-screen desktop: keep the action right of the headline
     return { px: sx + offs[0] - shiftX + sway, py: offs[1] * (narrow ? 1.15 : 1), pz: offs[2] * back - lt * .12, tx: sx + offs[3] - shiftX, ty: offs[4] * (narrow ? .9 : 1), tz: 0 };
   }
 
   // ---------- UI ----------
   var bars = document.getElementById('introBars'), steps = document.getElementById('introSteps');
+  var hBars = document.getElementById('hsBars'), hNum = document.getElementById('hsNum'), hTitle = document.getElementById('hsTitle');
   bars.innerHTML = STORY.map(function () { return '<span><i></i></span>'; }).join('');
   steps.innerHTML = STORY.map(function (s) { return '<span>' + s.tag + '</span>'; }).join('');
+  hBars.innerHTML = STORY.map(function (s, i) { return '<button type="button" aria-label="Show step ' + (i + 1) + ': ' + s.tag + '"><span><i></i></span></button>'; }).join('');
+  function plain(h) { return h.replace(/<[^>]+>/g, ''); }
   function setChapter(i) {
     var s = STORY[i];
-    [['introEyebrow', s.eyebrow], ['introH', s.h], ['introP', s.p]].forEach(function (p) { var el = document.getElementById(p[0]); el.innerHTML = p[1]; el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); });
-    [].forEach.call(steps.children, function (el, k) { el.classList.toggle('on', k === i); });
+    if (mode === 'intro') {
+      [['introEyebrow', s.eyebrow], ['introH', s.h], ['introP', s.p]].forEach(function (p) { var el = document.getElementById(p[0]); el.innerHTML = p[1]; el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); });
+      [].forEach.call(steps.children, function (el, k) { el.classList.toggle('on', k === i); });
+    }
+    hNum.textContent = '0' + (i + 1); hTitle.textContent = plain(s.h);
+    hTitle.classList.remove('swap'); void hTitle.offsetWidth; hTitle.classList.add('swap');
   }
+  function setBars(list, i, frac) { [].forEach.call(list, function (b, k) { b.querySelector('i').style.width = (k < i ? 100 : k > i ? 0 : frac * 100) + '%'; }); }
 
-  var lastFocus = null;
-  function frame(now) {
-    if (!running) return;
-    var t = Math.max(0, (now - t0) / 1000);
-    if (t >= TOTAL + .4) { close(); return; }
+  function draw(t) {
     var i = Math.min(STORY.length - 1, Math.floor(t / CH)), lt = t - i * CH;
     if (i !== chapter) { chapter = i; setChapter(i); }
-    [].forEach.call(bars.children, function (b, k) { b.firstChild.style.width = (k < i ? 100 : k > i ? 0 : Math.min(100, lt / CH * 100)) + '%'; });
-    // camera: glide from previous island during the first 1.3s of each chapter
+    setBars(mode === 'hero' ? hBars.children : bars.children, i, Math.min(1, lt / CH));
     var a = camFor(i, lt), p = i > 0 ? camFor(i - 1, lt + CH) : a, k = i > 0 ? ease(lt / 1.3) : 1;
     var lift = i > 0 ? Math.sin(k * Math.PI) * 1.6 : 0;
     camera.position.set(p.px + (a.px - p.px) * k, p.py + (a.py - p.py) * k + lift, p.pz + (a.pz - p.pz) * k);
     camera.lookAt(p.tx + (a.tx - p.tx) * k, p.ty + (a.ty - p.ty) * k, 0);
     var sun = camera.userData.sun, fx = camera.position.x; sun.position.set(fx + 6, 14, 9); sun.target.position.set(fx - 1, 0, 0);
-    // run current chapter, and the previous one while it is still in view
     upd[i](lt); if (i > 0 && lt < 1.3) upd[i - 1](lt + CH);
-    cells.forEach(function (c) { var d = c.userData; c.rotation.x += .003 * d.s * 4; c.rotation.y += .002 * d.s * 4; c.position.y = d.y + Math.sin(t * d.s + d.a) * .5; });
+    cells.forEach(function (c) { var d = c.userData; c.rotation.x = d.a + t * .012 * d.s * 4 * 15; c.rotation.y = d.a + t * .008 * d.s * 4 * 15; c.position.y = d.y + Math.sin(t * d.s + d.a) * .5; });
     renderer.render(scene, camera);
+  }
+  function frame(now) {
+    if (!running) return;
+    var t = Math.max(0, (now - t0) / 1000);
+    if (mode === 'intro' && t >= TOTAL + .4) { close(); return; }
+    if (mode === 'hero') t = t % TOTAL;
+    draw(t);
     raf = requestAnimationFrame(frame);
   }
+  function start(fromT) { cancelAnimationFrame(raf); t0 = performance.now() - (fromT || 0) * 1000; running = true; raf = requestAnimationFrame(frame); }
+  function stop() { if (running) pausedAt = performance.now(); running = false; cancelAnimationFrame(raf); }
 
+  function toHero() {
+    mode = 'hero'; chapter = -1;
+    heroStage.insertBefore(canvas, heroStage.firstChild); heroStage.classList.add('live');
+    resize();
+    if (reduce) { draw(STORY.length * CH - 1.5); return; } // still frame of the happy ending; step bars show each scene
+    if (heroVisible) start(0); else { pausedAt = performance.now(); t0 = pausedAt; }
+  }
+  // step buttons in the hero jump to a scene
+  hBars.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b || mode !== 'hero') return;
+    var i = [].indexOf.call(hBars.children, b), at = i * CH + 1.4;
+    chapter = -1; if (reduce) draw(at + 1.6); else start(at);
+  });
+  // pause the hero loop when it is off screen
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (en) {
+    heroVisible = en[0].isIntersecting;
+    if (mode !== 'hero' || reduce || !built) return;
+    if (heroVisible && !running && !document.hidden) { t0 += performance.now() - pausedAt; running = true; raf = requestAnimationFrame(frame); }
+    else if (!heroVisible) stop();
+  }, { threshold: .05 }).observe(heroStage);
+
+  var lastFocus = null;
   function open() {
-    try { if (!built) build(); } catch (e) { console.warn('Intro unavailable', e); return; }
-    lastFocus = document.activeElement;
+    try { if (!built) build(); } catch (e) { console.warn('3D scene unavailable', e); return; }
+    stop(); lastFocus = document.activeElement; mode = 'intro'; chapter = -1;
+    intro.insertBefore(canvas, intro.firstChild);
     intro.hidden = false; intro.classList.remove('out'); document.documentElement.style.overflow = 'hidden';
-    resize(); chapter = -1; t0 = performance.now(); running = true; raf = requestAnimationFrame(frame);
+    resize(); start(0);
     document.getElementById('introSkip').focus({ preventScroll: true });
   }
   function close(after) {
-    if (!running && intro.hidden) return;
-    running = false; cancelAnimationFrame(raf);
+    if (mode !== 'intro' || intro.hidden) return;
+    stop();
     try { sessionStorage.setItem('mc-intro', '1'); } catch (e) {}
     intro.classList.add('out'); document.documentElement.style.overflow = '';
-    setTimeout(function () { intro.hidden = true; if (after) after(); else if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); }, reduce ? 0 : 650);
+    setTimeout(function () { intro.hidden = true; toHero(); if (after) after(); else if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); }, reduce ? 0 : 650);
   }
   document.getElementById('introSkip').addEventListener('click', function () { close(); });
   document.getElementById('introEnter').addEventListener('click', function () { close(); });
   document.getElementById('introBook').addEventListener('click', function () { close(function () { var el = document.getElementById('packages'); if (el) el.scrollIntoView({ behavior: 'auto' }); }); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && running) close(); });
-  document.addEventListener('visibilitychange', function () { if (document.hidden && running) { running = false; cancelAnimationFrame(raf); intro.dataset.pausedAt = performance.now(); } else if (!document.hidden && !intro.hidden && !running && intro.dataset.pausedAt) { t0 += performance.now() - (+intro.dataset.pausedAt); running = true; raf = requestAnimationFrame(frame); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && mode === 'intro' && !intro.hidden) close(); });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop();
+    else if (built && (mode === 'intro' ? !intro.hidden : heroVisible && !reduce)) { t0 += performance.now() - pausedAt; running = true; raf = requestAnimationFrame(frame); }
+  });
   document.querySelectorAll('[data-intro]').forEach(function (b) { b.hidden = false; b.addEventListener('click', open); });
 
-  // Play on first visit in this browser session (not for reduced-motion users; they can press the replay button).
+  // First visit in this browser session: full-screen intro, then it settles into the hero. Otherwise straight to the hero.
   var seen = false; try { seen = sessionStorage.getItem('mc-intro') === '1'; } catch (e) {}
   if (!seen && !reduce) open();
+  else { try { build(); toHero(); } catch (e) { console.warn('3D scene unavailable', e); } }
 })();
 </script>
 
