@@ -277,6 +277,18 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .price em { display: block; font-style: normal; font: 600 .78rem/1.4 var(--font-head); color: var(--green-deep); margin-top: 3px; }
 .add { min-height: 42px; padding: 9px 16px; }
 .add.added { background: var(--mint); color: var(--green-deep); box-shadow: none; }
+/* ticket card: light category gradient on top, dark gradient price bar */
+.tk { background: linear-gradient(165deg, color-mix(in srgb, var(--c, #e6f3fc) 75%, #fff) 0%, #ffffff 55%, #ffffff 100%); overflow: visible; }
+.tk-top { border-radius: 24px 24px 0 0; }
+.tk-bottom { border-top: 0; border-radius: 0 0 23px 23px; background: linear-gradient(135deg, #0b2440 0%, #123a66 60%, #1a5a96 100%); color: #fff; margin: 0 -1px -1px; padding: 18px 20px 18px; }
+.tk-bottom::before, .tk-bottom::after { top: -11px; border-color: var(--line); }
+.tk-bottom .price b { color: #fff; }
+.tk-bottom .price s { color: #9fb6cf; }
+.tk-bottom .price em { color: #7cf08f; }
+.tk-bottom .add { background: #fff; color: var(--navy); box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+.tk-bottom .add:hover { background: #eaf4fd; }
+.tk-bottom .add.added { background: #7cf08f; color: #0b2440; }
+.tk-inc span { background: rgba(255,255,255,.85); border: 1px solid rgba(12,27,46,.06); }
 .note { font-size: .8rem; color: var(--ink-2); margin-top: 14px; }
 
 /* Concerns (list tiles) */
@@ -1109,7 +1121,7 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
 
   function ticket(p) {
     var d = CATS[p.cat];
-    return '<article class="tk"><div class="tk-top"><div class="tk-head"><span class="tk-ic" style="--c:' + d.c + ';--cf:' + (d.cf || '#0a5a99') + '">' + icon(p.cat, 22) + '</span><div><h3>' + esc(p.name) + '</h3>' + (p.tag ? '<span class="tag">' + esc(p.tag) + '</span>' : '') + '</div></div>' +
+    return '<article class="tk" style="--c:' + d.c + ';--cf:' + (d.cf || '#0a5a99') + '"><div class="tk-top"><div class="tk-head"><span class="tk-ic" style="--c:' + d.c + ';--cf:' + (d.cf || '#0a5a99') + '">' + icon(p.cat, 22) + '</span><div><h3>' + esc(p.name) + '</h3>' + (p.tag ? '<span class="tag">' + esc(p.tag) + '</span>' : '') + '</div></div>' +
       '<div class="tk-meta"><span><svg width="14" height="14"><use href="#i-tube"/></svg>' + p.tests + (p.tests === 1 ? ' test' : ' tests') + '</span><span><svg width="14" height="14"><use href="#i-clock"/></svg>Report in ' + p.tat + ' hrs</span><span>' + (p.fasting ? 'Fasting needed' : 'No fasting') + '</span></div>' +
       '<div class="tk-inc">' + p.inc.map(function (i) { return '<span>' + esc(i) + '</span>'; }).join('') + '</div></div>' +
       '<div class="tk-bottom"><div class="price"><b>' + inr(p.price) + '</b><s>' + inr(p.mrp) + '</s><em>You save ' + off(p) + '%</em></div>' + addBtn(p) + '</div></article>';
