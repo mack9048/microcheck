@@ -349,7 +349,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .road-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .road-steps { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
 .road-steps li { position: relative; background: linear-gradient(180deg, #ffffff, #f3f7fb); border: 1px solid var(--line); border-radius: 20px; padding: 30px 16px 18px; text-align: center; box-shadow: 0 8px 22px rgba(12,27,46,.06); transition: transform .35s, box-shadow .35s, opacity .35s, border-color .35s; }
-.road-steps .rn { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); width: 36px; height: 36px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--pc) 70%, #fff), var(--pc)); color: #fff; display: grid; place-items: center; font: 600 1rem/1 var(--font-display); box-shadow: 0 0 0 4px #fff, 0 6px 14px rgba(12,27,46,.18); }
+.road-steps .rn { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--pc) 70%, #fff), var(--pc)); color: #fff; display: grid; place-items: center; font: 600 1rem/1 var(--font-display); box-shadow: 0 0 0 4px #fff, 0 6px 14px rgba(12,27,46,.18); }
 .road-steps b { display: block; font: 600 1.02rem/1.15 var(--font-display); text-transform: uppercase; color: var(--pc); letter-spacing: .01em; }
 .road-steps p { margin-top: 6px; font-size: .86rem; color: var(--ink-2); }
 .road.anim .road-steps li { opacity: .55; }
@@ -366,7 +366,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   .road-stage svg { overflow: hidden; }
   .road-steps { grid-template-columns: minmax(0, 1fr); margin: 0 0 0 96px; gap: 18px; padding-block: 6px; }
   .road-steps li { text-align: left; padding: 14px 16px 14px 50px; }
-  .road-steps .rn { top: 50%; left: 10px; transform: translateY(-50%); width: 30px; height: 30px; font-size: .9rem; box-shadow: 0 4px 10px rgba(12,27,46,.15); }
+  .road-steps .rn { top: 50%; left: 10px; transform: translateY(-50%); width: 32px; height: 32px; font-size: .9rem; box-shadow: 0 4px 10px rgba(12,27,46,.15); }
+  .road-steps .rn svg { width: 15px; height: 15px; }
   .road.anim .road-steps li.on { transform: translateX(3px); }
 }
 /* Club */
@@ -866,11 +867,11 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
     <div class="road" id="road">
       <div class="road-stage"><svg id="roadSvg" aria-hidden="true"></svg></div>
       <ol class="road-steps" id="roadSteps">
-      <li style="--pc:#e5384f"><span class="rn">1</span><b>Book online</b><p>Pick a test or package, your address and a time slot.</p></li>
-      <li style="--pc:#f08c00"><span class="rn">2</span><b>Phlebotomist arrives</b><p>A trained phlebotomist is assigned and reaches your door.</p></li>
-      <li style="--pc:#4f9d33"><span class="rn">3</span><b>Safe collection</b><p>One prick, with sealed single-use kits.</p></li>
-      <li style="--pc:#1287d6"><span class="rn">4</span><b>Tested at the lab</b><p>Samples go to a certified partner lab.</p></li>
-      <li style="--pc:#7048e8"><span class="rn">5</span><b>Report on your phone</b><p>On WhatsApp and the app, with a free consultation.</p></li>
+      <li style="--pc:#e5384f"><span class="rn" aria-hidden="true"><svg width="18" height="18"><use href="#i-cart"/></svg></span><b>Book online</b><p>Pick a test or package, your address and a time slot.</p></li>
+      <li style="--pc:#f08c00"><span class="rn" aria-hidden="true"><svg width="18" height="18"><use href="#i-scooter"/></svg></span><b>Phlebotomist arrives</b><p>A trained phlebotomist is assigned and reaches your door.</p></li>
+      <li style="--pc:#4f9d33"><span class="rn" aria-hidden="true"><svg width="18" height="18"><use href="#i-drop2"/></svg></span><b>Safe collection</b><p>One prick, with sealed single-use kits.</p></li>
+      <li style="--pc:#1287d6"><span class="rn" aria-hidden="true"><svg width="18" height="18"><use href="#i-lab"/></svg></span><b>Tested at the lab</b><p>Samples go to a certified partner lab.</p></li>
+      <li style="--pc:#7048e8"><span class="rn" aria-hidden="true"><svg width="18" height="18"><use href="#i-report"/></svg></span><b>Report on your phone</b><p>On WhatsApp and the app, with a free consultation.</p></li>
       </ol>
     </div>
   </div>
