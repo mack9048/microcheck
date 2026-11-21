@@ -222,7 +222,18 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .seg::-webkit-scrollbar { display: none; }
 .seg button { white-space: nowrap; border: 0; background: none; border-radius: 999px; padding: 8px 16px; font: 500 .88rem var(--font-head); color: var(--ink-2); cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--navy); color: #fff; }
-.shelf { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.shelf { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 6px 2px 14px; scroll-padding-left: 2px; overscroll-behavior-x: contain; }
+.shelf::-webkit-scrollbar { display: none; }
+.shelf > .tk { flex: 0 0 calc((100% - 3 * 18px) / 4); scroll-snap-align: start; }
+.shelf-wrap { position: relative; }
+.shelf-nav { display: flex; gap: 8px; }
+.shelf-nav button { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: #fff; display: grid; place-items: center; cursor: pointer; color: var(--ink); }
+.shelf-nav button:hover:not(:disabled) { border-color: var(--blue); color: var(--blue-deep); }
+.shelf-nav button:disabled { opacity: .35; cursor: default; }
+.shelf-nav .prev svg { transform: rotate(180deg); }
+.shelf-tools { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; max-width: 100%; min-width: 0; }
+.shelf-bar { height: 4px; border-radius: 4px; background: var(--line); margin-top: 6px; overflow: hidden; }
+.shelf-bar i { display: block; height: 100%; width: 25%; border-radius: 4px; background: var(--blue); transition: transform .15s linear, width .2s; }
 .tk { position: relative; background: #fff; border: 1px solid var(--line); border-radius: 24px; display: grid; grid-template-rows: 1fr auto; transition: transform .2s, box-shadow .2s; }
 .tk:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
 .tk-top { padding: 20px 20px 18px; display: grid; gap: 12px; align-content: start; }
@@ -479,7 +490,7 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
 @media (prefers-reduced-motion: reduce) { .intro, .intro-h.swap, .intro-eyebrow.swap, .intro-side p.swap { transition: none; animation: none; } }
 
 @media (max-width: 1200px) {
-  .shelf { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .shelf > .tk { flex-basis: calc((100% - 2 * 18px) / 3); }
   .offers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .qa-card { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .qa:nth-child(4)::before { display: none; }
@@ -494,14 +505,16 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   .hero-art { position: relative; inset: auto; height: 440px; margin-top: -10px; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 70px); mask-image: linear-gradient(180deg, transparent 0, #000 70px); }
   .stage3d .fallback { inset: 0; }
   .concerns, .whom { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shelf > .tk { flex-basis: calc((100% - 18px) / 2.15); }
   .proof, .club, .two, .app { grid-template-columns: minmax(0, 1fr); }
   .tl { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .tl::before { left: 24px; right: auto; top: 24px; bottom: 24px; width: 2px; height: auto; background: repeating-linear-gradient(180deg, var(--blue) 0 8px, transparent 8px 16px); }
   .tl li { grid-template-columns: 50px minmax(0, 1fr); column-gap: 16px; row-gap: 2px; }
   .tl li .dot { grid-row: span 3; }
   .tl small { margin-top: 0; }
-  .svc-grid { grid-template-columns: minmax(0, 1fr); }
+  .svc-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; gap: 14px; padding-bottom: 4px; }
+  .svc-grid::-webkit-scrollbar { display: none; }
+  .svc { flex: 0 0 78%; scroll-snap-align: start; }
   .phone-mock { display: none; }
   .rv { flex-basis: calc((100% - 2 * 20px) / 3); }
   .hdr-row { flex-wrap: wrap; }
@@ -541,12 +554,23 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   .qa small { display: none; }
   .qa::before { display: none; }
   .qa:last-child { grid-column: 1 / -1; flex-direction: row; justify-content: center; }
-  .shelf, .concerns { grid-template-columns: minmax(0, 1fr); }
+  .shelf { gap: 12px; }
+  .shelf > .tk { flex-basis: 86%; }
+  .shelf-nav { display: none; }
+  .concerns { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .cn { padding: 10px; gap: 10px; border-radius: 14px; }
+  .cn i { width: 38px; height: 38px; }
+  .cn img { width: 28px; height: 28px; }
+  .cn b { font-size: .86rem; }
+  .cn small { font-size: .72rem; }
+  .cn > svg { display: none; }
   .whom { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .wm { min-height: 160px; padding: 16px; border-radius: 20px; }
   .wm b { font-size: 1.02rem; }
   .nums { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .tiers { grid-template-columns: minmax(0, 1fr); }
+  .tiers { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; gap: 12px; padding-bottom: 4px; }
+  .tiers::-webkit-scrollbar { display: none; }
+  .tier { flex: 0 0 80%; scroll-snap-align: start; }
   .rv-track { gap: 12px; }
   .rv { flex-basis: 64%; }
   .rv-nav { display: none; }
@@ -711,9 +735,10 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="head2">
       <div><span class="kicker">Health checkups</span><h2>Popular with <span>Kerala families</span></h2><p>Curated by doctors. Home collection is free on every package.</p></div>
-      <div class="seg" id="tabs" role="toolbar" aria-label="Filter packages"></div>
+      <div class="shelf-tools"><div class="seg" id="tabs" role="toolbar" aria-label="Filter packages"></div><div class="shelf-nav"><button class="prev" type="button" id="shPrev" aria-label="Previous packages"><svg width="18" height="18"><use href="#i-arrow"/></svg></button><button type="button" id="shNext" aria-label="Next packages"><svg width="18" height="18"><use href="#i-arrow"/></svg></button></div></div>
     </div>
     <div class="shelf" id="shelf"></div>
+    <div class="shelf-bar" aria-hidden="true"><i id="shBar"></i></div>
     <p class="note">Prices shown are sample prices for the design. <a class="link" href="#packages" id="seeAll">Show all packages →</a></p>
   </div>
 </section>
@@ -992,9 +1017,17 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
       '<div class="tk-inc">' + p.inc.map(function (i) { return '<span>' + esc(i) + '</span>'; }).join('') + '</div></div>' +
       '<div class="tk-bottom"><div class="price"><b>' + inr(p.price) + '</b><s>' + inr(p.mrp) + '</s><em>You save ' + off(p) + '%</em></div>' + addBtn(p) + '</div></article>';
   }
+  function syncShelf() {
+    var el = $('shelf'), max = el.scrollWidth - el.clientWidth, frac = el.scrollWidth ? el.clientWidth / el.scrollWidth : 1;
+    $('shBar').style.width = Math.min(100, frac * 100) + '%';
+    $('shBar').style.transform = 'translateX(' + (max > 0 ? (el.scrollLeft / max) * ((1 / Math.min(1, frac)) - 1) * 100 : 0) + '%)';
+    $('shPrev').disabled = el.scrollLeft < 4; $('shNext').disabled = el.scrollLeft > max - 4;
+  }
   function renderShelf() {
     var list = filter === 'all' ? (expanded ? PACKAGES : POPULAR.map(byId)) : PACKAGES.filter(function (p) { return p.cat === filter; });
+    var keep = $('shelf').scrollLeft, same = renderShelf.last === filter + expanded; renderShelf.last = filter + expanded;
     $('shelf').innerHTML = list.map(ticket).join('');
+    $('shelf').scrollLeft = same ? keep : 0; syncShelf();
     $('seeAll').hidden = filter === 'all' && expanded;
     document.querySelectorAll('#tabs [data-f], #chips [data-f]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.f === filter)); });
     document.querySelectorAll('[data-chipf]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.chipf === filter)); });
@@ -1041,6 +1074,10 @@ footer a { text-decoration: none; } footer a:hover { color: #fff; }
     document.querySelector('.hdr').addEventListener('mouseleave', function () { closeT = setTimeout(closeMenu, 220); });
     document.querySelector('.hdr').addEventListener('mouseenter', function () { clearTimeout(closeT); });
   }
+  $('shelf').addEventListener('scroll', function () { requestAnimationFrame(syncShelf); }, { passive: true });
+  window.addEventListener('resize', syncShelf);
+  $('shPrev').addEventListener('click', function () { $('shelf').scrollBy({ left: -$('shelf').clientWidth * .9, behavior: reduce ? 'auto' : 'smooth' }); });
+  $('shNext').addEventListener('click', function () { $('shelf').scrollBy({ left: $('shelf').clientWidth * .9, behavior: reduce ? 'auto' : 'smooth' }); });
   $('seeAll').addEventListener('click', function (e) { e.preventDefault(); filter = 'all'; expanded = true; renderShelf(); });
   document.querySelectorAll('[data-filter]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); setFilter(a.dataset.filter, true); }); });
 
